@@ -50,11 +50,24 @@ game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
 end
 
 if God then
-	fireserver("Damage", Players[player].Character.Humanoid, math.huge)
-	while client.Character ~= nil and client.Character:FindFirstChild("Humanoid") do
+	local Cam = workspace.CurrentCamera
+	local Pos, Char = Cam.CFrame, speaker.Character
+	local Human = Char and Char.FindFirstChildWhichIsA(Char, "Humanoid")
+	local nHuman = Human.Clone(Human)
+	nHuman.Parent, speaker.Character = Char, nil
+	nHuman.SetStateEnabled(nHuman, 15, false)
+	nHuman.SetStateEnabled(nHuman, 1, false)
+	nHuman.SetStateEnabled(nHuman, 0, false)
+	nHuman.BreakJointsOnDeath, Human = true, Human.Destroy(Human)
+	speaker.Character, Cam.CameraSubject, Cam.CFrame = Char, nHuman, wait() and Pos
+	nHuman.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+	local Script = Char.FindFirstChild(Char, "Animate")
+	if Script then
+		Script.Disabled = true
 		wait()
-		client.Character.Humanoid.Health = 100
+		Script.Disabled = false
 	end
+	nHuman.Health = nHuman.MaxHealth
 end
 --]--End Of Functions
 
@@ -95,21 +108,32 @@ LocalUI = UI.New({Title = "Local"})
 --Start Of Code
 LocalI = LocalUI.TextField({Text = "WalkSpeed", Callback = function(v)
 	SetWalkSpeed(v)
+	LoopValueOfWSpeed = v
 end, })
 
 LocalI = LocalUI.TextField({Text = "JumpPower", Callback = function(v)
 	SetJumpPower(v)
+	LoopValueOfJumpP = v
 end, })
 
 LocalI = LocalUI.Button({Text = "Restore WS/JP", Callback = function()
         RestoreWSJP()
 end, })
+
 LocalI = LocalUI.TextField({Text = "Cooldown -Applys To InfJump", Callback = function(v)
 	if CoolDown == nil or CoolDown == nan then
         CoolDown = 0.1
 	else
 	CoolDown = v
    end		
+end, })
+
+LocalI = LocalUI.Toggle({Text = "Loop WalkSpeed", Callback = function()
+    SetWalkSpeed(LoopValueOfWSpeed)
+end, })
+
+LocalI = LocalUI.Toggle({Text = "Loop JumpPower", Callback = function()
+    SetJumpPower(LoopValueOfJumpP)
 end, })
 
 LocalI = LocalUI.Toggle({Text = "No Clip", Callback = function(v)
