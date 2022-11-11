@@ -1,6 +1,7 @@
+local TitleWindow = "MultiRobloxScript"
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
 local UI = Library.Load({
-	Title = "MultiRobloxScript",
+	Title = TitleWindow,
 	Style = 1,
 	SizeX = 600,
 	SizeY = 400,
@@ -20,14 +21,14 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/
 
 --[--Script
 if game.PlaceId == 2866967438 and OUTDATEDVERSION == false and Discord_Key == "123" then
+TitleWindow = "Successful┃Loading Fishing Simulator Script"
 AlertList = AlertTab.Label({Text = "Fishing Simulator Script Is Loading"})
-Title = "Successful┃Loading Fishing Simulator Script"
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module2.lua", true))()
 elseif game.PlaceId == 0 and OUTDATEDVERSION == false and Discord_Key == "123" then
 elseif game.PlaceId == 0 and OUTDATEDVERSION == false and Discord_Key == "123" then
 elseif Discord_Key ~= "123" then
-Title = "Error1┃False Key"
+TitleWindow = "Error1┃False Key"
 AlertList = AlertTab.Label({Text = "Error1! - NK"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
@@ -42,7 +43,7 @@ AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard("https://discord.gg/DYkHGnYeDp")
 end, })
 elseif OUTDATEDVERSION == true and Discord_Key == "123" then
-Title = "Error2┃Outdated Version"
+TitleWindow = "Error2┃Outdated Version"
 AlertList = AlertTab.Label({Text = "Error2! - ODV/VT"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
@@ -57,7 +58,7 @@ AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard("https://discord.gg/DYkHGnYeDp")
 end, })
 elseif game.PlaceId ~= 2866967438 or game.PlaceId == 0 or game.PlaceId == 0 and OUTDATEDVERSION == false and Discord_Key == "123" then
-Title = "Error3┃Unspupported Game"
+TitleWindow = "Error3┃Unspupported Game"
 AlertList = AlertTab.Label({Text = "Error3! - NG/WD"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
