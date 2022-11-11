@@ -13,8 +13,16 @@ local UI = Library.Load({
 --[--Functions
 
 function SetWalkSpeed(value)
-       local humanoid = Plrs.LocalPlayer:WaitForChild("Humanoid")
-       humanoid.WalkSpeed = value
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
+end
+
+function SetJumpPower(value)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
+end
+
+function RestoreWSJP()
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
 end
 
 --]--End Of Functions
@@ -56,6 +64,14 @@ LocalUI = UI.New({Title = "Local"})
 --Start Of Code
 LocalI = LocalUI.TextField({Text = "WalkSpeed", Callback = function(v)
 	SetWalkSpeed(v)
+end, })
+
+LocalI = LocalUI.TextField({Text = "JumpPower", Callback = function(v)
+	SetJumpPower(v)
+end, })
+
+LocalI = LocalUI.Button({Text = "Restore WS/JP", Callback = function()
+        RestoreWSJP()
 end, })
 --]--End Of Local
 
