@@ -11,7 +11,6 @@ local UI = Library.Load({
 	}
 })
 --[--Setup
-wait(0.1)
 AlertTab = UI.New({Title = "Alerts"})
 wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Version.lua", true))()
@@ -20,13 +19,13 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/
 
 
 --[--Script
-if game.PlaceId == 2866967438 and OUTDATEDVERSION == false and Discord_Key == "IAMINTHEDISCORDSERVER" then
+if game.PlaceId == 2866967438 and OUTDATEDVERSION == false and Discord_Key == "123" then
 AlertList = AlertTab.Label({Text = "Fishing Simulator Script Is Loading"})
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module2.lua", true))()
-elseif game.PlaceId == 0 and OUTDATEDVERSION == false and Discord_Key == "IAMINTHEDISCORDSERVER" then
-elseif game.PlaceId == 0 and OUTDATEDVERSION == false and Discord_Key == "IAMINTHEDISCORDSERVER" then
-elseif Discord_Key ~= "IAMINTHEDISCORDSERVER" then
+elseif game.PlaceId == 0 and OUTDATEDVERSION == false and Discord_Key == "123" then
+elseif game.PlaceId == 0 and OUTDATEDVERSION == false and Discord_Key == "123" then
+elseif Discord_Key ~= "123" then
 AlertList = AlertTab.Label({Text = "Error1! - NK"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
@@ -40,7 +39,7 @@ wait(0.1)
 AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard("https://discord.gg/DYkHGnYeDp")
 end, })
-elseif OUTDATEDVERSION == true and Discord_Key == "IAMINTHEDISCORDSERVER" then
+elseif OUTDATEDVERSION == true and Discord_Key == "123" then
 AlertList = AlertTab.Label({Text = "Error2! - ODV/VT"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
@@ -54,7 +53,7 @@ wait(0.1)
 AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard("https://discord.gg/DYkHGnYeDp")
 end, })
-elseif game.PlaceId ~= 2866967438 or game.PlaceId == 0 or game.PlaceId == 0 and OUTDATEDVERSION == false and Discord_Key == "IAMINTHEDISCORDSERVER" then
+elseif game.PlaceId ~= 2866967438 or game.PlaceId == 0 or game.PlaceId == 0 and OUTDATEDVERSION == false and Discord_Key == "123" then
 AlertList = AlertTab.Label({Text = "Error3! - NG/WD"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
