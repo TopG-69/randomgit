@@ -2432,3 +2432,7 @@ function Material.Load(Config)
 end
 
 return Material
+
+wait(0.1)
+AlertTab = UI.New({Title = "Alerts"})
+wait(0.1)
