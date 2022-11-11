@@ -17,6 +17,7 @@ WelcomeUI = UI.New({Title = "Welcome"})
 if PremiumKey == "EJOHFDNSIBTREKPQWNDIASDHUBEJNOWBNTEORBNJSACNJOSVNIDASNOVUESNAVUBORTB" then
 WelcomeI = WelcomeUI.Label({Text = "Premium is True"})
 	local Premium = true
+	PremiumUI = UI.New({Title = "Premium"})
 else
 WelcomeI = WelcomeUI.Label({Text = "Premium is false"})
 	local Premium = false
@@ -30,10 +31,8 @@ end, })
 
 
 --[--Premium
-wait(1)
-if Premium == true then
-PremiumUI = UI.New({Title = "Premium"})
-end
+--*
+
 --Start Of Code
 PremiumI = PremiumUI.Label({Text = "Premium is false"})
 --]--End Of Premium
