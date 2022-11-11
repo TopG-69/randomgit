@@ -11,6 +11,9 @@ local UI = Library.Load({
 	}
 })
 --[--Functions
+if noclip then
+player.Character.Humanoid:ChangeState(11)
+end
 
 function SetWalkSpeed(value)
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -73,6 +76,13 @@ end, })
 LocalI = LocalUI.Button({Text = "Restore WS/JP", Callback = function()
         RestoreWSJP()
 end, })
+
+LocalI = LocalUI.Toggle({Text = "Restore WS/JP", Callback = function(v)
+       if v then
+         noclip = true
+       else
+	 noclip = false
+end, Enabled = false})
 --]--End Of Local
 
 
