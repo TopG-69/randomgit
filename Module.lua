@@ -178,6 +178,7 @@ local Types = {
 	"CircleButton",
 	"Frame",
 	"Label",
+	"LabelType2",
 	"Button",
 	"SmoothButton",
 	"Box",
@@ -193,6 +194,7 @@ local ActualTypes = {
 	CircleButton = "ImageButton",
 	Frame = "Frame",
 	Label = "TextLabel",
+	LabelType2 = "TextLabel",
 	Button = "TextButton",
 	SmoothButton = "ImageButton",
 	Box = "TextBox",
@@ -243,6 +245,13 @@ local Properties = {
 		Position = UDim2.fromOffset(5,0),
 		Size = UDim2.fromScale(1,1) - UDim2.fromOffset(5,0),
 		TextSize = 14,
+		TextXAlignment = Enum.TextXAlignment.Left
+	},
+	LabelType2 = {
+		BackgroundTransparency = 1,
+		Position = UDim2.fromOffset(5,0),
+		Size = UDim2.fromScale(1,1) - UDim2.fromOffset(5,0),
+		TextSize = 26,
 		TextXAlignment = Enum.TextXAlignment.Left
 	},
 	Button = {
