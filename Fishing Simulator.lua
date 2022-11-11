@@ -33,8 +33,7 @@ end, })
 wait(1)
 if Premium == true then
 PremiumUI = UI.New({Title = "Premium"})
-
+end
 --Start Of Code
 PremiumI = PremiumUI.Label({Text = "Premium is false"})
-end
 --]--End Of Premium
