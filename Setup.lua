@@ -1,14 +1,6 @@
-if TitleWindow ~= "MultiScriptHub" then
- TitleWindow = "MultiScriptHub"
-elseif TitleText ~= "Alerts" then
- TitleText = "Alerts"
-elseif ExecutionTime ~= 5 then
- ExecutionTime = 5
-end
-wait(0.1)
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
 local UI = Library.Load({
-	Title = "TitleWindow",
+	Title = "MultiScriptHub",
 	Style = 1,
 	SizeX = 600,
 	SizeY = 400,
@@ -19,7 +11,7 @@ local UI = Library.Load({
 	}
 })
 --[--Setup
-AlertTab = UI.New({Title = TitleText.."!"})
+AlertTab = UI.New({Title = "!"})
 wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Version.lua", true))()
 --]--End Of Setup
