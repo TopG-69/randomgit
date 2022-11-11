@@ -1,5 +1,5 @@
 if Theme == nil or Theme == "" then
-local Theme = "aqua"
+local Theme = "Aqua"
 end
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
