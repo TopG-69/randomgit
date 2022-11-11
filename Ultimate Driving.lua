@@ -1,6 +1,6 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
 local UI = Library.Load({
-	Title = "Ultimate Driving Westover",
+	Title = "Ultimate Driving",
 	Style = 1,
 	SizeX = 600,
 	SizeY = 400,
