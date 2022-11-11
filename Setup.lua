@@ -8,7 +8,7 @@ end
 wait(0.1)
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
 local UI = Library.Load({
-	Title = TitleWindow,
+	Title = TitleWindow.."!",
 	Style = 1,
 	SizeX = 600,
 	SizeY = 400,
