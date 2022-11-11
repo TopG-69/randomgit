@@ -87,11 +87,40 @@ end, })
 LocalI = LocalUI.Toggle({Text = "No Clip", Callback = function(v)
        if v then
          NoClip = true
-       elseif not b then
+       elseif not v then
 	 NoClip = false
     end
 end, Enabled = false})
 --]--End Of Local
+
+
+
+--[--Automatic
+AutoUI = UI.New({Title = "Automatic"})
+
+--Start Of Code
+--]--End Of Automatic
+
+
+
+--[--Extra
+ExtraUI = UI.New({Title = "Extra"})
+
+--Start Of Code
+--]--End Of Extra
+
+
+
+--[--Config
+UI = UI.New({Title = "Config"})
+
+--Start Of Code
+mouse = plr:GetMouse()
+mouse.KeyDown:connect(function(key)
+if key == "e" then
+Library:Toggle(State)
+end
+--]--End Of Config
 
 
 
