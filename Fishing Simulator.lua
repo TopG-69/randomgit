@@ -115,25 +115,9 @@ ExtraUI = UI.New({Title = "Extra"})
 ConfigUI = UI.New({Title = "Config"})
 
 --Start Of Code
-ConfigUI.colorpicker("Background Color", function(col)
-library:SetThemeColor("BackgroundColor", col, 0)
-end, Color3.fromRGB(40, 40, 40), false)
-
-ConfigUI.colorpicker("Text Color", function(col)
-library:SetThemeColor("TextColor", col, 0)
-end, Color3.fromRGB(255, 255, 255), false)
-
-ConfigUI.colorpicker("Accent Color", function(col)
-library:SetThemeColor("AccentColor", col, 0)
-end, Color3.fromRGB(30, 30, 30), false)
-
-ConfigUI.colorpicker("Gray Contrast Color", function(col)
-library:SetThemeColor("GrayContrastColor", col, 0)
-end, Color3.fromRGB(35, 35, 35), false)
-
-ConfigUI.colorpicker("Dark ContrastColor", function(col)
-library:SetThemeColor("DarkContrastColor", col, 0)
-end, Color3.fromRGB(25, 25, 25), false)
+ ConfigI = ConfigUI.Dropdown({Text = "Select Theme ", Callback = function(v)
+	Library:Theme = v
+end, Options = Theme})
 --]--End Of Config
 
 
