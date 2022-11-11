@@ -11,7 +11,6 @@ local UI = Library.Load({
 	}
 })
 --[--Run Checks
-Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/log.lua"))()
 --]--Finished
 
 --[--Setup
