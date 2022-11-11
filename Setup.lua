@@ -1,4 +1,11 @@
-local TitleWindow = "MultiRobloxScript"
+if TitleWindow == nil then
+ local TitleWindow = "MultiScriptHub"
+elseif TitleText == nil then
+ local TitleText == Alerts
+elseif ExecutionTime == nil then
+ local ExecutionTime == 5
+end
+wait(0.1)
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
 local UI = Library.Load({
 	Title = TitleWindow,
@@ -12,7 +19,7 @@ local UI = Library.Load({
 	}
 })
 --[--Setup
-AlertTab = UI.New({Title = "Alerts"})
+AlertTab = UI.New({Title = TitleText.."!"})
 wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Version.lua", true))()
 --]--End Of Setup
@@ -21,14 +28,12 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/
 
 --[--Script
 if game.PlaceId == 2866967438 and OUTDATEDVERSION == false and Discord_Key == "123" then
-TitleWindow = "Successful┃Loading Fishing Simulator Script"
 AlertList = AlertTab.Label({Text = "Fishing Simulator Script Is Loading"})
-wait(5)
+wait(ExecutionTime)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module2.lua", true))()
 elseif game.PlaceId == 0 and OUTDATEDVERSION == false and Discord_Key == "123" then
 elseif game.PlaceId == 0 and OUTDATEDVERSION == false and Discord_Key == "123" then
 elseif Discord_Key ~= "123" then
-TitleWindow = "Error1┃False Key"
 AlertList = AlertTab.Label({Text = "Error1! - NK"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
@@ -43,7 +48,6 @@ AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard("https://discord.gg/DYkHGnYeDp")
 end, })
 elseif OUTDATEDVERSION == true and Discord_Key == "123" then
-TitleWindow = "Error2┃Outdated Version"
 AlertList = AlertTab.Label({Text = "Error2! - ODV/VT"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
@@ -58,7 +62,6 @@ AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard("https://discord.gg/DYkHGnYeDp")
 end, })
 elseif game.PlaceId ~= 2866967438 or game.PlaceId == 0 or game.PlaceId == 0 and OUTDATEDVERSION == false and Discord_Key == "123" then
-TitleWindow = "Error3┃Unspupported Game"
 AlertList = AlertTab.Label({Text = "Error3! - NG/WD"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
