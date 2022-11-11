@@ -30,6 +30,7 @@ end, })
 
 
 --[--Premium
+wait(1)
 if Premium == true then
 PremiumUI = UI.New({Title = "Premium"})
 
