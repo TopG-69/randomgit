@@ -1,8 +1,8 @@
-if TitleWindow == nil then
+if TitleWindow ~= "MultiScriptHub" then
  local TitleWindow = "MultiScriptHub"
-elseif TitleText == nil then
- local TitleText = Alerts
-elseif ExecutionTime == nil then
+elseif TitleText ~= "Alerts" then
+ local TitleText = "Alerts"
+elseif ExecutionTime ~= 5 then
  local ExecutionTime = 5
 end
 wait(0.1)
