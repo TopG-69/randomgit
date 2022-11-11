@@ -17,7 +17,7 @@ game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
 end
 
 function SetJumpPower(value)
-game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
 end
 
 function RestoreWSJP()
