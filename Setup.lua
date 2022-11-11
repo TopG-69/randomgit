@@ -1,9 +1,9 @@
 if TitleWindow == nil then
  local TitleWindow = "MultiScriptHub"
 elseif TitleText == nil then
- local TitleText == Alerts
+ local TitleText = Alerts
 elseif ExecutionTime == nil then
- local ExecutionTime == 5
+ local ExecutionTime = 5
 end
 wait(0.1)
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
