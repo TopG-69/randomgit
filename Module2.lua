@@ -11,5 +11,11 @@ local UI = Library.Load({
 	}
 })
 
-Alert = UI.New({Title = "Alerts"})
-AlertUI = Alert.Label({Text = "Fishing Simulator Detected"})
+Alert = UI.New({Title = "Welcome"})
+if PremiumKey = "EJOHFDNSIBTREKPQWNDIASDHUBEJNOWBNTEORBNJSACNJOSVNIDASNOVUESNAVUBORTB" then
+AlertUI = Alert.Label({Text = "Premium is True"})
+	local Premium = true
+Else
+AlertUI = Alert.Label({Text = "Premium is false"})
+	local Premium = false
+end
