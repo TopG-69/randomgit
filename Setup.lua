@@ -1,7 +1,7 @@
 if Theme ~= "Aqua" or Theme ~= "Light" or Theme ~= "Dark" or Theme ~= "Jester" or Theme ~= "Mocha" then
 ColorMainGui = "Aqua"
 else
-Theme = Theme
+ColorMainGui = Theme
 end
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
