@@ -1,5 +1,5 @@
 if Theme ~= "Aqua" or Theme ~= "Light" or Theme ~= "Dark" or Theme ~= "Jester" or Theme ~= "Mocha" then
-local ColorMainGui = "Aqua"
+local ColorMainGui = "Jester"
 elseif Theme == "Aqua" or Theme == "Light" or Theme == "Dark" or Theme == "Jester" or Theme == "Mocha" then
 local ColorMainGui = Theme
 else
