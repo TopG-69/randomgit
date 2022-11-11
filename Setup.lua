@@ -1,4 +1,3 @@
-if Discord_Key = "IAMINTHEDISCORDSERVER" then
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
 local UI = Library.Load({
 	Title = "MultiRobloxScript",
@@ -11,26 +10,43 @@ local UI = Library.Load({
 		Minimise = Color3.fromRGB(0, 0, 0 )
 	}
 })
-else
-	
-end
+--[--Verifu
+local KEY = "IAMINTHEDISCORDSERVER"
+wait(0.1)
+--[--End Of Verify
+if Discord_Key == KEY then
 --[--Setup
 AlertTab = UI.New({Title = "Alerts"})
 wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Version.lua", true))()
 --]--End Of Setup
+end
 
 
 
 --[--Script
-if game.PlaceId == 2866967438 and OUTDATEDVERSION == false then
+if game.PlaceId == 2866967438 and OUTDATEDVERSION == false and Discord_Key = KEY then
 AlertList = AlertTab.Label({Text = "Fishing Simulator Script Is Loading"})
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module2.lua", true))()
-elseif game.PlaceId == 0 and OUTDATEDVERSION == false then
-elseif game.PlaceId == 0 and OUTDATEDVERSION == false then
-elseif OUTDATEDVERSION == true then
-AlertList = AlertTab.Label({Text = "Error1! - ODV/VT"})
+elseif game.PlaceId == 0 and OUTDATEDVERSION == false and Discord_Key = KEY then
+elseif game.PlaceId == 0 and OUTDATEDVERSION == false and Discord_Key = KEY then
+elseif Discord_Key ~= KEY then
+AlertList = AlertTab.Label({Text = "Error1! - NK"})
+wait(0.1)
+AlertList = AlertTab.Label({Text = "Possible Causes"})
+wait(0.1)
+AlertList = AlertTab.Label({Text = "You Havent Inputted The Correct Key"})
+wait(0.1)
+AlertList = AlertTab.Label({Text = "Your Key is Invalid"})
+wait(0.1)
+AlertList = AlertTab.Label({Text = "Still Need Help? Join The Discord - https://discord.gg/DYkHGnYeDp"})
+wait(0.1)
+AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
+    setclipboard("https://discord.gg/DYkHGnYeDp")
+end, })
+elseif OUTDATEDVERSION == true and Discord_Key = KEY then
+AlertList = AlertTab.Label({Text = "Error2! - ODV/VT"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
 wait(0.1)
@@ -43,8 +59,8 @@ wait(0.1)
 AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard("https://discord.gg/DYkHGnYeDp")
 end, })
-elseif game.PlaceId ~= 2866967438 or game.PlaceId == 0 or game.PlaceId == 0 and OUTDATEDVERSION == false then
-AlertList = AlertTab.Label({Text = "Error2! - NG/WD"})
+elseif game.PlaceId ~= 2866967438 or game.PlaceId == 0 or game.PlaceId == 0 and OUTDATEDVERSION == false and Discord_Key = KEY then
+AlertList = AlertTab.Label({Text = "Error3! - NG/WD"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
 wait(0.1)
