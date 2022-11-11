@@ -1,7 +1,5 @@
-if Theme ~= "Aqua" or Theme ~= "Light" or Theme ~= "Dark" or Theme ~= "Jester" or Theme ~= "Mocha" then
-local ColorMainGui = "Jester"
-elseif Theme == "Aqua" or Theme == "Light" or Theme == "Dark" or Theme == "Jester" or Theme == "Mocha" then
-local ColorMainGui = Theme
+if Theme ~= "Aqua" or Theme ~= "Light" or Theme ~= "Dark" or Theme ~= "Jester" or Theme ~= "Mocha" or Theme == nil then
+Local NewTheme = "Aqua"
 end
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
@@ -10,7 +8,7 @@ local UI = Library.Load({
 	Style = 1,
 	SizeX = 600,
 	SizeY = 400,
-	Theme = ColorMainGui,
+	Theme = NewTheme,
 	ColorOverrides = {
 		MainFrame = Color3.fromRGB(25,25,25 ),
 		Minimise = Color3.fromRGB(0, 0, 0 )
