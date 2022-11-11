@@ -646,7 +646,19 @@ function TryAddMenu(Object, Menu, ReturnTable)
 				OptionValue.ZIndex = 150
 				OptionValue.TextXAlignment = Enum.TextXAlignment.Right
 				OptionValue.Parent = MenuOption
-
+					
+				local OptionValue = Objects.new("LabelType2")
+				OptionValue.Name = "Value"
+				OptionValue.Position = UDim2.fromScale(0,0)
+				OptionValue.Size = UDim2.fromScale(1,1) - UDim2.fromOffset(5,0)
+				OptionValue.Text = Option
+				OptionValue.TextColor3 = ThisTheme.Button
+				OptionValue.Font = Enum.Font.Gotham
+				OptionValue.TextSize = 24
+				OptionValue.ZIndex = 150
+				OptionValue.TextXAlignment = Enum.TextXAlignment.Right
+				OptionValue.Parent = MenuOption
+					
 				MenuOption.MouseButton1Down:Connect(function()
 					Value(ReturnTable)
 					MenuToggle = false
@@ -955,7 +967,7 @@ function Material.Load(Config)
 		BannerLabel.TextTransparency = 1
 		BannerLabel.ZIndex = 80
 		BannerLabel.Parent = Banner
-
+		
 		TweenService:Create(BannerOverlay, TweenInfo.new(0.5), {BackgroundTransparency = 0.5}):Play()
 		TweenService:Create(Banner, TweenInfo.new(0.5), {ImageTransparency = 0}):Play()
 		TweenService:Create(BannerLabel, TweenInfo.new(0.5), {TextTransparency = 0}):Play()
