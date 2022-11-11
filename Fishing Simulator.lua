@@ -25,6 +25,7 @@ end)
 
 game:GetService("UserInputService").JumpRequest:connect(function()
 	if InfiniteJump then
+		wait(CoolDown)
 		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
 	end
 end)
@@ -88,6 +89,14 @@ end, })
 
 LocalI = LocalUI.Button({Text = "Restore WS/JP", Callback = function()
         RestoreWSJP()
+end, })
+local CoolDown = nil
+LocalI = LocalUI.TextField({Text = "Cooldown -Applys To InfJump", Callback = function(v)
+	if CoolDown = nil then
+        CoolDown = 0.1
+	else
+	CoolDown = v
+   end		
 end, })
 
 LocalI = LocalUI.Toggle({Text = "No Clip", Callback = function(v)
