@@ -10,9 +10,10 @@ local UI = Library.Load({
 		Minimise = Color3.fromRGB(0, 0, 0 )
 	}
 })
-
+--[--Welcome
 WelcomeUI = UI.New({Title = "Welcome"})
 
+--Start Of Code
 if PremiumKey == "EJOHFDNSIBTREKPQWNDIASDHUBEJNOWBNTEORBNJSACNJOSVNIDASNOVUESNAVUBORTB" then
 WelcomeI = WelcomeUI.Label({Text = "Premium is True"})
 	local Premium = true
@@ -24,3 +25,13 @@ end
 WelcomeI = WelcomeUI.CircleButton({Text = "Click To Copy Invite", function()
     setclipboard("https://discord.gg/DYkHGnYeDp")
 end, })
+--]--End Of Welcome
+
+
+
+--[--Premium
+PremiumUI = UI.New({Title = "Premium"})
+
+--Start Of Code
+WelcomeI = WelcomeUI.Label({Text = "Premium is false"})
+--]--End Of Premium
