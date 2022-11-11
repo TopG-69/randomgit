@@ -1,6 +1,6 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
 local UI = Library.Load({
-	Title = "Theme Park Tycoon 2",
+	Title = "Fishing Simulator",
 	Style = 1,
 	SizeX = 600,
 	SizeY = 400,
@@ -21,6 +21,12 @@ v.CanCollide = false
 end
 end
 end
+end)
+
+game:GetService("UserInputService").JumpRequest:connect(function()
+	if InfiniteJump then
+		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+	end
 end)
 
 function SetWalkSpeed(value)
@@ -87,11 +93,43 @@ end, })
 LocalI = LocalUI.Toggle({Text = "No Clip", Callback = function(v)
        if v then
          NoClip = true
-       elseif not b then
+       elseif not v then
 	 NoClip = false
     end
 end, Enabled = false})
+
+LocalI = LocalUI.Toggle({Text = "Inf Jump", Callback = function(v)
+       if v then
+         InfiniteJump = true
+       elseif not v then
+	 InfiniteJump = false
+    end
+end, Enabled = false})
+
+LocalI = LocalUI.Toggle({Text = "Fly - Will Be Added Sometime", Callback = function(v)
+       if v then
+         Fly = true
+       elseif not v then
+	 Fly = false
+    end
+end, Enabled = false})
 --]--End Of Local
+
+
+
+--[--Extra
+ExtraUI = UI.New({Title = "Extra"})
+
+--Start Of Code
+--]--End Of Extra
+
+
+
+--[--Config
+ConfigUI = UI.New({Title = "Config"})
+
+--Start Of Code
+--]--End Of Config
 
 
 
