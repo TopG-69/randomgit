@@ -25,8 +25,12 @@ AlertList = AlertTab.Label({Text = "Fishing Simulator Script Is Loading"})
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Fishing%20Simulator.lua", true))()
 elseif game.PlaceId == 69184822 and OUTDATEDVERSION == false and Discord_Key == "123" then
+AlertList = AlertTab.Label({Text = "Theme Park Tycoon 2 Script Is Loading"})
+wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/ThemeParkTycoon2.lua", true))()
 elseif game.PlaceId == 54865335 and OUTDATEDVERSION == false and Discord_Key == "123" then
+AlertList = AlertTab.Label({Text = "Ultimate Driving Script Is Loading"})
+wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Ultimate%20Driving.lua", true))()
 elseif Discord_Key ~= "123" then
 AlertList = AlertTab.Label({Text = "Error1! - NK"})
