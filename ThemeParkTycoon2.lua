@@ -1,6 +1,6 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
 local UI = Library.Load({
-	Title = "Fishing Simulator",
+	Title = "Theme Park Tycoon 2",
 	Style = 1,
 	SizeX = 600,
 	SizeY = 400,
@@ -50,7 +50,24 @@ game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
 end
 
 if God then
-game.Players.LocalPlayer.Character.Humanoid.Health = 100
+	local Cam = workspace.CurrentCamera
+	local Pos, Char = Cam.CFrame, speaker.Character
+	local Human = Char and Char.FindFirstChildWhichIsA(Char, "Humanoid")
+	local nHuman = Human.Clone(Human)
+	nHuman.Parent, speaker.Character = Char, nil
+	nHuman.SetStateEnabled(nHuman, 15, false)
+	nHuman.SetStateEnabled(nHuman, 1, false)
+	nHuman.SetStateEnabled(nHuman, 0, false)
+	nHuman.BreakJointsOnDeath, Human = true, Human.Destroy(Human)
+	speaker.Character, Cam.CameraSubject, Cam.CFrame = Char, nHuman, wait() and Pos
+	nHuman.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+	local Script = Char.FindFirstChild(Char, "Animate")
+	if Script then
+		Script.Disabled = true
+		wait()
+		Script.Disabled = false
+	end
+	nHuman.Health = nHuman.MaxHealth
 end
 --]--End Of Functions
 
@@ -91,21 +108,32 @@ LocalUI = UI.New({Title = "Local"})
 --Start Of Code
 LocalI = LocalUI.TextField({Text = "WalkSpeed", Callback = function(v)
 	SetWalkSpeed(v)
+	LoopValueOfWSpeed = v
 end, })
 
 LocalI = LocalUI.TextField({Text = "JumpPower", Callback = function(v)
 	SetJumpPower(v)
+	LoopValueOfJumpP = v
 end, })
 
 LocalI = LocalUI.Button({Text = "Restore WS/JP", Callback = function()
         RestoreWSJP()
 end, })
+
 LocalI = LocalUI.TextField({Text = "Cooldown -Applys To InfJump", Callback = function(v)
 	if CoolDown == nil or CoolDown == nan then
         CoolDown = 0.1
 	else
 	CoolDown = v
    end		
+end, })
+
+LocalI = LocalUI.Toggle({Text = "Loop WalkSpeed", Callback = function()
+    SetWalkSpeed(LoopValueOfWSpeed)
+end, })
+
+LocalI = LocalUI.Toggle({Text = "Loop JumpPower", Callback = function()
+    SetJumpPower(LoopValueOfJumpP)
 end, })
 
 LocalI = LocalUI.Toggle({Text = "No Clip", Callback = function(v)
@@ -132,6 +160,14 @@ LocalI = LocalUI.Toggle({Text = "Fly - Will Be Added Sometime", Callback = funct
     end
 end, Enabled = false})
 --]--End Of Local
+
+
+
+--[--Automatic
+AutoUI = UI.New({Title = "Automatic"})
+
+--Start Of Code
+--]--End Of Automatic
 
 
 
