@@ -1,14 +1,16 @@
-BrokenThemes = Theme ~= "Aqua" or Theme ~= "Light" or Theme ~= "Dark" or Theme ~= "Jester" or Theme ~= "Mocha" or Theme == nil
-if BrokenThemes then
- Theme = "Aqua"
+if Theme ~= "Aqua" or Theme ~= "Light" or Theme ~= "Dark" or Theme ~= "Jester" or Theme ~= "Mocha" then
+ColorMainGui = "Aqua"
+else
+Theme = Theme
 end
+
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
 local UI = Library.Load({
 	Title = "MultiRobloxScript",
 	Style = 1,
 	SizeX = 600,
 	SizeY = 400,
-	Theme = Theme,
+	Theme = ColorMainGui,
 	ColorOverrides = {
 		MainFrame = Color3.fromRGB(25,25,25 ),
 		Minimise = Color3.fromRGB(0, 0, 0 )
@@ -22,6 +24,7 @@ AlertTab = UI.New({Title = "Alerts"})
 wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Version.lua", true))()
 FixedThemes = Theme == "Aqua" or Theme == "Light" or Theme == "Dark" or Theme == "Jester" or Theme == "Mocha"
+BrokenThemes = Theme ~= "Aqua" or Theme ~= "Light" or Theme ~= "Dark" or Theme ~= "Jester" or Theme ~= "Mocha" or Theme == nil
 --]--End Of Setup
 
 --[--Script
