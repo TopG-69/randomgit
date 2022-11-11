@@ -11,7 +11,7 @@ local UI = Library.Load({
 	}
 })
 --[--Setup
-local KEY = "IAMINTHEDISCORDSERVER"
+local KEY = IAMINTHEDISCORDSERVER
 wait(0.1)
 AlertTab = UI.New({Title = "Alerts"})
 wait(0.1)
