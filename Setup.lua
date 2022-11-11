@@ -1,6 +1,7 @@
 if Theme == nil or Theme == "" then
 local Theme = "Aqua"
 end
+wait(1)
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
 local UI = Library.Load({
