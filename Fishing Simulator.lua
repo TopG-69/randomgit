@@ -165,7 +165,7 @@ ConfigUI = UI.New({Title = "Config"})
 --Start Of Code
 PremiumI = PremiumUI.Label({Text = "Experimental Setting"})
 
-LocalI = LocalUI.Toggle({Text = "God", Callback = function(v)
+PremiumI = PremiumUI.Toggle({Text = "God", Callback = function(v)
        if v then
          God = true
        elseif not v then
