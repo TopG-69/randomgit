@@ -10,12 +10,25 @@ local UI = Library.Load({
 		Minimise = Color3.fromRGB(0, 0, 0 )
 	}
 })
+--[--Functions
+
+function SetWalkSpeed(value)
+       local humanoid = Plrs.LocalPlayer:WaitForChild("Humanoid")
+       humanoid.WalkSpeed = value
+end
+
+--]--End Of Functions
+
+
+
 --[--Sound
 local s = Instance.new ("Sound", workspace)
 s.SoundId = 'rbxassetid://530637073'
 s.Volume = 1
 s:Play()
 --]--End Of Sound
+
+
 
 --[--Welcome
 WelcomeUI = UI.New({Title = "Welcome"})
@@ -34,6 +47,17 @@ WelcomeI = WelcomeUI.Button({Text = "Click To Copy Invite", function()
     setclipboard("https://discord.gg/DYkHGnYeDp")
 end, })
 --]--End Of Welcome
+
+
+
+--[--Local
+LocalUI = UI.New({Title = "Local"})
+
+--Start Of Code
+LocalI = LocalUI.TextField({Text = "WalkSpeed", Callback = function(v)
+	SetWalkSpeed(v)
+end, })
+--]--End Of Local
 
 
 
