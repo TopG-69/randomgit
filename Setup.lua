@@ -1,3 +1,26 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
+local UI = Library.Load({
+	Title = "MultiRobloxScript",
+	Style = 1,
+	SizeX = 600,
+	SizeY = 400,
+	Theme = "Light",
+	ColorOverrides = {
+		MainFrame = Color3.fromRGB(25,25,25 ),
+		Minimise = Color3.fromRGB(0, 0, 0 )
+	}
+})
+--[--Setup
+AlertTab = UI.New({Title = "Alerts"})
+wait(0.1)
+versionCURRENT = 1
+OUTDATEDVERSION = nil
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Version.lua", true))()
+--]--End Of Setup
+
+
+
+--[--Script
 if game.PlaceId == 2866967438 and OUTDATEDVERSION == false then
 AlertList = AlertTab.Label({Text = "Fishing Simulator Script Is Loading"})
 wait(5)
@@ -33,3 +56,4 @@ AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard("https://discord.gg/DYkHGnYeDp")
 end, })
 end
+--]--End Of Script
