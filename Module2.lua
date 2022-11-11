@@ -13,10 +13,10 @@ local UI = Library.Load({
 
 WelcomeUI = UI.New({Title = "Welcome"})
 
-if PremiumKey = "EJOHFDNSIBTREKPQWNDIASDHUBEJNOWBNTEORBNJSACNJOSVNIDASNOVUESNAVUBORTB" then
+if PremiumKey == "EJOHFDNSIBTREKPQWNDIASDHUBEJNOWBNTEORBNJSACNJOSVNIDASNOVUESNAVUBORTB" then
 WelcomeI = WelcomeUI.Label({Text = "Premium is True"})
 	local Premium = true
-Else
+else
 WelcomeI = WelcomeUI.Label({Text = "Premium is false"})
 	local Premium = false
 end
