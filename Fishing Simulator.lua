@@ -30,7 +30,7 @@ WelcomeI = WelcomeUI.Label({Text = "Premium is false"})
 	Premium = false
 end
 
-WelcomeI = WelcomeUI.CircleButton({Text = "Click To Copy Invite", function()
+WelcomeI = WelcomeUI.Button({Text = "Click To Copy Invite", function()
     setclipboard("https://discord.gg/DYkHGnYeDp")
 end, })
 --]--End Of Welcome
