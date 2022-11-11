@@ -21,6 +21,6 @@ WelcomeI = WelcomeUI.Label({Text = "Premium is false"})
 	local Premium = false
 end
 
-AlertListCopy = AlertTab.CircleButton({Text = "Click To Copy Invite", function()
+WelcomeI = WelcomeUI.SliderDot({Text = "Click To Copy Invite", function()
     setclipboard("https://discord.gg/DYkHGnYeDp")
 end, })
