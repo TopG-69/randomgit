@@ -30,8 +30,10 @@ end, })
 
 
 --[--Premium
+if Premium == true then
 PremiumUI = UI.New({Title = "Premium"})
 
 --Start Of Code
-WelcomeI = WelcomeUI.Label({Text = "Premium is false"})
+PremiumI = PremiumUI.Label({Text = "Premium is false"})
+end
 --]--End Of Premium
