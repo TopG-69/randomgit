@@ -1,10 +1,14 @@
+if Theme == nil or Theme == "" then
+local Theme = "aqua"
+end
+
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
 local UI = Library.Load({
 	Title = "MultiRobloxScript",
 	Style = 1,
 	SizeX = 600,
 	SizeY = 400,
-	Theme = "Light",
+	Theme = Theme,
 	ColorOverrides = {
 		MainFrame = Color3.fromRGB(25,25,25 ),
 		Minimise = Color3.fromRGB(0, 0, 0 )
