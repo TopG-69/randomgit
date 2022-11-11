@@ -23,6 +23,12 @@ end
 end
 end)
 
+game:GetService("UserInputService").JumpRequest:connect(function()
+	if InfiniteJump then
+		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+	end
+end)
+
 function SetWalkSpeed(value)
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
 end
@@ -89,6 +95,22 @@ LocalI = LocalUI.Toggle({Text = "No Clip", Callback = function(v)
          NoClip = true
        elseif not v then
 	 NoClip = false
+    end
+end, Enabled = false})
+
+LocalI = LocalUI.Toggle({Text = "Inf Jump", Callback = function(v)
+       if v then
+         InfiniteJump = true
+       elseif not v then
+	 InfiniteJump = false
+    end
+end, Enabled = false})
+
+LocalI = LocalUI.Toggle({Text = "Fly - Will Be Added Sometime", Callback = function(v)
+       if v then
+         Fly = true
+       elseif not v then
+	 Fly = false
     end
 end, Enabled = false})
 --]--End Of Local
