@@ -11,7 +11,7 @@ local UI = Library.Load({
 	}
 })
 --[--Set Values
-local CoolDown = 0.1
+local CoolDown = nan
 --]--End Of Set Values
 
 
@@ -47,6 +47,10 @@ end
 function RestoreWSJP()
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
 game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+end
+
+if God then
+game.Players.LocalPlayer.Character.Humanoid.Health = 100
 end
 --]--End Of Functions
 
@@ -151,5 +155,13 @@ ConfigUI = UI.New({Title = "Config"})
 --/
 
 --Start Of Code
-PremiumI = PremiumUI.Label({Text = "No Options Yet"})
+PremiumI = PremiumUI.Label({Text = "Experimental Setting"})
+
+PremiumI = PremiumUI.Toggle({Text = "God", Callback = function(v)
+       if v then
+         God = true
+       elseif not v then
+	 God = false
+    end
+end, Enabled = false})
 --]--End Of Premium
