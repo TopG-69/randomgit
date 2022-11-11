@@ -12,7 +12,9 @@ local UI = Library.Load({
 })
 --[--Run Checks
 local HowLongToWait = ExecutionTime
-if ExecutionTime < 1 then
+local MIN = 1
+local MAX = 10
+if ExecutionTime < MIN or ExecutionTime < MAX then
  local ExecutionTime == 5
 end
 --]--Finished
