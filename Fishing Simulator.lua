@@ -16,11 +16,11 @@ WelcomeUI = UI.New({Title = "Welcome"})
 --Start Of Code
 if PremiumKey == "EJOHFDNSIBTREKPQWNDIASDHUBEJNOWBNTEORBNJSACNJOSVNIDASNOVUESNAVUBORTB" then
 WelcomeI = WelcomeUI.Label({Text = "Premium is True"})
-	local Premium = true
+	Premium = true
 	PremiumUI = UI.New({Title = "Premium"})
 else
 WelcomeI = WelcomeUI.Label({Text = "Premium is false"})
-	local Premium = false
+	Premium = false
 end
 
 WelcomeI = WelcomeUI.CircleButton({Text = "Click To Copy Invite", function()
@@ -34,5 +34,5 @@ end, })
 --*
 
 --Start Of Code
-PremiumI = PremiumUI.Label({Text = "Premium is false"})
+PremiumI = PremiumUI.Label({Text = "No Options Yet"})
 --]--End Of Premium
