@@ -13,8 +13,6 @@ local UI = Library.Load({
 --[--Setup
 AlertTab = UI.New({Title = "Alerts"})
 wait(0.1)
-versionCURRENT = 1
-OUTDATEDVERSION = nil
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Version.lua", true))()
 --]--End Of Setup
 
