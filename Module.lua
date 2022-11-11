@@ -2285,6 +2285,33 @@ function Material.Load(Config)
 			return LabelOptions
 		end
 
+		function OptionLibrary.LabelType2(LabelConfig)
+			local LabelText = LabelConfig.Text or "nil label"
+			
+			local LabelContainer = Objects.new("Round")
+			LabelContainer.Name = "Label"
+			LabelContainer.Size = UDim2.fromScale(1,0) + UDim2.fromOffset(0,20)
+			LabelContainer.ImageColor3 = Theme.MainFrame
+			LabelContainer.Parent = PageContentFrame
+			
+			local LabelContent = Objects.new("Label")
+			LabelContent.TextColor3 = Theme.ChipSet
+			LabelContent.Text = LabelText:upper()
+			LabelContent.TextSize = 24
+			LabelContent.Font = Enum.Font.GothamSemibold
+			LabelContent.Size = UDim2.fromScale(1,1) + UDim2.fromOffset(-5,0)
+			LabelContent.Position = UDim2.fromOffset(5,0)
+			LabelContent.Parent = LabelContainer
+			
+			local LabelOptions = {}
+			
+			function LabelOptions.SetText(Text)
+				LabelContent.Text = Text
+			end
+			
+			return LabelOptions
+		end
+		
 		function OptionLibrary.Slider(SliderConfig)
 			local SliderText = SliderConfig.Text or "nil slider"
 			local SliderCallback = SliderConfig.Callback or function() print("nil slider") end
