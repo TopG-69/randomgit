@@ -10,6 +10,13 @@ local UI = Library.Load({
 		Minimise = Color3.fromRGB(0, 0, 0 )
 	}
 })
+--[--Sound
+local s = Instance.new ("Sound", workspace)
+s.SoundId = 'rbxassetid://530637073'
+s.Volume = 1
+s:Play()
+--]--End Of Sound
+
 --[--Welcome
 WelcomeUI = UI.New({Title = "Welcome"})
 
