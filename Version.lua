@@ -1,5 +1,6 @@
 local VerifyVersion = 1
-
+local versionCURRENT = nil
+wait(1)
 if versionCURRENT ~= VerifyVersion then
 AlertUI = Alert.Label({Text = "Your Using A Outdated Version Please Update"})
 else
