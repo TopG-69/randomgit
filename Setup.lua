@@ -1,3 +1,4 @@
+if Discord_Key = "IAMINTHEDISCORDSERVER" then
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
 local UI = Library.Load({
 	Title = "MultiRobloxScript",
@@ -10,6 +11,9 @@ local UI = Library.Load({
 		Minimise = Color3.fromRGB(0, 0, 0 )
 	}
 })
+else
+	
+end
 --[--Setup
 AlertTab = UI.New({Title = "Alerts"})
 wait(0.1)
