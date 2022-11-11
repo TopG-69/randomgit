@@ -250,8 +250,8 @@ local Properties = {
 	LabelType2 = {
 		BackgroundTransparency = 1,
 		Position = UDim2.fromOffset(5,0),
-		Size = UDim2.fromScale(1,1) - UDim2.fromOffset(5,0),
-		TextSize = 26,
+		Size = UDim2.fromScale(1,2) - UDim2.fromOffset(5,0),
+		TextSize = 42,
 		TextXAlignment = Enum.TextXAlignment.Left
 	},
 	Button = {
@@ -2297,7 +2297,7 @@ function Material.Load(Config)
 			local LabelContent = Objects.new("Label")
 			LabelContent.TextColor3 = Theme.ChipSet
 			LabelContent.Text = LabelText:upper()
-			LabelContent.TextSize = 24
+			LabelContent.TextSize = 32
 			LabelContent.Font = Enum.Font.GothamSemibold
 			LabelContent.Size = UDim2.fromScale(1,1) + UDim2.fromOffset(-5,0)
 			LabelContent.Position = UDim2.fromOffset(5,0)
