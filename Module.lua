@@ -650,11 +650,11 @@ function TryAddMenu(Object, Menu, ReturnTable)
 				local OptionValue = Objects.new("LabelType2")
 				OptionValue.Name = "Value"
 				OptionValue.Position = UDim2.fromScale(0,0)
-				OptionValue.Size = UDim2.fromScale(1,1) - UDim2.fromOffset(5,0)
+				OptionValue.Size = UDim2.fromScale(1,3) - UDim2.fromOffset(5,0)
 				OptionValue.Text = Option
 				OptionValue.TextColor3 = ThisTheme.Button
 				OptionValue.Font = Enum.Font.Gotham
-				OptionValue.TextSize = 24
+				OptionValue.TextSize = 32
 				OptionValue.ZIndex = 150
 				OptionValue.TextXAlignment = Enum.TextXAlignment.Right
 				OptionValue.Parent = MenuOption
