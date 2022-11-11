@@ -11,8 +11,9 @@ local UI = Library.Load({
 	}
 })
 --[--Functions
-if noclip then
-player.Character.Humanoid:ChangeState(11)
+RunService.RenderStepped:Connect(function()
+if NoClip then
+client.Character.Humanoid:ChangeState(11)
 end
 
 function SetWalkSpeed(value)
@@ -82,6 +83,7 @@ LocalI = LocalUI.Toggle({Text = "Restore WS/JP", Callback = function(v)
          noclip = true
        else
 	 noclip = false
+    end
 end, Enabled = false})
 --]--End Of Local
 
