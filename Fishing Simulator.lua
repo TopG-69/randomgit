@@ -156,7 +156,7 @@ ConfigUI = UI.New({Title = "Config"})
 
 
 --[--Premium
---*
+--/
 
 --Start Of Code
 PremiumI = PremiumUI.Label({Text = "No Options Yet"})
