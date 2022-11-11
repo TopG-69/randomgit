@@ -10,6 +10,12 @@ local UI = Library.Load({
 		Minimise = Color3.fromRGB(0, 0, 0 )
 	}
 })
+--[--Set Values
+local CoolDown = 0.1
+--]--End Of Set Values
+
+
+
 --[--Functions
 local runservice = game:GetService("RunService")
 local player = game:GetService("Players").LocalPlayer
@@ -24,10 +30,10 @@ end
 end)
 
 game:GetService("UserInputService").JumpRequest:connect(function()
-	if InfiniteJump then
-		wait(CoolDown)
-		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
-	end
+if InfiniteJump then
+game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+wait(CoolDown)
+end
 end)
 
 function SetWalkSpeed(value)
@@ -90,9 +96,8 @@ end, })
 LocalI = LocalUI.Button({Text = "Restore WS/JP", Callback = function()
         RestoreWSJP()
 end, })
-local CoolDown = nil
 LocalI = LocalUI.TextField({Text = "Cooldown -Applys To InfJump", Callback = function(v)
-	if CoolDown = nil then
+	if CoolDown == nil or CoolDown == nan then
         CoolDown = 0.1
 	else
 	CoolDown = v
