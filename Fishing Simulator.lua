@@ -11,10 +11,17 @@ local UI = Library.Load({
 	}
 })
 --[--Functions
-RunService.RenderStepped:Connect(function()
+local runservice = game:GetService("RunService")
+local player = game:GetService("Players").LocalPlayer
+runservice.Stepped:Connect(function()
+for i,v in pairs(player.Character:GetDescendants()) do
+if v:IsA("BasePart") then
 if NoClip then
-client.Character.Humanoid:ChangeState(11)
+v.CanCollide = false
 end
+end
+end
+end)
 
 function SetWalkSpeed(value)
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -28,7 +35,6 @@ function RestoreWSJP()
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
 game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
 end
-
 --]--End Of Functions
 
 
@@ -78,11 +84,11 @@ LocalI = LocalUI.Button({Text = "Restore WS/JP", Callback = function()
         RestoreWSJP()
 end, })
 
-LocalI = LocalUI.Toggle({Text = "Restore WS/JP", Callback = function(v)
+LocalI = LocalUI.Toggle({Text = "No Clip", Callback = function(v)
        if v then
-         noclip = true
-       else
-	 noclip = false
+         NoClip = true
+       elseif not b then
+	 NoClip = false
     end
 end, Enabled = false})
 --]--End Of Local
