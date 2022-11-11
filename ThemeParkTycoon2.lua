@@ -11,16 +11,37 @@ local UI = Library.Load({
 	}
 })
 
+--[--Sound
+local s = Instance.new ("Sound", workspace)
+s.SoundId = 'rbxassetid://530637073'
+s.Volume = 1
+s:Play()
+--]--End Of Sound
+
+--[--Welcome
 WelcomeUI = UI.New({Title = "Welcome"})
 
+--Start Of Code
 if PremiumKey == "EJOHFDNSIBTREKPQWNDIASDHUBEJNOWBNTEORBNJSACNJOSVNIDASNOVUESNAVUBORTB" then
 WelcomeI = WelcomeUI.Label({Text = "Premium is True"})
-	local Premium = true
+	Premium = true
+	PremiumUI = UI.New({Title = "Premium"})
 else
 WelcomeI = WelcomeUI.Label({Text = "Premium is false"})
-	local Premium = false
+	Premium = false
 end
 
-WelcomeI = WelcomeUI.CircleButton({Text = "Click To Copy Invite", function()
+WelcomeI = WelcomeUI.Button({Text = "Click To Copy Invite", function()
     setclipboard("https://discord.gg/DYkHGnYeDp")
 end, })
+--]--End Of Welcome
+
+
+
+--[--Premium
+--*
+
+--Start Of Code
+PremiumI = PremiumUI.Label({Text = "No Options Yet"})
+--]--End Of Premium
+
