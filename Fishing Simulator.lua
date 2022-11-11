@@ -4,7 +4,7 @@ local UI = Library.Load({
 	Style = 1,
 	SizeX = 600,
 	SizeY = 400,
-	Theme = "Light",
+	Theme = Theme,
 	ColorOverrides = {
 		MainFrame = Color3.fromRGB(25,25,25 ),
 		Minimise = Color3.fromRGB(0, 0, 0 )
@@ -115,9 +115,6 @@ ExtraUI = UI.New({Title = "Extra"})
 ConfigUI = UI.New({Title = "Config"})
 
 --Start Of Code
- ConfigI = ConfigUI.Dropdown({Text = "Select Theme ", Callback = function(v)
-	Library:Theme = v
-end, Options = Theme})
 --]--End Of Config
 
 
