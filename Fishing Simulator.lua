@@ -50,7 +50,11 @@ game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
 end
 
 if God then
-game.Players.LocalPlayer.Character.Humanoid.Health = 100
+	fireserver("Damage", Players[player].Character.Humanoid, math.huge)
+	while client.Character ~= nil and client.Character:FindFirstChild("Humanoid") do
+		wait()
+		client.Character.Humanoid.Health = 100
+	end
 end
 --]--End Of Functions
 
