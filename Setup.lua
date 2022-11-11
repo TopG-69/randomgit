@@ -10,18 +10,22 @@ local UI = Library.Load({
 		Minimise = Color3.fromRGB(0, 0, 0 )
 	}
 })
+--[--Run Checks
+if ExecutionTime < 1 then
+ local ExecutionTime == 5
+end
+--]--Finished
+
 --[--Setup
 AlertTab = UI.New({Title = "Alerts"})
 wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Version.lua", true))()
 --]--End Of Setup
 
-
-
 --[--Script
 if game.PlaceId == 2866967438 and OUTDATEDVERSION == false and Discord_Key == "123" then
 AlertList = AlertTab.Label({Text = "Fishing Simulator Script Is Loading"})
-wait(5)
+wait(ExecutionTime)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module2.lua", true))()
 elseif game.PlaceId == 0 and OUTDATEDVERSION == false and Discord_Key == "123" then
 elseif game.PlaceId == 0 and OUTDATEDVERSION == false and Discord_Key == "123" then
