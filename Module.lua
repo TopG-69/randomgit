@@ -42,7 +42,7 @@ local Themes = {
 		TextFieldAccent = Color3.fromRGB(124,37,255),
 	},
 	Dark = {
-		MainFrame = Color3.fromRGB(68,68,68),
+		MainFrame = Color3.fromRGB(30,30,30),
 		Minimise = Color3.fromRGB(255,106,0),
 		MinimiseAccent = Color3.fromRGB(147,59,0),
 		Maximise = Color3.fromRGB(25,255,0),
@@ -178,7 +178,6 @@ local Types = {
 	"CircleButton",
 	"Frame",
 	"Label",
-	"LabelType2",
 	"Button",
 	"SmoothButton",
 	"Box",
@@ -194,7 +193,6 @@ local ActualTypes = {
 	CircleButton = "ImageButton",
 	Frame = "Frame",
 	Label = "TextLabel",
-	LabelType2 = "TextLabel",
 	Button = "TextButton",
 	SmoothButton = "ImageButton",
 	Box = "TextBox",
@@ -245,13 +243,6 @@ local Properties = {
 		Position = UDim2.fromOffset(5,0),
 		Size = UDim2.fromScale(1,1) - UDim2.fromOffset(5,0),
 		TextSize = 14,
-		TextXAlignment = Enum.TextXAlignment.Left
-	},
-	LabelType2 = {
-		BackgroundTransparency = 1,
-		Position = UDim2.fromOffset(5,0),
-		Size = UDim2.fromScale(1,1) - UDim2.fromOffset(5,0),
-		TextSize = 32,
 		TextXAlignment = Enum.TextXAlignment.Left
 	},
 	Button = {
@@ -646,19 +637,7 @@ function TryAddMenu(Object, Menu, ReturnTable)
 				OptionValue.ZIndex = 150
 				OptionValue.TextXAlignment = Enum.TextXAlignment.Right
 				OptionValue.Parent = MenuOption
-					
-				local OptionValue = Objects.new("LabelType2")
-				OptionValue.Name = "Value"
-				OptionValue.Position = UDim2.fromScale(0,0)
-				OptionValue.Size = UDim2.fromScale(1,1) - UDim2.fromOffset(5,0)
-				OptionValue.Text = Option
-				OptionValue.TextColor3 = ThisTheme.Button
-				OptionValue.Font = Enum.Font.Gotham
-				OptionValue.TextSize = 32
-				OptionValue.ZIndex = 150
-				OptionValue.TextXAlignment = Enum.TextXAlignment.Right
-				OptionValue.Parent = MenuOption
-					
+
 				MenuOption.MouseButton1Down:Connect(function()
 					Value(ReturnTable)
 					MenuToggle = false
@@ -967,7 +946,7 @@ function Material.Load(Config)
 		BannerLabel.TextTransparency = 1
 		BannerLabel.ZIndex = 80
 		BannerLabel.Parent = Banner
-		
+
 		TweenService:Create(BannerOverlay, TweenInfo.new(0.5), {BackgroundTransparency = 0.5}):Play()
 		TweenService:Create(Banner, TweenInfo.new(0.5), {ImageTransparency = 0}):Play()
 		TweenService:Create(BannerLabel, TweenInfo.new(0.5), {TextTransparency = 0}):Play()
@@ -2285,33 +2264,6 @@ function Material.Load(Config)
 			return LabelOptions
 		end
 
-		function OptionLibrary.LabelType2(LabelConfig)
-			local LabelText = LabelConfig.Text or "nil label"
-			
-			local LabelContainer = Objects.new("Round")
-			LabelContainer.Name = "Label"
-			LabelContainer.Size = UDim2.fromScale(1,1) + UDim2.fromOffset(0,20)
-			LabelContainer.ImageColor3 = Theme.MainFrame
-			LabelContainer.Parent = PageContentFrame
-			
-			local LabelContent = Objects.new("Label")
-			LabelContent.TextColor3 = Theme.ChipSet
-			LabelContent.Text = LabelText:upper()
-			LabelContent.TextSize = 32
-			LabelContent.Font = Enum.Font.GothamSemibold
-			LabelContent.Size = UDim2.fromScale(1,1) + UDim2.fromOffset(-5,0)
-			LabelContent.Position = UDim2.fromOffset(5,0)
-			LabelContent.Parent = LabelContainer
-			
-			local LabelOptions = {}
-			
-			function LabelOptions.SetText(Text)
-				LabelContent.Text = Text
-			end
-			
-			return LabelOptions
-		end
-		
 		function OptionLibrary.Slider(SliderConfig)
 			local SliderText = SliderConfig.Text or "nil slider"
 			local SliderCallback = SliderConfig.Callback or function() print("nil slider") end
