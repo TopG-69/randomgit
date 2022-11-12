@@ -24,6 +24,8 @@ TPT2ISPATCHED = nil
 UDISPATCHED = nil
 --]--Finished
 
+
+
 --[--Setup
 AlertTab = UI.New({Title = "Alerts"})
 wait(0.1)
@@ -35,6 +37,8 @@ ScreenCheckX = ScreenSizeX ~= nil or ScreenSizeX ~= nan
 ScreenCheckY = ScreenSizeY ~= nil or ScreenSizeY ~= nan
 wait(0.1)
 --]--End Of Setup
+
+
 
 --[--Script
 if game.PlaceId == 2866967438 and OUTDATEDVERSION == false and Discord_Key == "123" and FixedThemes and FSISPATCHED == false and ScreenCheckX and ScreenCheckY then
