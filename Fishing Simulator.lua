@@ -107,11 +107,17 @@ LocalUI = UI.New({Title = "Local"})
 
 --Start Of Code
 LocalI = LocalUI.TextField({Text = "WalkSpeed", Callback = function(v)
+	if v == nil or v == nan then
+	v = 16
+	else
 	SetWalkSpeed(v)
 	LoopValueOfWSpeed = v
 end, })
 
 LocalI = LocalUI.TextField({Text = "JumpPower", Callback = function(v)
+	if v == nil or v == nan then
+	v = 50
+	else
 	SetJumpPower(v)
 	LoopValueOfJumpP = v
 end, })
