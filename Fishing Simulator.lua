@@ -37,11 +37,19 @@ end
 end)
 
 function SetWalkSpeed(value)
+if value == nan or value == nil then
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+else
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
 end
-
+end
+	
 function SetJumpPower(value)
+if value == nan or value == nil then
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 50
+else
 game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
+end
 end
 
 function RestoreWSJP()
@@ -107,17 +115,11 @@ LocalUI = UI.New({Title = "Local"})
 
 --Start Of Code
 LocalI = LocalUI.TextField({Text = "WalkSpeed", Callback = function(v)
-	if v == nil or v == nan then
-	v = 16
-	else
 	SetWalkSpeed(v)
 	LoopValueOfWSpeed = v
 end, })
 
 LocalI = LocalUI.TextField({Text = "JumpPower", Callback = function(v)
-	if v == nil or v == nan then
-	v = 50
-	else
 	SetJumpPower(v)
 	LoopValueOfJumpP = v
 end, })
