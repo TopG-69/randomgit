@@ -11,8 +11,8 @@ end
 
 --[--Is Patched
 local FishingSimulatorVersion = 0
-local ThemeParkTycoon2Version = 1
-local UltimateDrivingVersion = 1
+local ThemeParkTycoon2Version = 0
+local UltimateDrivingVersion = 0
 wait(0.1)
 
 
