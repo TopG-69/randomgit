@@ -13,7 +13,7 @@ end
 local FishingSimulatorVersion = 1
 local ThemeParkTycoon2Version = 1
 local UltimateDrivingVersion = 1
-
+wait(0.1)
 
 
 if FishingSimulatorCURRENT =~ FishingSimulatorVersion then
