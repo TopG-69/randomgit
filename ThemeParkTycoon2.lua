@@ -46,7 +46,7 @@ end
 	
 function SetJumpPower(value)
 if value == nan or value == nil then
-game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 50
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
 else
 game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
 end
