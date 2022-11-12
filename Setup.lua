@@ -30,7 +30,6 @@ UDISPATCHED = nil
 AlertTab = UI.New({Title = "Alerts"})
 wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Version.lua", true))()
-ValidGames = game.PlaceId == 2866967438 or game.PlaceId == 69184822 or game.PlaceId == 54865335
 FixedThemes = Theme == "Aqua" or Theme == "Light" or Theme == "Dark" or Theme == "Jester" or Theme == "Mocha"
 BrokenThemes = Theme ~= "Aqua" or Theme ~= "Light" or Theme ~= "Dark" or Theme ~= "Jester" or Theme ~= "Mocha" or Theme == nil
 IsPatched = TPT2ISPATCHED == false and UDISPATCHED == false and FSISPATCHED == false
@@ -54,7 +53,7 @@ elseif game.PlaceId == 54865335 and OUTDATEDVERSION == false and Discord_Key == 
 AlertList = AlertTab.Label({Text = "Ultimate Driving Script Is Loading"})
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Ultimate%20Driving.lua", true))()
-elseif BrokenThemes and OUTDATEDVERSION == false and Discord_Key == "123" and IsPatched and ScreenCheckX and ScreenCheckY and ValidGames then
+elseif BrokenThemes and OUTDATEDVERSION == false and Discord_Key == "123" and IsPatched and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Error1! - NT"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
@@ -70,7 +69,7 @@ wait(0.1)
 AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard('https://discord.gg/DYkHGnYeDp')
 end, })
-elseif Discord_Key ~= "123" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY and ValidGames then
+elseif Discord_Key ~= "123" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Error2! - NK"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
@@ -84,7 +83,7 @@ wait(0.1)
 AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard('https://discord.gg/DYkHGnYeDp')
 end, })
-elseif OUTDATEDVERSION == true and Discord_Key == "123" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY and ValidGames then
+elseif OUTDATEDVERSION == true and Discord_Key == "123" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Error3! - ODV/VT"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
@@ -98,7 +97,7 @@ wait(0.1)
 AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard('https://discord.gg/DYkHGnYeDp')
 end, })
-elseif game.PlaceId ~= 2866967438 or game.PlaceId ~= 69184822 or game.PlaceId ~= 54865335 and OUTDATEDVERSION == false and Discord_Key == "123" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
+elseif game.PlaceId ~= 2866967438 or game.PlaceId ~= 69184822 or game.PlaceId ~= 54865335 OUTDATEDVERSION == false and Discord_Key == "123" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Error4! - NG/WD"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
@@ -117,7 +116,7 @@ end, })
 AlertList = AlertTab.Label({Text = "Loading Universal Version In 10 Secs"})
 wait(10)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/UniversalScript.lua", true))()
-elseif OUTDATEDVERSION == false and ValidGames and Discord_Key == "123" and FixedThemes and TPT2ISPATCHED == true or UDISPATCHED == true or FSISPATCHED == true and ScreenCheckX and ScreenCheckY then
+elseif OUTDATEDVERSION == false and Discord_Key == "123" and FixedThemes and TPT2ISPATCHED == true or UDISPATCHED == true or FSISPATCHED == true and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Error5! - SIP"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
@@ -131,7 +130,7 @@ wait(0.1)
 AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard('https://discord.gg/DYkHGnYeDp')
 end, })
-elseif ScreenSizeX == nil or ScreenSizeX == nan or ScreenSizeY == nil or ScreenSizeY == nan and OUTDATEDVERSION == false and ValidGames and Discord_Key == "123" and FixedThemes and UDISPATCHED == false then
+elseif ScreenSizeX == nil or ScreenSizeX == nan or ScreenSizeY == nil or ScreenSizeY == nan and OUTDATEDVERSION == false and Discord_Key == "123" and FixedThemes and UDISPATCHED == false then
 AlertList = AlertTab.Label({Text = "Error5! - BSX/BSY"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
