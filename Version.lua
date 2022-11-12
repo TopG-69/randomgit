@@ -20,10 +20,10 @@ local UltimateDrivingVersion = 1
 
 
 --Start Of IsPatched
-if FishingSimulatorCURRENT ~= FishingSimulatorVersion then
+if FishingSimulatorCURRENT ~= FishingSimulatorVersion and game.PlaceId == 2866967438 then
 AlertList = AlertTab.Label({Text = "Fishing Simulator Is Outdated"})
 FSISPATCHED = true
-elseif FishingSimulatorCURRENT == FishingSimulatorVersion then
+elseif FishingSimulatorCURRENT == FishingSimulatorVersion and game.PlaceId == 2866967438 then
 AlertList = AlertTab.Label({Text = "Fishing Simulator Is Running Latest Version"})
 FSISPATCHED = false
 --else
@@ -31,10 +31,10 @@ FSISPATCHED = false
 --FSISPATCHED = true
 end
 
-if ThemeParkTycoon2CURRENT ~= ThemeParkTycoon2Version then
+if ThemeParkTycoon2CURRENT ~= ThemeParkTycoon2Version and game.PlaceId == 69184822 then
 AlertList = AlertTab.Label({Text = "Theme Park Tycoon 2 Is Outdated"})
 TPT2ISPATCHED = true
-elseif ThemeParkTycoon2CURRENT == ThemeParkTycoon2Version then
+elseif ThemeParkTycoon2CURRENT == ThemeParkTycoon2Version and game.PlaceId == 69184822 then
 AlertList = AlertTab.Label({Text = "Theme Park Tycoon 2 Is Running Latest Version"})
 TPT2ISPATCHED = false
 --else
@@ -42,10 +42,10 @@ TPT2ISPATCHED = false
 --TPT2ISPATCHED = true
 end
 
-if UltimateDrivingCURRENT ~= UltimateDrivingVersion then
+if UltimateDrivingCURRENT ~= UltimateDrivingVersion and game.PlaceId == 54865335 then
 AlertList = AlertTab.Label({Text = "Theme Park Tycoon 2 Is Outdated"})
 UDISPATCHED = true
-elseif UltimateDrivingCURRENT == UltimateDrivingVersion then
+elseif UltimateDrivingCURRENT == UltimateDrivingVersion and game.PlaceId == 54865335 then
 AlertList = AlertTab.Label({Text = "Theme Park Tycoon 2 Is Running Latest Version"})
 UDISPATCHED = false
 --else
