@@ -11,9 +11,13 @@ local UI = Library.Load({
 	}
 })
 --[--Run Checks
+
+--Anti Bypass Modules
 FishingSimulatorCURRENT = 1
 ThemeParkTycoon2CURRENT = 1
 UltimateDrivingCURRENT = 1
+--end of ABM
+
 OUTDATEDVERSION = nil
 FSISPATCHED = nil
 TPT2ISPATCHED = nil
