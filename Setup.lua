@@ -114,7 +114,7 @@ wait(0.1)
 AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard('https://discord.gg/DYkHGnYeDp')
 end, })
-AlertListCopy = AlertTab.Button({Text = "Load Universal Edision", function()
+AlertList = AlertTab.Button({Text = "Load Universal Edision", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/UniversalScript.lua", true))()
 end, })
 elseif OUTDATEDVERSION == false and ValidGames and Discord_Key == "123" and FixedThemes and TPT2ISPATCHED == true or UDISPATCHED == true or FSISPATCHED == true and ScreenCheckX and ScreenCheckY then
