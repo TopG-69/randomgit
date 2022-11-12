@@ -1,6 +1,6 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
 local UI = Library.Load({
-	Title = "Fishing Simulator",
+	Title = "Theme Park Tycoon 2",
 	Style = 1,
 	SizeX = 600,
 	SizeY = 400,
