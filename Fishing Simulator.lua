@@ -119,9 +119,10 @@ WelcomeI = WelcomeUI.Label({Text = "Update Includes - Updates To Automatic Tab"}
 WelcomeI = WelcomeUI.Label({Text = "AutoCaught - Auto Catches Fish"})
 WelcomeI = WelcomeUI.Label({Text = "AutoSell - Automaticly Sells Items"})
 WelcomeI = WelcomeUI.Label({Text = "Fast Caught/Sell - Will Make It So There Is No Delay While Those 2 Settings Are On"})
+WelcomeI = WelcomeUI.Label({Text = "Need Help? Join The Discord - https://discord.gg/DYkHGnYeDp"})
 
 WelcomeI = WelcomeUI.Button({Text = "Click To Copy Invite", function()
-    setclipboard("https://discord.gg/DYkHGnYeDp")
+    setclipboard('https://discord.gg/DYkHGnYeDp')
 end, })
 --]--End Of Welcome
 
@@ -266,6 +267,16 @@ ExtraI = ExtraUI.Button({Text = "Teleport", Callback = function()
               end                               
     end
 end, })
+
+ExtraI = ExtraUI.Label({Text = "Buttons"})
+
+ExtraI = ExtraUI.Button({Text = "Remove Borders", Callback = function()
+    for i, v in pairs(game.Workspace.IgnoredByMouse.BoatBorders:GetChildren()) do
+        v:Destroy()
+    end
+end, })
+
+ExtraI = ExtraUI.Label({Text = "Toggles"})
 --]--End Of Extra
 
 
