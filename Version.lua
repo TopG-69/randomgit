@@ -16,7 +16,7 @@ local UltimateDrivingVersion = 1
 wait(0.1)
 
 
-if FishingSimulatorCURRENT =~ FishingSimulatorVersion then
+if FishingSimulatorCURRENT ~= FishingSimulatorVersion then
 FSISPATCHED = true
 elseif FishingSimulatorCURRENT == FishingSimulatorVersion then
 FSISPATCHED = false
