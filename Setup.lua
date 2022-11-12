@@ -97,7 +97,7 @@ wait(0.1)
 AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard('https://discord.gg/DYkHGnYeDp')
 end, })
-elseif game.PlaceId ~= 2866967438 or game.PlaceId ~= 69184822 or game.PlaceId ~= 54865335 OUTDATEDVERSION == false and Discord_Key == "123" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
+elseif game.PlaceId ~= 2866967438 or game.PlaceId ~= 69184822 or game.PlaceId ~= 54865335 and OUTDATEDVERSION == false and Discord_Key == "123" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Error4! - NG/WD"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
