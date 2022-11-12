@@ -224,12 +224,12 @@ end, Enabled = false})
 ExtraUI = UI.New({Title = "Extra"})
 
 --Start Of Code
-TeleportLocations1 = {"Port Jackson", "Ancient Shores", "Shadow Isles", "Pharaoh's Dunes", "Eruption Island", "Monster's Borough"}
+TeleportLocations1 = {"Port Jackson", "Ancient Shores", "Shadow Isles", "Pharaoh's Dunes", "Eruption Island", "Monster's Borough", "None"}
  ExtraI = ExtraUI.Dropdown({Text = "Teleport Location ", Callback = function(v)
      TPM2TeleportLocation = v
 end, Options = TeleportLocations1})
 
-TeleportLocations2 = {"Pets Store", "Supplies Store", "Raygan's Tavern", "Boat Store"}
+TeleportLocations2 = {"Pets Store", "Supplies Store", "Raygan's Tavern", "Boat Store", "None"}
  ExtraI = ExtraUI.Dropdown({Text = "Teleport Store ", Callback = function(v)
      TPM2sTeleportLocation = v
 end, Options = TeleportLocations2})
