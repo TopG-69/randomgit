@@ -11,7 +11,7 @@ local UI = Library.Load({
 	}
 })
 --[--Run Checks
-FishingSimulatorCURRENT = 1
+FishingSimulatorCURRENT = 0
 ThemeParkTycoon2CURRENT = 1
 UltimateDrivingCURRENT = 1
 --]--Finished
