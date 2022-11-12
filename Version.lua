@@ -1,4 +1,8 @@
 --[--Verify Main Loader
+OUTDATEDVERSION = nil
+FSISPATCHED = nil
+TPT2ISPATCHED = nil
+UDISPATCHED = nil
 local VerifyVersion = 1
 if versionCURRENT ~= VerifyVersion then
   AlertList = AlertTab.Label({Text = "Your Using A Outdated Version Please Update"})
@@ -16,7 +20,6 @@ end
 local FishingSimulatorVersion = 1
 local ThemeParkTycoon2Version = 1
 local UltimateDrivingVersion = 1
-
 
 
 --Start Of IsPatched
