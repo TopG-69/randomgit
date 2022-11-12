@@ -10,7 +10,7 @@ end
 --]--End Of Verify Main Loader
 
 --[--Is Patched
-local FishingSimulatorVersion = 1
+local FishingSimulatorVersion = 0
 local ThemeParkTycoon2Version = 1
 local UltimateDrivingVersion = 1
 wait(0.1)
