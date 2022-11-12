@@ -213,5 +213,6 @@ end, Enabled = false})
 
 
 --[--Fix
+wait(0.1)
 RestoreWSJP()
 --]--End Of Fix
