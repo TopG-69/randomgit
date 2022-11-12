@@ -19,6 +19,7 @@ local CoolDown = nan
 --[--Functions
 local runservice = game:GetService("RunService")
 local player = game:GetService("Players").LocalPlayer
+
 runservice.Stepped:Connect(function()
 for i,v in pairs(player.Character:GetDescendants()) do
 if v:IsA("BasePart") then
@@ -175,6 +176,19 @@ end, Enabled = false})
 AutoUI = UI.New({Title = "Automatic"})
 
 --Start Of Code
+AutoI = AutoUI.Toggle({Text = "AutoCaught", Callback = function(v)
+       if v then
+        wait(2.6)
+        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.FishCaught:FireServer()
+    end
+end, Enabled = false})
+
+AutoI = AutoUI.Toggle({Text = "AutoSell", Callback = function(v)
+       if v then
+        wait(2.6)
+        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.processGameItemSold:InvokeServer("SellEverything")
+    end
+end, Enabled = false})
 --]--End Of Automatic
 
 
