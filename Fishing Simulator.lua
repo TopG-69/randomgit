@@ -104,10 +104,10 @@ WelcomeI = WelcomeUI.Label({Text = "Premium is false"})
 	Premium = false
 end
 
-PremiumUI = UI.New({Title = "Updated : To V2"})
-PremiumUI = UI.New({Title = "Update Includes - Updates To Automatic Tab"})
-PremiumUI = UI.New({Title = "AutoCaught - Auto Catches Fish"})
-PremiumUI = UI.New({Title = "AutoSell - Automaticly Sells Items"})
+PremiumUI = WelcomeUI.Label({Text = "Updated : To V2"})
+PremiumUI = WelcomeUI.Label({Text = "Update Includes - Updates To Automatic Tab"})
+PremiumUI = WelcomeUI.Label({Text = "AutoCaught - Auto Catches Fish"})
+PremiumUI = WelcomeUI.Label({Text = "AutoSell - Automaticly Sells Items"})
 
 WelcomeI = WelcomeUI.Button({Text = "Click To Copy Invite", function()
     setclipboard("https://discord.gg/DYkHGnYeDp")
