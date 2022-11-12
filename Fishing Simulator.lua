@@ -209,3 +209,9 @@ PremiumI = PremiumUI.Toggle({Text = "God", Callback = function(v)
     end
 end, Enabled = false})
 --]--End Of Premium
+
+
+
+--[--Fix
+RestoreWSJP()
+--]--End Of Fix
