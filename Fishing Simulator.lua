@@ -31,6 +31,15 @@ end
 end
 end)
 
+function teleport(loc)
+    bLocation = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    if game.Players.LocalPlayer.Character.Humanoid.Sit then
+        game.Players.LocalPlayer.Character.Humanoid.Sit = false
+    end
+    wait()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = loc
+end
+
 game:GetService("UserInputService").JumpRequest:connect(function()
 if InfiniteJump then
 game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
@@ -215,6 +224,33 @@ end, Enabled = false})
 ExtraUI = UI.New({Title = "Extra"})
 
 --Start Of Code
+TeleportLocations = {"Port Jackson", "Ancient Shores", "Shadow Isles", "Pharaoh's Dunes", "Eruption Island", "Monster's Borough"}
+ ExtraI = ExtraUI.Dropdown({Text = "Teleport ", Callback = function(v)
+     TPM2TeleportLocation = v
+end, Options = TeleportLocations})
+
+ExtraI = ExtraUI.Button({Text = "Teleport", Callback = function()
+    if TPM2TeleportLocation == "Port Jackson" then
+        teleport(CFrame.new(1.8703980445862, 53.57190322876, -188.37982177734))           
+        elseif TPM2TeleportLocation == "Ancient Shores" then
+        teleport(CFrame.new(-2436.431640625, 43.564971923828, -1683.4526367188))    
+        elseif TPM2TeleportLocation == "Shadow Isles" then
+        teleport(CFrame.new(2196.9926757812, 43.491630554199, -2216.4543457031))    
+        elseif TPM2TeleportLocation == "Pharaoh's Dunes" then
+        teleport(CFrame.new(-4142.74609375, 46.71378326416, 262.05679321289))
+        elseif TPM2TeleportLocation == "Eruption Island" then
+        teleport(CFrame.new(3022.9311523438, 52.347640991211, 1323.74609375))
+        elseif TPM2TeleportLocation == "Monster's Borough" then
+        teleport(CFrame.new(-3211.9047851562, 41.850345611572, 2735.306640625))  
+        elseif TPM2TeleportLocation == "Suken Ship" then
+             for i, v in pairs(game.Workspace:GetChildren()) do
+                if string.find(v.Name, "ShipModel") then
+                        teleport(v.HitBox.CFrame)
+                    break
+                 end
+              end                               
+    end
+end, })
 --]--End Of Extra
 
 
