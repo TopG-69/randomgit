@@ -224,13 +224,26 @@ end, Enabled = false})
 ExtraUI = UI.New({Title = "Extra"})
 
 --Start Of Code
-TeleportLocations = {"Port Jackson", "Ancient Shores", "Shadow Isles", "Pharaoh's Dunes", "Eruption Island", "Monster's Borough"}
- ExtraI = ExtraUI.Dropdown({Text = "Teleport ", Callback = function(v)
+TeleportLocations1 = {"Port Jackson", "Ancient Shores", "Shadow Isles", "Pharaoh's Dunes", "Eruption Island", "Monster's Borough"}
+ ExtraI = ExtraUI.Dropdown({Text = "Teleport Location ", Callback = function(v)
      TPM2TeleportLocation = v
-end, Options = TeleportLocations})
+end, Options = TeleportLocations1})
+
+TeleportLocations2 = {"Pets Store", "Supplies Store", "Raygan's Tavern", "Boat Store"}
+ ExtraI = ExtraUI.Dropdown({Text = "Teleport Store ", Callback = function(v)
+     TPM2sTeleportLocation = v
+end, Options = TeleportLocations2})
 
 ExtraI = ExtraUI.Button({Text = "Teleport", Callback = function()
-    if TPM2TeleportLocation == "Port Jackson" then
+        if TPM2sTeleportLocation == "Boat Store" then
+        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.EnterDoor:InvokeServer("BoatShopInterior", "Inside")
+        elseif TPM2sTeleportLocation == "Raygan's Tavern" then
+        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.EnterDoor:InvokeServer("TavernInterior", "Inside")
+        elseif TPM2sTeleportLocation == "Supplies Store" then
+        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.EnterDoor:InvokeServer("SuppliesStoreInterior", "Inside")  
+        elseif TPM2sTeleportLocation == "Pets Store" then
+        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.EnterDoor:InvokeServer("PetShop", "MainEntrance")
+        elseif TPM2TeleportLocation == "Port Jackson" then
         teleport(CFrame.new(1.8703980445862, 53.57190322876, -188.37982177734))           
         elseif TPM2TeleportLocation == "Ancient Shores" then
         teleport(CFrame.new(-2436.431640625, 43.564971923828, -1683.4526367188))    
