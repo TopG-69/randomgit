@@ -224,6 +224,8 @@ end, Enabled = false})
 ExtraUI = UI.New({Title = "Extra"})
 
 --Start Of Code
+ExtraI = ExtraUI.Label({Text = "Select Location And Press Teleport / Choose None Once Done"})
+
 TeleportLocations1 = {"Port Jackson", "Ancient Shores", "Shadow Isles", "Pharaoh's Dunes", "Eruption Island", "Monster's Borough", "None"}
  ExtraI = ExtraUI.Dropdown({Text = "Teleport Location ", Callback = function(v)
      TPM2TeleportLocation = v
@@ -272,7 +274,6 @@ end, })
 ConfigUI = UI.New({Title = "Config"})
 
 --Start Of Code
-
 --]--End Of Config
 
 
