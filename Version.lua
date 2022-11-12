@@ -1,8 +1,12 @@
 --[--Verify Main Loader
+
+--Anti Bypass Modules
 OUTDATEDVERSION = nil
 FSISPATCHED = nil
 TPT2ISPATCHED = nil
 UDISPATCHED = nil
+--end of ABM
+
 local VerifyVersion = 1
 if versionCURRENT ~= VerifyVersion then
   AlertList = AlertTab.Label({Text = "Your Using A Outdated Version Please Update"})
