@@ -13,7 +13,7 @@ local UI = Library.Load({
 --[--Run Checks
 
 --Anti Bypass Modules
-FishingSimulatorCURRENT = 1
+FishingSimulatorCURRENT = 2
 ThemeParkTycoon2CURRENT = 1
 UltimateDrivingCURRENT = 1
 --end of ABM
