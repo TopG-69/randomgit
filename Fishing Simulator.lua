@@ -217,7 +217,7 @@ ConfigUI = UI.New({Title = "Config"})
 
 
 --[--Premium
---NGH
+--Will Be Shown Once Premium Is Active
 
 --Start Of Code
 PremiumI = PremiumUI.Label({Text = "Experimental Setting"})
