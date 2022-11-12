@@ -35,7 +35,7 @@ elseif game.PlaceId == 54865335 and OUTDATEDVERSION == false and Discord_Key == 
 AlertList = AlertTab.Label({Text = "Ultimate Driving Script Is Loading"})
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Ultimate%20Driving.lua", true))()
-elseif BrokenThemes then
+elseif BrokenThemes and OUTDATEDVERSION == false and Discord_Key == "123" then
 AlertList = AlertTab.Label({Text = "Error1! - NT"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
