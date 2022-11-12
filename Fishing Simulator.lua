@@ -182,10 +182,10 @@ end, Enabled = false})
 AutoUI = UI.New({Title = "Automatic"})
 
 --Start Of Code
-AutoIInfo = AutoUI.Label({Text = "Warning You Might Get Kicked"})
-AutoI = AutoUI.Toggle({Text = "Fast Caught", Callback = function(v)
+AutoIInfo = AutoUI.Label({Text = "Warning You Might Get Kicked | Req The Setting To Be Turned On!"})
+AutoI = AutoUI.Toggle({Text = "Fast Caught/Sell", Callback = function(v)
        if v then
-       CaughtTime = 0.5
+       CaughtTime = 0.1
        else
        CaughtTime = 2.6
     end
@@ -202,7 +202,7 @@ end, Enabled = false})
 AutoIInfo = AutoUI.Label({Text = "Have Items In Your Hotbar Or Inventory"})
 AutoI = AutoUI.Toggle({Text = "AutoSell", Callback = function(v)
        while v do
-        wait(2.6)
+        wait(CaughtTime)
         game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.processGameItemSold:InvokeServer("SellEverything")
     end
 end, Enabled = false})
