@@ -202,6 +202,14 @@ AutoI = AutoUI.Toggle({Text = "Fast Caught/Sell", Callback = function(v)
     end
 end, Enabled = false})
 
+AutoI = AutoUI.Toggle({Text = "Fast Catch", Callback = function(v)
+       while v do
+        game:GetService("ReplicatedStorage").CloudFrameShared.Communication.Events.FishedDone:FireServer()
+		wait()
+		game:GetService("ReplicatedStorage").CloudFrameShared.Communication.Events.ResetFishingRod:FireServer()
+    end
+end, Enabled = false})
+
 AutoIInfo = AutoUI.Label({Text = "Usage Equip FishingRod Then Throw The Fishing Line"})
 AutoI = AutoUI.Toggle({Text = "AutoCaught", Callback = function(v)
        while v do
@@ -303,14 +311,13 @@ BANDTI = BANDTUI.Button({Text = "TP To Boat", Callback = function()
     end
 end, })
 
-BANDTI = BANDTUI.TextField({Text = "Boat Speed", Callback = function(v)
+BANDTI = BANDTUI.TextField({Text = "Boat Speed", Callback = function(VA)
  for i, v in pairs(game.Workspace:GetChildren()) do
         if v.Name == (game.Players.LocalPlayer.Name .. "'s Boat") then
-             v.Controller.VehicleSeat.MaxSpeed = tonumber(v)
+             v.Controller.VehicleSeat.MaxSpeed = VA
          end
-    end   
+    end  
 end, })
-
 --]--End Of Teleport/Buy
 
 
@@ -322,11 +329,20 @@ ExtraUI = UI.New({Title = "Extra"})
 ExtraI = ExtraUI.Label({Text = "Buttons"})
 
 ExtraI = ExtraUI.Button({Text = "Remove Borders", Callback = function()
+		for i, v in pairs(game.Workspace.IgnoredByMouse.LockedAreas:GetDescendants()) do 
+			v:Destroy()
+    end
+end, })
+
+ExtraI = ExtraUI.Button({Text = "Remove Boat Borders", Callback = function()
     for i, v in pairs(game.Workspace.IgnoredByMouse.BoatBorders:GetChildren()) do
         v:Destroy()
     end
 end, })
 
+ExtraI = ExtraUI.Button({Text = "Remove Fog", Callback = function()
+    game.Lighting.FogEnd = 1000000
+end, })
 ExtraI = ExtraUI.Label({Text = "Toggles"})
 --]--End Of Extra
 
