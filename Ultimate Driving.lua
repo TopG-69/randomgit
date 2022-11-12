@@ -104,7 +104,7 @@ WelcomeI = WelcomeUI.Label({Text = "Premium is false"})
 end
 
 WelcomeI = WelcomeUI.Button({Text = "Click To Copy Invite", function()
-    setclipboard("https://discord.gg/DYkHGnYeDp")
+    setclipboard('https://discord.gg/DYkHGnYeDp')
 end, })
 --]--End Of Welcome
 
