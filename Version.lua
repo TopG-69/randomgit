@@ -19,6 +19,8 @@ local UltimateDrivingVersion = 1
 wait(0.1)
 
 
+
+--Start Of IsPatched
 if FishingSimulatorCURRENT ~= FishingSimulatorVersion then
 AlertList = AlertTab.Label({Text = "Fishing Simulator Is Outdated"})
 FSISPATCHED = true
@@ -39,8 +41,6 @@ TPT2ISPATCHED = false
 else
 AlertList = AlertTab.Label({Text = "Unknown Issue Happined While Verifying Theme Park Tycoon 2 Version"})
 TPT2ISPATCHED = true
-else
-
 end
 
 if UltimateDrivingCURRENT ~= UltimateDrivingVersion then
