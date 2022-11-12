@@ -2,8 +2,8 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sitta
 local UI = Library.Load({
 	Title = "Fishing Simulator",
 	Style = 1,
-	SizeX = ScreenSizeX,
-	SizeY = ScreenSizeY,
+	SizeX = 600,
+	SizeY = 400,
 	Theme = Theme,
 	ColorOverrides = {
 		MainFrame = Color3.fromRGB(25,25,25 ),
@@ -221,23 +221,48 @@ end, Enabled = false})
 
 
 
---[--Extra
-ExtraUI = UI.New({Title = "Extra"})
+--[--Teleport/Buy
+BANDTUI = UI.New({Title = "Buy/Teleport"})
+egglist = {"Royals","Normal","Ruby", "Void", "Silver", "Stone", "Gold"}
+TeleportLocations1 = {"Port Jackson", "Ancient Shores", "Shadow Isles", "Pharaoh's Dunes", "Eruption Island", "Monster's Borough", "None"}
+TeleportLocations2 = {"Pets Store", "Supplies Store", "Raygan's Tavern", "Boat Store", "None"}
 
 --Start Of Code
-ExtraI = ExtraUI.Label({Text = "Select Location And Press Teleport / Choose None Once Done"})
+BANDTI = BANDTUI.Label({Text = "Select Egg Then Press Buy"})
 
-TeleportLocations1 = {"Port Jackson", "Ancient Shores", "Shadow Isles", "Pharaoh's Dunes", "Eruption Island", "Monster's Borough", "None"}
- ExtraI = ExtraUI.Dropdown({Text = "Teleport Location ", Callback = function(v)
+BANDTI = BANDTUI.Dropdown({Text = "Egg ", Callback = function(v)
+     eggs = v
+end, Options = egglist})
+
+BANDTI = BANDTUI.Button({Text = "Buy", Callback = function()
+        if eggs == "Royal" then
+        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("royalegg")    
+        elseif eggs == "Normal" then
+        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("normalegg")   
+        elseif eggs == "Ruby" then
+        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("rubyegg")   
+        elseif eggs == "Void" then
+        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("voidegg")
+        elseif eggs == "Silver" then
+        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("silverchest")
+        elseif eggs == "Stone" then
+        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("stonechest")    
+        elseif eggs == "Gold" then
+        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("goldchest")            
+    end
+end, })
+
+BANDTI = BANDTUI.Label({Text = "Select Location And Press Teleport / Choose None Once Done"})
+
+BANDTI = BANDTUI.Dropdown({Text = "Teleport Location ", Callback = function(v)
      TPM2TeleportLocation = v
 end, Options = TeleportLocations1})
 
-TeleportLocations2 = {"Pets Store", "Supplies Store", "Raygan's Tavern", "Boat Store", "None"}
- ExtraI = ExtraUI.Dropdown({Text = "Teleport Store ", Callback = function(v)
+BANDTI = BANDTUI.Dropdown({Text = "Teleport Store ", Callback = function(v)
      TPM2sTeleportLocation = v
 end, Options = TeleportLocations2})
 
-ExtraI = ExtraUI.Button({Text = "Teleport", Callback = function()
+BANDTI = BANDTUI.Button({Text = "Teleport", Callback = function()
         if TPM2sTeleportLocation == "Boat Store" then
         game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.EnterDoor:InvokeServer("BoatShopInterior", "Inside")
         elseif TPM2sTeleportLocation == "Raygan's Tavern" then
@@ -268,6 +293,32 @@ ExtraI = ExtraUI.Button({Text = "Teleport", Callback = function()
     end
 end, })
 
+BANDTI = BANDTUI.Label({Text = "Boat"})
+
+BANDTI = BANDTUI.Button({Text = "TP To Boat", Callback = function()
+    for i, v in pairs(game.Workspace:GetChildren()) do
+        if v.Name == (game.Players.LocalPlayer.Name .. "'s Boat") then
+             teleport(v.Controller.VehicleSeat.CFrame + Vector3.new(0, 3, 0))
+        end
+    end
+end, })
+
+BANDTI = BANDTUI.TextField({Text = "Boat Speed", Callback = function(v)
+ for i, v in pairs(game.Workspace:GetChildren()) do
+        if v.Name == (game.Players.LocalPlayer.Name .. "'s Boat") then
+             v.Controller.VehicleSeat.MaxSpeed = tonumber(v)
+         end
+    end   
+end, })
+
+--]--End Of Teleport/Buy
+
+
+
+--[--Extra
+ExtraUI = UI.New({Title = "Extra"})
+
+--Start Of Code
 ExtraI = ExtraUI.Label({Text = "Buttons"})
 
 ExtraI = ExtraUI.Button({Text = "Remove Borders", Callback = function()
