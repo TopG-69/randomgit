@@ -104,6 +104,11 @@ WelcomeI = WelcomeUI.Label({Text = "Premium is false"})
 	Premium = false
 end
 
+PremiumUI = UI.New({Title = "Updated : To V2"})
+PremiumUI = UI.New({Title = "Update Includes - Updates To Automatic Tab"})
+PremiumUI = UI.New({Title = "AutoCaught - Auto Catches Fish"})
+PremiumUI = UI.New({Title = "AutoSell - Automaticly Sells Items"})
+
 WelcomeI = WelcomeUI.Button({Text = "Click To Copy Invite", function()
     setclipboard("https://discord.gg/DYkHGnYeDp")
 end, })
@@ -176,6 +181,7 @@ end, Enabled = false})
 AutoUI = UI.New({Title = "Automatic"})
 
 --Start Of Code
+AutoIInfo = AutoUI.Label({Text = "Usage Equip FishingRod Then Throw The Fishing Line"})
 AutoI = AutoUI.Toggle({Text = "AutoCaught", Callback = function(v)
        while v do
         wait(2.6)
@@ -183,6 +189,7 @@ AutoI = AutoUI.Toggle({Text = "AutoCaught", Callback = function(v)
     end
 end, Enabled = false})
 
+AutoIInfo = AutoUI.Label({Text = "Have Items In Your Hotbar Or Inventory"})
 AutoI = AutoUI.Toggle({Text = "AutoSell", Callback = function(v)
        while v do
         wait(2.6)
