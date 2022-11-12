@@ -14,6 +14,10 @@ local UI = Library.Load({
 FishingSimulatorCURRENT = 1
 ThemeParkTycoon2CURRENT = 1
 UltimateDrivingCURRENT = 1
+OUTDATEDVERSION = nil
+FSISPATCHED = nil
+TPT2ISPATCHED = nil
+UDISPATCHED = nil
 --]--Finished
 
 --[--Setup
