@@ -1,6 +1,6 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
 local UI = Library.Load({
-	Title = "Ultimate Driving",
+	Title = "Fishing Simulator",
 	Style = 1,
 	SizeX = 600,
 	SizeY = 400,
@@ -37,11 +37,19 @@ end
 end)
 
 function SetWalkSpeed(value)
+if value == nan or value == nil then
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+else
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
 end
-
+end
+	
 function SetJumpPower(value)
+if value == nan or value == nil then
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 50
+else
 game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
+end
 end
 
 function RestoreWSJP()
