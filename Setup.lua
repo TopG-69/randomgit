@@ -42,15 +42,15 @@ wait(0.1)
 
 
 --[--Script
-if game.PlaceId == 2866967438 and OUTDATEDVERSION == false and Discord_Key == "123" and FixedThemes and FSISPATCHED == false and ScreenCheckX and ScreenCheckY and ValidGames then
+if game.PlaceId == 2866967438 and OUTDATEDVERSION == false and Discord_Key == "123" and FixedThemes and FSISPATCHED == false and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Fishing Simulator Script Is Loading"})
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Fishing%20Simulator.lua", true))()
-elseif game.PlaceId == 69184822 and OUTDATEDVERSION == false and Discord_Key == "123" and FixedThemes and TPT2ISPATCHED == false and ScreenCheckX and ScreenCheckY and ValidGames then
+elseif game.PlaceId == 69184822 and OUTDATEDVERSION == false and Discord_Key == "123" and FixedThemes and TPT2ISPATCHED == false and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Theme Park Tycoon 2 Script Is Loading"})
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/ThemeParkTycoon2.lua", true))()
-elseif game.PlaceId == 54865335 and OUTDATEDVERSION == false and Discord_Key == "123" and FixedThemes and UDISPATCHED == false and ScreenCheckX and ScreenCheckY and ValidGames then
+elseif game.PlaceId == 54865335 and OUTDATEDVERSION == false and Discord_Key == "123" and FixedThemes and UDISPATCHED == false and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Ultimate Driving Script Is Loading"})
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Ultimate%20Driving.lua", true))()
