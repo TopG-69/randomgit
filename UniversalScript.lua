@@ -171,22 +171,6 @@ end, Enabled = false})
 
 
 
---[--Automatic
-AutoUI = UI.New({Title = "Automatic"})
-
---Start Of Code
---]--End Of Automatic
-
-
-
---[--Extra
-ExtraUI = UI.New({Title = "Extra"})
-
---Start Of Code
---]--End Of Extra
-
-
-
 --[--Config
 ConfigUI = UI.New({Title = "Config"})
 
