@@ -6,9 +6,9 @@ if versionCURRENT ~= VerifyVersion then
 elseif versionCURRENT == VerifyVersion then
   AlertList = AlertTab.Label({Text = "Your Running The Latest Version"})
   OUTDATEDVERSION = false
---else 
---  AlertList = AlertTab.Label({Text = "Unknown Issue With Version Verify"})
---  OUTDATEDVERSION = true
+else 
+  AlertList = AlertTab.Label({Text = "Unknown Issue With Version Verify"})
+  OUTDATEDVERSION = true
 end
 --]--End Of Verify Main Loader
 
@@ -26,9 +26,9 @@ FSISPATCHED = true
 elseif FishingSimulatorCURRENT == FishingSimulatorVersion and game.PlaceId == 2866967438 then
 AlertList = AlertTab.Label({Text = "Fishing Simulator Is Running Latest Version"})
 FSISPATCHED = false
---else
---AlertList = AlertTab.Label({Text = "Unknown Issue Happined While Verifying Fishing Simulator Version"})
---FSISPATCHED = true
+else
+AlertList = AlertTab.Label({Text = "Unknown Issue Happined While Verifying Fishing Simulator Version"})
+FSISPATCHED = true
 end
 
 if ThemeParkTycoon2CURRENT ~= ThemeParkTycoon2Version and game.PlaceId == 69184822 then
@@ -37,9 +37,9 @@ TPT2ISPATCHED = true
 elseif ThemeParkTycoon2CURRENT == ThemeParkTycoon2Version and game.PlaceId == 69184822 then
 AlertList = AlertTab.Label({Text = "Theme Park Tycoon 2 Is Running Latest Version"})
 TPT2ISPATCHED = false
---else
---AlertList = AlertTab.Label({Text = "Unknown Issue Happined While Verifying Theme Park Tycoon 2 Version"})
---TPT2ISPATCHED = true
+else
+AlertList = AlertTab.Label({Text = "Unknown Issue Happined While Verifying Theme Park Tycoon 2 Version"})
+TPT2ISPATCHED = true
 end
 
 if UltimateDrivingCURRENT ~= UltimateDrivingVersion and game.PlaceId == 54865335 then
@@ -48,8 +48,8 @@ UDISPATCHED = true
 elseif UltimateDrivingCURRENT == UltimateDrivingVersion and game.PlaceId == 54865335 then
 AlertList = AlertTab.Label({Text = "Theme Park Tycoon 2 Is Running Latest Version"})
 UDISPATCHED = false
---else
---AlertList = AlertTab.Label({Text = "Unknown Issue Happined While Verifying Ultimate Driving Version"})
---UDISPATCHED = true
+else
+AlertList = AlertTab.Label({Text = "Unknown Issue Happined While Verifying Ultimate Driving Version"})
+UDISPATCHED = true
 end
 --]--End Of Is Patched
