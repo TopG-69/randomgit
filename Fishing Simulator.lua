@@ -353,8 +353,7 @@ autoopenchest = false
 end
 end, Enabled = false})
 
-ExtraI = ExtraUI.Label({Text = "Press To Teleport To Chest"})
-ExtraI = ExtraUI.Label({Text = "If You Get TPd Under Map Then Use No-Clip"})
+ExtraI = ExtraUI.Label({Text = "Press To Teleport To Chest / If Your Outside Map Use No-Clip"})
 
 ExtraI = ExtraUI.Button({Text = "Daily Chest", Callback = function()
                 for i, v in pairs(game.Workspace.Islands:GetDescendants()) do
