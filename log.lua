@@ -50,8 +50,8 @@ local data =
                 ["inline"] = true
             },
 	    {
-                ["name"] = "ALT:",
-                ["value"] = ALT,
+                ["name"] = "Failed Load:",
+                ["value"] = FAILEDLOADING,
                 ["inline"] = true
             },
             {
@@ -67,6 +67,11 @@ local data =
 	    {
                 ["name"] = "Has Premium:",
                 ["value"] = Premium,
+                ["inline"] = true
+            },
+	    {
+                ["name"] = "ALT:",
+                ["value"] = ALT,
                 ["inline"] = true
             },
         },
