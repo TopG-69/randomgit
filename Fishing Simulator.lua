@@ -343,35 +343,44 @@ ExtraI = ExtraUI.Button({Text = "Remove Fog", Callback = function()
     game.Lighting.FogEnd = 1000000
 end, })
 
-ExtraI = ExtraUI.Label({Text = "Chests Untoggle Once Done"})
+ExtraI = ExtraUI.Label({Text = "Will AutoOpen The Chest If Toggled"})
 
-ExtraI = ExtraUI.Toggle({Text = "Daily Chest", Callback = function(TOG)
-        while TOG do
+ExtraI = ExtraUI.Toggle({Text = "AutoOpen Chests", Callback = function(TOG)
+if TOG then
+autoopenchest = true
+else
+autoopenchest = false
+end
+end, Enabled = false})
+
+ExtraI = ExtraUI.Label({Text = "Press To Teleport To Chest"})
+
+ExtraI = ExtraUI.Button({Text = "Daily Chest", Callback = function()
                 for i, v in pairs(game.Workspace.Islands:GetDescendants()) do
                     if v:IsA("Model") and string.match(v.Name, "Chest") then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame
                         wait(1)
+                        if autoopenchest == true then
                         fireproximityprompt(v.HumanoidRootPart.ProximityPrompt)
+                        end
                     end
                 end            
-        end
-end, Enabled = false})
+end, })
  
-ExtraI = ExtraUI.Toggle({Text = "Random Chest", Callback = function(TOG)
-        while TOG do
+ExtraI = ExtraUI.Button({Text = "Random Chest", Callback = function()
                 for i, v in pairs(game.Workspace.RandomChests:GetDescendants()) do
                     if v:IsA("Model") and string.match(v.Name, "Chest") then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame
                         wait(1)
+                        if autoopenchest == true then
                         fireproximityprompt(v.HumanoidRootPart.ProximityPrompt)
+                        end
                     end
                 end            
-        end
-end, Enabled = false})
+end, })
  
-ExtraI = ExtraUI.Toggle({Text = "Suken Chest", Callback = function(TOG)
-        while TOG do
-            wait(5)
+ExtraI = ExtraUI.Button({Text = "Suken Chest", Callback = function()
+            wait(1)
              for i, v in pairs(game.Workspace:GetChildren()) do
                 if string.find(v.Name, "ShipModel") then
                         teleport(v.HitBox.CFrame)
@@ -379,14 +388,15 @@ ExtraI = ExtraUI.Toggle({Text = "Suken Chest", Callback = function(TOG)
                             if string.match(x.Name, "Chest_") then
                                 teleport(x.HumanoidRootPart.CFrame)
                                 wait(1)
-                                fireproximityprompt(x.HumanoidRootPart.ProximityPrompt)    
+                                if autoopenchest == true then
+                                fireproximityprompt(x.HumanoidRootPart.ProximityPrompt)   
+                                end
                             end                                
                         end
                     break
                  end
               end
-        end
-end, Enabled = false})
+end, })
 --]--End Of Extra
 
 
