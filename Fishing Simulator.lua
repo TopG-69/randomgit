@@ -2,7 +2,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sitta
 local UI = Library.Load({
 	Title = "Fishing Simulator",
 	Style = 1,
-        SizeX = ScreenSizeX,
+    SizeX = ScreenSizeX,
 	SizeY = ScreenSizeY,
 	Theme = Theme,
 	ColorOverrides = {
@@ -342,6 +342,51 @@ end, })
 ExtraI = ExtraUI.Button({Text = "Remove Fog", Callback = function()
     game.Lighting.FogEnd = 1000000
 end, })
+
+ExtraI = ExtraUI.Label({Text = "Chests Untoggle Once Done"})
+
+ExtraI = ExtraUI.Toggle({Text = "Daily Chest", Callback = function(TOG)
+        while TOG do
+                for i, v in pairs(game.Workspace.Islands:GetDescendants()) do
+                    if v:IsA("Model") and string.match(v.Name, "Chest") then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame
+                        wait(1)
+                        fireproximityprompt(v.HumanoidRootPart.ProximityPrompt)
+                    end
+                end            
+        end
+end, Enabled = false})
+ 
+ExtraI = ExtraUI.Toggle({Text = "Random Chest", Callback = function(TOG)
+        while TOG do
+                for i, v in pairs(game.Workspace.RandomChests:GetDescendants()) do
+                    if v:IsA("Model") and string.match(v.Name, "Chest") then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame
+                        wait(1)
+                        fireproximityprompt(v.HumanoidRootPart.ProximityPrompt)
+                    end
+                end            
+        end
+end, Enabled = false})
+ 
+ExtraI = ExtraUI.Toggle({Text = "Suken Chest", Callback = function(TOG)
+        while TOG do
+            wait(5)
+             for i, v in pairs(game.Workspace:GetChildren()) do
+                if string.find(v.Name, "ShipModel") then
+                        teleport(v.HitBox.CFrame)
+                        for i, x in pairs(v:GetChildren()) do
+                            if string.match(x.Name, "Chest_") then
+                                teleport(x.HumanoidRootPart.CFrame)
+                                wait(1)
+                                fireproximityprompt(x.HumanoidRootPart.ProximityPrompt)    
+                            end                                
+                        end
+                    break
+                 end
+              end
+        end
+end, Enabled = false})
 --]--End Of Extra
 
 
