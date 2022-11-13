@@ -155,12 +155,16 @@ LocalI = LocalUI.TextField({Text = "Cooldown -Applys To InfJump", Callback = fun
    end		
 end, })
 
-LocalI = LocalUI.Toggle({Text = "Loop WalkSpeed", Callback = function()
+LocalI = LocalUI.Toggle({Text = "Loop WalkSpeed", Callback = function(v)
+ while v do
     SetWalkSpeed(LoopValueOfWSpeed)
+ end
 end, Enabled = false})
 
-LocalI = LocalUI.Toggle({Text = "Loop JumpPower", Callback = function()
+LocalI = LocalUI.Toggle({Text = "Loop JumpPower", Callback = function(v)
+ while v do
     SetJumpPower(LoopValueOfJumpP)
+ end
 end, Enabled = false})
 
 LocalI = LocalUI.Toggle({Text = "No Clip", Callback = function(v)
