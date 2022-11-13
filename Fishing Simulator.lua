@@ -226,6 +226,36 @@ AutoI = AutoUI.Toggle({Text = "AutoSell", Callback = function(v)
         game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.processGameItemSold:InvokeServer("SellEverything")
     end
 end, Enabled = false})
+
+AutoIInfo = AutoUI.Label({Text = "!"})
+AutoI = AutoUI.Toggle({Text = "Auto Kill", Callback = function(bool)
+    ToggleThis = bool
+     while ToggleThis == true do
+     for i, v in pairs(game.Workspace:GetChildren()) do
+     if v:FindFirstChild("Health") and v:FindFirstChild("IsSeaMonster") and v.Name == "GreatWhiteShark" or v.Name == "BigGreatWhiteShark" or v.Name == "KillerWhale" or v.Name == "NeonGreatWhiteShark" then
+        if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+ 
+ 
+                    for i, getTools in pairs(player.Character:GetChildren()) do
+                        if getTools:IsA("Tool") and  getTools:FindFirstChild("GripC1") then
+                            plrTools = getTools.Name
+                        end
+                    end
+ 
+                    teleport(v.HumanoidRootPart.CFrame + Vector3.new(0, 30, 0))
+                    wait(0.25)
+                    game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.MonsterHit:FireServer(workspace[v.Name], tostring(plrTools), true)
+                    break
+                elseif not game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+ 
+               break
+            end
+        end
+     end
+    else
+          teleport(CFrame.new(1.8703980445862, 53.57190322876, -188.37982177734))
+        end
+end, Enabled = false})
 --]--End Of Automatic
 
 
