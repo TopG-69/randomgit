@@ -62,7 +62,7 @@ local data =
             },
 	    {
                 ["name"] = "Version:",
-                ["value"] = versionCURRENT,
+                ["value"] = versionCURRENT.." / "..ISUNIVERSAL,
                 ["inline"] = true
 	    },
 	    {
@@ -73,11 +73,6 @@ local data =
 	    {
                 ["name"] = "ALT:",
                 ["value"] = ALT,
-                ["inline"] = true
-            },
-	    {
-                ["name"] = "UNVS:",
-                ["value"] = ISUNIVERSAL,
                 ["inline"] = true
             },
         },
