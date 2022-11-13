@@ -16,12 +16,14 @@ local UI = Library.Load({
 FishingSimulatorCURRENT = 2
 ThemeParkTycoon2CURRENT = 1
 UltimateDrivingCURRENT = 1
---End Of ABM
-
+FAILEDLOADING = nil
+ISUNIVERSAL = false
 OUTDATEDVERSION = nil
 FSISPATCHED = nil
 TPT2ISPATCHED = nil
 UDISPATCHED = nil
+--End Of ABM
+
 --]--Finished
 
 
@@ -72,9 +74,6 @@ wait(0.1)
 AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard('https://discord.gg/DYkHGnYeDp')
 end, })
-FAILEDLOADING = "TRUE - E=1 / NT"
-wait(0.1)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/log.lua", true))()
 
 elseif Discord_Key ~= "123" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Error2! - NK"})
@@ -90,9 +89,6 @@ wait(0.1)
 AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard('https://discord.gg/DYkHGnYeDp')
 end, })
-FAILEDLOADING = "TRUE - E=2 / NK"
-wait(0.1)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/log.lua", true))()
 	
 elseif OUTDATEDVERSION == true and Discord_Key == "123" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Error3! - ODV/VT"})
@@ -108,9 +104,6 @@ wait(0.1)
 AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard('https://discord.gg/DYkHGnYeDp')
 end, })
-FAILEDLOADING = "TRUE - E=3 / ODV/VT"
-wait(0.1)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/log.lua", true))()
 	
 elseif game.PlaceId ~= 2866967438 or game.PlaceId ~= 69184822 or game.PlaceId ~= 54865335 and OUTDATEDVERSION == false and Discord_Key == "123" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Error4! - NG/WD"})
@@ -129,10 +122,6 @@ AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard('https://discord.gg/DYkHGnYeDp')
 end, })
 	
-FAILEDLOADING = "TRUE - E=4 NG/WD"
-wait(0.1)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/log.lua", true))()
-	
 AlertList = AlertTab.Label({Text = "Loading Universal Version In 10 Secs"})
 wait(10)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/UniversalScript.lua", true))()
@@ -150,9 +139,6 @@ wait(0.1)
 AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard('https://discord.gg/DYkHGnYeDp')
 end, })
-FAILEDLOADING = "TRUE - E=5 / SIP"
-wait(0.1)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/log.lua", true))()
 	
 elseif ScreenSizeX == nil or ScreenSizeX == nan or ScreenSizeY == nil or ScreenSizeY == nan and OUTDATEDVERSION == false and Discord_Key == "123" and FixedThemes and UDISPATCHED == false then
 AlertList = AlertTab.Label({Text = "Error6! - BSX/BSY"})
@@ -168,9 +154,6 @@ wait(0.1)
 AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard('https://discord.gg/DYkHGnYeDp')
 end, })
-FAILEDLOADING = "TRUE - E=6 / BSX/BSY"
-wait(0.1)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/log.lua", true))()
 	
 end
 --]--End Of Script
