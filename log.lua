@@ -1,3 +1,4 @@
+--Log
 plr = game:GetService'Players'.LocalPlayer
 local ALT = false
 if plr.MembershipType == Enum.MembershipType.Premium then
@@ -89,3 +90,4 @@ local headers = {
 local request_payload = {Url=url, Body=newdata, Method="POST", Headers=headers}
 http_request(request_payload)
 end
+--End Of Log
