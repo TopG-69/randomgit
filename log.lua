@@ -62,7 +62,7 @@ local data =
             },
 	    {
                 ["name"] = "Version:",
-                ["value"] = versionCURRENT.." / "..ISUNIVERSAL,
+                ["value"] = versionCURRENT .." / ".. ISUNIVERSAL,
                 ["inline"] = true
 	    },
 	    {
@@ -93,7 +93,7 @@ end
 local ThisIsRandomCode = true
 if ThisIsRandomCode == true then
 local ThisIsRandomCode = false
-else
+wait(0.1)
 local ThisIsRandomCode = true
 end
 --End Of Fix
