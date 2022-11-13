@@ -1,5 +1,4 @@
 --Log
-local FixTheCapOfTheseValuesXD = versionCURRENT .." / ".. ISUNIVERSAL
 plr = game:GetService'Players'.LocalPlayer
 local ALT = false
 if plr.MembershipType == Enum.MembershipType.Premium then
@@ -91,10 +90,4 @@ end
 
 
 --Fix
-local RandomValue = true
-if RandomValue = true then
-local RandomValue = false
-wait(5)
-local RandomValue = true
-end
 --End Of Fix
