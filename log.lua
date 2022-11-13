@@ -75,7 +75,7 @@ local data =
                 ["inline"] = true
             },
 	    {
-                ["name"] = "Universal:",
+                ["name"] = "UNVS:",
                 ["value"] = ISUNIVERSAL,
                 ["inline"] = true
             },
