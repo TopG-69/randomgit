@@ -232,7 +232,7 @@ end, Enabled = false})
 --[--Teleport/Buy
 BANDTUI = UI.New({Title = "Buy/Teleport"})
 egglist = {"Royals","Normal","Ruby", "Void", "Silver", "Stone", "Gold"}
-TeleportLocations1 = {"Port Jackson", "Ancient Shores", "Shadow Isles", "Pharaoh's Dunes", "Eruption Island", "Monster's Borough", "None"}
+TeleportLocations1 = {"Port Jackson", "Ancient Shores", "Shadow Isles", "Pharaoh's Dunes", "Eruption Island", "Monster's Borough", "Suken Ship", "None"}
 TeleportLocations2 = {"Pets Store", "Supplies Store", "Raygan's Tavern", "Boat Store", "None"}
 
 --Start Of Code
