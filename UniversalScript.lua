@@ -12,6 +12,7 @@ local UI = Library.Load({
 })
 --[--Set Values
 local CoolDown = nan
+ISUNIVERSAL = true
 --]--End Of Set Values
 
 
