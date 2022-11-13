@@ -461,6 +461,7 @@ end, Enabled = false})
 
 --[--Fix
 wait(0.1)
+--Actual Fixes
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/log.lua", true))()
 RestoreWSJP()
 --]--End Of Fix
