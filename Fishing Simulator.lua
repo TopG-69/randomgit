@@ -227,10 +227,10 @@ AutoI = AutoUI.Toggle({Text = "AutoSell", Callback = function(v)
     end
 end, Enabled = false})
 
-AutoIInfo = AutoUI.Label({Text = "!"})
+AutoIInfo = AutoUI.Label({Text = "Equip Spear Then Toggle Setting"})
 AutoI = AutoUI.Toggle({Text = "Auto Kill", Callback = function(bool)
     ToggleThis = bool
-     while ToggleThis == true do
+     if ToggleThis == true then
      for i, v in pairs(game.Workspace:GetChildren()) do
      if v:FindFirstChild("Health") and v:FindFirstChild("IsSeaMonster") and v.Name == "GreatWhiteShark" or v.Name == "BigGreatWhiteShark" or v.Name == "KillerWhale" or v.Name == "NeonGreatWhiteShark" then
         if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
