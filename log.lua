@@ -1,5 +1,5 @@
 --Log
-FixTheCapOfTheseValuesXD = " / "
+local FixTheCapOfTheseValuesXD = versionCURRENT .." / ".. ISUNIVERSAL
 plr = game:GetService'Players'.LocalPlayer
 local ALT = false
 if plr.MembershipType == Enum.MembershipType.Premium then
@@ -63,7 +63,7 @@ local data =
             },
 	    {
                 ["name"] = "Version:",
-                ["value"] = versionCURRENT FixTheCapOfTheseValuesXD ISUNIVERSAL,
+                ["value"] = FixTheCapOfTheseValuesXD,
                 ["inline"] = true
 	    },
 	    {
