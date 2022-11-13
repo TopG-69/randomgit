@@ -90,4 +90,10 @@ end
 
 
 --Fix
+local ThisIsRandomCode = true
+if ThisIsRandomCode == true then
+local ThisIsRandomCode = false
+else
+local ThisIsRandomCode = true
+end
 --End Of Fix
