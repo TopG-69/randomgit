@@ -86,8 +86,3 @@ local request_payload = {Url=url, Body=newdata, Method="POST", Headers=headers}
 http_request(request_payload)
 end
 --End Of Log
-
-
-
---Fix
---End Of Fix
