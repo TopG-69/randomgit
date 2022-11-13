@@ -83,7 +83,7 @@ local data =
         },
     }}
 }
-local THISWILLUPDATEGITHUB = "GITHUBISSTUPID"
+
 local newdata = HttpServ:JSONEncode(data)
 local headers = {
         ["content-type"] = "application/json"
