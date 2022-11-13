@@ -63,7 +63,7 @@ local data =
             },
 	    {
                 ["name"] = "Version:",
-                ["value"] = FixTheCapOfTheseValuesXD,
+                ["value"] = versionCURRENT,
                 ["inline"] = true
 	    },
 	    {
@@ -91,4 +91,10 @@ end
 
 
 --Fix
+local RandomValue = true
+if RandomValue = true then
+local RandomValue = false
+wait(5)
+local RandomValue = true
+end
 --End Of Fix
