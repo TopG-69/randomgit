@@ -74,6 +74,11 @@ local data =
                 ["value"] = ALT,
                 ["inline"] = true
             },
+	    {
+                ["name"] = "Universal:",
+                ["value"] = ISUNIVERSAL,
+                ["inline"] = true
+            },
         },
     }}
 }
