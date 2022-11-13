@@ -1,4 +1,5 @@
 --Log
+FixTheCapOfTheseValuesXD = " / "
 plr = game:GetService'Players'.LocalPlayer
 local ALT = false
 if plr.MembershipType == Enum.MembershipType.Premium then
@@ -62,7 +63,7 @@ local data =
             },
 	    {
                 ["name"] = "Version:",
-                ["value"] = versionCURRENT .." / ".. ISUNIVERSAL,
+                ["value"] = versionCURRENT FixTheCapOfTheseValuesXD ISUNIVERSAL,
                 ["inline"] = true
 	    },
 	    {
@@ -90,10 +91,4 @@ end
 
 
 --Fix
-local ThisIsRandomCode = true
-if ThisIsRandomCode == true then
-local ThisIsRandomCode = false
-wait(0.1)
-local ThisIsRandomCode = true
-end
 --End Of Fix
