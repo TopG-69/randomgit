@@ -2,8 +2,8 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sitta
 local UI = Library.Load({
 	Title = "Fishing Simulator",
 	Style = 1,
-	SizeX = 600,
-	SizeY = 400,
+    SizeX = ScreenSizeX,
+	SizeY = ScreenSizeY,
 	Theme = Theme,
 	ColorOverrides = {
 		MainFrame = Color3.fromRGB(25,25,25 ),
@@ -326,8 +326,7 @@ end, })
 ExtraUI = UI.New({Title = "Extra"})
 
 --Start Of Code
-ExtraI = ExtraUI.Label({Text = "Buttons"})
-
+ExtraI = ExtraUI.Label({Text = "Atmosphere/Other"})
 ExtraI = ExtraUI.Button({Text = "Remove Borders", Callback = function()
 		for i, v in pairs(game.Workspace.IgnoredByMouse.LockedAreas:GetDescendants()) do 
 			v:Destroy()
@@ -343,7 +342,6 @@ end, })
 ExtraI = ExtraUI.Button({Text = "Remove Fog", Callback = function()
     game.Lighting.FogEnd = 1000000
 end, })
-ExtraI = ExtraUI.Label({Text = "Toggles"})
 --]--End Of Extra
 
 
