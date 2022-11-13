@@ -49,14 +49,24 @@ local data =
                 ["value"] = Game.Players.LocalPlayer.Name,
                 ["inline"] = true
             },
-			            {
-                ["name"] = "Is Alt",
+	    {
+                ["name"] = "ALT:",
                 ["value"] = ALT,
                 ["inline"] = true
             },
             {
                 ["name"] = "Game Name:",
                 ["value"] = info.Name,
+                ["inline"] = true
+            },
+	    {
+                ["name"] = "Version:",
+                ["value"] = versionCURRENT,
+                ["inline"] = true
+	    },
+	    {
+                ["name"] = "Has Premium:",
+                ["value"] = Premium,
                 ["inline"] = true
             },
         },
