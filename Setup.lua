@@ -14,6 +14,7 @@ local UI = Library.Load({
 
 --Anti Bypass Modules
 FishingSimulatorCURRENT = 2
+DoorsCURRENT = 2
 ThemeParkTycoon2CURRENT = 1
 UltimateDrivingCURRENT = 1
 FAILEDLOADING = nil
@@ -57,6 +58,11 @@ elseif game.PlaceId == 54865335 and OUTDATEDVERSION == false and Discord_Key == 
 AlertList = AlertTab.Label({Text = "Ultimate Driving Script Is Loading"})
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Ultimate%20Driving.lua", true))()
+	
+elseif game.PlaceId == 6516141723 and OUTDATEDVERSION == false and Discord_Key == "123" and FixedThemes and UDISPATCHED == false and ScreenCheckX and ScreenCheckY then
+AlertList = AlertTab.Label({Text = "Doors Script Is Loading"})
+wait(5)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Doors.lua", true))()
 	
 elseif BrokenThemes and OUTDATEDVERSION == false and Discord_Key == "123" and IsPatched and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Error1! - NT"})
