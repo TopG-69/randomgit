@@ -8,7 +8,7 @@ UDISPATCHED = nil
 DOORSISPATCHED = nil
 --end of ABM
 
-local VerifyVersion = 1
+local VerifyVersion = 2
 if versionCURRENT ~= VerifyVersion then
   AlertList = AlertTab.Label({Text = "Your Using A Outdated Version Please Update"})
   OUTDATEDVERSION = true
