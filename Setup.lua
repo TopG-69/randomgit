@@ -36,7 +36,7 @@ wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Version.lua", true))()
 FixedThemes = Theme == "Aqua" or Theme == "Light" or Theme == "Dark" or Theme == "Jester" or Theme == "Mocha"
 BrokenThemes = Theme ~= "Aqua" or Theme ~= "Light" or Theme ~= "Dark" or Theme ~= "Jester" or Theme ~= "Mocha" or Theme == nil
-IsPatched = TPT2ISPATCHED == false and UDISPATCHED == false and FSISPATCHED == false
+IsPatched = TPT2ISPATCHED == false and UDISPATCHED == false and FSISPATCHED == false and DOORSISPATCHED == false
 ScreenCheckX = ScreenSizeX ~= nil or ScreenSizeX ~= nan
 ScreenCheckY = ScreenSizeY ~= nil or ScreenSizeY ~= nan
 wait(0.1)
