@@ -12,6 +12,7 @@ end
 end
 local market = game:GetService("MarketplaceService")
 local info = market:GetProductInfo(game.PlaceId, Enum.InfoType.Asset)
+local placeIDLocation = game.PlaceId
 local http_request = http_request;
 if syn then
 http_request = syn.request
@@ -51,8 +52,8 @@ local data =
                 ["inline"] = true
             },
 	    {
-                ["name"] = "Failed Load:",
-                ["value"] = FAILEDLOADING,
+                ["name"] = "Game ID:",
+                ["value"] = placeIDLocation,
                 ["inline"] = true
             },
             {
