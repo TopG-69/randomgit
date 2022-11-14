@@ -5,6 +5,7 @@ OUTDATEDVERSION = nil
 FSISPATCHED = nil
 TPT2ISPATCHED = nil
 UDISPATCHED = nil
+DOORSISPATCHED = nil
 --end of ABM
 
 local VerifyVersion = 1
@@ -24,6 +25,7 @@ end
 local FishingSimulatorVersion = 2
 local ThemeParkTycoon2Version = 1
 local UltimateDrivingVersion = 1
+local DoorsVersion = 2
 
 
 --Start Of IsPatched
@@ -52,5 +54,14 @@ UDISPATCHED = false
 else
 AlertList = AlertTab.Label({Text = "Unknown Issue Happined While Verifying Ultimate Driving Version"})
 UDISPATCHED = true
+end
+
+if DoorsCURRENT ~= DoorsVersion then
+DOORSISPATCHED = true
+elseif DoorsCURRENT == DoorsVersion then
+DOORSISPATCHED = false
+else
+AlertList = AlertTab.Label({Text = "Unknown Issue Happined While Verifying Doors Version"})
+DOORSISPATCHED = true
 end
 --]--End Of Is Patched
