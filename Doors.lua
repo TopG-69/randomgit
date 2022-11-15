@@ -13,6 +13,8 @@ local UI = Library.Load({
 })
 --[--Set Values
 local CoolDown = nan
+local LatestRoom = game:GetService("ReplicatedStorage").GameData.LatestRoom
+local ChaseStart = game:GetService("ReplicatedStorage").GameData.ChaseStart
 --]--End Of Set Values
 
 
@@ -77,6 +79,19 @@ if God then
 		Script.Disabled = false
 	end
 	nHuman.Health = nHuman.MaxHealth
+end
+
+if KeyChams == true then
+    wait()
+    local Cham = Instance.new("Highlight")
+    Cham.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    Cham.FillColor = Color3.new(0.980392, 0.670588, 0)
+    Cham.FillTransparency = 0.5
+    Cham.OutlineColor = Color3.new(0.792156, 0.792156, 0.792156)
+    Cham.Parent = game:GetService("CoreGui")
+    Cham.Adornee = inst
+    Cham.RobloxLocked = true
+    return Cham
 end
 --]--End Of Functions
 
@@ -173,9 +188,16 @@ end, Enabled = false})
 
 
 --[--Automatic
-AutoUI = UI.New({Title = "Automatic"})
+ESPUI = UI.New({Title = "ESP"})
 
 --Start Of Code
+ESPI = ESPUI.Toggle({Text = "Key ESP", Callback = function(v)
+       if v then
+         KeyChams = true
+       elseif not v then
+	 KeyChams = false
+    end
+end, Enabled = false})
 --]--End Of Automatic
 
 
