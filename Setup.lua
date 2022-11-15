@@ -11,7 +11,6 @@ local UI = Library.Load({
 	}
 })
 --[--Run Checks
-
 --Anti Bypass Modules
 FishingSimulatorCURRENT = 2
 DoorsCURRENT = 2
@@ -25,7 +24,6 @@ FSISPATCHED = nil
 TPT2ISPATCHED = nil
 UDISPATCHED = nil
 --End Of ABM
-
 --]--Finished
 
 
