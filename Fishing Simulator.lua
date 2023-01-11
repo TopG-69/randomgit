@@ -1,19 +1,44 @@
 FAILEDLOADING = false
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
 local UI = Library.Load({
-	Title = "Fishing Simulator",
-	Style = 1,
+	Title = "Fishing Simulator V3",
+	Style = 3,
         SizeX = ScreenSizeX,
 	SizeY = ScreenSizeY,
 	Theme = Theme,
 	ColorOverrides = {
-		MainFrame = Color3.fromRGB(25,25,25 ),
+		MainFrame = Color3.fromRGB(235,235,235 ),
 		Minimise = Color3.fromRGB(0, 0, 0 )
 	}
 })
---[--Set Values
+--[--Set Values/Guis
 local CoolDown = nil
 local CaughtTime = nil
+
+local Welcome = UI.New({
+	Title = "Info {👋}"
+})
+local Local = UI.New({
+	Title = "Local {👤}"
+})
+local People = UI.New({
+	Title = "Other {👥}"
+})
+local Automatic = UI.New({
+	Title = "Automatic {🤖}"
+})
+local Buy = UI.New({
+	Title = "Buy {💲}"
+})
+local Teleport = UI.New({
+	Title = "Teleport {🌀}"
+})
+local Extra = UI.New({
+	Title = "Extra {❓}"
+})
+local Config = UI.New({
+	Title = "Config {⚙️}"
+})
 --]--End Of Set Values
 
 
@@ -103,136 +128,172 @@ s:Play()
 
 
 --[--Welcome
-WelcomeUI = UI.New({Title = "Welcome"})
 
 --Start Of Code
 if PremiumKey == "EJOHFDNSIBTREKPQWNDIASDHUBEJNOWBNTEORBNJSACNJOSVNIDASNOVUESNAVUBORTB" then
-WelcomeI = WelcomeUI.Label({Text = "Premium is True"})
+WelcomeI = Welcome.Label({Text = "Premium is True"})
 	Premium = true
-	PremiumUI = UI.New({Title = "Premium"})
+	PremiumUI = UI.New({Title = "Premium {💎}"})
 else
-WelcomeI = WelcomeUI.Label({Text = "Premium is false"})
+WelcomeI = Welcome.Label({Text = "Premium is false"})
 	Premium = false
 end
 
-WelcomeI = WelcomeUI.Label({Text = "Updated : To V2"})
-WelcomeI = WelcomeUI.Label({Text = "Update Includes - Updates To Automatic Tab"})
-WelcomeI = WelcomeUI.Label({Text = "AutoCaught - Auto Catches Fish"})
-WelcomeI = WelcomeUI.Label({Text = "AutoSell - Automaticly Sells Items"})
-WelcomeI = WelcomeUI.Label({Text = "Fast Caught/Sell - Will Make It So There Is No Delay While Those 2 Settings Are On"})
-WelcomeI = WelcomeUI.Label({Text = "Need Help? Join The Discord - https://discord.gg/DYkHGnYeDp"})
+WelcomeI = Welcome.Label({Text = "Version : V3 (Current Gui)"})
+WelcomeI = Welcome.Label({Text = "Update Includes - Ui Changes"})
+WelcomeI = Welcome.Label({Text = "--// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --//"})
+WelcomeI = Welcome.Label({Text = "Need Help? Join The Discord - https://discord.gg/DYkHGnYeDp"})
 
-WelcomeI = WelcomeUI.Button({Text = "Click To Copy Invite", function()
-    setclipboard('https://discord.gg/DYkHGnYeDp')
-end, })
+WelcomeI = Welcome.Button({
+	Text = "Click To Copy Invite",
+	Callback = function()
+		setclipboard('https://discord.gg/DYkHGnYeDp')
+	end,
+	Menu = {
+		Information = function(self)
+			X.Banner({
+				Text = "nil"
+			})
+		end
+	}
+})
 --]--End Of Welcome
 
 
 
 --[--Local
-LocalUI = UI.New({Title = "Local"})
 
 --Start Of Code
-LocalI = LocalUI.TextField({Text = "WalkSpeed", Callback = function(v)
-	SetWalkSpeed(v)
-	LoopValueOfWSpeed = v
-end, })
 
-LocalI = LocalUI.TextField({Text = "JumpPower", Callback = function(v)
-	SetJumpPower(v)
-	LoopValueOfJumpP = v
-end, })
+LocalI = Local.TextField({
+	Text = "Walk Speed",
+	Callback = function(v)
+		SetWalkSpeed(v)
+	end,
+	Menu = {
+		Normal = function(self)
+			self.SetText("16")
+			SetWalkSpeed(16)
+		end
+	}
+})
+LocalI = Local.TextField({
+	Text = "Jump Power",
+	Callback = function(v)
+		SetJumpPower(v)
+	end,
+	Menu = {
+		Normal = function(self)
+			self.SetText("50")
+			SetJumpPower(50)
+		end
+	}
+})
 
-LocalI = LocalUI.Button({Text = "Restore WS/JP", Callback = function()
-        RestoreWSJP()
-end, })
+LocalI = Local.TextField({
+	Text = "Cooldown (JP)",
+	Callback = function(v)
+		CoolDownJP = v
+	end,
+	Menu = {
+		Normal = function(self)
+			self.SetText("0.5")
+			CoolDownJP = 0.5
+		end
+	}
+})
 
-LocalI = LocalUI.TextField({Text = "Cooldown -Applys To InfJump", Callback = function(v)
-	if CoolDown == nil or CoolDown == nan then
-        CoolDown = 0.1
-	else
-	CoolDown = v
-   end		
-end, })
+LocalI = Local.Toggle({
+	Text = "No Clip",
+	Callback = function(Value)
+		if Value then
+			NoClip = true
+		else
+			NoClip = false
+		end
+	end,
+	Enabled = false
+})
+LocalI = Local.Toggle({
+	Text = "InfJump",
+	Callback = function(Value)
+		if Value then
+			InfiniteJump = true
+		else
+			InfiniteJump = false
+		end
+	end,
+	Enabled = false
+})
 
-LocalI = LocalUI.Toggle({Text = "Loop WalkSpeed", Callback = function(v)
- while v do
-    SetWalkSpeed(LoopValueOfWSpeed)
- end
-end, Enabled = false})
-
-LocalI = LocalUI.Toggle({Text = "Loop JumpPower", Callback = function(v)
- while v do
-    SetJumpPower(LoopValueOfJumpP)
- end
-end, Enabled = false})
-
-LocalI = LocalUI.Toggle({Text = "No Clip", Callback = function(v)
-       if v then
-         NoClip = true
-       elseif not v then
-	 NoClip = false
-    end
-end, Enabled = false})
-
-LocalI = LocalUI.Toggle({Text = "Inf Jump", Callback = function(v)
-       if v then
-         InfiniteJump = true
-       elseif not v then
-	 InfiniteJump = false
-    end
-end, Enabled = false})
-
-LocalI = LocalUI.Toggle({Text = "Fly - Will Be Added Sometime", Callback = function(v)
-       if v then
-         Fly = true
-       elseif not v then
-	 Fly = false
-    end
-end, Enabled = false})
 --]--End Of Local
 
 
 
---[--Automatic
-AutoUI = UI.New({Title = "Automatic"})
+--[--Other
 
 --Start Of Code
-AutoIInfo = AutoUI.Label({Text = "Warning You Might Get Kicked | Req The Setting To Be Turned On!"})
-AutoI = AutoUI.Toggle({Text = "Fast Caught/Sell", Callback = function(v)
-       if v then
-       CaughtTime = 0.1
-       else
-       CaughtTime = 2.6
-    end
-end, Enabled = false})
+OtherI = People.Label({Text = "Missing / Coming"})
+--]--End Of Other
 
-AutoI = AutoUI.Toggle({Text = "Fast Catch", Callback = function(v)
-       while v do
-        game:GetService("ReplicatedStorage").CloudFrameShared.Communication.Events.FishedDone:FireServer()
-		wait()
-		game:GetService("ReplicatedStorage").CloudFrameShared.Communication.Events.ResetFishingRod:FireServer()
-    end
-end, Enabled = false})
 
-AutoIInfo = AutoUI.Label({Text = "Usage Equip FishingRod Then Throw The Fishing Line"})
-AutoI = AutoUI.Toggle({Text = "AutoCaught", Callback = function(v)
-       while v do
-        wait(CaughtTime)
-        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.FishCaught:FireServer()
-    end
-end, Enabled = false})
 
-AutoIInfo = AutoUI.Label({Text = "Have Items In Your Hotbar Or Inventory"})
-AutoI = AutoUI.Toggle({Text = "AutoSell", Callback = function(v)
-       while v do
-        wait(CaughtTime)
-        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.processGameItemSold:InvokeServer("SellEverything")
-    end
-end, Enabled = false})
+--[--Automatic
 
-AutoIInfo = AutoUI.Label({Text = "Equip Spear Then Toggle Setting"})
-AutoI = AutoUI.Toggle({Text = "Auto Kill", Callback = function(bool)
+--Start Of Code
+AutoIInfo = Automatic.Label({Text = "Warning: can couse issues or kick you"})
+
+AutoI = Automatic.TextField({
+	Text = "Cooldown (CT)",
+	Callback = function(v)
+		CoolDownCT = v
+	end,
+	Menu = {
+		Normal = function(self)
+			self.SetText("2.6")
+			CoolDownCT = 2.6
+		end
+	}
+})
+
+AutoI = Automatic.Toggle({
+	Text = "Fast Catch",
+	Callback = function(Value)
+		while Value do
+			game:GetService("ReplicatedStorage").CloudFrameShared.Communication.Events.FishedDone:FireServer()
+			wait(2.6)
+			game:GetService("ReplicatedStorage").CloudFrameShared.Communication.Events.ResetFishingRod:FireServer()
+		end
+	end,
+	Enabled = false
+})
+
+AutoIInfo = Automatic.Label({Text = "Throw fishing rod in water"})
+AutoI = Automatic.Toggle({
+	Text = "AutoCaught",
+	Callback = function(Value)
+		while Value do
+			wait(2.6)
+			game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.FishCaught:FireServer()
+		end
+	end,
+	Enabled = false
+})
+
+AutoIInfo = Automatic.Label({Text = "AutoSells Sellebol Items"})
+AutoI = Automatic.Toggle({
+	Text = "AutoSell",
+	Callback = function(Value)
+		while Value do
+			wait(CoolDownCT)
+			game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.processGameItemSold:InvokeServer("SellEverything")
+		end
+	end,
+	Enabled = false
+})
+
+AutoIInfo = Automatic.Label({Text = "Equip Spear"})
+AutoI = Automatic.Toggle({Text = "Auto Kill", Callback = function(bool)
     ToggleThis = bool
      if ToggleThis == true then
      for i, v in pairs(game.Workspace:GetChildren()) do
@@ -260,72 +321,129 @@ AutoI = AutoUI.Toggle({Text = "Auto Kill", Callback = function(bool)
           teleport(CFrame.new(1.8703980445862, 53.57190322876, -188.37982177734))
         end
 end, Enabled = false})
+
 --]--End Of Automatic
 
 
 
 --[--Teleport/Buy
-BANDTUI = UI.New({Title = "Buy/Teleport"})
-egglist = {"Royals","Normal","Ruby", "Void", "Silver", "Stone", "Gold"}
-TeleportLocations1 = {"Port Jackson", "Ancient Shores", "Shadow Isles", "Pharaoh's Dunes", "Eruption Island", "Monster's Borough", "Suken Ship", "None"}
-TeleportLocations2 = {"Pets Store", "Supplies Store", "Raygan's Tavern", "Boat Store", "None"}
 
 --Start Of Code
-BANDTI = BANDTUI.Label({Text = "Select Egg Then Press Buy"})
+BANDTI = Buy.Label({Text = "Select Egg Then Press Buy"})
+BANDTI = Buy.Dropdown({
+	Text = "Egg",
+	Callback = function(Value)
+		eggs = Value
+	end,
+	Options = {
+		"Normal",
+		"Stone",
+		"Silver",
+		"Gold",
+		"Void",
+		"Royals"
+	},
+	Menu = {
+		Information = function(self)
+			X.Banner({
+				Text = "Select an egg then press buy"
+			})
+		end
+	}
+})
+BANDTI = Buy.Button({
+	Text = "Buy",
+	Callback = function(Value)
+		if Value == "Royal" then
+			game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("royalegg")
+		elseif Value == "Normal" then
+			game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("normalegg")
+		elseif Value == "Ruby" then
+			game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("rubyegg")
+		elseif Value == "Void" then
+			game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("voidegg")
+		elseif Value == "Silver" then
+			game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("silverchest")
+		elseif Value == "Stone" then
+			game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("stonechest")
+		elseif Value == "Gold" then
+			game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("goldchest")
+		end
+	end,
+	Menu = {
+		Information = function(self)
+			X.Banner({
+				Text = "Select an egg then press buy"
+			})
+		end
+	}
+})
 
-BANDTI = BANDTUI.Dropdown({Text = "Egg ", Callback = function(v)
-     eggs = v
-end, Options = egglist})
-
-BANDTI = BANDTUI.Button({Text = "Buy", Callback = function()
-        if eggs == "Royal" then
-        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("royalegg")    
-        elseif eggs == "Normal" then
-        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("normalegg")   
-        elseif eggs == "Ruby" then
-        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("rubyegg")   
-        elseif eggs == "Void" then
-        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("voidegg")
-        elseif eggs == "Silver" then
-        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("silverchest")
-        elseif eggs == "Stone" then
-        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("stonechest")    
-        elseif eggs == "Gold" then
-        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.OpenLootboxFunction:InvokeServer("goldchest")            
-    end
-end, })
-
-BANDTI = BANDTUI.Label({Text = "Select Location And Press Teleport / Choose None Once Done"})
-
-BANDTI = BANDTUI.Dropdown({Text = "Teleport Location ", Callback = function(v)
-     TPM2TeleportLocation = v
-end, Options = TeleportLocations1})
-
-BANDTI = BANDTUI.Dropdown({Text = "Teleport Store ", Callback = function(v)
-     TPM2sTeleportLocation = v
-end, Options = TeleportLocations2})
-
-BANDTI = BANDTUI.Button({Text = "Teleport", Callback = function()
-        if TPM2sTeleportLocation == "Boat Store" then
-        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.EnterDoor:InvokeServer("BoatShopInterior", "Inside")
+BANDTI = Teleport.Label({Text = "Select Location And Press Teleport"})
+BANDTI = Teleport.Dropdown({
+	Text = "Location Store",
+	Callback = function(Value)
+		TPM2sTeleportLocation = Value
+	end,
+	Options = {
+		"None",
+		"Boat Store",
+		"Raygan's Tavern",
+		"Supplies Store",
+		"Pets Store",
+	},
+	Menu = {
+		Information = function(self)
+			X.Banner({
+				Text = "Select an store then press teleport"
+			})
+		end
+	}
+})
+BANDTI = Teleport.Dropdown({
+	Text = "Location",
+	Callback = function(Value)
+		TPM2TeleportLocation = Value
+	end,
+	Options = {
+		"None",
+		"Port Jackson",
+		"Ancient Shores",
+		"Pharaoh's Dunes",
+		"Eruption Island",
+		"Suken Ship",
+	},
+	Menu = {
+		Information = function(self)
+			X.Banner({
+				Text = "Select an location then press teleport"
+			})
+		end
+	}
+})
+BANDTI = Teleport.Button({
+	Text = "Teleport",
+	Callback = function(Value)
+		if TPM2sTeleportLocation == "Boat Store" then
+        	game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.EnterDoor:InvokeServer("BoatShopInterior", "Inside")
         elseif TPM2sTeleportLocation == "Raygan's Tavern" then
-        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.EnterDoor:InvokeServer("TavernInterior", "Inside")
+        	game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.EnterDoor:InvokeServer("TavernInterior", "Inside")
         elseif TPM2sTeleportLocation == "Supplies Store" then
-        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.EnterDoor:InvokeServer("SuppliesStoreInterior", "Inside")  
+        	game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.EnterDoor:InvokeServer("SuppliesStoreInterior", "Inside")  
         elseif TPM2sTeleportLocation == "Pets Store" then
-        game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.EnterDoor:InvokeServer("PetShop", "MainEntrance")
+        	game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.EnterDoor:InvokeServer("PetShop", "MainEntrance")
         elseif TPM2TeleportLocation == "Port Jackson" then
-        teleport(CFrame.new(1.8703980445862, 53.57190322876, -188.37982177734))           
+        	teleport(CFrame.new(1.8703980445862, 53.57190322876, -188.37982177734))           
         elseif TPM2TeleportLocation == "Ancient Shores" then
-        teleport(CFrame.new(-2436.431640625, 43.564971923828, -1683.4526367188))    
+        	teleport(CFrame.new(-2436.431640625, 43.564971923828, -1683.4526367188))    
         elseif TPM2TeleportLocation == "Shadow Isles" then
-        teleport(CFrame.new(2196.9926757812, 43.491630554199, -2216.4543457031))    
+        	teleport(CFrame.new(2196.9926757812, 43.491630554199, -2216.4543457031))    
         elseif TPM2TeleportLocation == "Pharaoh's Dunes" then
-        teleport(CFrame.new(-4142.74609375, 46.71378326416, 262.05679321289))
+        	teleport(CFrame.new(-4142.74609375, 46.71378326416, 262.05679321289))
         elseif TPM2TeleportLocation == "Eruption Island" then
-        teleport(CFrame.new(3022.9311523438, 52.347640991211, 1323.74609375))
+        	teleport(CFrame.new(3022.9311523438, 52.347640991211, 1323.74609375))
         elseif TPM2TeleportLocation == "Monster's Borough" then
-        teleport(CFrame.new(-3211.9047851562, 41.850345611572, 2735.306640625))  
+        	teleport(CFrame.new(-3211.9047851562, 41.850345611572, 2735.306640625))  
         elseif TPM2TeleportLocation == "Suken Ship" then
              for i, v in pairs(game.Workspace:GetChildren()) do
                 if string.find(v.Name, "ShipModel") then
@@ -333,64 +451,97 @@ BANDTI = BANDTUI.Button({Text = "Teleport", Callback = function()
                     break
                  end
               end                               
-    end
-end, })
+    	   end
+	end,
+	Menu = {
+		Information = function(self)
+			X.Banner({
+				Text = "Select an location then press buy"
+			})
+		end
+	}
+})
 
-BANDTI = BANDTUI.Label({Text = "Boat"})
-
-BANDTI = BANDTUI.Button({Text = "TP To Boat", Callback = function()
-    for i, v in pairs(game.Workspace:GetChildren()) do
-        if v.Name == (game.Players.LocalPlayer.Name .. "'s Boat") then
+BANDTI = Teleport.Label({Text = "Teleports to Boat"})
+BANDTI = Teleport.Button({
+	Text = "TP To Boat",
+	Callback = function()
+	for i, v in pairs(game.Workspace:GetChildren()) do
+		if v.Name == (game.Players.LocalPlayer.Name .. "'s Boat") then
              teleport(v.Controller.VehicleSeat.CFrame + Vector3.new(0, 3, 0))
         end
-    end
-end, })
-
-BANDTI = BANDTUI.TextField({Text = "Boat Speed", Callback = function(VA)
- for i, v in pairs(game.Workspace:GetChildren()) do
-        if v.Name == (game.Players.LocalPlayer.Name .. "'s Boat") then
-             v.Controller.VehicleSeat.MaxSpeed = VA
-         end
-    end  
-end, })
+      end
+	end,
+	Menu = {
+		Information = function(self)
+			X.Banner({
+				Text = "Teleports to your boat"
+			})
+		end
+	}
+})
 --]--End Of Teleport/Buy
 
 
 
 --[--Extra
-ExtraUI = UI.New({Title = "Extra"})
 
 --Start Of Code
-ExtraI = ExtraUI.Label({Text = "Atmosphere/Other"})
-ExtraI = ExtraUI.Button({Text = "Remove Borders", Callback = function()
-		for i, v in pairs(game.Workspace.IgnoredByMouse.LockedAreas:GetDescendants()) do 
-			v:Destroy()
-    end
-end, })
 
-ExtraI = ExtraUI.Button({Text = "Remove Boat Borders", Callback = function()
-    for i, v in pairs(game.Workspace.IgnoredByMouse.BoatBorders:GetChildren()) do
-        v:Destroy()
-    end
-end, })
+ExtraI = Extra.Slider({
+	Text = "Boat Speed",
+	Callback = function(Value)
+	for i, v in pairs(game.Workspace:GetChildren()) do
+        if v.Name == (game.Players.LocalPlayer.Name .. "'s Boat") then
+             v.Controller.VehicleSeat.MaxSpeed = Value
+         end
+       end  
+	end,
+	Min = 1,
+	Max = 500,
+	Def = 70
+})
 
-ExtraI = ExtraUI.Button({Text = "Remove Fog", Callback = function()
-    game.Lighting.FogEnd = 1000000
-end, })
+ExtraI = Extra.ChipSet({
+	Text = "Atmosphere/Other",
+	Callback = function(ChipSet)
+		table.foreach(ChipSet, function(Option, Value)
+			print(Option, Value)
+		end)
+	end,
+	Options = {
+		RemoveBorders = false,
+		RemoveBoatBorders = false,
+		RemoveFog = false,
+	}
+})
 
-ExtraI = ExtraUI.Label({Text = "Will AutoOpen The Chest If Toggled"})
+--fog
+--game.Lighting.FogEnd = 1000000
+--Remove Boat Borders
+--for i, v in pairs(game.Workspace.IgnoredByMouse.BoatBorders:GetChildren()) do
+--	v:Destroy()
+--Remove Borders
+--for i, v in pairs(game.Workspace.IgnoredByMouse.LockedAreas:GetDescendants()) do 
+--	v:Destroy()
 
-ExtraI = ExtraUI.Toggle({Text = "AutoOpen Chests", Callback = function(TOG)
-if TOG then
-autoopenchest = true
-else
-autoopenchest = false
-end
-end, Enabled = false})
+ExtraI = Extra.Label({Text = "Will AutoOpen The Chest If Toggled"})
+ExtraI = Extra.Toggle({
+	Text = "AutoOpen Chests",
+	Callback = function(Value)
+		if Value then
+		autoopenchest = true
+		else
+		autoopenchest = false
+		end
+	end,
+	Enabled = false
+})
 
-ExtraI = ExtraUI.Label({Text = "Press To Teleport To Chest / If Your Outside Map Use No-Clip"})
-
-ExtraI = ExtraUI.Button({Text = "Daily Chest", Callback = function()
+ExtraI = Extra.Label({Text = "Press To Teleport To Chest"})
+ExtraI = Extra.Button({
+	Text = "Daily Chest",
+	Callback = function()
                 for i, v in pairs(game.Workspace.Islands:GetDescendants()) do
                     if v:IsA("Model") and string.match(v.Name, "Chest") then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame
@@ -399,11 +550,20 @@ ExtraI = ExtraUI.Button({Text = "Daily Chest", Callback = function()
                         fireproximityprompt(v.HumanoidRootPart.ProximityPrompt)
                         end
                     end
-                end            
-end, })
- 
-ExtraI = ExtraUI.Button({Text = "Random Chest", Callback = function()
-                for i, v in pairs(game.Workspace.RandomChests:GetDescendants()) do
+                end 
+	end,
+	Menu = {
+		Information = function(self)
+			X.Banner({
+				Text = "Teleports to daily chest"
+			})
+		end
+	}
+})
+ExtraI = Extra.Button({
+	Text = "Random Chest",
+	Callback = function()
+            for i, v in pairs(game.Workspace.RandomChests:GetDescendants()) do
                     if v:IsA("Model") and string.match(v.Name, "Chest") then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame
                         wait(1)
@@ -411,10 +571,19 @@ ExtraI = ExtraUI.Button({Text = "Random Chest", Callback = function()
                         fireproximityprompt(v.HumanoidRootPart.ProximityPrompt)
                         end
                     end
-                end            
-end, })
- 
-ExtraI = ExtraUI.Button({Text = "Suken Chest", Callback = function()
+                end 
+	end,
+	Menu = {
+		Information = function(self)
+			X.Banner({
+				Text = "Teleports to random chest"
+			})
+		end
+	}
+})
+ExtraI = Extra.Button({
+	Text = "Suken Chest",
+	Callback = function()
             wait(1)
              for i, v in pairs(game.Workspace:GetChildren()) do
                 if string.find(v.Name, "ShipModel") then
@@ -431,15 +600,61 @@ ExtraI = ExtraUI.Button({Text = "Suken Chest", Callback = function()
                     break
                  end
               end
-end, })
+	end,
+	Menu = {
+		Information = function(self)
+			X.Banner({
+				Text = "Teleports to suken chest"
+			})
+		end
+	}
+})
 --]--End Of Extra
 
 
 
 --[--Config
-ConfigUI = UI.New({Title = "Config"})
 
 --Start Of Code
+ConfigI = Config.Button({
+	Text = "Save Settings",
+	Callback = function()
+		print("hello")
+	end,
+	Menu = {
+		Information = function(self)
+			X.Banner({
+				Text = "Saves all settings"
+			})
+		end
+	}
+})
+ConfigI = Config.Button({
+	Text = "Load Settings",
+	Callback = function()
+		print("hello")
+	end,
+	Menu = {
+		Information = function(self)
+			X.Banner({
+				Text = "Loads saved settings"
+			})
+		end
+	}
+})
+ConfigI = Config.Button({
+	Text = "Beta Test Login/Register Gui",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/login.lua", true))()
+	end,
+	Menu = {
+		Information = function(self)
+			X.Banner({
+				Text = "Give us feedback in discord"
+			})
+		end
+	}
+})
 --]--End Of Config
 
 
@@ -467,5 +682,4 @@ end, Enabled = false})
 wait(0.1)
 --Actual Fixes
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/log.lua", true))()
-RestoreWSJP()
 --]--End Of Fix
