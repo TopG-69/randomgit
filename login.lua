@@ -18,7 +18,7 @@ makefolder("Agony/Settings")
     end
     local options = [[
 --// --// --// --// --// --// --// --// --// --// --//
-    will be added
+    will be added soon
 --// --// --// --// --// --// --// --// --// --// --//
     ]]
 --// --// --// --// --// --// --// --// --// --// --//
@@ -113,8 +113,6 @@ makefolder("Agony/Settings")
         if c != nil then
             Discord_Key = c
             WriteFile("Settings/DK", "{"..c.."}")
-        elseif DcKey == Ey580OgEJIYnagHJUIWAjfasnfg then
-        	Discord_Key = "Ey580OgEJIYnagHJUIWAjfasnfg"
         end
     end)
     MiscSection:NewTextBox("Premium", "More Access", function(c)
@@ -127,31 +125,18 @@ makefolder("Agony/Settings")
         if c != nil then
             Theme = c
             WriteFile("Settings/T", "{"..c.."}")
-        elseif THEME == aqua or THEME == dark or THEME == light then
-        
-            if THEME == aqua then
-                Theme = "Aqua"
-            elseif THEME == dark then
-                Theme = "Dark"
-            elseif THEME == light then
-                Theme = "Light"
-            end
         end
     end)
     MiscSection:NewTextBox("ScreenSizeX", "ScreenSize", function(c)
         if c != nil then
             ScreenSizeX = c
             WriteFile("Settings/SZX", "{"..c.."}")
-        elseif SCREENX != nil then
-            ScreenSizeX = SCREENX
         end
     end)
     MiscSection:NewTextBox("ScreenSizeY", "ScreenSize", function(c)
         if c != nil then
             ScreenSizeY = c
             WriteFile("Settings/SZY", "{"..c.."}")
-        elseif SCREENY != nil then
-            ScreenSizeY = SCREENY
         end
     end)
     
@@ -160,9 +145,6 @@ makefolder("Agony/Settings")
     -- End Of Misc
 --// --// --// --// --// --// --// --// --// --// --//
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/LoadModules.lua", true))()
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Setup.lua", true))()
-                
 WriteFile("Settings/Options", options)
 
     local SCREENY = ReadFile(Settings/SZY)
@@ -170,4 +152,20 @@ WriteFile("Settings/Options", options)
     local DcKey = ReadFile(Settings/DK)
     local PrKey = ReadFile(Settings/P)
     local THEME = ReadFile(Settings/T)
-    
+	wait(1)
+	
+    if SCREENY != nil then
+        ScreenSizeY = SCREENY
+    elseif SCREENX != nil then
+        ScreenSizeX = SCREENX
+    elseif THEME == aqua or THEME == dark or THEME == light then
+         if THEME == aqua then
+             Theme = "Aqua"
+         elseif THEME == dark then
+             Theme = "Dark"
+         elseif THEME == light then
+             Theme = "Light"
+         end
+    elseif DcKey == Ey580OgEJIYnagHJUIWAjfasnfg then
+        Discord_Key = "Ey580OgEJIYnagHJUIWAjfasnfg"
+    end
