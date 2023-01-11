@@ -140,7 +140,10 @@ WelcomeI = Welcome.Label({Text = "Premium is false"})
 end
 
 WelcomeI = Welcome.Label({Text = "Version : V3 (Current Gui)"})
-WelcomeI = Welcome.Label({Text = "Update Includes - Ui Changes"})
+WelcomeI = Welcome.Label({Text = "-- Update Includes --"})
+WelcomeI = Welcome.Label({Text = "- Ui Changes"})
+WelcomeI = Welcome.Label({Text = "- New Config Options"})
+WelcomeI = Welcome.Label({Text = "- Fixed Automatic Options"})
 WelcomeI = Welcome.Label({Text = "--// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --// --//"})
 WelcomeI = Welcome.Label({Text = "Need Help? Join The Discord - https://discord.gg/DYkHGnYeDp"})
 
