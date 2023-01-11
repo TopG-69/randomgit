@@ -677,6 +677,20 @@ ConfigI = Config.Button({
 		end
 	}
 })
+ConfigI = Config.Button({
+	Text = "Restart Agony",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/LoadModules.lua", true))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Setup.lua", true))()
+	end,
+	Menu = {
+		Information = function(self)
+			X.Banner({
+				Text = "Restarts Agony"
+			})
+		end
+	}
+})
 --]--End Of Config
 
 
