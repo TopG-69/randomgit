@@ -233,7 +233,29 @@ LocalI = Local.Toggle({
 --[--Other
 
 --Start Of Code
-OtherI = People.Label({Text = "Missing / Coming"})
+OtherI = People.Toggle({
+	Text = "ToggleESP",
+	Callback = function(Value)
+	end,
+	Enabled = false
+})
+
+OtherI = People.ChipSet({
+	Text = "ESP Options",
+	Callback = function(ChipSet)
+		table.foreach(ChipSet, function(Option, Value)
+			print(Option, Value)
+		end)
+	end,
+	Options = {
+		PlayerESP = false,
+		FriendESP = false,
+		BoatESP = false,
+		ChestESP = false,
+		SharkESP = false,
+		OrcaESP = false,
+	}
+})
 --]--End Of Other
 
 
