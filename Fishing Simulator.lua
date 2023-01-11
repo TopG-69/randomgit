@@ -691,6 +691,19 @@ ConfigI = Config.Button({
 		end
 	}
 })
+ConfigI = Config.Button({
+	Text = "Load Old Fishing Simulator Script",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Old-Fishing-Simulator.lua", true))()
+	end,
+	Menu = {
+		Information = function(self)
+			X.Banner({
+				Text = "Load Old Agony (Fishing Simulator)"
+			})
+		end
+	}
+})
 --]--End Of Config
 
 
