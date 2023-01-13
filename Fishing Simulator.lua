@@ -1,49 +1,11 @@
-function CreateFloatingTextBox(text, time, colorr, colorg, colorb)
-PopupMessage = Instance.new("ScreenGui")
-MainFrame = Instance.new("Frame")
-UICorner = Instance.new("UICorner")
-TextLabel = Instance.new("TextLabel")
-
-PopupMessage.Name = "AnomissPopup"
-PopupMessage.Parent = game:GetService("CoreGui")
-PopupMessage.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-MainFrame.Name = "MainFrame"
-MainFrame.Parent = PopupMessage
-MainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-MainFrame.BackgroundTransparency = 0.500
-MainFrame.BorderColor3 = Color3.fromRGB(255, 255, 0)
-MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
-MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-MainFrame.Size = UDim2.new(0, 600, 0, 30)
-
-UICorner.Parent = MainFrame
-
-TextLabel.Parent = MainFrame
-TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.BackgroundTransparency = 1.000
-TextLabel.Position = UDim2.new(0.3611353703, 0, -0.4, 0)
-TextLabel.Size = UDim2.new(0, 200, 0, 50)
-TextLabel.Font = Enum.Font.SourceSans
-TextLabel.Text = text
-TextLabel.TextColor3 = Color3.fromRGB(colorr, colorg, colorb)
-TextLabel.TextSize = 40.000
-
-wait(time)
-PopupMessage:destroy()
-MainFrame:destroy()
-UICorner:destroy()
-TextLabel:destroy()
-end
-
 FAILEDLOADING = false
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
 local UI = Library.Load({
 	Title = "Fishing Simulator V3",
 	Style = 3,
-        SizeX = 600,
-	SizeY = 400,
-	Theme = "Dark",
+        SizeX = ScreenSizeX,
+	SizeY = ScreenSizeY,
+	Theme = Theme,
 	ColorOverrides = {
 	
 	}
@@ -161,6 +123,43 @@ if God then
 		Script.Disabled = false
 	end
 	nHuman.Health = nHuman.MaxHealth
+end
+function CreateFloatingTextBox(text, time, colorr, colorg, colorb)
+PopupMessage = Instance.new("ScreenGui")
+MainFrame = Instance.new("Frame")
+UICorner = Instance.new("UICorner")
+TextLabel = Instance.new("TextLabel")
+
+PopupMessage.Name = "AnomissPopup"
+PopupMessage.Parent = game:GetService("CoreGui")
+PopupMessage.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = PopupMessage
+MainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+MainFrame.BackgroundTransparency = 0.500
+MainFrame.BorderColor3 = Color3.fromRGB(255, 255, 0)
+MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.Size = UDim2.new(0, 600, 0, 30)
+
+UICorner.Parent = MainFrame
+
+TextLabel.Parent = MainFrame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Position = UDim2.new(0.3611353703, 0, -0.4, 0)
+TextLabel.Size = UDim2.new(0, 200, 0, 50)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = text
+TextLabel.TextColor3 = Color3.fromRGB(colorr, colorg, colorb)
+TextLabel.TextSize = 40.000
+
+wait(time)
+PopupMessage:destroy()
+MainFrame:destroy()
+UICorner:destroy()
+TextLabel:destroy()
 end
 local PlaceID = game.PlaceId
 local AllIDs = {}
