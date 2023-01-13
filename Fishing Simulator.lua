@@ -13,6 +13,7 @@ local UI = Library.Load({
 --[--Set Values/Guis
 local CoolDown = nil
 local CaughtTime = nil
+local localplayer = game.Players.LocalPlayer
 
 local Welcome = UI.New({
 	Title = "Info {👋}"
@@ -914,7 +915,7 @@ ConfigI = Config.Button({
 ConfigI = Config.Button({
 	Text = "Rejoin",
 	Callback = function()
-		tpservice:Teleport(game.PlaceId, plr)
+		tpservice:Teleport(game.PlaceId, localplayer)
 	end,
 	Menu = {
 		Information = function(self)
