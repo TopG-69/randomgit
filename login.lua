@@ -18,7 +18,9 @@ makefolder("Agony/Settings")
     end
     local options = [[
 --// --// --// --// --// --// --// --// --// --// --//
-    will be added soon
+    AutoLoadSettings: nil
+    HasSavedSettings: nil
+    WillLoadScript: nil
 --// --// --// --// --// --// --// --// --// --// --//
     ]]
 --// --// --// --// --// --// --// --// --// --// --//
@@ -152,7 +154,7 @@ WriteFile("Settings/Options", options)
     local DcKey = ReadFile(Settings/DK)
     local PrKey = ReadFile(Settings/P)
     local THEME = ReadFile(Settings/T)
-	wait(1)
+	wait(0.1)
 	
     if SCREENY != nil then
         ScreenSizeY = SCREENY
