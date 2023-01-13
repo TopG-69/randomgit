@@ -157,10 +157,10 @@ TextLabel.TextColor3 = Color3.fromRGB(colorr, colorg, colorb)
 TextLabel.TextSize = 40.000
 
 wait(time)
-PopupMessage:destroy()
-MainFrame:destroy()
-UICorner:destroy()
-TextLabel:destroy()
+PopupMessage:remove()
+MainFrame:remove()
+UICorner:remove()
+TextLabel:remove()
 end
 local PlaceID = game.PlaceId
 local AllIDs = {}
