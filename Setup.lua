@@ -142,7 +142,7 @@ AlertList = AlertTab.Label({Text = "Loading Universal Version In 10 Secs"})
 wait(10)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/UniversalScript.lua", true))()
 
-elseif IsAGameThatWorks and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and DOORSISPATCHED == true or TPT2ISPATCHED == true or UDISPATCHED == true or FSISPATCHED == true and ScreenCheckX and ScreenCheckY then
+elseif IsAGameThatWorks and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and DOORSISPATCHED == true or TPT2ISPATCHED == true or UDISPATCHED == true or APOCISPATCHED == true or FSISPATCHED == true and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Error5! - SIP"})
 wait(0.1)
 AlertList = AlertTab.Label({Text = "Possible Causes"})
