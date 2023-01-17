@@ -173,4 +173,5 @@ AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
 end, })
 	
 end
+
 --]--End Of Script
