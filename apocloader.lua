@@ -92,6 +92,7 @@ end
 
 TextButton.MouseButton1Click:Connect(function()
     Close()
+    wait(0.1)
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Apoc.lua", true))()   
 end)
 
