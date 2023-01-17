@@ -15,12 +15,14 @@ local UI = Library.Load({
 --Anti Bypass Modules
 FishingSimulatorCURRENT = 2
 DoorsCURRENT = 2
+ApocCURRENT = 1
 ThemeParkTycoon2CURRENT = 1
 UltimateDrivingCURRENT = 1
 FAILEDLOADING = nil
 ISUNIVERSAL = false
 OUTDATEDVERSION = nil
 DOORSISPATCHED = nil
+APOCISPATCHED = nil
 FSISPATCHED = nil
 TPT2ISPATCHED = nil
 UDISPATCHED = nil
@@ -36,10 +38,10 @@ wait(0.1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Version.lua", true))()
 FixedThemes = Theme == "Aqua" or Theme == "Light" or Theme == "Dark" or Theme == "Jester" or Theme == "Mocha"
 BrokenThemes = Theme ~= "Aqua" or Theme ~= "Light" or Theme ~= "Dark" or Theme ~= "Jester" or Theme ~= "Mocha" or Theme == nil
-IsPatched = TPT2ISPATCHED == false and UDISPATCHED == false and FSISPATCHED == false and DOORSISPATCHED == false
+IsPatched = TPT2ISPATCHED == false and UDISPATCHED == false and FSISPATCHED == false and DOORSISPATCHED == false and ApocISPATCHED == false
 ScreenCheckX = ScreenSizeX ~= nil or ScreenSizeX ~= nan
 ScreenCheckY = ScreenSizeY ~= nil or ScreenSizeY ~= nan
-IsAGameThatWorks = game.PlaceId == 2866967438 or game.PlaceId == 69184822 or game.PlaceId == 54865335 or game.PlaceId == 6516141723
+IsAGameThatWorks = game.PlaceId == 2866967438 or game.PlaceId == 69184822 or game.PlaceId == 54865335 or game.PlaceId == 6516141723 or game.PlaceId == 237590657 or game.PlaceId == 1228674372 or game.PlaceId == 1600503 or game.PlaceId == 237590761
 wait(0.1)
 --]--End Of Setup
 
@@ -65,6 +67,11 @@ elseif game.PlaceId == 6516141723 or game.PlaceId == 6839171747 and OUTDATEDVERS
 AlertList = AlertTab.Label({Text = "Doors Script Is Loading"})
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Doors.lua", true))()
+	
+elseif game.PlaceId == 237590657 or game.PlaceId == 1228674372 or game.PlaceId == 1600503 or game.PlaceId == 237590761 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and ApocISPATCHED == false and ScreenCheckX and ScreenCheckY then
+AlertList = AlertTab.Label({Text = "Ultimate Driving Script Is Loading"})
+wait(5)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Ultimate%20Driving.lua", true))()
 	
 elseif IsAGameThatWorks and BrokenThemes and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and IsPatched and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Error1! - NT"})
