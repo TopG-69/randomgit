@@ -18,6 +18,7 @@ DoorsCURRENT = 2
 ApocCURRENT = 1
 ThemeParkTycoon2CURRENT = 1
 UltimateDrivingCURRENT = 1
+
 FAILEDLOADING = nil
 ISUNIVERSAL = false
 OUTDATEDVERSION = nil
