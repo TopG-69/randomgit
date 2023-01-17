@@ -87,21 +87,12 @@ TextLabel_3.TextSize = 40.000
 TextLabel_3.TextWrapped = true
 
 local function Close()
-	Popup:Destroy()
-	MainFrame:Destroy()
-	UICorner:Destroy()
-	TextButton:Destroy()
-	UICorner_2:Destroy()
-	TextLabel:Destroy()
-	TextLabel_2:Destroy()
-	TextButton_2:Destroy()
-	UICorner_3:Destroy()
-	TextLabel_3:Destroy()
+    Popup:Destroy()
 end
 
 TextButton.MouseButton1Click:Connect(function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Apoc.lua", true))()
-    Close()   
+    Close()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Apoc.lua", true))()   
 end)
 
 TextButton_2.MouseButton1Click:Connect(function()
