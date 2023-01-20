@@ -81,7 +81,7 @@ TextLabel_3.BackgroundTransparency = 1.000
 TextLabel_3.Position = UDim2.new(0.0611353703, 0, 0.161111116, 0)
 TextLabel_3.Size = UDim2.new(0, 200, 0, 122)
 TextLabel_3.Font = Enum.Font.SourceSans
-TextLabel_3.Text = "AES (non bot)"
+TextLabel_3.Text = "Victini V2"
 TextLabel_3.TextColor3 = Color3.fromRGB(25,255,25)
 TextLabel_3.TextSize = 40.000
 TextLabel_3.TextWrapped = true
@@ -98,4 +98,6 @@ end)
 
 TextButton_2.MouseButton1Click:Connect(function()
     Close()
+    wait(0.1)
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/victiniv2.lua", true))()   
 end)
