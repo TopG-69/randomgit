@@ -214,7 +214,38 @@ TextButton2O.MouseButton1Click:Connect(function()
 	end
 end)
 
+local function beginDecent()
+	ScreenGui.Transparency = 50
+end
+
+local function MakeGuiTransparency(Val, Time)
+Start = 0
+if Val < 0 then
+    Start = 1
+end
+for i = 0, 20 do
+TextLabelO.Transparency = Start+(i/20*Val)
+TextBox1O.Transparency = Start+(i/20*Val)
+TextBox2O.Transparency = Start+(i/20*Val)
+TextButton2O.Transparency = Start+(i/20*Val)
+TextButton2OZ.Transparency = Start+(i/20*Val)
+TextLabelOQZ.Transparency = Start+(i/20*Val)
+TextLabelOQ.Transparency = Start+(i/20*Val)
+FrameOQ.Transparency = Start+(i/20*Val)
+FrameO.Transparency = Start+(i/20*Val)
+Frame.Transparency = Start+(i/20*Val)
+TextLabel.Transparency = Start+(i/20*Val)
+TextBox1.Transparency = Start+(i/20*Val)
+TextBox2.Transparency = Start+(i/20*Val)
+LoadButton.Transparency = Start+(i/20*Val)
+DestroyButton.Transparency = Start+(i/20*Val)
+wait(Time)
+end
+end
+
 DestroyButton.MouseButton1Click:Connect(function()
+	MakeGuiTransparency(1, 0.05)
+	wait(0.35)
 	ScreenGui:Destroy()
 end)
 
@@ -222,7 +253,8 @@ LoadButton.MouseButton1Click:Connect(function()
 	if TextBox1.Text == "Ey580OgEJIYnagHJUIWAjfasnfg" then
 		TextBox1.TextColor3 = Color3.fromRGB(0, 255, 0)
 		Discord_Key = "Ey580OgEJIYnagHJUIWAjfasnfg"
-		wait(1)
+		MakeGuiTransparency(1, 0.05)
+		wait(0.35)
 		ScreenGui:Destroy()
 		wait()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Setup.lua", true))()
@@ -246,6 +278,13 @@ LoadButton.MouseButton1Click:Connect(function()
 	if TextBox1O.Text == "Screen X" or TextBox2O.Text == "Screen Y" then
 		ScreenSizeX = 600
 		ScreenSizeY = 400
+		TextBox1O.Text = "600"
+		TextBox2O.Text = "400"
+		TextBox1O.TextColor3 = Color3.fromRGB(255, 135, 0)
+		TextBox2O.TextColor3 = Color3.fromRGB(255, 135, 0)
+		wait(1)
+		TextBox1O.TextColor3 = Color3.fromRGB(0, 0, 0)
+		TextBox2O.TextColor3 = Color3.fromRGB(0, 0, 0)
 	else
 		ScreenSizeX = TextBox1O.Text
 		ScreenSizeY = TextBox2O.Text
