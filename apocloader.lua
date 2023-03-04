@@ -93,7 +93,11 @@ end
 TextButton.MouseButton1Click:Connect(function()
     Close()
     wait(0.1)
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Apoc.lua", true))()   
+	if PremiumKey ~= "EJOHFDNSIBTREKPQWNDIASDHUBEJNOWBNTEORBNJSACNJOSVNIDASNOVUESNAVUBORTB" then
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Apoc.lua", true))()
+	else
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Apoc.lua", true))()
+	end
 end)
 
 TextButton_2.MouseButton1Click:Connect(function()
