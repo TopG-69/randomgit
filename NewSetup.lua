@@ -265,7 +265,7 @@ wait(0.1)
 
 --[--Script
 if game.PlaceId == 2866967438 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and FSISPATCHED == false and ScreenCheckX and ScreenCheckY then
-UpdateLabelScript.Text = "FS Script Is Loading"
+UpdateLabelScript.Text = "Script Is Loading"
 UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
 wait(5)
@@ -273,7 +273,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/
   MainGui:destroy()
 	
 elseif game.PlaceId == 69184822 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and TPT2ISPATCHED == false and ScreenCheckX and ScreenCheckY then
-UpdateLabelScript.Text = "TPT 2 Script Is Loading"
+UpdateLabelScript.Text = "Script Is Loading"
 UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
 wait(5)
@@ -281,7 +281,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/
   MainGui:destroy()
 	
 elseif game.PlaceId == 54865335 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and UDISPATCHED == false and ScreenCheckX and ScreenCheckY then
-UpdateLabelScript.Text = "UD Script Is Loading"
+UpdateLabelScript.Text = "Script Is Loading"
 UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
 wait(5)
@@ -289,7 +289,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/
   MainGui:destroy()
 	
 elseif game.PlaceId == 6516141723 or game.PlaceId == 6839171747 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and DOORSISPATCHED == false and ScreenCheckX and ScreenCheckY then
-UpdateLabelScript.Text = "D Script Is Loading"
+UpdateLabelScript.Text = "Script Is Loading"
 UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
 wait(5)
@@ -297,7 +297,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/
   MainGui:destroy()
 	
 elseif game.PlaceId == 237590761 or game.PlaceId == 237590657 or game.PlaceId == 1228674372 or game.PlaceId == 1600503 or game.PlaceId == 237590761 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and ApocISPATCHED == false and ScreenCheckX and ScreenCheckY then
-UpdateLabelScript.Text = "A Script Is Loading"
+UpdateLabelScript.Text = "Script Is Loading"
 UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
 wait(5)
