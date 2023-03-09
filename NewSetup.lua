@@ -168,11 +168,13 @@ UDISPATCHED = nil
 local VerifyVersion = 2
 if versionCURRENT ~= VerifyVersion then
   UpdateLabelScript.Text = "Error 7: outdated"
+  UpdateLabelInfo.Text = "!"
   OUTDATEDVERSION = true
 elseif versionCURRENT == VerifyVersion then
   OUTDATEDVERSION = false
 else 
   UpdateLabelScript.Text = "Error 7: invalid version"
+  UpdateLabelInfo.Text = "!"
   OUTDATEDVERSION = true
 end
 --]--End Of Verify Main Loader
@@ -192,6 +194,7 @@ elseif FishingSimulatorCURRENT == FishingSimulatorVersion then
 FSISPATCHED = false
 else
 UpdateLabelScript.Text = "Error 8: failed verify"
+UpdateLabelInfo.Text = "!"
 FSISPATCHED = true
 end
 
@@ -201,6 +204,7 @@ elseif ThemeParkTycoon2CURRENT == ThemeParkTycoon2Version then
 TPT2ISPATCHED = false
 else
 UpdateLabelScript.Text = "Error 8: failed verify"
+UpdateLabelInfo.Text = "!"
 TPT2ISPATCHED = true
 end
 
@@ -210,6 +214,7 @@ elseif UltimateDrivingCURRENT == UltimateDrivingVersion then
 UDISPATCHED = false
 else
 UpdateLabelScript.Text = "Error 8: failed verify"
+UpdateLabelInfo.Text = "!"
 UDISPATCHED = true
 end
 
@@ -219,6 +224,7 @@ elseif DoorsCURRENT == DoorsVersion then
 DOORSISPATCHED = false
 else
 UpdateLabelScript.Text = "Error 8: failed verify"
+UpdateLabelInfo.Text = "!"
 DOORSISPATCHED = true
 end
 
@@ -228,6 +234,7 @@ elseif ApocCURRENT == ApocVersion then
 APOCISPATCHED = false
 else
 UpdateLabelScript.Text = "Error 8: failed verify"
+UpdateLabelInfo.Text = "!"
 APOCISPATCHED = true
 end
 --]--End Of Is Patched
@@ -251,56 +258,65 @@ wait(0.1)
 
 --[--Script
 if game.PlaceId == 2866967438 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and FSISPATCHED == false and ScreenCheckX and ScreenCheckY then
-UpdateLabelScript.Text = "Fishing Simulator Script Is Loading"
+UpdateLabelScript.Text = "FS Script Is Loading"
+UpdateLabelInfo.Text = "!"
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Fishing%20Simulator.lua", true))()
   MainGui:destroy()
 	
 elseif game.PlaceId == 69184822 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and TPT2ISPATCHED == false and ScreenCheckX and ScreenCheckY then
-UpdateLabelScript.Text = "Theme Park Tycoon 2 Script Is Loading"
+UpdateLabelScript.Text = "TPT 2 Script Is Loading"
+UpdateLabelInfo.Text = "!"
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/ThemeParkTycoon2.lua", true))()
   MainGui:destroy()
 	
 elseif game.PlaceId == 54865335 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and UDISPATCHED == false and ScreenCheckX and ScreenCheckY then
-UpdateLabelScript.Text = "Ultimate Driving Script Is Loading"
+UpdateLabelScript.Text = "UD Script Is Loading"
+UpdateLabelInfo.Text = "!"
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Ultimate%20Driving.lua", true))()
   MainGui:destroy()
 	
 elseif game.PlaceId == 6516141723 or game.PlaceId == 6839171747 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and DOORSISPATCHED == false and ScreenCheckX and ScreenCheckY then
-UpdateLabelScript.Text = "Doors Script Is Loading"
+UpdateLabelScript.Text = "D Script Is Loading"
+UpdateLabelInfo.Text = "!"
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Doors.lua", true))()
   MainGui:destroy()
 	
 elseif game.PlaceId == 237590761 or game.PlaceId == 237590657 or game.PlaceId == 1228674372 or game.PlaceId == 1600503 or game.PlaceId == 237590761 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and ApocISPATCHED == false and ScreenCheckX and ScreenCheckY then
-UpdateLabelScript.Text = "MultiScript Script Is Loading"
+UpdateLabelScript.Text = "A Script Is Loading"
+UpdateLabelInfo.Text = "!"
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/apocloader.lua", true))()
   MainGui:destroy()
 	
 elseif IsAGameThatWorks and BrokenThemes and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and IsPatched and ScreenCheckX and ScreenCheckY then
 wait(0.1)
-  UpdateLabelScript.Text = "Error 1: wrong theme / no theme"
+UpdateLabelScript.Text = "Error 1: wrong theme / no theme"
+UpdateLabelInfo.Text = "!"
 wait(5)
  MainGui:destroy()
 	
 elseif IsAGameThatWorks and Discord_Key ~= "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
 wait(0.1)
-  UpdateLabelScript.Text = "Error 2: wrong discord key"
+UpdateLabelScript.Text = "Error 2: wrong discord key"
+UpdateLabelInfo.Text = "!"
 wait(5)
  MainGui:destroy()
 	
 elseif IsAGameThatWorks and OUTDATEDVERSION == true and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
 wait(0.1)
-  UpdateLabelScript.Text = "Error 3: invalid version"
+UpdateLabelScript.Text = "Error 3: invalid version"
+UpdateLabelInfo.Text = "!"
 wait(5)
  MainGui:destroy()
 	
 elseif game.PlaceId ~= 237590657 or game.PlaceId ~= 1228674372 or game.PlaceId ~= 237590761 or game.PlaceId ~= 1600503 or game.PlaceId ~= 237590761 or game.PlaceId ~= 2866967438 or game.PlaceId ~= 69184822 or game.PlaceId ~= 54865335 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
 wait(0.1)
-  UpdateLabelScript.Text = "Error 4: unsupported game"
+UpdateLabelScript.Text = "Error 4: unsupported game"
+UpdateLabelInfo.Text = "!"
 
 wait(10)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/UniversalScript.lua", true))()
@@ -308,13 +324,15 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/
 
 elseif IsAGameThatWorks and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and DOORSISPATCHED == true or TPT2ISPATCHED == true or UDISPATCHED == true or APOCISPATCHED == true or FSISPATCHED == true and ScreenCheckX and ScreenCheckY then
 wait(0.1)
-  UpdateLabelScript.Text = "Error 5: script is patched"
+UpdateLabelScript.Text = "Error 5: script is patched"
+UpdateLabelInfo.Text = "!"
 wait(5)
  MainGui:destroy()
 		
 elseif IsAGameThatWorks and ScreenSizeX == nil or ScreenSizeX == nan or ScreenSizeY == nil or ScreenSizeY == nan and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and IsAGameThatWorks then
 wait(0.1)
-  UpdateLabelScript.Text = "Error 6: invalid screensize"
+UpdateLabelScript.Text = "Error 6: invalid screensize"
+UpdateLabelInfo.Text = "!"
 wait(5)
  MainGui:destroy()
 	
