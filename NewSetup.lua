@@ -317,7 +317,6 @@ wait(0.1)
   UpdateLabelScript.Text = "Error 6: invalid screensize"
 wait(5)
  MainGui:destroy()
-	
 end
 
 --]--End Of Script
