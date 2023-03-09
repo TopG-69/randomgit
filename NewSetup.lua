@@ -164,13 +164,80 @@ TPT2ISPATCHED = nil
 UDISPATCHED = nil
 --End Of ABM
 
+--[--Verify Main Loader
+local VerifyVersion = 2
+if versionCURRENT ~= VerifyVersion then
+  UpdateLabelScript.Text = "Error 7: outdated"
+  OUTDATEDVERSION = true
+elseif versionCURRENT == VerifyVersion then
+  OUTDATEDVERSION = false
+else 
+  UpdateLabelScript.Text = "Error 7: invalid version"
+  OUTDATEDVERSION = true
+end
+--]--End Of Verify Main Loader
+
+--[--Is Patched
+local FishingSimulatorVersion = 2
+local ThemeParkTycoon2Version = 1
+local UltimateDrivingVersion = 1
+local DoorsVersion = 2
+local ApocVersion = 1
+
+
+--Start Of IsPatched
+if FishingSimulatorCURRENT ~= FishingSimulatorVersion then
+FSISPATCHED = true
+elseif FishingSimulatorCURRENT == FishingSimulatorVersion then
+FSISPATCHED = false
+else
+UpdateLabelScript.Text = "Error 8: failed verify"
+FSISPATCHED = true
+end
+
+if ThemeParkTycoon2CURRENT ~= ThemeParkTycoon2Version then
+TPT2ISPATCHED = true
+elseif ThemeParkTycoon2CURRENT == ThemeParkTycoon2Version then
+TPT2ISPATCHED = false
+else
+UpdateLabelScript.Text = "Error 8: failed verify"
+TPT2ISPATCHED = true
+end
+
+if UltimateDrivingCURRENT ~= UltimateDrivingVersion then
+UDISPATCHED = true
+elseif UltimateDrivingCURRENT == UltimateDrivingVersion then
+UDISPATCHED = false
+else
+UpdateLabelScript.Text = "Error 8: failed verify"
+UDISPATCHED = true
+end
+
+if DoorsCURRENT ~= DoorsVersion then
+DOORSISPATCHED = true
+elseif DoorsCURRENT == DoorsVersion then
+DOORSISPATCHED = false
+else
+UpdateLabelScript.Text = "Error 8: failed verify"
+DOORSISPATCHED = true
+end
+
+if ApocCURRENT ~= ApocVersion then
+APOCISPATCHED = true
+elseif ApocCURRENT == ApocVersion then
+APOCISPATCHED = false
+else
+UpdateLabelScript.Text = "Error 8: failed verify"
+APOCISPATCHED = true
+end
+--]--End Of Is Patched
+
 --]--Finished
 
 
 
 --[--Setup
 wait(0.1)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Version.lua", true))()
 FixedThemes = Theme == "Aqua" or Theme == "Light" or Theme == "Dark" or Theme == "Jester" or Theme == "Mocha"
 BrokenThemes = Theme ~= "Aqua" or Theme ~= "Light" or Theme ~= "Dark" or Theme ~= "Jester" or Theme ~= "Mocha" or Theme == nil
 IsPatched = TPT2ISPATCHED == false and UDISPATCHED == false and FSISPATCHED == false and DOORSISPATCHED == false and ApocISPATCHED == false
