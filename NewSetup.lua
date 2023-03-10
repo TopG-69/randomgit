@@ -419,13 +419,13 @@ ErrorUpdateButton.Text = "1/3"
 ErrorUpdateButton.BackgroundTransparency = 0.4
 ErrorUpdateButton.BorderSizePixel = 0
 ErrorUpdateButton.Transparency = 0
-ErrorUpdateButton.TextColor3 = Color3.fromRGB(60, 95, 60)
+ErrorUpdateButton.TextColor3 = Color3.fromRGB(95, 60, 60)--(60, 95, 60)
 ErrorUpdateButton.TextSize = 8
 ErrorUpdateButton.TextXAlignment = "Center"
 ErrorUpdateButton.Parent = InfoPhrame
 
 ErrorUpdateButton.MouseButton1Click:Connect(function()
-	if ErrorUpdateButton.Text == "1/3" then
+	if ErrorUpdateButton.Text == "1/3" then--"1/3" then
 		ErrorUpdateButton.Text = "2/3"
 		ErrorUpdateButton.TextColor3 = Color3.fromRGB(70, 70, 255)
 		ErrorLogPhrame.Visible = true
@@ -434,24 +434,24 @@ ErrorUpdateButton.MouseButton1Click:Connect(function()
 		ErrorLogPhrame.Active = true
 		ScriptPhrameB.Visible = false
 		ScriptPhrameB.Active = false
-	elseif ErrorUpdateButton.Text == "2/3" then
-		ErrorUpdateButton.Text = "3/3"
+	elseif ErrorUpdateButton.Text == "3/3" then--"2/3" then
+		ErrorUpdateButton.Text = "1/3"--"3/3"
 		ErrorUpdateButton.TextColor3 = Color3.fromRGB(95, 60, 60)
-		ErrorLogPhrame.Visible =false
-		UpdateLogPhrame.Visible = false
-		UpdateLogPhrame.Active = false
-		ErrorLogPhrame.Active = false
-		ScriptPhrameB.Visible = true
-		ScriptPhrameB.Active = true
-	elseif ErrorUpdateButton.Text == "3/3" then
-		ErrorUpdateButton.Text = "1/3"
-		ErrorUpdateButton.TextColor3 = Color3.fromRGB(60, 95, 60)
-		ErrorLogPhrame.Visible =false
+		ErrorLogPhrame.Visible = false
 		UpdateLogPhrame.Visible = true
 		UpdateLogPhrame.Active = true
 		ErrorLogPhrame.Active = false
 		ScriptPhrameB.Visible = false
 		ScriptPhrameB.Active = false
+	elseif ErrorUpdateButton.Text == "2/3" then--"1/3" then
+		ErrorUpdateButton.Text = "3/3"--"1/3"
+		ErrorUpdateButton.TextColor3 = Color3.fromRGB(60, 95, 60)
+		ErrorLogPhrame.Visible = false
+		UpdateLogPhrame.Visible = false
+		UpdateLogPhrame.Active = false
+		ErrorLogPhrame.Active = false
+		ScriptPhrameB.Visible = true
+		ScriptPhrameB.Active = true
 	end
 end)
 
@@ -465,26 +465,26 @@ ExecuteButton.BorderSizePixel = 0
 ExecuteButton.Transparency = 0
 ExecuteButton.Visible = true
 ExecuteButton.Image = "rbxassetid://6022860343"
-ExecuteButton.ImageColor3 = Color3.fromRGB(60, 95, 60)
+ExecuteButton.ImageColor3 = Color3.fromRGB(95, 60, 60)--(60, 95, 60)
 ExecuteButton.Parent = InfoPhrame
 
 ExecuteButton.MouseButton1Click:Connect(function()
-	if ExecuteButton.ImageColor3 == Color3.fromRGB(60, 95, 60) then
+	if ExecuteButton.ImageColor3 == Color3.fromRGB(95, 60, 60) then--(60, 95, 60) then
 		ExecuteButton.ImageColor3 = Color3.fromRGB(70, 70, 255)
 		InfoPhrameB.Visible = true
 		BarPhrameB.Visible = true
 		InfoPhrameB.Active = true
 		BarPhrameB.Active = true
 	elseif ExecuteButton.ImageColor3 == Color3.fromRGB(70, 70, 255) then
-		ExecuteButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ExecuteButton.ImageColor3 = Color3.fromRGB(60, 95, 60)--(95, 60, 60)
 		InfoPhrameB.Visible = true
 		BarPhrameB.Visible = true
 		InfoPhrameB.Active = true
 		BarPhrameB.Active = true
 		InfoPhrameC.Visible = true
 		InfoPhrameC.Active = true
-	elseif ExecuteButton.ImageColor3 == Color3.fromRGB(95, 60, 60) then
-		ExecuteButton.ImageColor3 = Color3.fromRGB(60, 95, 60)
+	elseif ExecuteButton.ImageColor3 == Color3.fromRGB(60, 95, 60) then--(95, 60, 60) then
+		ExecuteButton.ImageColor3 = Color3.fromRGB(95, 60, 60)--(60, 95, 60)
 		InfoPhrameB.Visible = false
 		BarPhrameB.Visible = false
 		InfoPhrameB.Active = false
