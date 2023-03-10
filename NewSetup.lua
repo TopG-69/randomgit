@@ -22,6 +22,184 @@ local MainGui = Instance.new("ScreenGui")
 MainGui.Name = "ApocGui"
 MainGui.Parent = game.CoreGui
 
+local OeroPhrame = Instance.new("Frame")
+OeroPhrame.Size = UDim2.new(0, 250, 0, 400)
+OeroPhrame.Position = UDim2.new(0.4, 0, 0.2, 0)
+OeroPhrame.BorderSizePixel = 5
+OeroPhrame.Transparency = 1
+OeroPhrame.Draggable = true
+OeroPhrame.Active = true
+OeroPhrame.Selectable = true
+OeroPhrame.Parent = MainGui
+
+local ThetaBarPhrame = Instance.new("Frame")
+ThetaBarPhrame.Size = UDim2.new(1, 0, 0.08, 0)
+ThetaBarPhrame.Position = UDim2.new(0, 0, 0, 0)
+ThetaBarPhrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+ThetaBarPhrame.BorderSizePixel = 0
+ThetaBarPhrame.Transparency = 0.01
+ThetaBarPhrame.Active = true
+ThetaBarPhrame.Selectable = true
+ThetaBarPhrame.Parent = OeroPhrame
+
+local ThetaBarText1 = Instance.new("TextLabel")
+ThetaBarText1.Size = UDim2.new(1, 0, 1, 0)
+ThetaBarText1.Position = UDim2.new(0.32, 0, 0, 0)
+ThetaBarText1.BorderSizePixel = 0
+ThetaBarText1.Text = "Agony"
+ThetaBarText1.Transparency = 0.1
+ThetaBarText1.TextColor3 = Color3.fromRGB(255,255,255)
+ThetaBarText1.TextSize = 12
+ThetaBarText1.BackgroundTransparency = 1
+ThetaBarText1.TextXAlignment = "Left"
+ThetaBarText1.Parent = ThetaBarPhrame
+--// linked
+local ThetaBarText2 = Instance.new("TextLabel")
+ThetaBarText2.Size = UDim2.new(1, 0, 1, 0)
+ThetaBarText2.Position = UDim2.new(0.505, 0, 0, 0)
+ThetaBarText2.BorderSizePixel = 0
+ThetaBarText2.Text = "Loader"
+ThetaBarText2.TextColor3 = Color3.fromRGB(0,255,255)
+ThetaBarText2.Transparency = 0.1
+ThetaBarText2.TextSize = 12
+ThetaBarText2.BackgroundTransparency = 1
+ThetaBarText2.TextXAlignment = "Left"
+ThetaBarText2.Parent = ThetaBarPhrame
+
+local ThetaLoaderPhrame = Instance.new("Frame")
+ThetaLoaderPhrame.Size = UDim2.new(1, 0, 1, 0)
+ThetaLoaderPhrame.Position = UDim2.new(0, 0, 0.08, 0)
+ThetaLoaderPhrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+ThetaLoaderPhrame.BorderSizePixel = 0
+ThetaLoaderPhrame.Transparency = 0.01
+ThetaLoaderPhrame.Active = true
+ThetaLoaderPhrame.Selectable = true
+ThetaLoaderPhrame.Parent = OeroPhrame
+
+local ThetaLoaderPhrameLoadingImage = Instance.new("ImageLabel")
+ThetaLoaderPhrameLoadingImage.Size = UDim2.new(0, 120, 0, 120)
+ThetaLoaderPhrameLoadingImage.Position = UDim2.new(0.25, 0, 0.07, 0)
+ThetaLoaderPhrameLoadingImage.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+ThetaLoaderPhrameLoadingImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+ThetaLoaderPhrameLoadingImage.BackgroundTransparency = 1
+ThetaLoaderPhrameLoadingImage.Transparency = 1
+ThetaLoaderPhrameLoadingImage.BorderSizePixel = 0
+ThetaLoaderPhrameLoadingImage.Transparency = 0
+ThetaLoaderPhrameLoadingImage.Visible = true
+ThetaLoaderPhrameLoadingImage.Image = "rbxassetid://6034509993"
+ThetaLoaderPhrameLoadingImage.ImageColor3 = Color3.fromRGB(100, 100, 100)
+ThetaLoaderPhrameLoadingImage.Parent = ThetaLoaderPhrame
+
+local ThetaLoaderPhrameSeperator1 = Instance.new("Frame")
+ThetaLoaderPhrameSeperator1.Size = UDim2.new(1, 0, 0, 1)
+ThetaLoaderPhrameSeperator1.Position = UDim2.new(0, 0, 0.57, 0)
+ThetaLoaderPhrameSeperator1.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ThetaLoaderPhrameSeperator1.BorderSizePixel = 0
+ThetaLoaderPhrameSeperator1.Transparency = 0
+ThetaLoaderPhrameSeperator1.Draggable = true
+ThetaLoaderPhrameSeperator1.Active = true
+ThetaLoaderPhrameSeperator1.Selectable = true
+ThetaLoaderPhrameSeperator1.Parent = OeroPhrame
+
+local ThetaLoaderPhrameVersion = Instance.new("TextLabel")
+ThetaLoaderPhrameVersion.Size = UDim2.new(0.01, 0, 0.01, 0)
+ThetaLoaderPhrameVersion.Position = UDim2.new(0.5, 0, 0.45, 0)
+ThetaLoaderPhrameVersion.BorderSizePixel = 0
+ThetaLoaderPhrameVersion.Text = "2.0.0A"
+ThetaLoaderPhrameVersion.TextColor3 = Color3.fromRGB(0,255,255)
+ThetaLoaderPhrameVersion.Transparency = 0.1
+ThetaLoaderPhrameVersion.TextSize = 20
+ThetaLoaderPhrameVersion.BackgroundTransparency = 1
+ThetaLoaderPhrameVersion.TextXAlignment = "Center"
+ThetaLoaderPhrameVersion.Parent = ThetaLoaderPhrame
+
+local ThetaLoaderPhrameInfo1 = Instance.new("TextLabel")
+ThetaLoaderPhrameInfo1.Size = UDim2.new(0.01, 0, 0.01, 0)
+ThetaLoaderPhrameInfo1.Position = UDim2.new(0.1, 0, 0.55, 0)
+ThetaLoaderPhrameInfo1.BorderSizePixel = 0
+ThetaLoaderPhrameInfo1.Text = "Welcome "..Game.Players.LocalPlayer.Name.."!"
+ThetaLoaderPhrameInfo1.TextColor3 = Color3.fromRGB(255,255,255)
+ThetaLoaderPhrameInfo1.Transparency = 0.1
+ThetaLoaderPhrameInfo1.TextSize = 12
+ThetaLoaderPhrameInfo1.BackgroundTransparency = 1
+ThetaLoaderPhrameInfo1.TextXAlignment = "Left"
+ThetaLoaderPhrameInfo1.Parent = ThetaLoaderPhrame
+
+local ThetaLoaderPhrameInfo2 = Instance.new("TextLabel")
+ThetaLoaderPhrameInfo2.Size = UDim2.new(0.01, 0, 0.01, 0)
+ThetaLoaderPhrameInfo2.Position = UDim2.new(0.1, 0, 0.60, 0)
+ThetaLoaderPhrameInfo2.BorderSizePixel = 0
+ThetaLoaderPhrameInfo2.Text = "Agony™ 2022/2023"
+ThetaLoaderPhrameInfo2.TextColor3 = Color3.fromRGB(255,255,255)
+ThetaLoaderPhrameInfo2.Transparency = 0.1
+ThetaLoaderPhrameInfo2.TextSize = 12
+ThetaLoaderPhrameInfo2.BackgroundTransparency = 1
+ThetaLoaderPhrameInfo2.TextXAlignment = "Left"
+ThetaLoaderPhrameInfo2.Parent = ThetaLoaderPhrame
+
+local ThetaLoaderPhrameInfo3 = Instance.new("TextLabel")
+ThetaLoaderPhrameInfo3.Size = UDim2.new(0.01, 0, 0.01, 0)
+ThetaLoaderPhrameInfo3.Position = UDim2.new(0.1, 0, 0.65, 0)
+ThetaLoaderPhrameInfo3.BorderSizePixel = 0
+ThetaLoaderPhrameInfo3.Text = "Agony is Loading"
+ThetaLoaderPhrameInfo3.TextColor3 = Color3.fromRGB(255,255,255)
+ThetaLoaderPhrameInfo3.Transparency = 0.1
+ThetaLoaderPhrameInfo3.TextSize = 12
+ThetaLoaderPhrameInfo3.BackgroundTransparency = 1
+ThetaLoaderPhrameInfo3.TextXAlignment = "Left"
+ThetaLoaderPhrameInfo3.Parent = ThetaLoaderPhrame
+
+local ThetaLoaderPhrameBottomInfo = Instance.new("TextLabel")
+ThetaLoaderPhrameBottomInfo.Size = UDim2.new(0.01, 0, 0.01, 0)
+ThetaLoaderPhrameBottomInfo.Position = UDim2.new(0.26, 0, 0.95, 0)
+ThetaLoaderPhrameBottomInfo.BorderSizePixel = 0
+ThetaLoaderPhrameBottomInfo.Text = "Ass script #1"
+ThetaLoaderPhrameBottomInfo.TextColor3 = Color3.fromRGB(255,255,255)
+ThetaLoaderPhrameBottomInfo.Transparency = 0.1
+ThetaLoaderPhrameBottomInfo.TextSize = 16
+ThetaLoaderPhrameBottomInfo.BackgroundTransparency = 1
+ThetaLoaderPhrameBottomInfo.TextXAlignment = "Left"
+ThetaLoaderPhrameBottomInfo.Parent = ThetaLoaderPhrame
+
+local function MakeLoadingImageSpin()
+for i = 0, 60 do
+local RotationAmount = math.floor(0+(60-i))
+local ColorAmount = math.floor(255-((255-i)+(255-i)+(255-i)+(255-i)))
+ThetaLoaderPhrameLoadingImage.Rotation = math.floor(0+tostring(RotationAmount))
+ThetaLoaderPhrameLoadingImage.ImageColor3 = Color3.fromRGB(tostring(ColorAmount), tostring(ColorAmount), tostring(ColorAmount))
+ThetaLoaderPhrameInfo3.Text = "Agony is Loading "..i.."/60"
+wait()
+end
+ThetaLoaderPhrameLoadingImage.Rotation = 0
+end
+
+MakeLoadingImageSpin()
+
+local function CloseThetaGui(Val, ValQ, Time, Amount)
+ThetaLoaderPhrameLoadingImage.Size = UDim2.new(0, 1, 0, 1)
+local MakeUpRandomNumber = math.random(20, 100)
+for i = 0, Amount do
+local LoadedAmount = math.floor(200-(i/Amount*Val))
+local LoadedAmountQ = math.floor(400-(i/Amount*ValQ))
+local LoadedAmountB = math.floor(10-i)
+ThetaLoaderPhrameBottomInfo.TextSize = LoadedAmountB
+ThetaLoaderPhrameInfo1.TextSize = LoadedAmountB
+ThetaLoaderPhrameInfo2.TextSize = LoadedAmountB
+ThetaLoaderPhrameInfo3.TextSize = LoadedAmountB
+ThetaLoaderPhrameVersion.TextSize = LoadedAmountB
+ThetaBarText1.TextSize = LoadedAmountB
+ThetaBarText2.TextSize = LoadedAmountB
+OeroPhrame.Size = UDim2.new(0, LoadedAmount, 0, LoadedAmountQ)
+wait(Time)
+end
+OeroPhrame:destroy()
+end
+CloseThetaGui(200, 400, 0.01, 10)
+--[[ Req Features --]]
+
+wait()
+
+--[[ Loader Frame --]]
 local ZeroPhrame = Instance.new("Frame")
 ZeroPhrame.Size = UDim2.new(0, 300, 0, 200)
 ZeroPhrame.Position = UDim2.new(0, 200, 0, 200)
@@ -31,7 +209,7 @@ ZeroPhrame.Draggable = true
 ZeroPhrame.Active = true
 ZeroPhrame.Selectable = true
 ZeroPhrame.Parent = MainGui
---[[ Req Features --]]
+--[[ Loader Frame --]]
 
 
 
@@ -60,19 +238,6 @@ MinimiseRestroreButton.TextSize = 20
 MinimiseRestroreButton.TextXAlignment = "Center"
 MinimiseRestroreButton.Parent = MinimiseButtonPhrame
 
-MinimiseRestroreButton.MouseButton1Click:Connect(function()
-	if MinimiseRestroreButton.Text == "✖️" then
-		MinimiseRestroreButton.Text = "➕"
-		MinimiseRestroreButton.BorderColor3 = Color3.fromRGB(0, 255, 255)
-		wait(0.1)
-		MinimiseRestroreButton.Text = "✖️"
-		MinimiseButtonPhrame.Active = false
-		MinimiseButtonPhrame.Visible = false
-		ZeroPhrame.Visible = true
-		ZeroPhrame.Active = true
-	end
-end)
-
 local BarPhrame = Instance.new("Frame")
 BarPhrame.Size = UDim2.new(1, 0, 0.12, 0)
 BarPhrame.Position = UDim2.new(0, 0, 0, 0)
@@ -83,29 +248,29 @@ BarPhrame.Active = true
 BarPhrame.Selectable = true
 BarPhrame.Parent = ZeroPhrame
 
-local BarText = Instance.new("TextLabel")
-BarText.Size = UDim2.new(1, 0, 1, 0)
-BarText.Position = UDim2.new(0.01, 0, 0, 0)
-BarText.BorderSizePixel = 0
-BarText.Text = "Agony"
-BarText.Transparency = 0.1
-BarText.TextColor3 = Color3.fromRGB(255,255,255)
-BarText.TextSize = 9
-BarText.BackgroundTransparency = 1
-BarText.TextXAlignment = "Left"
-BarText.Parent = BarPhrame
+local BarText1 = Instance.new("TextLabel")
+BarText1.Size = UDim2.new(1, 0, 1, 0)
+BarText1.Position = UDim2.new(0.01, 0, 0, 0)
+BarText1.BorderSizePixel = 0
+BarText1.Text = "Agony"
+BarText1.Transparency = 0.1
+BarText1.TextColor3 = Color3.fromRGB(255,255,255)
+BarText1.TextSize = 9
+BarText1.BackgroundTransparency = 1
+BarText1.TextXAlignment = "Left"
+BarText1.Parent = BarPhrame
 --// linked
-local BarText = Instance.new("TextLabel")
-BarText.Size = UDim2.new(1, 0, 1, 0)
-BarText.Position = UDim2.new(0.13, 0, 0, 0)
-BarText.BorderSizePixel = 0
-BarText.Text = "Loader"
-BarText.TextColor3 = Color3.fromRGB(0,255,255)
-BarText.Transparency = 0.1
-BarText.TextSize = 9
-BarText.BackgroundTransparency = 1
-BarText.TextXAlignment = "Left"
-BarText.Parent = BarPhrame
+local BarText2 = Instance.new("TextLabel")
+BarText2.Size = UDim2.new(1, 0, 1, 0)
+BarText2.Position = UDim2.new(0.13, 0, 0, 0)
+BarText2.BorderSizePixel = 0
+BarText2.Text = "Loader"
+BarText2.TextColor3 = Color3.fromRGB(0,255,255)
+BarText2.Transparency = 0.1
+BarText2.TextSize = 9
+BarText2.BackgroundTransparency = 1
+BarText2.TextXAlignment = "Left"
+BarText2.Parent = BarPhrame
 
 local ExitGuiButton = Instance.new("TextButton")
 ExitGuiButton.Size = UDim2.new(0, 20, 0, 20)
@@ -121,10 +286,6 @@ ExitGuiButton.TextSize = 12
 ExitGuiButton.TextXAlignment = "Center"
 ExitGuiButton.Parent = BarPhrame
 
-ExitGuiButton.MouseButton1Click:Connect(function()
-MainGui:destroy()
-end)
-
 local MinimiseGuiButton = Instance.new("TextButton")
 MinimiseGuiButton.Size = UDim2.new(0, 20, 0, 20)
 MinimiseGuiButton.Position = UDim2.new(0.84, 0, 0.1, 0)
@@ -138,13 +299,6 @@ MinimiseGuiButton.TextColor3 = Color3.fromRGB(255,255, 255)
 MinimiseGuiButton.TextSize = 12
 MinimiseGuiButton.TextXAlignment = "Center"
 MinimiseGuiButton.Parent = BarPhrame
-
-MinimiseGuiButton.MouseButton1Click:Connect(function()
-MinimiseButtonPhrame.Active = true
-MinimiseButtonPhrame.Visible = true
-ZeroPhrame.Visible = false
-ZeroPhrame.Active = false
-end)
 
 local LoadingBar = Instance.new("TextButton")
 LoadingBar.Size = UDim2.new(0, 0, 0, 10)
@@ -220,38 +374,38 @@ InfoPhrameC.BackgroundTransparency = 0.4
 InfoPhrameC.Visible = false
 InfoPhrameC.Parent = ZeroPhrame
 
-local InfoPhrameCText = Instance.new("TextLabel")
-InfoPhrameCText.Size = UDim2.new(0.01, 0, 0.01, 0)
-InfoPhrameCText.Position = UDim2.new(0.08, 0, 0.12, 0)
-InfoPhrameCText.BorderSizePixel = 0
-InfoPhrameCText.Text = "concrats you found this text"
-InfoPhrameCText.TextColor3 = Color3.fromRGB(255,255,255)
-InfoPhrameCText.TextSize = 7
-InfoPhrameCText.BackgroundTransparency = 1
-InfoPhrameCText.TextXAlignment = "Left"
-InfoPhrameCText.Parent = InfoPhrameC
+local InfoPhrameCText1 = Instance.new("TextLabel")
+InfoPhrameCText1.Size = UDim2.new(0.01, 0, 0.01, 0)
+InfoPhrameCText1.Position = UDim2.new(0.08, 0, 0.12, 0)
+InfoPhrameCText1.BorderSizePixel = 0
+InfoPhrameCText1.Text = "concrats you found this text"
+InfoPhrameCText1.TextColor3 = Color3.fromRGB(255,255,255)
+InfoPhrameCText1.TextSize = 7
+InfoPhrameCText1.BackgroundTransparency = 1
+InfoPhrameCText1.TextXAlignment = "Left"
+InfoPhrameCText1.Parent = InfoPhrameC
 
-local InfoPhrameCText = Instance.new("TextLabel")
-InfoPhrameCText.Size = UDim2.new(0.01, 0, 0.01, 0)
-InfoPhrameCText.Position = UDim2.new(0.08, 0, 0.27, 0)
-InfoPhrameCText.BorderSizePixel = 0
-InfoPhrameCText.Text = "now you can idk do something"
-InfoPhrameCText.TextColor3 = Color3.fromRGB(255,255,255)
-InfoPhrameCText.TextSize = 7
-InfoPhrameCText.BackgroundTransparency = 1
-InfoPhrameCText.TextXAlignment = "Left"
-InfoPhrameCText.Parent = InfoPhrameC
+local InfoPhrameCText2 = Instance.new("TextLabel")
+InfoPhrameCText2.Size = UDim2.new(0.01, 0, 0.01, 0)
+InfoPhrameCText2.Position = UDim2.new(0.08, 0, 0.27, 0)
+InfoPhrameCText2.BorderSizePixel = 0
+InfoPhrameCText2.Text = "now you can idk do something"
+InfoPhrameCText2.TextColor3 = Color3.fromRGB(255,255,255)
+InfoPhrameCText2.TextSize = 7
+InfoPhrameCText2.BackgroundTransparency = 1
+InfoPhrameCText2.TextXAlignment = "Left"
+InfoPhrameCText2.Parent = InfoPhrameC
 
-local InfoPhrameCText = Instance.new("TextLabel")
-InfoPhrameCText.Size = UDim2.new(0.01, 0, 0.01, 0)
-InfoPhrameCText.Position = UDim2.new(0.08, 0, 0.42, 0)
-InfoPhrameCText.BorderSizePixel = 0
-InfoPhrameCText.Text = "with this text ig :skull:"
-InfoPhrameCText.TextColor3 = Color3.fromRGB(255,255,255)
-InfoPhrameCText.TextSize = 7
-InfoPhrameCText.BackgroundTransparency = 1
-InfoPhrameCText.TextXAlignment = "Left"
-InfoPhrameCText.Parent = InfoPhrameC
+local InfoPhrameCText3 = Instance.new("TextLabel")
+InfoPhrameCText3.Size = UDim2.new(0.01, 0, 0.01, 0)
+InfoPhrameCText3.Position = UDim2.new(0.08, 0, 0.42, 0)
+InfoPhrameCText3.BorderSizePixel = 0
+InfoPhrameCText3.Text = "with this text ig :skull:"
+InfoPhrameCText3.TextColor3 = Color3.fromRGB(255,255,255)
+InfoPhrameCText3.TextSize = 7
+InfoPhrameCText3.BackgroundTransparency = 1
+InfoPhrameCText3.TextXAlignment = "Left"
+InfoPhrameCText3.Parent = InfoPhrameC
 
 local BarTextB = Instance.new("TextLabel")
 BarTextB.Size = UDim2.new(1, 0, 1, 0)
@@ -276,49 +430,49 @@ ExentsionBarPlayersText.BackgroundTransparency = 1
 ExentsionBarPlayersText.TextXAlignment = "Left"
 ExentsionBarPlayersText.Parent = InfoPhrameB
 
-local ExentsionBarText = Instance.new("TextLabel")
-ExentsionBarText.Size = UDim2.new(0.01, 0, 0.01, 0)
-ExentsionBarText.Position = UDim2.new(0.08, 0, 0.08, 0)
-ExentsionBarText.BorderSizePixel = 0
-ExentsionBarText.Text = "(Users) - nil"
-ExentsionBarText.TextColor3 = Color3.fromRGB(255,255,255)
-ExentsionBarText.TextSize = 8
-ExentsionBarText.BackgroundTransparency = 1
-ExentsionBarText.TextXAlignment = "Left"
-ExentsionBarText.Parent = InfoPhrameB
+local ExentsionBarText1 = Instance.new("TextLabel")
+ExentsionBarText1.Size = UDim2.new(0.01, 0, 0.01, 0)
+ExentsionBarText1.Position = UDim2.new(0.08, 0, 0.08, 0)
+ExentsionBarText1.BorderSizePixel = 0
+ExentsionBarText1.Text = "(Users) - nil"
+ExentsionBarText1.TextColor3 = Color3.fromRGB(255,255,255)
+ExentsionBarText1.TextSize = 8
+ExentsionBarText1.BackgroundTransparency = 1
+ExentsionBarText1.TextXAlignment = "Left"
+ExentsionBarText1.Parent = InfoPhrameB
 
-local ExentsionBarText = Instance.new("TextLabel")
-ExentsionBarText.Size = UDim2.new(0.01, 0, 0.01, 0)
-ExentsionBarText.Position = UDim2.new(0.08, 0, 0.13, 0)
-ExentsionBarText.BorderSizePixel = 0
-ExentsionBarText.Text = "(ID) - nil"
-ExentsionBarText.TextColor3 = Color3.fromRGB(255,255,255)
-ExentsionBarText.TextSize = 8
-ExentsionBarText.BackgroundTransparency = 1
-ExentsionBarText.TextXAlignment = "Left"
-ExentsionBarText.Parent = InfoPhrameB
+local ExentsionBarText2 = Instance.new("TextLabel")
+ExentsionBarText2.Size = UDim2.new(0.01, 0, 0.01, 0)
+ExentsionBarText2.Position = UDim2.new(0.08, 0, 0.13, 0)
+ExentsionBarText2.BorderSizePixel = 0
+ExentsionBarText2.Text = "(ID) - nil"
+ExentsionBarText2.TextColor3 = Color3.fromRGB(255,255,255)
+ExentsionBarText2.TextSize = 8
+ExentsionBarText2.BackgroundTransparency = 1
+ExentsionBarText2.TextXAlignment = "Left"
+ExentsionBarText2.Parent = InfoPhrameB
 
-local ExentsionBarText = Instance.new("TextLabel")
-ExentsionBarText.Size = UDim2.new(0.01, 0, 0.01, 0)
-ExentsionBarText.Position = UDim2.new(0.08, 0, 0.18, 0)
-ExentsionBarText.BorderSizePixel = 0
-ExentsionBarText.Text = "(Ping) - ".."nil ms"--Game.Players.LocalPlayer.Name:GetNetworkPing().." ms"
-ExentsionBarText.TextColor3 = Color3.fromRGB(255,255,255)
-ExentsionBarText.TextSize = 8
-ExentsionBarText.BackgroundTransparency = 1
-ExentsionBarText.TextXAlignment = "Left"
-ExentsionBarText.Parent = InfoPhrameB
+local ExentsionBarText3 = Instance.new("TextLabel")
+ExentsionBarText3.Size = UDim2.new(0.01, 0, 0.01, 0)
+ExentsionBarText3.Position = UDim2.new(0.08, 0, 0.18, 0)
+ExentsionBarText3.BorderSizePixel = 0
+ExentsionBarText3.Text = "(Ping) - ".."nil ms"--Game.Players.LocalPlayer.Name:GetNetworkPing().." ms"
+ExentsionBarText3.TextColor3 = Color3.fromRGB(255,255,255)
+ExentsionBarText3.TextSize = 8
+ExentsionBarText3.BackgroundTransparency = 1
+ExentsionBarText3.TextXAlignment = "Left"
+ExentsionBarText3.Parent = InfoPhrameB
 
-local ExentsionBarText = Instance.new("TextLabel")
-ExentsionBarText.Size = UDim2.new(0.01, 0, 0.01, 0)
-ExentsionBarText.Position = UDim2.new(0.08, 0, 0.23, 0)
-ExentsionBarText.BorderSizePixel = 0
-ExentsionBarText.Text = "(Loadtime) - "..tostring(ScriptLoadTime).." ms"
-ExentsionBarText.TextColor3 = Color3.fromRGB(255,255,255)
-ExentsionBarText.TextSize = 8
-ExentsionBarText.BackgroundTransparency = 1
-ExentsionBarText.TextXAlignment = "Left"
-ExentsionBarText.Parent = InfoPhrameB
+local ExentsionBarText4 = Instance.new("TextLabel")
+ExentsionBarText4.Size = UDim2.new(0.01, 0, 0.01, 0)
+ExentsionBarText4.Position = UDim2.new(0.08, 0, 0.23, 0)
+ExentsionBarText4.BorderSizePixel = 0
+ExentsionBarText4.Text = "(Loadtime) - "..tostring(ScriptLoadTime).." ms"
+ExentsionBarText4.TextColor3 = Color3.fromRGB(255,255,255)
+ExentsionBarText4.TextSize = 8
+ExentsionBarText4.BackgroundTransparency = 1
+ExentsionBarText4.TextXAlignment = "Left"
+ExentsionBarText4.Parent = InfoPhrameB
 
 local UpdateLogPhrame = Instance.new("ScrollingFrame")
 UpdateLogPhrame.Size = UDim2.new(0.9, 0, 0.9, 0)
@@ -627,89 +781,89 @@ end)
 
 
 --[[ Update Log --]]
-local BigUpdateText = Instance.new("TextLabel")
-BigUpdateText.Size = UDim2.new(0.01, 0, 0.01, 0)
-BigUpdateText.Position = UDim2.new(0.05, 0, 0.05, 0)
-BigUpdateText.BorderSizePixel = 0
-BigUpdateText.Text = "New Update [10/03/2023] [16/10] ━━━━━━━━━━━━━"
-BigUpdateText.TextColor3 = Color3.fromRGB(255,255,255)
-BigUpdateText.TextSize = 8
-BigUpdateText.BackgroundTransparency = 1
-BigUpdateText.TextXAlignment = "Left"
-BigUpdateText.Parent = UpdateLogPhrame
+local BigUpdateText1 = Instance.new("TextLabel")
+BigUpdateText1.Size = UDim2.new(0.01, 0, 0.01, 0)
+BigUpdateText1.Position = UDim2.new(0.05, 0, 0.05, 0)
+BigUpdateText1.BorderSizePixel = 0
+BigUpdateText1.Text = "New Update [10/03/2023] [16/10] ━━━━━━━━━━━━━"
+BigUpdateText1.TextColor3 = Color3.fromRGB(255,255,255)
+BigUpdateText1.TextSize = 8
+BigUpdateText1.BackgroundTransparency = 1
+BigUpdateText1.TextXAlignment = "Left"
+BigUpdateText1.Parent = UpdateLogPhrame
 
-local SmallUpdateText = Instance.new("TextLabel")
-SmallUpdateText.Size = UDim2.new(0.01, 0, 0.01, 0)
-SmallUpdateText.Position = UDim2.new(0.08, 0, 0.1, 0)
-SmallUpdateText.BorderSizePixel = 0
-SmallUpdateText.Text = "(+) added something i think lmfao"
-SmallUpdateText.TextColor3 = Color3.fromRGB(60,160,60)
-SmallUpdateText.TextSize = 6
-SmallUpdateText.BackgroundTransparency = 1
-SmallUpdateText.TextXAlignment = "Left"
-SmallUpdateText.Parent = UpdateLogPhrame
-local SmallUpdateText = Instance.new("TextLabel")
-SmallUpdateText.Size = UDim2.new(0.01, 0, 0.01, 0)
-SmallUpdateText.Position = UDim2.new(0.08, 0, 0.13, 0)
-SmallUpdateText.BorderSizePixel = 0
-SmallUpdateText.Text = "(+) ahhaahahha"
-SmallUpdateText.TextColor3 = Color3.fromRGB(60,160,60)
-SmallUpdateText.TextSize = 6
-SmallUpdateText.BackgroundTransparency = 1
-SmallUpdateText.TextXAlignment = "Left"
-SmallUpdateText.Parent = UpdateLogPhrame
-local SmallUpdateText = Instance.new("TextLabel")
-SmallUpdateText.Size = UDim2.new(0.01, 0, 0.01, 0)
-SmallUpdateText.Position = UDim2.new(0.08, 0, 0.16, 0)
-SmallUpdateText.BorderSizePixel = 0
-SmallUpdateText.Text = "(+) xd lmfao"
-SmallUpdateText.TextColor3 = Color3.fromRGB(60,160,60)
-SmallUpdateText.TextSize = 6
-SmallUpdateText.BackgroundTransparency = 1
-SmallUpdateText.TextXAlignment = "Left"
-SmallUpdateText.Parent = UpdateLogPhrame
+local SmallUpdateText1 = Instance.new("TextLabel")
+SmallUpdateText1.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText1.Position = UDim2.new(0.08, 0, 0.1, 0)
+SmallUpdateText1.BorderSizePixel = 0
+SmallUpdateText1.Text = "(+) added something i think lmfao"
+SmallUpdateText1.TextColor3 = Color3.fromRGB(60,160,60)
+SmallUpdateText1.TextSize = 6
+SmallUpdateText1.BackgroundTransparency = 1
+SmallUpdateText1.TextXAlignment = "Left"
+SmallUpdateText1.Parent = UpdateLogPhrame
+local SmallUpdateText2 = Instance.new("TextLabel")
+SmallUpdateText2.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText2.Position = UDim2.new(0.08, 0, 0.13, 0)
+SmallUpdateText2.BorderSizePixel = 0
+SmallUpdateText2.Text = "(+) ahhaahahha"
+SmallUpdateText2.TextColor3 = Color3.fromRGB(60,160,60)
+SmallUpdateText2.TextSize = 6
+SmallUpdateText2.BackgroundTransparency = 1
+SmallUpdateText2.TextXAlignment = "Left"
+SmallUpdateText2.Parent = UpdateLogPhrame
+local SmallUpdateText3 = Instance.new("TextLabel")
+SmallUpdateText3.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText3.Position = UDim2.new(0.08, 0, 0.16, 0)
+SmallUpdateText3.BorderSizePixel = 0
+SmallUpdateText3.Text = "(+) xd lmfao"
+SmallUpdateText3.TextColor3 = Color3.fromRGB(60,160,60)
+SmallUpdateText3.TextSize = 6
+SmallUpdateText3.BackgroundTransparency = 1
+SmallUpdateText3.TextXAlignment = "Left"
+SmallUpdateText3.Parent = UpdateLogPhrame
 
-local BigUpdateText = Instance.new("TextLabel")
-BigUpdateText.Size = UDim2.new(0.01, 0, 0.01, 0)
-BigUpdateText.Position = UDim2.new(0.05, 0, 0.25, 0)
-BigUpdateText.BorderSizePixel = 0
-BigUpdateText.Text = "Last Update [10/03/2023] [16/08] ━━━━━━━━━━━━━"
-BigUpdateText.TextColor3 = Color3.fromRGB(255,255,255)
-BigUpdateText.TextSize = 8
-BigUpdateText.BackgroundTransparency = 1
-BigUpdateText.TextXAlignment = "Left"
-BigUpdateText.Parent = UpdateLogPhrame
+local BigUpdateText2 = Instance.new("TextLabel")
+BigUpdateText2.Size = UDim2.new(0.01, 0, 0.01, 0)
+BigUpdateText2.Position = UDim2.new(0.05, 0, 0.25, 0)
+BigUpdateText2.BorderSizePixel = 0
+BigUpdateText2.Text = "Last Update [10/03/2023] [16/08] ━━━━━━━━━━━━━"
+BigUpdateText2.TextColor3 = Color3.fromRGB(255,255,255)
+BigUpdateText2.TextSize = 8
+BigUpdateText2.BackgroundTransparency = 1
+BigUpdateText2.TextXAlignment = "Left"
+BigUpdateText2.Parent = UpdateLogPhrame
 
-local SmallUpdateText = Instance.new("TextLabel")
-SmallUpdateText.Size = UDim2.new(0.01, 0, 0.01, 0)
-SmallUpdateText.Position = UDim2.new(0.08, 0, 0.30, 0)
-SmallUpdateText.BorderSizePixel = 0
-SmallUpdateText.Text = "(-) idk"
-SmallUpdateText.TextColor3 = Color3.fromRGB(160,60,60)
-SmallUpdateText.TextSize = 6
-SmallUpdateText.BackgroundTransparency = 1
-SmallUpdateText.TextXAlignment = "Left"
-SmallUpdateText.Parent = UpdateLogPhrame
-local SmallUpdateText = Instance.new("TextLabel")
-SmallUpdateText.Size = UDim2.new(0.01, 0, 0.01, 0)
-SmallUpdateText.Position = UDim2.new(0.08, 0, 0.33, 0)
-SmallUpdateText.BorderSizePixel = 0
-SmallUpdateText.Text = "(-) idk xd"
-SmallUpdateText.TextColor3 = Color3.fromRGB(160,60,60)
-SmallUpdateText.TextSize = 6
-SmallUpdateText.BackgroundTransparency = 1
-SmallUpdateText.TextXAlignment = "Left"
-SmallUpdateText.Parent = UpdateLogPhrame
-local SmallUpdateText = Instance.new("TextLabel")
-SmallUpdateText.Size = UDim2.new(0.01, 0, 0.01, 0)
-SmallUpdateText.Position = UDim2.new(0.08, 0, 0.36, 0)
-SmallUpdateText.BorderSizePixel = 0
-SmallUpdateText.Text = "(-) eheheheh"
-SmallUpdateText.TextColor3 = Color3.fromRGB(160,60,60)
-SmallUpdateText.TextSize = 6
-SmallUpdateText.BackgroundTransparency = 1
-SmallUpdateText.TextXAlignment = "Left"
-SmallUpdateText.Parent = UpdateLogPhrame
+local SmallUpdateText4 = Instance.new("TextLabel")
+SmallUpdateText4.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText4.Position = UDim2.new(0.08, 0, 0.30, 0)
+SmallUpdateText4.BorderSizePixel = 0
+SmallUpdateText4.Text = "(-) idk"
+SmallUpdateText4.TextColor3 = Color3.fromRGB(160,60,60)
+SmallUpdateText4.TextSize = 6
+SmallUpdateText4.BackgroundTransparency = 1
+SmallUpdateText4.TextXAlignment = "Left"
+SmallUpdateText4.Parent = UpdateLogPhrame
+local SmallUpdateText5 = Instance.new("TextLabel")
+SmallUpdateText5.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText5.Position = UDim2.new(0.08, 0, 0.33, 0)
+SmallUpdateText5.BorderSizePixel = 0
+SmallUpdateText5.Text = "(-) idk xd"
+SmallUpdateText5.TextColor3 = Color3.fromRGB(160,60,60)
+SmallUpdateText5.TextSize = 6
+SmallUpdateText5.BackgroundTransparency = 1
+SmallUpdateText5.TextXAlignment = "Left"
+SmallUpdateText5.Parent = UpdateLogPhrame
+local SmallUpdateText6 = Instance.new("TextLabel")
+SmallUpdateText6.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText6.Position = UDim2.new(0.08, 0, 0.36, 0)
+SmallUpdateText6.BorderSizePixel = 0
+SmallUpdateText6.Text = "(-) eheheheh"
+SmallUpdateText6.TextColor3 = Color3.fromRGB(160,60,60)
+SmallUpdateText6.TextSize = 6
+SmallUpdateText6.BackgroundTransparency = 1
+SmallUpdateText6.TextXAlignment = "Left"
+SmallUpdateText6.Parent = UpdateLogPhrame
 --[[ Update Log --]]
 
 
@@ -726,9 +880,98 @@ end)
 
 
 
---[[ Final Setup --]]
-local ScriptLoadTime = 0
+--[[ Finalise Stuff --]]
+local function MakeCoolVisualOpen(Val, ValQ, Time, Amount)
+LoadingBar.TextSize = 8
+ExentsionBarPlayersText.TextSize = 8
+ExentsionBarText1.TextSize = 8
+ExentsionBarText2.TextSize = 8
+ExentsionBarText3.TextSize = 8
+ExentsionBarText4.TextSize = 8
+InputInfoLabel.TextSize = 8
+TextBox1.TextSize = 8
+TextBox2.TextSize = 8
+TextBox3.TextSize = 8
+TextBox4.TextSize = 8
+UpdateLabelError.TextSize = 8
+UpdateLabelScript.TextSize = 8
+UpdateLabelInfo1.TextSize = 8
+UpdateLabelInfo2.TextSize = 8
+ErrorUpdateButton.TextSize = 8
+BigUpdateText1.TextSize = 8
+BigUpdateText2.TextSize = 8
+MinimiseRestroreButton.TextSize = 20
+BarText1.TextSize = 9
+BarText2.TextSize = 9
+BarTextB.TextSize = 9
+ExitGuiButton.TextSize = 12
+MinimiseGuiButton.TextSize = 12
+LoadingFill.TextSize = 7
+InfoPhrameCText1.TextSize = 7
+InfoPhrameCText2.TextSize = 7
+InfoPhrameCText3.TextSize = 7
+SmallUpdateText1.TextSize = 6
+SmallUpdateText2.TextSize = 6
+SmallUpdateText3.TextSize = 6
+SmallUpdateText4.TextSize = 6
+SmallUpdateText5.TextSize = 6
+SmallUpdateText6.TextSize = 6
+local MakeUpRandomNumber = math.random(20, 100)
+for i = 0, Amount do
+local LoadedAmount = math.floor(0+(i/Amount*Val))
+local LoadedAmountQ = math.floor(0+(i/Amount*ValQ))
+ZeroPhrame.Size = UDim2.new(0, LoadedAmount, 0, LoadedAmountQ)
+wait(Time)
+end
+end
+
+local function MakeCoolVisualClose(Val, ValQ, Time, Amount)
+local MakeUpRandomNumber = math.random(20, 100)
+for i = 0, Amount do
+local LoadedAmount = math.floor(300-(i/Amount*Val))
+local LoadedAmountQ = math.floor(200-(i/Amount*ValQ))
+local LoadedAmountB = math.floor(10-i)
+LoadingBar.TextSize = LoadedAmountB
+ExentsionBarPlayersText.TextSize = LoadedAmountB
+ExentsionBarText1.TextSize = LoadedAmountB
+ExentsionBarText2.TextSize = LoadedAmountB
+ExentsionBarText3.TextSize = LoadedAmountB
+ExentsionBarText4.TextSize = LoadedAmountB
+InputInfoLabel.TextSize = LoadedAmountB
+TextBox1.TextSize = LoadedAmountB
+TextBox2.TextSize = LoadedAmountB
+TextBox3.TextSize = LoadedAmountB
+TextBox4.TextSize = LoadedAmountB
+UpdateLabelError.TextSize = LoadedAmountB
+UpdateLabelScript.TextSize = LoadedAmountB
+UpdateLabelInfo1.TextSize = LoadedAmountB
+UpdateLabelInfo2.TextSize = LoadedAmountB
+ErrorUpdateButton.TextSize = LoadedAmountB
+BigUpdateText1.TextSize = LoadedAmountB
+BigUpdateText2.TextSize = LoadedAmountB
+MinimiseRestroreButton.TextSize = LoadedAmountB
+BarText1.TextSize = LoadedAmountB
+BarText2.TextSize = LoadedAmountB
+BarTextB.TextSize = LoadedAmountB
+ExitGuiButton.TextSize = LoadedAmountB
+MinimiseGuiButton.TextSize = LoadedAmountB
+LoadingFill.TextSize = LoadedAmountB
+InfoPhrameCText1.TextSize = LoadedAmountB
+InfoPhrameCText2.TextSize = LoadedAmountB
+InfoPhrameCText3.TextSize = LoadedAmountB
+SmallUpdateText1.TextSize = LoadedAmountB
+SmallUpdateText2.TextSize = LoadedAmountB
+SmallUpdateText3.TextSize = LoadedAmountB
+SmallUpdateText4.TextSize = LoadedAmountB
+SmallUpdateText5.TextSize = LoadedAmountB
+SmallUpdateText6.TextSize = LoadedAmountB
+ZeroPhrame.Size = UDim2.new(0, LoadedAmount, 0, LoadedAmountQ)
+wait(Time)
+end
+end
+
 local function StartLoading(Val, ValQ, Time, Amount)
+MakeCoolVisualOpen(300, 200, 0.01, 10)
 local MakeUpRandomNumber = math.random(20, 100)
 for i = 0, Amount do
 local LoadedBarAmount = math.floor(0+(i/Amount*ValQ))
@@ -736,13 +979,46 @@ local LoadedAmount = math.floor(0+(i/Amount*Val))
 local ScriptLoadTime = math.floor(((Time * Amount)*1000)+MakeUpRandomNumber)
 LoadingFill.Text= tostring(LoadedAmount).."/100%"
 LoadingBar.Size = UDim2.new(0, tostring(LoadedBarAmount), 0, 10)
-ExentsionBarText.Text = "(Loadtime) - "..tostring(ScriptLoadTime).." ms"
+ExentsionBarText4.Text = "(Loadtime) - "..tostring(ScriptLoadTime).." ms"
 wait(Time)
 end
 end
 
-local MakeUpLoadingBar = math.random(20, 100)
-StartLoading(100, 100, 0.1, tostring(MakeUpLoadingBar))
+MinimiseGuiButton.MouseButton1Click:Connect(function()
+MakeCoolVisualClose(300, 200, 0.01, 10)
+wait()
+MinimiseButtonPhrame.Active = true
+MinimiseButtonPhrame.Visible = true
+ZeroPhrame.Visible = false
+ZeroPhrame.Active = false
+end)
+
+ExitGuiButton.MouseButton1Click:Connect(function()
+MakeCoolVisualClose(300, 200, 0.01, 10)
+MainGui:destroy()
+end)
+
+MinimiseRestroreButton.MouseButton1Click:Connect(function()
+	if MinimiseRestroreButton.Text == "✖️" then
+		MinimiseRestroreButton.Text = "➕"
+		MinimiseRestroreButton.BorderColor3 = Color3.fromRGB(0, 255, 255)
+		wait(0.1)
+		MinimiseRestroreButton.Text = "✖️"
+		MinimiseRestroreButton.BorderColor3 = Color3.fromRGB(255, 0, 0)
+		MinimiseButtonPhrame.Active = false
+		MinimiseButtonPhrame.Visible = false
+		ZeroPhrame.Visible = true
+		ZeroPhrame.Active = true
+		MakeCoolVisualOpen(300, 200, 0.01, 10)
+	end
+end)
+--[[ Finalise Stuff --]]
+
+
+
+--[[ Final Setup --]]
+local MakeUpLoadingBar = math.random(5, 20)
+StartLoading(100, 100, 0.01, tostring(MakeUpLoadingBar))
 --[[ Final Setup --]]
 
 --[--Run Checks
