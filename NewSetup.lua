@@ -163,6 +163,7 @@ UDISPATCHED = nil
 --End Of ABM
 
 --[--Verify Main Loader
+
 local VerifyVersion = 2
 if versionCURRENT ~= VerifyVersion then
   UpdateLabelError.TextSize = 9
@@ -181,15 +182,16 @@ else
   UpdateLabelInfo2.Text = "!"
   OUTDATEDVERSION = true
 end
+
 --]--End Of Verify Main Loader
 
 --[--Is Patched
+
 local FishingSimulatorVersion = 2
 local ThemeParkTycoon2Version = 1
 local UltimateDrivingVersion = 1
 local DoorsVersion = 2
 local ApocVersion = 1
-
 
 --Start Of IsPatched
 if FishingSimulatorCURRENT ~= FishingSimulatorVersion then
