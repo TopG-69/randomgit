@@ -475,9 +475,15 @@ ExecuteButton.MouseButton1Click:Connect(function()
 		BarPhrameB.Visible = true
 		InfoPhrameB.Active = true
 		BarPhrameB.Active = true
+	elseif ExecuteButton.ImageColor3 == Color3.fromRGB(70, 70, 255) then
+		ExecuteButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		InfoPhrameB.Visible = true
+		BarPhrameB.Visible = true
+		InfoPhrameB.Active = true
+		BarPhrameB.Active = true
 		InfoPhrameC.Visible = true
 		InfoPhrameC.Active = true
-	elseif ExecuteButton.ImageColor3 == Color3.fromRGB(70, 70, 255) then
+	elseif ExecuteButton.ImageColor3 == Color3.fromRGB(95, 60, 60) then
 		ExecuteButton.ImageColor3 = Color3.fromRGB(60, 95, 60)
 		InfoPhrameB.Visible = false
 		BarPhrameB.Visible = false
