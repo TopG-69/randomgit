@@ -341,12 +341,26 @@ ErrorLogPhrame.BackgroundColor3 = Color3.fromRGB(60, 60, 95)
 ErrorLogPhrame.BorderSizePixel = 0
 ErrorLogPhrame.Transparency = 0.3
 ErrorLogPhrame.BackgroundTransparency = 0.4
-ErrorLogPhrame.Active = true
+ErrorLogPhrame.Active = false
 ErrorLogPhrame.Selectable = true
 ErrorLogPhrame.Visible = false
 ErrorLogPhrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
 ErrorLogPhrame.ScrollBarThickness = 4
 ErrorLogPhrame.Parent = InfoPhrame
+
+local ScriptPhrameB = Instance.new("ScrollingFrame")
+ScriptPhrameB.Size = UDim2.new(0.9, 0, 0.9, 0)
+ScriptPhrameB.Position = UDim2.new(0, 0.01, 0.05, 0)
+ScriptPhrameB.BackgroundColor3 = Color3.fromRGB(60, 60, 95)
+ScriptPhrameB.BorderSizePixel = 0
+ScriptPhrameB.Transparency = 0.3
+ScriptPhrameB.BackgroundTransparency = 0.4
+ScriptPhrameB.Active = false
+ScriptPhrameB.Selectable = true
+ScriptPhrameB.Visible = false
+ScriptPhrameB.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+ScriptPhrameB.ScrollBarThickness = 4
+ScriptPhrameB.Parent = InfoPhrame
 --[[ Gui Features --]]
 
 
@@ -401,7 +415,7 @@ ErrorUpdateButton.Size = UDim2.new(0, 20, 0, 20)
 ErrorUpdateButton.Position = UDim2.new(0.915, 0, 0.05, 0)
 ErrorUpdateButton.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 ErrorUpdateButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
-ErrorUpdateButton.Text = "1/2"
+ErrorUpdateButton.Text = "1/3"
 ErrorUpdateButton.BackgroundTransparency = 0.4
 ErrorUpdateButton.BorderSizePixel = 0
 ErrorUpdateButton.Transparency = 0
@@ -411,16 +425,33 @@ ErrorUpdateButton.TextXAlignment = "Center"
 ErrorUpdateButton.Parent = InfoPhrame
 
 ErrorUpdateButton.MouseButton1Click:Connect(function()
-	if ErrorUpdateButton.Text == "1/2" then
-		ErrorUpdateButton.Text = "2/2"
+	if ErrorUpdateButton.Text == "1/3" then
+		ErrorUpdateButton.Text = "2/3"
 		ErrorUpdateButton.TextColor3 = Color3.fromRGB(70, 70, 255)
 		ErrorLogPhrame.Visible = true
 		UpdateLogPhrame.Visible = false
-	elseif ErrorUpdateButton.Text == "2/2" then
-		ErrorUpdateButton.Text = "1/2"
+		UpdateLogPhrame.Active = false
+		ErrorLogPhrame.Active = true
+		ScriptPhrameB.Visible = false
+		ScriptPhrameB.Active = false
+	elseif ErrorUpdateButton.Text == "2/3" then
+		ErrorUpdateButton.Text = "3/3"
+		ErrorUpdateButton.TextColor3 = Color3.fromRGB(95, 60, 60)
+		ErrorLogPhrame.Visible =false
+		UpdateLogPhrame.Visible = false
+		UpdateLogPhrame.Active = false
+		ErrorLogPhrame.Active = false
+		ScriptPhrameB.Visible = true
+		ScriptPhrameB.Active = true
+	elseif ErrorUpdateButton.Text == "3/3" then
+		ErrorUpdateButton.Text = "1/3"
 		ErrorUpdateButton.TextColor3 = Color3.fromRGB(60, 95, 60)
 		ErrorLogPhrame.Visible =false
 		UpdateLogPhrame.Visible = true
+		UpdateLogPhrame.Active = true
+		ErrorLogPhrame.Active = false
+		ScriptPhrameB.Visible = false
+		ScriptPhrameB.Active = false
 	end
 end)
 
