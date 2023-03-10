@@ -386,6 +386,7 @@ UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
 wait(5)
  MainGui:destroy()
+	
 end
 
 --]--End Of Script
