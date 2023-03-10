@@ -146,6 +146,7 @@ StartLoading(100, 180, 0.1, tostring(MakeUpLoadingBar))
 --[--Run Checks
 
 --Anti Bypass Modules
+
 FishingSimulatorCURRENT = 2
 DoorsCURRENT = 2
 ApocCURRENT = 1
@@ -160,6 +161,7 @@ APOCISPATCHED = nil
 FSISPATCHED = nil
 TPT2ISPATCHED = nil
 UDISPATCHED = nil
+
 --End Of ABM
 
 --[--Verify Main Loader
@@ -194,6 +196,7 @@ local DoorsVersion = 2
 local ApocVersion = 1
 
 --Start Of IsPatched
+
 if FishingSimulatorCURRENT ~= FishingSimulatorVersion then
 FSISPATCHED = true
 elseif FishingSimulatorCURRENT == FishingSimulatorVersion then
@@ -258,13 +261,13 @@ UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
 APOCISPATCHED = true
 end
+
 --]--End Of Is Patched
 
 --]--Finished
 
-
-
 --[--Setup
+
 wait(0.1)
 FixedThemes = Theme == "Aqua" or Theme == "Light" or Theme == "Dark" or Theme == "Jester" or Theme == "Mocha"
 BrokenThemes = Theme ~= "Aqua" or Theme ~= "Light" or Theme ~= "Dark" or Theme ~= "Jester" or Theme ~= "Mocha" or Theme == nil
@@ -273,11 +276,11 @@ ScreenCheckX = ScreenSizeX ~= nil or ScreenSizeX ~= nan
 ScreenCheckY = ScreenSizeY ~= nil or ScreenSizeY ~= nan
 IsAGameThatWorks = game.PlaceId == 2866967438 or game.PlaceId == 237590761 or game.PlaceId == 69184822 or game.PlaceId == 54865335 or game.PlaceId == 6516141723 or game.PlaceId == 237590657 or game.PlaceId == 1228674372 or game.PlaceId == 1600503 or game.PlaceId == 237590761
 wait(0.1)
+
 --]--End Of Setup
 
-
-
 --[--Script
+
 if game.PlaceId == 2866967438 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and FSISPATCHED == false and ScreenCheckX and ScreenCheckY then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Script Is Loading"
