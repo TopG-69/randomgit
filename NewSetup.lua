@@ -744,8 +744,8 @@ FSISPATCHED = false
 else
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 8: failed verify"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
+UpdateLabelScript.Text = "Failed Verifying"
+UpdateLabelInfo1.Text = "Fishing Simulator Script"
 UpdateLabelInfo2.Text = "!"
 FSISPATCHED = true
 end
@@ -757,8 +757,8 @@ TPT2ISPATCHED = false
 else
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 8: failed verify"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
+UpdateLabelScript.Text = "Failed Verifying"
+UpdateLabelInfo1.Text = "Theme Park Tycoon 2 Script"
 UpdateLabelInfo2.Text = "!"
 TPT2ISPATCHED = true
 end
@@ -770,8 +770,8 @@ UDISPATCHED = false
 else
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 8: failed verify"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
+UpdateLabelScript.Text = "Failed Verifying"
+UpdateLabelInfo1.Text = "Ultimate Driving Script"
 UpdateLabelInfo2.Text = "!"
 UDISPATCHED = true
 end
@@ -783,8 +783,8 @@ DOORSISPATCHED = false
 else
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 8: failed verify"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
+UpdateLabelScript.Text = "Failed Verifying"
+UpdateLabelInfo1.Text = "Doors Script"
 UpdateLabelInfo2.Text = "!"
 DOORSISPATCHED = true
 end
@@ -796,8 +796,8 @@ APOCISPATCHED = false
 else
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 8: failed verify"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
+UpdateLabelScript.Text = "Failed Verifying"
+UpdateLabelInfo1.Text = "Apoc Script"
 UpdateLabelInfo2.Text = "!"
 APOCISPATCHED = true
 end
@@ -863,44 +863,44 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/
 elseif IsAGameThatWorks and BrokenThemes and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and IsPatched and ScreenCheckX and ScreenCheckY then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 1: wrong theme / no theme"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
+UpdateLabelScript.Text = "Your missing Theme = "
+UpdateLabelInfo1.Text = "Your missing Theme"
 UpdateLabelInfo2.Text = "!"
 	
 elseif IsAGameThatWorks and Discord_Key ~= "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 2: wrong discord key"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
+UpdateLabelScript.Text = "Your discord key is invalid"
+UpdateLabelInfo1.Text = "Your discord key is missing"
 UpdateLabelInfo2.Text = "!"
 	
 elseif IsAGameThatWorks and OUTDATEDVERSION == true and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 3: invalid version"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
+UpdateLabelScript.Text = "Agony is outdated"
+UpdateLabelInfo1.Text = "Script you want is outdated"
 UpdateLabelInfo2.Text = "!"
 	
 elseif game.PlaceId ~= 237590657 or game.PlaceId ~= 1228674372 or game.PlaceId ~= 237590761 or game.PlaceId ~= 1600503 or game.PlaceId ~= 237590761 or game.PlaceId ~= 2866967438 or game.PlaceId ~= 69184822 or game.PlaceId ~= 54865335 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 4: unsupported game"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
+UpdateLabelScript.Text = "Your game isn't supported"
+UpdateLabelInfo1.Text = "Game has teleported you"
 UpdateLabelInfo2.Text = "!"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/UniversalScript.lua", true))()
 
 elseif IsAGameThatWorks and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and DOORSISPATCHED == true or TPT2ISPATCHED == true or UDISPATCHED == true or APOCISPATCHED == true or FSISPATCHED == true and ScreenCheckX and ScreenCheckY then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 5: script is patched"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
+UpdateLabelScript.Text = "Agony is patched"
+UpdateLabelInfo1.Text = "Script you want is outdated"
 UpdateLabelInfo2.Text = "!"
 		
 elseif ScreenSizeX == nil or ScreenSizeX == nan or ScreenSizeY == nil or ScreenSizeY == nan and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and IsAGameThatWorks then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 6: invalid screensize"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
+UpdateLabelScript.Text = "Your ScreenSizeX or Y is invalid"
+UpdateLabelInfo1.Text = "Your missing ScreenSize"
 UpdateLabelInfo2.Text = "!"
 	
 end
