@@ -36,6 +36,43 @@ ZeroPhrame.Parent = MainGui
 
 
 --[[ Gui Features --]]
+local MinimiseButtonPhrame = Instance.new("Frame")
+MinimiseButtonPhrame.Size = UDim2.new(0, 44, 0, 44)
+MinimiseButtonPhrame.Position = UDim2.new(0.485, 0, 0, 0)
+MinimiseButtonPhrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+MinimiseButtonPhrame.Style = 3
+MinimiseButtonPhrame.BorderSizePixel = 5
+MinimiseButtonPhrame.Transparency = 0.1
+MinimiseButtonPhrame.Active = false
+MinimiseButtonPhrame.Visible = false
+MinimiseButtonPhrame.Selectable = true
+MinimiseButtonPhrame.Parent = MainGui
+
+local MinimiseRestroreButton = Instance.new("TextButton")
+MinimiseRestroreButton.Size = UDim2.new(0, 34, 0, 34)
+MinimiseRestroreButton.Position = UDim2.new(0, -3, 0, -3)
+MinimiseRestroreButton.BorderColor3 = Color3.fromRGB(255,0, 0)
+MinimiseRestroreButton.Text = "✖️"
+MinimiseRestroreButton.BorderSizePixel = 1
+MinimiseRestroreButton.Transparency = 0
+MinimiseRestroreButton.BackgroundTransparency = 0.9
+MinimiseRestroreButton.TextSize = 20
+MinimiseRestroreButton.TextXAlignment = "Center"
+MinimiseRestroreButton.Parent = MinimiseButtonPhrame
+
+MinimiseRestroreButton.MouseButton1Click:Connect(function()
+	if MinimiseRestroreButton.Text == "✖️" then
+		MinimiseRestroreButton.Text = "➕"
+		MinimiseRestroreButton.BorderColor3 = Color3.fromRGB(0, 255, 255)
+		wait(0.1)
+		MinimiseRestroreButton.Text = "✖️"
+		MinimiseButtonPhrame.Active = false
+		MinimiseButtonPhrame.Visible = false
+		ZeroPhrame.Visible = true
+		ZeroPhrame.Active = true
+	end
+end)
+
 local BarPhrame = Instance.new("Frame")
 BarPhrame.Size = UDim2.new(1, 0, 0.12, 0)
 BarPhrame.Position = UDim2.new(0, 0, 0, 0)
@@ -103,11 +140,10 @@ MinimiseGuiButton.TextXAlignment = "Center"
 MinimiseGuiButton.Parent = BarPhrame
 
 MinimiseGuiButton.MouseButton1Click:Connect(function()
+MinimiseButtonPhrame.Active = true
+MinimiseButtonPhrame.Visible = true
 ZeroPhrame.Visible = false
 ZeroPhrame.Active = false
-wait(5)
-ZeroPhrame.Visible = true
-ZeroPhrame.Active = true
 end)
 
 local LoadingBar = Instance.new("TextButton")
@@ -229,16 +265,16 @@ BarTextB.BackgroundTransparency = 1
 BarTextB.TextXAlignment = "Center"
 BarTextB.Parent = BarPhrameB
 
-local ExentsionBarText = Instance.new("TextLabel")
-ExentsionBarText.Size = UDim2.new(0.01, 0, 0.01, 0)
-ExentsionBarText.Position = UDim2.new(0.08, 0, 0.03, 0)
-ExentsionBarText.BorderSizePixel = 0
-ExentsionBarText.Text = "(Players) - "..tostring(#game.Players:GetPlayers())
-ExentsionBarText.TextColor3 = Color3.fromRGB(255,255,255)
-ExentsionBarText.TextSize = 8
-ExentsionBarText.BackgroundTransparency = 1
-ExentsionBarText.TextXAlignment = "Left"
-ExentsionBarText.Parent = InfoPhrameB
+local ExentsionBarPlayersText = Instance.new("TextLabel")
+ExentsionBarPlayersText.Size = UDim2.new(0.01, 0, 0.01, 0)
+ExentsionBarPlayersText.Position = UDim2.new(0.08, 0, 0.03, 0)
+ExentsionBarPlayersText.BorderSizePixel = 0
+ExentsionBarPlayersText.Text = "(Players) - "..tostring(#game.Players:GetPlayers())
+ExentsionBarPlayersText.TextColor3 = Color3.fromRGB(255,255,255)
+ExentsionBarPlayersText.TextSize = 8
+ExentsionBarPlayersText.BackgroundTransparency = 1
+ExentsionBarPlayersText.TextXAlignment = "Left"
+ExentsionBarPlayersText.Parent = InfoPhrameB
 
 local ExentsionBarText = Instance.new("TextLabel")
 ExentsionBarText.Size = UDim2.new(0.01, 0, 0.01, 0)
@@ -266,7 +302,7 @@ local ExentsionBarText = Instance.new("TextLabel")
 ExentsionBarText.Size = UDim2.new(0.01, 0, 0.01, 0)
 ExentsionBarText.Position = UDim2.new(0.08, 0, 0.18, 0)
 ExentsionBarText.BorderSizePixel = 0
-ExentsionBarText.Text = "(Ping) - nil ms"
+ExentsionBarText.Text = "(Ping) - ".."nil ms"--Game.Players.LocalPlayer.Name:GetNetworkPing().." ms"
 ExentsionBarText.TextColor3 = Color3.fromRGB(255,255,255)
 ExentsionBarText.TextSize = 8
 ExentsionBarText.BackgroundTransparency = 1
@@ -577,6 +613,21 @@ SmallUpdateText.TextXAlignment = "Left"
 SmallUpdateText.Parent = UpdateLogPhrame
 --[[ Update Log --]]
 
+
+
+--[[ Renew Text --]]
+game.Players.PlayerAdded:Connect(function(player)
+	ExentsionBarPlayersText.Text = "(Players) - "..tostring(#game.Players:GetPlayers())
+end)
+
+game.Players.PlayerRemoving:Connect(function(player)
+	ExentsionBarPlayersText.Text = "(Players) - "..tostring(#game.Players:GetPlayers())
+end)
+--[[ Renew Text --]]
+
+
+
+--[[ Final Setup --]]
 local ScriptLoadTime = 0
 local function StartLoading(Val, ValQ, Time, Amount)
 local MakeUpRandomNumber = math.random(20, 100)
@@ -593,6 +644,7 @@ end
 
 local MakeUpLoadingBar = math.random(20, 100)
 StartLoading(100, 100, 0.1, tostring(MakeUpLoadingBar))
+--[[ Final Setup --]]
 
 --[--Run Checks
 
