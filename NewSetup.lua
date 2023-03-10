@@ -137,16 +137,6 @@ LoadingFill.TextSize = 7
 LoadingFill.TextXAlignment = "Center"
 LoadingFill.Parent = BarPhrame
 
-local function StartLoading(Val, ValQ, Time, Amount)
-for i = 0, Amount do
-local LoadedBarAmount = math.floor(0+(i/Amount*ValQ))
-local LoadedAmount = math.floor(0+(i/Amount*Val))
-LoadingFill.Text= tostring(LoadedAmount).."/100%"
-LoadingBar.Size = UDim2.new(0, tostring(LoadedBarAmount), 0, 10)
-wait(Time)
-end
-end
-
 local InfoPhrame = Instance.new("Frame")
 InfoPhrame.Size = UDim2.new(1, 0, 1, 0)
 InfoPhrame.Position = UDim2.new(0, 0, 0.12, 0)
@@ -156,6 +146,143 @@ InfoPhrame.Transparency = 0.3
 InfoPhrame.Active = true
 InfoPhrame.Selectable = true
 InfoPhrame.Parent = ZeroPhrame
+
+local BarPhrameB = Instance.new("Frame")
+BarPhrameB.Size = UDim2.new(0.55, 0, 0.12, 0)
+BarPhrameB.Position = UDim2.new(1.05, 0, 0, 0)
+BarPhrameB.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+BarPhrameB.BorderSizePixel = 0
+BarPhrameB.Transparency = 0.2
+BarPhrameB.Active = false
+BarPhrameB.Selectable = true
+BarPhrameB.Visible = false
+BarPhrameB.Parent = ZeroPhrame
+
+local InfoPhrameB = Instance.new("ScrollingFrame")
+InfoPhrameB.Size = UDim2.new(0.55, 0, 0.6, 0)
+InfoPhrameB.Position = UDim2.new(1.05, 0, 0.12, 0)
+InfoPhrameB.BackgroundColor3 = Color3.fromRGB(60, 60, 95)
+InfoPhrameB.Active = false
+InfoPhrameB.Selectable = true
+InfoPhrameB.BorderSizePixel = 0
+InfoPhrameB.Transparency = 0.3
+InfoPhrameB.BackgroundTransparency = 0.4
+InfoPhrameB.Visible = false
+InfoPhrameB.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+InfoPhrameB.ScrollBarThickness = 4
+InfoPhrameB.Parent = ZeroPhrame
+
+local InfoPhrameC = Instance.new("Frame")
+InfoPhrameC.Size = UDim2.new(0.55, 0, 0.385, 0)
+InfoPhrameC.Position = UDim2.new(1.05, 0, 0.735, 0)
+InfoPhrameC.BackgroundColor3 = Color3.fromRGB(60, 60, 95)
+InfoPhrameC.Active = false
+InfoPhrameC.Selectable = true
+InfoPhrameC.BorderSizePixel = 0
+InfoPhrameC.Transparency = 0.3
+InfoPhrameC.BackgroundTransparency = 0.4
+InfoPhrameC.Visible = false
+InfoPhrameC.Parent = ZeroPhrame
+
+local InfoPhrameCText = Instance.new("TextLabel")
+InfoPhrameCText.Size = UDim2.new(0.01, 0, 0.01, 0)
+InfoPhrameCText.Position = UDim2.new(0.08, 0, 0.12, 0)
+InfoPhrameCText.BorderSizePixel = 0
+InfoPhrameCText.Text = "concrats you found this text"
+InfoPhrameCText.TextColor3 = Color3.fromRGB(255,255,255)
+InfoPhrameCText.TextSize = 7
+InfoPhrameCText.BackgroundTransparency = 1
+InfoPhrameCText.TextXAlignment = "Left"
+InfoPhrameCText.Parent = InfoPhrameC
+
+local InfoPhrameCText = Instance.new("TextLabel")
+InfoPhrameCText.Size = UDim2.new(0.01, 0, 0.01, 0)
+InfoPhrameCText.Position = UDim2.new(0.08, 0, 0.27, 0)
+InfoPhrameCText.BorderSizePixel = 0
+InfoPhrameCText.Text = "now you can idk do something"
+InfoPhrameCText.TextColor3 = Color3.fromRGB(255,255,255)
+InfoPhrameCText.TextSize = 7
+InfoPhrameCText.BackgroundTransparency = 1
+InfoPhrameCText.TextXAlignment = "Left"
+InfoPhrameCText.Parent = InfoPhrameC
+
+local InfoPhrameCText = Instance.new("TextLabel")
+InfoPhrameCText.Size = UDim2.new(0.01, 0, 0.01, 0)
+InfoPhrameCText.Position = UDim2.new(0.08, 0, 0.42, 0)
+InfoPhrameCText.BorderSizePixel = 0
+InfoPhrameCText.Text = "with this text ig :skull:"
+InfoPhrameCText.TextColor3 = Color3.fromRGB(255,255,255)
+InfoPhrameCText.TextSize = 7
+InfoPhrameCText.BackgroundTransparency = 1
+InfoPhrameCText.TextXAlignment = "Left"
+InfoPhrameCText.Parent = InfoPhrameC
+
+local BarTextB = Instance.new("TextLabel")
+BarTextB.Size = UDim2.new(1, 0, 1, 0)
+BarTextB.Position = UDim2.new(0, 0, 0, 0)
+BarTextB.BorderSizePixel = 0
+BarTextB.Text = "Info Section"
+BarTextB.TextColor3 = Color3.fromRGB(255,255,255)
+BarTextB.Transparency = 0.1
+BarTextB.TextSize = 9
+BarTextB.BackgroundTransparency = 1
+BarTextB.TextXAlignment = "Center"
+BarTextB.Parent = BarPhrameB
+
+local ExentsionBarText = Instance.new("TextLabel")
+ExentsionBarText.Size = UDim2.new(0.01, 0, 0.01, 0)
+ExentsionBarText.Position = UDim2.new(0.08, 0, 0.03, 0)
+ExentsionBarText.BorderSizePixel = 0
+ExentsionBarText.Text = "(Players) - "..tostring(#game.Players:GetPlayers())
+ExentsionBarText.TextColor3 = Color3.fromRGB(255,255,255)
+ExentsionBarText.TextSize = 8
+ExentsionBarText.BackgroundTransparency = 1
+ExentsionBarText.TextXAlignment = "Left"
+ExentsionBarText.Parent = InfoPhrameB
+
+local ExentsionBarText = Instance.new("TextLabel")
+ExentsionBarText.Size = UDim2.new(0.01, 0, 0.01, 0)
+ExentsionBarText.Position = UDim2.new(0.08, 0, 0.08, 0)
+ExentsionBarText.BorderSizePixel = 0
+ExentsionBarText.Text = "(Users) - nil"
+ExentsionBarText.TextColor3 = Color3.fromRGB(255,255,255)
+ExentsionBarText.TextSize = 8
+ExentsionBarText.BackgroundTransparency = 1
+ExentsionBarText.TextXAlignment = "Left"
+ExentsionBarText.Parent = InfoPhrameB
+
+local ExentsionBarText = Instance.new("TextLabel")
+ExentsionBarText.Size = UDim2.new(0.01, 0, 0.01, 0)
+ExentsionBarText.Position = UDim2.new(0.08, 0, 0.13, 0)
+ExentsionBarText.BorderSizePixel = 0
+ExentsionBarText.Text = "(ID) - nil"
+ExentsionBarText.TextColor3 = Color3.fromRGB(255,255,255)
+ExentsionBarText.TextSize = 8
+ExentsionBarText.BackgroundTransparency = 1
+ExentsionBarText.TextXAlignment = "Left"
+ExentsionBarText.Parent = InfoPhrameB
+
+local ExentsionBarText = Instance.new("TextLabel")
+ExentsionBarText.Size = UDim2.new(0.01, 0, 0.01, 0)
+ExentsionBarText.Position = UDim2.new(0.08, 0, 0.18, 0)
+ExentsionBarText.BorderSizePixel = 0
+ExentsionBarText.Text = "(Ping) - nil ms"
+ExentsionBarText.TextColor3 = Color3.fromRGB(255,255,255)
+ExentsionBarText.TextSize = 8
+ExentsionBarText.BackgroundTransparency = 1
+ExentsionBarText.TextXAlignment = "Left"
+ExentsionBarText.Parent = InfoPhrameB
+
+local ExentsionBarText = Instance.new("TextLabel")
+ExentsionBarText.Size = UDim2.new(0.01, 0, 0.01, 0)
+ExentsionBarText.Position = UDim2.new(0.08, 0, 0.23, 0)
+ExentsionBarText.BorderSizePixel = 0
+ExentsionBarText.Text = "(Loadtime) - "..tostring(ScriptLoadTime).." ms"
+ExentsionBarText.TextColor3 = Color3.fromRGB(255,255,255)
+ExentsionBarText.TextSize = 8
+ExentsionBarText.BackgroundTransparency = 1
+ExentsionBarText.TextXAlignment = "Left"
+ExentsionBarText.Parent = InfoPhrameB
 
 local UpdateLogPhrame = Instance.new("ScrollingFrame")
 UpdateLogPhrame.Size = UDim2.new(0.9, 0, 0.9, 0)
@@ -277,8 +404,20 @@ ExecuteButton.Parent = InfoPhrame
 ExecuteButton.MouseButton1Click:Connect(function()
 	if ExecuteButton.ImageColor3 == Color3.fromRGB(60, 95, 60) then
 		ExecuteButton.ImageColor3 = Color3.fromRGB(70, 70, 255)
+		InfoPhrameB.Visible = true
+		BarPhrameB.Visible = true
+		InfoPhrameB.Active = true
+		BarPhrameB.Active = true
+		InfoPhrameC.Visible = true
+		InfoPhrameC.Active = true
 	elseif ExecuteButton.ImageColor3 == Color3.fromRGB(70, 70, 255) then
 		ExecuteButton.ImageColor3 = Color3.fromRGB(60, 95, 60)
+		InfoPhrameB.Visible = false
+		BarPhrameB.Visible = false
+		InfoPhrameB.Active = false
+		BarPhrameB.Active = false
+		InfoPhrameC.Visible = false
+		InfoPhrameC.Active = false
 	end
 end)
 
@@ -438,9 +577,22 @@ SmallUpdateText.TextXAlignment = "Left"
 SmallUpdateText.Parent = UpdateLogPhrame
 --[[ Update Log --]]
 
+local ScriptLoadTime = 0
+local function StartLoading(Val, ValQ, Time, Amount)
+local MakeUpRandomNumber = math.random(20, 100)
+for i = 0, Amount do
+local LoadedBarAmount = math.floor(0+(i/Amount*ValQ))
+local LoadedAmount = math.floor(0+(i/Amount*Val))
+local ScriptLoadTime = math.floor(((Time * Amount)*1000)+MakeUpRandomNumber)
+LoadingFill.Text= tostring(LoadedAmount).."/100%"
+LoadingBar.Size = UDim2.new(0, tostring(LoadedBarAmount), 0, 10)
+ExentsionBarText.Text = "(Loadtime) - "..tostring(ScriptLoadTime).." ms"
+wait(Time)
+end
+end
+
 local MakeUpLoadingBar = math.random(20, 100)
 StartLoading(100, 100, 0.1, tostring(MakeUpLoadingBar))
-
 
 --[--Run Checks
 
