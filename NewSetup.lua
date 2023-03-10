@@ -814,12 +814,12 @@ IsPatched = TPT2ISPATCHED == false and UDISPATCHED == false and FSISPATCHED == f
 ScreenCheckX = ScreenSizeX ~= nil or ScreenSizeX ~= nan
 ScreenCheckY = ScreenSizeY ~= nil or ScreenSizeY ~= nan
 IsAGameThatWorks = game.PlaceId == 2866967438 or game.PlaceId == 237590761 or game.PlaceId == 69184822 or game.PlaceId == 54865335 or game.PlaceId == 6516141723 or game.PlaceId == 237590657 or game.PlaceId == 1228674372 or game.PlaceId == 1600503 or game.PlaceId == 237590761
+wait(0.1)
 
 --]--End Of Setup
 
 --[--Script
 
-wait(0.1)
 if game.PlaceId == 2866967438 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and FSISPATCHED == false and ScreenCheckX and ScreenCheckY then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Script Is Loading"
@@ -902,7 +902,6 @@ UpdateLabelError.Text = "Error 6: invalid screensize"
 UpdateLabelScript.Text = "Your ScreenSizeX or Y is invalid"
 UpdateLabelInfo1.Text = "Your missing ScreenSize"
 UpdateLabelInfo2.Text = "!"
-	
 end
 
 --]--End Of Script
