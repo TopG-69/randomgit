@@ -1,4 +1,5 @@
 --[[
+
           ╭╭━━━━━╮╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮╭━━━━━╮╮
           ┃┃ ━━━ ┃┃\       █████╗  ██████╗  █████╗ ███╗  ██╗██╗   ██╗      /┃┃ ━━━ ┃┃
           ┃┃     ┃┃       ██╔══██╗██╔════╝ ██╔══██╗████╗ ██║╚██╗ ██╔╝       ┃┃     ┃┃
@@ -13,14 +14,16 @@
                      ─▀▀▀▄▄ █──█ █──█ █▄▄▀ █── █▀▀ 　 █─── █──█ █──█ █▀▀
                       █▄▄▄█ ▀▀▀▀ ─▀▀▀ ▀─▀▀ ▀▀▀ ▀▀▀ 　 █▄▄█ ▀▀▀▀ ▀▀▀─ ▀▀▀
 ╰━━━━━━━━━━━━━━━━╯╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯╰━━━━━━━━━━━━━━━━╯
+
 --]]
 
+--[[ Req Features --]]
 local MainGui = Instance.new("ScreenGui")
 MainGui.Name = "ApocGui"
 MainGui.Parent = game.CoreGui
 
 local ZeroPhrame = Instance.new("Frame")
-ZeroPhrame.Size = UDim2.new(0, 195, 0, 115)
+ZeroPhrame.Size = UDim2.new(0, 300, 0, 200)
 ZeroPhrame.Position = UDim2.new(0, 200, 0, 200)
 ZeroPhrame.BorderSizePixel = 5
 ZeroPhrame.Transparency = 1
@@ -28,84 +31,88 @@ ZeroPhrame.Draggable = true
 ZeroPhrame.Active = true
 ZeroPhrame.Selectable = true
 ZeroPhrame.Parent = MainGui
+--[[ Req Features --]]
 
-local LoaderPhrame = Instance.new("Frame")
-LoaderPhrame.Size = UDim2.new(0, 195, 0, 30)
-LoaderPhrame.Position = UDim2.new(0, 0, 0, 0)
-LoaderPhrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-LoaderPhrame.Style = 3
-LoaderPhrame.BorderSizePixel = 5
-LoaderPhrame.Transparency = 0.1
-LoaderPhrame.Active = true
-LoaderPhrame.Selectable = true
-LoaderPhrame.Parent = ZeroPhrame
 
-local UpdatesPhrame = Instance.new("Frame")
-UpdatesPhrame.Size = UDim2.new(0, 195, 0, 90)
-UpdatesPhrame.Position = UDim2.new(0, 0, 0, 30)
-UpdatesPhrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-UpdatesPhrame.Style = 6
-UpdatesPhrame.BorderSizePixel = 0
-UpdatesPhrame.Transparency = 0.1
-UpdatesPhrame.Active = true
-UpdatesPhrame.Selectable = true
-UpdatesPhrame.Parent = ZeroPhrame
 
-local UpdatesPhrameSeperator = Instance.new("Frame")
-UpdatesPhrameSeperator.Size = UDim2.new(0, 180, 0, 2)
-UpdatesPhrameSeperator.Position = UDim2.new(0, 0, 0.25, 0)
-UpdatesPhrameSeperator.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-UpdatesPhrameSeperator.Style = 3
-UpdatesPhrameSeperator.BorderSizePixel = 5
-UpdatesPhrameSeperator.Transparency = 0.1
-UpdatesPhrameSeperator.Active = true
-UpdatesPhrameSeperator.Selectable = true
-UpdatesPhrameSeperator.Parent = UpdatesPhrame
+--[[ Gui Features --]]
+local BarPhrame = Instance.new("Frame")
+BarPhrame.Size = UDim2.new(1, 0, 0.12, 0)
+BarPhrame.Position = UDim2.new(0, 0, 0, 0)
+BarPhrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+BarPhrame.BorderSizePixel = 0
+BarPhrame.Transparency = 0.2
+BarPhrame.Active = true
+BarPhrame.Selectable = true
+BarPhrame.Parent = ZeroPhrame
 
-local UpdateLabelError = Instance.new("TextLabel")
-UpdateLabelError.Size = UDim2.new(0, 0, 0, 0)
-UpdateLabelError.Position = UDim2.new(0.5, 0, 0.10, 0)
-UpdateLabelError.BorderSizePixel = 0
-UpdateLabelError.Text = "(Catching Errors)"
-UpdateLabelError.Transparency = 0.9
-UpdateLabelError.TextColor3 = Color3.fromRGB(0,255,255)
-UpdateLabelError.TextSize = 12
-UpdateLabelError.TextXAlignment = "Center"
-UpdateLabelError.Parent = UpdatesPhrame
+local BarText = Instance.new("TextLabel")
+BarText.Size = UDim2.new(1, 0, 1, 0)
+BarText.Position = UDim2.new(0.01, 0, 0, 0)
+BarText.BorderSizePixel = 0
+BarText.Text = "Agony"
+BarText.Transparency = 0.1
+BarText.TextColor3 = Color3.fromRGB(255,255,255)
+BarText.TextSize = 9
+BarText.BackgroundTransparency = 1
+BarText.TextXAlignment = "Left"
+BarText.Parent = BarPhrame
+--// linked
+local BarText = Instance.new("TextLabel")
+BarText.Size = UDim2.new(1, 0, 1, 0)
+BarText.Position = UDim2.new(0.13, 0, 0, 0)
+BarText.BorderSizePixel = 0
+BarText.Text = "Loader"
+BarText.TextColor3 = Color3.fromRGB(0,255,255)
+BarText.Transparency = 0.1
+BarText.TextSize = 9
+BarText.BackgroundTransparency = 1
+BarText.TextXAlignment = "Left"
+BarText.Parent = BarPhrame
 
-local UpdateLabelScript = Instance.new("TextLabel")
-UpdateLabelScript.Size = UDim2.new(0, 0, 0, 0)
-UpdateLabelScript.Position = UDim2.new(0.5, 0, 0.40, 0)
-UpdateLabelScript.BorderSizePixel = 0
-UpdateLabelScript.Text = "welcome "..Game.Players.LocalPlayer.Name.."!"
-UpdateLabelScript.TextColor3 = Color3.fromRGB(140,140,140)
-UpdateLabelScript.TextSize = 9
-UpdateLabelScript.TextXAlignment = "Center"
-UpdateLabelScript.Parent = UpdatesPhrame
+local ExitGuiButton = Instance.new("TextButton")
+ExitGuiButton.Size = UDim2.new(0, 20, 0, 20)
+ExitGuiButton.Position = UDim2.new(0.915, 0, 0.1, 0)
+ExitGuiButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ExitGuiButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
+ExitGuiButton.Text = "✖️"
+ExitGuiButton.BorderSizePixel = 0
+ExitGuiButton.Transparency = 0
+ExitGuiButton.BackgroundTransparency = 0.9
+ExitGuiButton.TextColor3 = Color3.fromRGB(255,255, 255)
+ExitGuiButton.TextSize = 9
+ExitGuiButton.TextXAlignment = "Center"
+ExitGuiButton.Parent = BarPhrame
 
-local UpdateLabelInfo1 = Instance.new("TextLabel")
-UpdateLabelInfo1.Size = UDim2.new(0, 0, 0, 0)
-UpdateLabelInfo1.Position = UDim2.new(0.5, 0, 0.65, 0)
-UpdateLabelInfo1.BorderSizePixel = 0
-UpdateLabelInfo1.Text = "loading might take some time!"
-UpdateLabelInfo1.TextColor3 = Color3.fromRGB(140,140,140)
-UpdateLabelInfo1.TextSize = 9
-UpdateLabelInfo1.TextXAlignment = "Center"
-UpdateLabelInfo1.Parent = UpdatesPhrame
+ExitGuiButton.MouseButton1Click:Connect(function()
+MainGui:destroy()
+end)
 
-local UpdateLabelInfo2 = Instance.new("TextLabel")
-UpdateLabelInfo2.Size = UDim2.new(0, 0, 0, 0)
-UpdateLabelInfo2.Position = UDim2.new(0.5, 0, 0.9, 0)
-UpdateLabelInfo2.BorderSizePixel = 0
-UpdateLabelInfo2.Text = "new loader better?"
-UpdateLabelInfo2.TextColor3 = Color3.fromRGB(140,140,140)
-UpdateLabelInfo2.TextSize = 9
-UpdateLabelInfo2.TextXAlignment = "Center"
-UpdateLabelInfo2.Parent = UpdatesPhrame
+local MinimiseGuiButton = Instance.new("TextButton")
+MinimiseGuiButton.Size = UDim2.new(0, 20, 0, 20)
+MinimiseGuiButton.Position = UDim2.new(0.84, 0, 0.1, 0)
+MinimiseGuiButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+MinimiseGuiButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
+MinimiseGuiButton.Text = "➖"
+MinimiseGuiButton.BorderSizePixel = 0
+MinimiseGuiButton.Transparency = 0
+MinimiseGuiButton.BackgroundTransparency = 0.9
+MinimiseGuiButton.TextColor3 = Color3.fromRGB(255,255, 255)
+MinimiseGuiButton.TextSize = 9
+MinimiseGuiButton.TextXAlignment = "Center"
+MinimiseGuiButton.Parent = BarPhrame
+
+MinimiseGuiButton.MouseButton1Click:Connect(function()
+ZeroPhrame.Visible = false
+ZeroPhrame.Active = false
+wait(5)
+ZeroPhrame.Visible = true
+ZeroPhrame.Active = true
+end)
 
 local LoadingBar = Instance.new("TextButton")
-LoadingBar.Size = UDim2.new(0, 100, 0, 15)
-LoadingBar.Position = UDim2.new(0, 0, 0, 0)
+LoadingBar.Size = UDim2.new(0, 0, 0, 10)
+LoadingBar.Position = UDim2.new(0.48, 0, 0.28, 0)
 LoadingBar.BackgroundColor3 = Color3.fromRGB(0, 255, 255)
 LoadingBar.BorderColor3 = Color3.fromRGB(255, 255, 255)
 LoadingBar.Text = ""
@@ -115,33 +122,325 @@ LoadingBar.BackgroundTransparency = 0.9
 LoadingBar.TextColor3 = Color3.fromRGB(255,255, 255)
 LoadingBar.TextSize = 8
 LoadingBar.TextXAlignment = "Center"
-LoadingBar.Parent = LoaderPhrame
+LoadingBar.Parent = BarPhrame
 
 local LoadingFill = Instance.new("TextButton")
-LoadingFill.Size = UDim2.new(0, 180, 0, 15)
-LoadingFill.Position = UDim2.new(0, 0, 0, 0)
-LoadingFill.BorderColor3 = Color3.fromRGB(255, 255, 255)
-LoadingFill.Text = "Loading 0/100%"
+LoadingFill.Size = UDim2.new(0, 100, 0, 10)
+LoadingFill.Position = UDim2.new(0.48, 0, 0.28, 0)
+LoadingFill.BorderColor3 = Color3.fromRGB(190, 190, 190)
+LoadingFill.Text = "0/100%"
 LoadingFill.BorderSizePixel = 1
 LoadingFill.Transparency = 0
 LoadingFill.BackgroundTransparency = 0.9
 LoadingFill.TextColor3 = Color3.fromRGB(255,255, 255)
-LoadingFill.TextSize = 8
+LoadingFill.TextSize = 7
 LoadingFill.TextXAlignment = "Center"
-LoadingFill.Parent = LoaderPhrame
+LoadingFill.Parent = BarPhrame
 
 local function StartLoading(Val, ValQ, Time, Amount)
 for i = 0, Amount do
 local LoadedBarAmount = math.floor(0+(i/Amount*ValQ))
 local LoadedAmount = math.floor(0+(i/Amount*Val))
-LoadingFill.Text= "Loading "..tostring(LoadedAmount).."/100%"
-LoadingBar.Size = UDim2.new(0, tostring(LoadedBarAmount), 0, 15)
+LoadingFill.Text= tostring(LoadedAmount).."/100%"
+LoadingBar.Size = UDim2.new(0, tostring(LoadedBarAmount), 0, 10)
 wait(Time)
 end
 end
 
+local InfoPhrame = Instance.new("Frame")
+InfoPhrame.Size = UDim2.new(1, 0, 1, 0)
+InfoPhrame.Position = UDim2.new(0, 0, 0.12, 0)
+InfoPhrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+InfoPhrame.BorderSizePixel = 0
+InfoPhrame.Transparency = 0.3
+InfoPhrame.Active = true
+InfoPhrame.Selectable = true
+InfoPhrame.Parent = ZeroPhrame
+
+local UpdateLogPhrame = Instance.new("ScrollingFrame")
+UpdateLogPhrame.Size = UDim2.new(0.9, 0, 0.9, 0)
+UpdateLogPhrame.Position = UDim2.new(0, 0.01, 0.05, 0)
+UpdateLogPhrame.BackgroundColor3 = Color3.fromRGB(60, 60, 95)
+UpdateLogPhrame.BorderSizePixel = 0
+UpdateLogPhrame.Transparency = 0.3
+UpdateLogPhrame.BackgroundTransparency = 0.4
+UpdateLogPhrame.Active = true
+UpdateLogPhrame.Selectable = true
+UpdateLogPhrame.Visible = true
+UpdateLogPhrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+UpdateLogPhrame.ScrollBarThickness = 4
+UpdateLogPhrame.Parent = InfoPhrame
+
+local ErrorLogPhrame = Instance.new("ScrollingFrame")
+ErrorLogPhrame.Size = UDim2.new(0.9, 0, 0.9, 0)
+ErrorLogPhrame.Position = UDim2.new(0, 0.01, 0.05, 0)
+ErrorLogPhrame.BackgroundColor3 = Color3.fromRGB(60, 60, 95)
+ErrorLogPhrame.BorderSizePixel = 0
+ErrorLogPhrame.Transparency = 0.3
+ErrorLogPhrame.BackgroundTransparency = 0.4
+ErrorLogPhrame.Active = true
+ErrorLogPhrame.Selectable = true
+ErrorLogPhrame.Visible = false
+ErrorLogPhrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+ErrorLogPhrame.ScrollBarThickness = 4
+ErrorLogPhrame.Parent = InfoPhrame
+--[[ Gui Features --]]
+
+
+
+--[[ Error Log Text --]]
+local UpdateLabelError = Instance.new("TextLabel")
+UpdateLabelError.Size = UDim2.new(0, 0, 0, 0)
+UpdateLabelError.Position = UDim2.new(0.5, 0, 0.05, 0)
+UpdateLabelError.BorderSizePixel = 0
+UpdateLabelError.Text = "(Catching Errors)"
+UpdateLabelError.TextColor3 = Color3.fromRGB(255,255,255)
+UpdateLabelError.TextSize = 8
+UpdateLabelError.TextXAlignment = "Center"
+UpdateLabelError.Parent = ErrorLogPhrame
+
+local UpdateLabelScript = Instance.new("TextLabel")
+UpdateLabelScript.Size = UDim2.new(0, 0, 0, 0)
+UpdateLabelScript.Position = UDim2.new(0.5, 0, 0.1, 0)
+UpdateLabelScript.BorderSizePixel = 0
+UpdateLabelScript.Text = "-"
+UpdateLabelScript.TextColor3 = Color3.fromRGB(255,255,255)
+UpdateLabelScript.TextSize = 8
+UpdateLabelScript.TextXAlignment = "Center"
+UpdateLabelScript.Parent = ErrorLogPhrame
+
+local UpdateLabelInfo1 = Instance.new("TextLabel")
+UpdateLabelInfo1.Size = UDim2.new(0, 0, 0, 0)
+UpdateLabelInfo1.Position = UDim2.new(0.5, 0, 0.15, 0)
+UpdateLabelInfo1.BorderSizePixel = 0
+UpdateLabelInfo1.Text = "-"
+UpdateLabelInfo1.TextColor3 = Color3.fromRGB(255,255,255)
+UpdateLabelInfo1.TextSize = 8
+UpdateLabelInfo1.TextXAlignment = "Center"
+UpdateLabelInfo1.Parent = ErrorLogPhrame
+
+local UpdateLabelInfo2 = Instance.new("TextLabel")
+UpdateLabelInfo2.Size = UDim2.new(0, 0, 0, 0)
+UpdateLabelInfo2.Position = UDim2.new(0.5, 0, 0.2, 0)
+UpdateLabelInfo2.BorderSizePixel = 0
+UpdateLabelInfo2.Text = "-"
+UpdateLabelInfo2.TextColor3 = Color3.fromRGB(255,255,255)
+UpdateLabelInfo2.TextSize = 8
+UpdateLabelInfo2.TextXAlignment = "Center"
+UpdateLabelInfo2.Parent = ErrorLogPhrame
+--[[ Error Log Text --]]
+
+
+
+--[[ Info Bar Buttons --]]
+local ErrorUpdateButton = Instance.new("TextButton")
+ErrorUpdateButton.Size = UDim2.new(0, 20, 0, 20)
+ErrorUpdateButton.Position = UDim2.new(0.915, 0, 0.05, 0)
+ErrorUpdateButton.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+ErrorUpdateButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
+ErrorUpdateButton.Text = "1/2"
+ErrorUpdateButton.BackgroundTransparency = 0.4
+ErrorUpdateButton.BorderSizePixel = 0
+ErrorUpdateButton.Transparency = 0
+ErrorUpdateButton.TextColor3 = Color3.fromRGB(60, 95, 60)
+ErrorUpdateButton.TextSize = 8
+ErrorUpdateButton.TextXAlignment = "Center"
+ErrorUpdateButton.Parent = InfoPhrame
+
+ErrorUpdateButton.MouseButton1Click:Connect(function()
+	if ErrorUpdateButton.Text == "1/2" then
+		ErrorUpdateButton.Text = "2/2"
+		ErrorUpdateButton.TextColor3 = Color3.fromRGB(70, 70, 255)
+		ErrorLogPhrame.Visible = true
+		UpdateLogPhrame.Visible = false
+	elseif ErrorUpdateButton.Text == "2/2" then
+		ErrorUpdateButton.Text = "1/2"
+		ErrorUpdateButton.TextColor3 = Color3.fromRGB(60, 95, 60)
+		ErrorLogPhrame.Visible =false
+		UpdateLogPhrame.Visible = true
+	end
+end)
+
+local ExecuteButton = Instance.new("ImageButton")
+ExecuteButton.Size = UDim2.new(0, 20, 0, 20)
+ExecuteButton.Position = UDim2.new(0.915, 0, 0.17, 0)
+ExecuteButton.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+ExecuteButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
+ExecuteButton.BackgroundTransparency = 0.4
+ExecuteButton.BorderSizePixel = 0
+ExecuteButton.Transparency = 0
+ExecuteButton.Visible = true
+ExecuteButton.Image = "rbxassetid://6022860343"
+ExecuteButton.ImageColor3 = Color3.fromRGB(60, 95, 60)
+ExecuteButton.Parent = InfoPhrame
+
+ExecuteButton.MouseButton1Click:Connect(function()
+	if ExecuteButton.ImageColor3 == Color3.fromRGB(60, 95, 60) then
+		ExecuteButton.ImageColor3 = Color3.fromRGB(70, 70, 255)
+	elseif ExecuteButton.ImageColor3 == Color3.fromRGB(70, 70, 255) then
+		ExecuteButton.ImageColor3 = Color3.fromRGB(60, 95, 60)
+	end
+end)
+
+local SoqButton = Instance.new("ImageButton")
+SoqButton.Size = UDim2.new(0, 20, 0, 20)
+SoqButton.Position = UDim2.new(0.915, 0, 0.61, 0)
+SoqButton.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+SoqButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
+SoqButton.BackgroundTransparency = 0.4
+SoqButton.BorderSizePixel = 0
+SoqButton.Transparency = 0
+SoqButton.Visible = true
+SoqButton.Image = "rbxassetid://5012544693"
+SoqButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
+SoqButton.Parent = InfoPhrame
+
+SoqButton.MouseButton1Click:Connect(function()
+	if SoqButton.Image == "rbxassetid://5012544693" then
+		SoqButton.Image = "rbxassetid://6031280883"
+		SoqButton.ImageColor3 = Color3.fromRGB(70, 70, 255)
+		wait(1)
+		SoqButton.Image = "rbxassetid://5012544693"
+		SoqButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
+	end
+end)
+
+local SeqButton = Instance.new("ImageButton")
+SeqButton.Size = UDim2.new(0, 20, 0, 20)
+SeqButton.Position = UDim2.new(0.915, 0, 0.73, 0)
+SeqButton.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+SeqButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
+SeqButton.BackgroundTransparency = 0.4
+SeqButton.BorderSizePixel = 0
+SeqButton.Transparency = 0
+SeqButton.Visible = true
+SeqButton.Image = "rbxassetid://284402785"
+SeqButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
+SeqButton.Parent = InfoPhrame
+
+SeqButton.MouseButton1Click:Connect(function()
+	if SeqButton.Image == "rbxassetid://284402785" then
+		SeqButton.Image = "rbxassetid://284402752"
+		SeqButton.ImageColor3 = Color3.fromRGB(60, 95, 60)
+	elseif SeqButton.Image == "rbxassetid://284402752" then
+		SeqButton.Image = "rbxassetid://284402785"
+		SeqButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
+	end
+end)
+
+local SettingsButton = Instance.new("ImageButton")
+SettingsButton.Size = UDim2.new(0, 20, 0, 20)
+SettingsButton.Position = UDim2.new(0.915, 0, 0.85, 0)
+SettingsButton.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+SettingsButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
+SettingsButton.BackgroundTransparency = 0.4
+SettingsButton.BorderSizePixel = 0
+SettingsButton.Transparency = 0
+SettingsButton.Visible = true
+SettingsButton.Image = "rbxassetid://6034509993"
+SettingsButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
+SettingsButton.Parent = InfoPhrame
+
+SettingsButton.MouseButton1Click:Connect(function()
+	if SettingsButton.ImageColor3 == Color3.fromRGB(95, 60, 60) then
+		SettingsButton.ImageColor3 = Color3.fromRGB(60, 95, 60)
+	elseif SettingsButton.ImageColor3 == Color3.fromRGB(60, 95, 60) then
+		SettingsButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
+	end
+end)
+--[[ Info Bar Buttons --]]
+
+
+
+--[[ Update Log --]]
+local BigUpdateText = Instance.new("TextLabel")
+BigUpdateText.Size = UDim2.new(0.01, 0, 0.01, 0)
+BigUpdateText.Position = UDim2.new(0.05, 0, 0.05, 0)
+BigUpdateText.BorderSizePixel = 0
+BigUpdateText.Text = "New Update [69/69/69][69/69] ━━━━━━━━━━━━━"
+BigUpdateText.TextColor3 = Color3.fromRGB(255,255,255)
+BigUpdateText.TextSize = 8
+BigUpdateText.BackgroundTransparency = 1
+BigUpdateText.TextXAlignment = "Left"
+BigUpdateText.Parent = UpdateLogPhrame
+
+local SmallUpdateText = Instance.new("TextLabel")
+SmallUpdateText.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText.Position = UDim2.new(0.08, 0, 0.1, 0)
+SmallUpdateText.BorderSizePixel = 0
+SmallUpdateText.Text = "(+) added something i think lmfao"
+SmallUpdateText.TextColor3 = Color3.fromRGB(60,160,60)
+SmallUpdateText.TextSize = 6
+SmallUpdateText.BackgroundTransparency = 1
+SmallUpdateText.TextXAlignment = "Left"
+SmallUpdateText.Parent = UpdateLogPhrame
+local SmallUpdateText = Instance.new("TextLabel")
+SmallUpdateText.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText.Position = UDim2.new(0.08, 0, 0.13, 0)
+SmallUpdateText.BorderSizePixel = 0
+SmallUpdateText.Text = "(+) ahhaahahha"
+SmallUpdateText.TextColor3 = Color3.fromRGB(60,160,60)
+SmallUpdateText.TextSize = 6
+SmallUpdateText.BackgroundTransparency = 1
+SmallUpdateText.TextXAlignment = "Left"
+SmallUpdateText.Parent = UpdateLogPhrame
+local SmallUpdateText = Instance.new("TextLabel")
+SmallUpdateText.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText.Position = UDim2.new(0.08, 0, 0.16, 0)
+SmallUpdateText.BorderSizePixel = 0
+SmallUpdateText.Text = "(+) xd lmfao"
+SmallUpdateText.TextColor3 = Color3.fromRGB(60,160,60)
+SmallUpdateText.TextSize = 6
+SmallUpdateText.BackgroundTransparency = 1
+SmallUpdateText.TextXAlignment = "Left"
+SmallUpdateText.Parent = UpdateLogPhrame
+
+local BigUpdateText = Instance.new("TextLabel")
+BigUpdateText.Size = UDim2.new(0.01, 0, 0.01, 0)
+BigUpdateText.Position = UDim2.new(0.05, 0, 0.25, 0)
+BigUpdateText.BorderSizePixel = 0
+BigUpdateText.Text = "New Update [69/69/69][69/69] ━━━━━━━━━━━━━"
+BigUpdateText.TextColor3 = Color3.fromRGB(255,255,255)
+BigUpdateText.TextSize = 8
+BigUpdateText.BackgroundTransparency = 1
+BigUpdateText.TextXAlignment = "Left"
+BigUpdateText.Parent = UpdateLogPhrame
+
+local SmallUpdateText = Instance.new("TextLabel")
+SmallUpdateText.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText.Position = UDim2.new(0.08, 0, 0.30, 0)
+SmallUpdateText.BorderSizePixel = 0
+SmallUpdateText.Text = "(-) did something"
+SmallUpdateText.TextColor3 = Color3.fromRGB(160,60,60)
+SmallUpdateText.TextSize = 6
+SmallUpdateText.BackgroundTransparency = 1
+SmallUpdateText.TextXAlignment = "Left"
+SmallUpdateText.Parent = UpdateLogPhrame
+local SmallUpdateText = Instance.new("TextLabel")
+SmallUpdateText.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText.Position = UDim2.new(0.08, 0, 0.33, 0)
+SmallUpdateText.BorderSizePixel = 0
+SmallUpdateText.Text = "(-) lmfao"
+SmallUpdateText.TextColor3 = Color3.fromRGB(160,60,60)
+SmallUpdateText.TextSize = 6
+SmallUpdateText.BackgroundTransparency = 1
+SmallUpdateText.TextXAlignment = "Left"
+SmallUpdateText.Parent = UpdateLogPhrame
+local SmallUpdateText = Instance.new("TextLabel")
+SmallUpdateText.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText.Position = UDim2.new(0.08, 0, 0.36, 0)
+SmallUpdateText.BorderSizePixel = 0
+SmallUpdateText.Text = "(-) eheheheh"
+SmallUpdateText.TextColor3 = Color3.fromRGB(160,60,60)
+SmallUpdateText.TextSize = 6
+SmallUpdateText.BackgroundTransparency = 1
+SmallUpdateText.TextXAlignment = "Left"
+SmallUpdateText.Parent = UpdateLogPhrame
+--[[ Update Log --]]
+
 local MakeUpLoadingBar = math.random(20, 100)
-StartLoading(100, 180, 0.1, tostring(MakeUpLoadingBar))
+StartLoading(100, 100, 0.1, tostring(MakeUpLoadingBar))
+
 
 --[--Run Checks
 
@@ -281,6 +580,7 @@ wait(0.1)
 
 --[--Script
 
+wait(0.1)
 if game.PlaceId == 2866967438 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and FSISPATCHED == false and ScreenCheckX and ScreenCheckY then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Script Is Loading"
@@ -289,7 +589,7 @@ UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Fishing%20Simulator.lua", true))()
-  MainGui:destroy()
+  --MainGui:destroy()
 	
 elseif game.PlaceId == 69184822 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and TPT2ISPATCHED == false and ScreenCheckX and ScreenCheckY then
 UpdateLabelError.TextSize = 9
@@ -299,7 +599,7 @@ UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/ThemeParkTycoon2.lua", true))()
-  MainGui:destroy()
+  --MainGui:destroy()
 	
 elseif game.PlaceId == 54865335 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and UDISPATCHED == false and ScreenCheckX and ScreenCheckY then
 UpdateLabelError.TextSize = 9
@@ -309,7 +609,7 @@ UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Ultimate%20Driving.lua", true))()
-  MainGui:destroy()
+  --MainGui:destroy()
 	
 elseif game.PlaceId == 6516141723 or game.PlaceId == 6839171747 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and DOORSISPATCHED == false and ScreenCheckX and ScreenCheckY then
 UpdateLabelError.TextSize = 9
@@ -319,7 +619,7 @@ UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Doors.lua", true))()
-  MainGui:destroy()
+  --MainGui:destroy()
 	
 elseif game.PlaceId == 237590761 or game.PlaceId == 237590657 or game.PlaceId == 1228674372 or game.PlaceId == 1600503 or game.PlaceId == 237590761 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and ApocISPATCHED == false and ScreenCheckX and ScreenCheckY then
 UpdateLabelError.TextSize = 9
@@ -329,7 +629,7 @@ UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/apocloader.lua", true))()
-  MainGui:destroy()
+  --MainGui:destroy()
 	
 elseif IsAGameThatWorks and BrokenThemes and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and IsPatched and ScreenCheckX and ScreenCheckY then
 wait(0.1)
@@ -338,8 +638,8 @@ UpdateLabelError.Text = "Error 1: wrong theme / no theme"
 UpdateLabelScript.Text = "!"
 UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
-wait(5)
- MainGui:destroy()
+--wait(5)
+ --MainGui:destroy()
 	
 elseif IsAGameThatWorks and Discord_Key ~= "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
 wait(0.1)
@@ -348,8 +648,8 @@ UpdateLabelError.Text = "Error 2: wrong discord key"
 UpdateLabelScript.Text = "!"
 UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
-wait(5)
- MainGui:destroy()
+--wait(5)
+ --MainGui:destroy()
 	
 elseif IsAGameThatWorks and OUTDATEDVERSION == true and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
 wait(0.1)
@@ -358,8 +658,8 @@ UpdateLabelError.Text = "Error 3: invalid version"
 UpdateLabelScript.Text = "!"
 UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
-wait(5)
- MainGui:destroy()
+--wait(5)
+ --MainGui:destroy()
 	
 elseif game.PlaceId ~= 237590657 or game.PlaceId ~= 1228674372 or game.PlaceId ~= 237590761 or game.PlaceId ~= 1600503 or game.PlaceId ~= 237590761 or game.PlaceId ~= 2866967438 or game.PlaceId ~= 69184822 or game.PlaceId ~= 54865335 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
 wait(0.1)
@@ -370,7 +670,7 @@ UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/UniversalScript.lua", true))()
-  MainGui:destroy()
+  --MainGui:destroy()
 
 elseif IsAGameThatWorks and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and DOORSISPATCHED == true or TPT2ISPATCHED == true or UDISPATCHED == true or APOCISPATCHED == true or FSISPATCHED == true and ScreenCheckX and ScreenCheckY then
 wait(0.1)
@@ -379,8 +679,8 @@ UpdateLabelError.Text = "Error 5: script is patched"
 UpdateLabelScript.Text = "!"
 UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
-wait(5)
- MainGui:destroy()
+--wait(5)
+ --MainGui:destroy()
 		
 elseif ScreenSizeX == nil or ScreenSizeX == nan or ScreenSizeY == nil or ScreenSizeY == nan and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and IsAGameThatWorks then
 wait(0.1)
@@ -389,8 +689,8 @@ UpdateLabelError.Text = "Error 6: invalid screensize"
 UpdateLabelScript.Text = "!"
 UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
-wait(5)
- MainGui:destroy()
+--wait(5)
+ --MainGui:destroy()
 	
 end
 
