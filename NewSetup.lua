@@ -73,14 +73,14 @@ BarText.Parent = BarPhrame
 local ExitGuiButton = Instance.new("TextButton")
 ExitGuiButton.Size = UDim2.new(0, 20, 0, 20)
 ExitGuiButton.Position = UDim2.new(0.915, 0, 0.1, 0)
-ExitGuiButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ExitGuiButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 ExitGuiButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
 ExitGuiButton.Text = "✖️"
 ExitGuiButton.BorderSizePixel = 0
 ExitGuiButton.Transparency = 0
 ExitGuiButton.BackgroundTransparency = 0.9
 ExitGuiButton.TextColor3 = Color3.fromRGB(255,255, 255)
-ExitGuiButton.TextSize = 9
+ExitGuiButton.TextSize = 12
 ExitGuiButton.TextXAlignment = "Center"
 ExitGuiButton.Parent = BarPhrame
 
@@ -91,14 +91,14 @@ end)
 local MinimiseGuiButton = Instance.new("TextButton")
 MinimiseGuiButton.Size = UDim2.new(0, 20, 0, 20)
 MinimiseGuiButton.Position = UDim2.new(0.84, 0, 0.1, 0)
-MinimiseGuiButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+MinimiseGuiButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 MinimiseGuiButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
 MinimiseGuiButton.Text = "➖"
 MinimiseGuiButton.BorderSizePixel = 0
 MinimiseGuiButton.Transparency = 0
 MinimiseGuiButton.BackgroundTransparency = 0.9
 MinimiseGuiButton.TextColor3 = Color3.fromRGB(255,255, 255)
-MinimiseGuiButton.TextSize = 9
+MinimiseGuiButton.TextSize = 12
 MinimiseGuiButton.TextXAlignment = "Center"
 MinimiseGuiButton.Parent = BarPhrame
 
