@@ -365,6 +365,68 @@ ScriptPhrameB.Parent = InfoPhrame
 
 
 
+--[[ ScriptPhrame Setup --]]
+local InputInfoLabel = Instance.new("TextLabel")
+InputInfoLabel.Size = UDim2.new(0, 0, 0, 0)
+InputInfoLabel.Position = UDim2.new(0.49, 0, 0.05, 0)
+InputInfoLabel.BorderSizePixel = 0
+InputInfoLabel.Text = "(Input Info)"
+InputInfoLabel.TextColor3 = Color3.fromRGB(255,255,255)
+InputInfoLabel.TextSize = 8
+InputInfoLabel.TextXAlignment = "Center"
+InputInfoLabel.Parent = ScriptPhrameB
+
+local TextBox1 = Instance.new("TextBox")
+TextBox1.Size = UDim2.new(1, -45, 0, 15)
+TextBox1.Position = UDim2.new(0.08, 0, 0.1, 0)
+TextBox1.BackgroundColor3 = Color3.fromRGB(215, 215, 215)
+TextBox1.BackgroundTransparency = 0.98
+TextBox1.BorderSizePixel = 0
+TextBox1.Text = "Keycode 1"
+TextBox1.TextColor3 = Color3.fromRGB(60, 95, 60)
+TextBox1.TextSize = 8
+TextBox1.TextXAlignment = "Center"
+TextBox1.Parent = ScriptPhrameB
+
+local TextBox2 = Instance.new("TextBox")
+TextBox2.Size = UDim2.new(1, -45, 0, 15)
+TextBox2.Position = UDim2.new(0.08, 0, 0.15, 0)
+TextBox2.BackgroundColor3 = Color3.fromRGB(215, 215, 215)
+TextBox2.BackgroundTransparency = 0.98
+TextBox2.BorderSizePixel = 0
+TextBox2.Text = "Keycode 2"
+TextBox2.TextColor3 = Color3.fromRGB(60, 95, 60)
+TextBox2.TextSize = 8
+TextBox2.TextXAlignment = "Center"
+TextBox2.Parent = ScriptPhrameB
+
+local TextBox3 = Instance.new("TextBox")
+TextBox3.Size = UDim2.new(1, -45, 0, 15)
+TextBox3.Position = UDim2.new(0.08, 0, 0.20, 0)
+TextBox3.BackgroundColor3 = Color3.fromRGB(215, 215, 215)
+TextBox3.BackgroundTransparency = 0.98
+TextBox3.BorderSizePixel = 0
+TextBox3.Text = "Keycode 3"
+TextBox3.TextColor3 = Color3.fromRGB(60, 95, 60)
+TextBox3.TextSize = 8
+TextBox3.TextXAlignment = "Center"
+TextBox3.Parent = ScriptPhrameB
+
+local TextBox4 = Instance.new("TextBox")
+TextBox4.Size = UDim2.new(1, -45, 0, 15)
+TextBox4.Position = UDim2.new(0.08, 0, 0.25, 0)
+TextBox4.BackgroundColor3 = Color3.fromRGB(215, 215, 215)
+TextBox4.BackgroundTransparency = 0.98
+TextBox4.BorderSizePixel = 0
+TextBox4.Text = "Keycode 4"
+TextBox4.TextColor3 = Color3.fromRGB(60, 95, 60)
+TextBox4.TextSize = 8
+TextBox4.TextXAlignment = "Center"
+TextBox4.Parent = ScriptPhrameB
+--[[ ScriptPhrame Setup --]]
+
+
+
 --[[ Error Log Text --]]
 local UpdateLabelError = Instance.new("TextLabel")
 UpdateLabelError.Size = UDim2.new(0, 0, 0, 0)
