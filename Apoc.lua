@@ -3019,7 +3019,6 @@ end, Color3.fromRGB(25, 25, 25), false)
 
 
 rconsoleclear()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/log.lua", true))()
 CreateFloatingTextBox("Script Loaded Correctly!", 3, 25, 255, 25)
 
 local Players = game:GetService("Players")
