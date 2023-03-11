@@ -179,7 +179,7 @@ local function CloseThetaGui(Val, ValQ, Time, Amount)
 ThetaLoaderPhrameLoadingImage.Size = UDim2.new(0, 1, 0, 1)
 local MakeUpRandomNumber = math.random(20, 100)
 for i = 0, Amount do
-local LoadedAmount = math.floor(200-(i/Amount*Val))
+local LoadedAmount = math.floor(250-(i/Amount*Val))
 local LoadedAmountQ = math.floor(400-(i/Amount*ValQ))
 local LoadedAmountB = math.floor(10-i)
 ThetaLoaderPhrameBottomInfo.TextSize = LoadedAmountB
@@ -194,7 +194,7 @@ wait(Time)
 end
 OeroPhrame:destroy()
 end
-CloseThetaGui(200, 400, 0.01, 10)
+CloseThetaGui(250, 400, 0.01, 10)
 --[[ Req Features --]]
 
 wait()
@@ -981,21 +981,21 @@ local MakeUpRandomNumber = math.random(20, 100)
 for i = 0, Amount do
 local LoadedAmount = math.floor(300-(i/Amount*Val))
 local LoadedAmountQ = math.floor(200-(i/Amount*ValQ))
-local LoadedAmountB = math.floor(10-i)
+local LoadedAmountB = math.floor(8-i)
 LoadingFill.Size = UDim2.new(0, 1, 0, 1)
 LoadingBar.Size = UDim2.new(0, 1, 0, 1)
-LoadingBar.TextSize = LoadedAmountB
-LoadingFill.TextSize = LoadedAmountB
+LoadingBar.TextSize = math.floor(LoadedAmountB-4)
+LoadingFill.TextSize = math.floor(LoadedAmountB-4)
 ErrorUpdateButton.Size = UDim2.new(0, 20, 0, 20)
 ExecuteButton.Size = UDim2.new(0, 1, 0, 1)
 SoqButton.Size = UDim2.new(0, 1, 0, 1)
 SeqButton.Size = UDim2.new(0, 1, 0, 1)
 SettingsButton.Size = UDim2.new(0, 1, 0, 1)
-ExentsionBarPlayersText.TextSize = LoadedAmountB
-ExentsionBarText1.TextSize = LoadedAmountB
-ExentsionBarText2.TextSize = LoadedAmountB
-ExentsionBarText3.TextSize = LoadedAmountB
-ExentsionBarText4.TextSize = LoadedAmountB
+ExentsionBarPlayersText.TextSize = math.floor(LoadedAmountB-4)
+ExentsionBarText1.TextSize = math.floor(LoadedAmountB-4)
+ExentsionBarText2.TextSize = math.floor(LoadedAmountB-4)
+ExentsionBarText3.TextSize = math.floor(LoadedAmountB-4)
+ExentsionBarText4.TextSize = math.floor(LoadedAmountB-4)
 --[[InputInfoLabel.TextSize = LoadedAmountB
 TextBox1.TextSize = LoadedAmountB
 TextBox2.TextSize = LoadedAmountB
@@ -1006,24 +1006,24 @@ UpdateLabelScript.TextSize = LoadedAmountB
 UpdateLabelInfo1.TextSize = LoadedAmountB
 UpdateLabelInfo2.TextSize = LoadedAmountB
 ErrorUpdateButton.TextSize = LoadedAmountB
-BigUpdateText1.TextSize = LoadedAmountB
-BigUpdateText2.TextSize = LoadedAmountB
+BigUpdateText1.TextSize = math.floor(LoadedAmountB-2)
+BigUpdateText2.TextSize = math.floor(LoadedAmountB-2)
 MinimiseRestroreButton.TextSize = LoadedAmountB
-BarText1.TextSize = LoadedAmountB
-BarText2.TextSize = LoadedAmountB
-BarTextB.TextSize = LoadedAmountB
+BarText1.TextSize = math.floor(LoadedAmountB-2)
+BarText2.TextSize = math.floor(LoadedAmountB-2)
+BarTextB.TextSize = math.floor(LoadedAmountB-2)
 ExitGuiButton.TextSize = LoadedAmountB
 MinimiseGuiButton.TextSize = LoadedAmountB
 LoadingFill.TextSize = LoadedAmountB
-InfoPhrameCText1.TextSize = LoadedAmountB
-InfoPhrameCText2.TextSize = LoadedAmountB
-InfoPhrameCText3.TextSize = LoadedAmountB
-SmallUpdateText1.TextSize = LoadedAmountB
-SmallUpdateText2.TextSize = LoadedAmountB
-SmallUpdateText3.TextSize = LoadedAmountB
-SmallUpdateText4.TextSize = LoadedAmountB
-SmallUpdateText5.TextSize = LoadedAmountB
-SmallUpdateText6.TextSize = LoadedAmountB
+InfoPhrameCText1.TextSize = math.floor(LoadedAmountB-4)
+InfoPhrameCText2.TextSize = math.floor(LoadedAmountB-4)
+InfoPhrameCText3.TextSize = math.floor(LoadedAmountB-4)
+SmallUpdateText1.TextSize = math.floor(LoadedAmountB-4)
+SmallUpdateText2.TextSize = math.floor(LoadedAmountB-4)
+SmallUpdateText3.TextSize = math.floor(LoadedAmountB-4)
+SmallUpdateText4.TextSize = math.floor(LoadedAmountB-4)
+SmallUpdateText5.TextSize = math.floor(LoadedAmountB-4)
+SmallUpdateText6.TextSize = math.floor(LoadedAmountB-4)
 ZeroPhrame.Size = UDim2.new(0, LoadedAmount, 0, LoadedAmountQ)
 wait(Time)
 end
