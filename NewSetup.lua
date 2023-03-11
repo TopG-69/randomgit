@@ -159,6 +159,18 @@ ThetaLoaderPhrameBottomInfo.BackgroundTransparency = 1
 ThetaLoaderPhrameBottomInfo.TextXAlignment = "Left"
 ThetaLoaderPhrameBottomInfo.Parent = ThetaLoaderPhrame
 
+local function OpenThetaGui(Val, ValQ, Time, Amount)
+local MakeUpRandomNumber = math.random(20, 100)
+for i = 0, Amount do
+local LoadedAmount = math.floor(0+(i/Amount*Val))
+local LoadedAmountQ = math.floor(0+(i/Amount*ValQ))
+OeroPhrame.Size = UDim2.new(0, LoadedAmount, 0, LoadedAmountQ)
+wait(Time)
+end
+end
+
+OpenThetaGui(250, 400, 0.01, 10)
+
 local function MakeLoadingImageSpin()
 for i = 0, 60 do
 local RotationAmount = math.floor(0+(60-i))
@@ -978,8 +990,8 @@ local LoadedAmountQ = math.floor(200-(i/Amount*ValQ))
 local LoadedAmountB = math.floor(8-i)
 LoadingFill.Size = UDim2.new(0, 1, 0, 1)
 LoadingBar.Size = UDim2.new(0, 1, 0, 1)
-LoadingBar.TextSize = math.floor(LoadedAmountB-4)
-LoadingFill.TextSize = math.floor(LoadedAmountB-4)
+LoadingBar.TextSize = math.floor(LoadedAmountB-6)
+LoadingFill.TextSize = math.floor(LoadedAmountB-6)
 ErrorUpdateButton.Size = UDim2.new(0, 20, 0, 20)
 ExecuteButton.Size = UDim2.new(0, 1, 0, 1)
 SoqButton.Size = UDim2.new(0, 1, 0, 1)
