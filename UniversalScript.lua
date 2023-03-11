@@ -1,5 +1,5 @@
 FAILEDLOADING = false
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/Module.lua?token=GHSAT0AAAAAAB7C53BGY6PILSARBIYA4Y5EZAMSXKA"))()
 local UI = Library.Load({
 	Title = "Universal - MSH",
 	Style = 1,
@@ -204,6 +204,6 @@ end, Enabled = false})
 
 --[--Fix
 wait(0.1)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/log.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/log.lua?token=GHSAT0AAAAAAB7C53BG6C7CILXW7UJOCNH6ZAMS2BQ", true))()
 RestoreWSJP()
 --]--End Of Fix
