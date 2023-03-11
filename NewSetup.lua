@@ -884,7 +884,15 @@ end)
 local function MakeCoolVisualOpen(Val, ValQ, Time, Amount)
 LoadingBar.TextSize = 4
 ExentsionBarPlayersText.TextSize = 4
+LoadingFill.Size = UDim2.new(0, 1, 0, 1)
+LoadingBar.Size = UDim2.new(0, 1, 0, 1)
 LoadingFill.TextSize = 3.5
+LoadingBar.TextSize = 4
+ErrorUpdateButton.Size = UDim2.new(0, 1, 0, 1)
+ExecuteButton.Size = UDim2.new(0, 1, 0, 1)
+SoqButton.Size = UDim2.new(0, 1, 0, 1)
+SeqButton.Size = UDim2.new(0, 1, 0, 1)
+SettingsButton.Size = UDim2.new(0, 1, 0, 1)
 ExentsionBarText1.TextSize = 4
 ExentsionBarText2.TextSize = 4
 ExentsionBarText3.TextSize = 4
