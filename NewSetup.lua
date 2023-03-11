@@ -1312,7 +1312,7 @@ UpdateLabelError.Text = "Script Is Loading"
 UpdateLabelScript.Text = "!"
 UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/apocloader.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/apocloader.lua?token=GHSAT0AAAAAAB7C53BHXIYJ2HMRVYZ5LRPMZAMTIJA", true))()
 end
 end	
 --]--End Of Script
