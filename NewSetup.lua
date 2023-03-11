@@ -520,7 +520,7 @@ ScriptPhrameB.Parent = InfoPhrame
 
 
 --[[ ScriptPhrame Setup --]]
-local InputInfoLabel = Instance.new("TextLabel")
+--[[local InputInfoLabel = Instance.new("TextLabel")
 InputInfoLabel.Size = UDim2.new(0, 0, 0, 0)
 InputInfoLabel.Position = UDim2.new(0.49, 0, 0.05, 0)
 InputInfoLabel.BorderSizePixel = 0
@@ -576,7 +576,7 @@ TextBox4.Text = "Keycode 4"
 TextBox4.TextColor3 = Color3.fromRGB(60, 95, 60)
 TextBox4.TextSize = 8
 TextBox4.TextXAlignment = "Center"
-TextBox4.Parent = ScriptPhrameB
+TextBox4.Parent = ScriptPhrameB--]]
 --[[ ScriptPhrame Setup --]]
 
 
@@ -882,17 +882,67 @@ end)
 
 --[[ Finalise Stuff --]]
 local function MakeCoolVisualOpen(Val, ValQ, Time, Amount)
+LoadingBar.TextSize = 4
+ExentsionBarPlayersText.TextSize = 4
+LoadingFill.TextSize = 3.5
+ExentsionBarText1.TextSize = 4
+ExentsionBarText2.TextSize = 4
+ExentsionBarText3.TextSize = 4
+ExentsionBarText4.TextSize = 4
+--[[InputInfoLabel.TextSize = 4
+TextBox1.TextSize = 4
+TextBox2.TextSize = 4
+TextBox3.TextSize = 4
+TextBox4.TextSize = 4--]]
+UpdateLabelError.TextSize = 4
+UpdateLabelScript.TextSize = 4
+UpdateLabelInfo1.TextSize = 4
+UpdateLabelInfo2.TextSize = 4
+ErrorUpdateButton.TextSize = 4
+BigUpdateText1.TextSize = 4
+BigUpdateText2.TextSize = 4
+MinimiseRestroreButton.TextSize = 10
+BarText1.TextSize = 4.5
+BarText2.TextSize = 4.5
+BarTextB.TextSize = 4.5
+ExitGuiButton.TextSize = 6
+MinimiseGuiButton.TextSize = 6
+LoadingFill.TextSize = 3.5
+InfoPhrameCText1.TextSize = 3.5
+InfoPhrameCText2.TextSize = 3.5
+InfoPhrameCText3.TextSize = 3.5
+SmallUpdateText1.TextSize = 3
+SmallUpdateText2.TextSize = 3
+SmallUpdateText3.TextSize = 3
+SmallUpdateText4.TextSize = 3
+SmallUpdateText5.TextSize = 3
+SmallUpdateText6.TextSize = 3
+local MakeUpRandomNumber = math.random(20, 100)
+for i = 0, Amount do
+local LoadedAmount = math.floor(0+(i/Amount*Val))
+local LoadedAmountQ = math.floor(0+(i/Amount*ValQ))
+ZeroPhrame.Size = UDim2.new(0, LoadedAmount, 0, LoadedAmountQ)
+wait(Time)
+end
+LoadingFill.Size = UDim2.new(0, 100, 0, 10)
+LoadingBar.Size = UDim2.new(0, 100, 0, 10)
+LoadingFill.TextSize = 7
 LoadingBar.TextSize = 8
+ErrorUpdateButton.Size = UDim2.new(0, 20, 0, 20)
+ExecuteButton.Size = UDim2.new(0, 20, 0, 20)
+SoqButton.Size = UDim2.new(0, 20, 0, 20)
+SeqButton.Size = UDim2.new(0, 20, 0, 20)
+SettingsButton.Size = UDim2.new(0, 20, 0, 20)
 ExentsionBarPlayersText.TextSize = 8
 ExentsionBarText1.TextSize = 8
 ExentsionBarText2.TextSize = 8
 ExentsionBarText3.TextSize = 8
 ExentsionBarText4.TextSize = 8
-InputInfoLabel.TextSize = 8
+--[[InputInfoLabel.TextSize = 8
 TextBox1.TextSize = 8
 TextBox2.TextSize = 8
 TextBox3.TextSize = 8
-TextBox4.TextSize = 8
+TextBox4.TextSize = 8--]]
 UpdateLabelError.TextSize = 8
 UpdateLabelScript.TextSize = 8
 UpdateLabelInfo1.TextSize = 8
@@ -916,13 +966,6 @@ SmallUpdateText3.TextSize = 6
 SmallUpdateText4.TextSize = 6
 SmallUpdateText5.TextSize = 6
 SmallUpdateText6.TextSize = 6
-local MakeUpRandomNumber = math.random(20, 100)
-for i = 0, Amount do
-local LoadedAmount = math.floor(0+(i/Amount*Val))
-local LoadedAmountQ = math.floor(0+(i/Amount*ValQ))
-ZeroPhrame.Size = UDim2.new(0, LoadedAmount, 0, LoadedAmountQ)
-wait(Time)
-end
 end
 
 local function MakeCoolVisualClose(Val, ValQ, Time, Amount)
@@ -931,17 +974,25 @@ for i = 0, Amount do
 local LoadedAmount = math.floor(300-(i/Amount*Val))
 local LoadedAmountQ = math.floor(200-(i/Amount*ValQ))
 local LoadedAmountB = math.floor(10-i)
+LoadingFill.Size = UDim2.new(0, 1, 0, 1)
+LoadingBar.Size = UDim2.new(0, 1, 0, 1)
 LoadingBar.TextSize = LoadedAmountB
+LoadingFill.TextSize = LoadedAmountB
+ErrorUpdateButton.Size = UDim2.new(0, 20, 0, 20)
+ExecuteButton.Size = UDim2.new(0, 1, 0, 1)
+SoqButton.Size = UDim2.new(0, 1, 0, 1)
+SeqButton.Size = UDim2.new(0, 1, 0, 1)
+SettingsButton.Size = UDim2.new(0, 1, 0, 1)
 ExentsionBarPlayersText.TextSize = LoadedAmountB
 ExentsionBarText1.TextSize = LoadedAmountB
 ExentsionBarText2.TextSize = LoadedAmountB
 ExentsionBarText3.TextSize = LoadedAmountB
 ExentsionBarText4.TextSize = LoadedAmountB
-InputInfoLabel.TextSize = LoadedAmountB
+--[[InputInfoLabel.TextSize = LoadedAmountB
 TextBox1.TextSize = LoadedAmountB
 TextBox2.TextSize = LoadedAmountB
 TextBox3.TextSize = LoadedAmountB
-TextBox4.TextSize = LoadedAmountB
+TextBox4.TextSize = LoadedAmountB--]]
 UpdateLabelError.TextSize = LoadedAmountB
 UpdateLabelScript.TextSize = LoadedAmountB
 UpdateLabelInfo1.TextSize = LoadedAmountB
