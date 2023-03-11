@@ -1080,7 +1080,8 @@ local MakeUpLoadingBar = math.random(5, 20)
 StartLoading(100, 100, 0.01, tostring(MakeUpLoadingBar))
 --[[ Final Setup --]]
 
---[--Run Checks
+--[--Run Check
+local success, result = pcall(function()
 
 --Anti Bypass Modules
 
@@ -1300,5 +1301,14 @@ UpdateLabelScript.Text = "Your ScreenSizeX or Y is invalid"
 UpdateLabelInfo1.Text = "Your missing ScreenSize"
 UpdateLabelInfo2.Text = "!"
 end
-
+		
 --]--End Of Script
+		
+--]--On Error
+if not success then
+UpdateLabelError.Text = "Error 10: invalid script"
+UpdateLabelScript.Text = "Your script is invalid"
+UpdateLabelInfo1.Text = "Agony stopped loading"
+UpdateLabelInfo2.Text = "!"
+end
+--]--End Of On Error
