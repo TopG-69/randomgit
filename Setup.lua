@@ -192,7 +192,5 @@ wait(0.1)
 AlertListCopy = AlertTab.Button({Text = "Click To Copy Invite", function()
     setclipboard('https://discord.gg/DYkHGnYeDp')
 end, })
-	
 end
-
 --]--End Of Script
