@@ -1,5 +1,5 @@
 FAILEDLOADING = false
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/Module.lua?token=GHSAT0AAAAAAB7C53BGY6PILSARBIYA4Y5EZAMSXKA"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/Module.lua"))()
 local UI = Library.Load({
 	Title = "Universal - MSH",
 	Style = 1,
