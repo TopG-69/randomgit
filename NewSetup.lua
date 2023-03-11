@@ -1272,7 +1272,7 @@ UpdateLabelScript.Text = "Your game isn't supported"
 UpdateLabelInfo1.Text = "Game has teleported you"
 UpdateLabelInfo2.Text = "!"
 LoadingBar.BackgroundColor3 = Color3.fromRGB(255, 255, 60)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/UniversalScript.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/UniversalScript.lua", true))()
 
 elseif game.PlaceId == 2866967438 then
 UpdateLabelError.TextSize = 9
@@ -1280,15 +1280,15 @@ UpdateLabelError.Text = "Script Is Loading"
 UpdateLabelScript.Text = "!"
 UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Fishing%20Simulator.lua", true))()
-	
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/Fishing%20Simulator.lua", true))()
+
 elseif game.PlaceId == 69184822 then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Script Is Loading"
 UpdateLabelScript.Text = "!"
 UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/ThemeParkTycoon2.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/ThemeParkTycoon2.lua", true))()
 	
 elseif game.PlaceId == 54865335  then
 UpdateLabelError.TextSize = 9
@@ -1296,7 +1296,7 @@ UpdateLabelError.Text = "Script Is Loading"
 UpdateLabelScript.Text = "!"
 UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Ultimate%20Driving.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/Ultimate%20Driving.lua", true))()
 	
 elseif game.PlaceId == 6516141723 or game.PlaceId == 6839171747 then
 UpdateLabelError.TextSize = 9
@@ -1304,7 +1304,7 @@ UpdateLabelError.Text = "Script Is Loading"
 UpdateLabelScript.Text = "!"
 UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Doors.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/Doors.lua", true))()
 	
 elseif game.PlaceId == 237590761 or game.PlaceId == 237590657 or game.PlaceId == 1228674372 or game.PlaceId == 1600503 or game.PlaceId == 237590761 then
 UpdateLabelError.TextSize = 9
@@ -1312,7 +1312,7 @@ UpdateLabelError.Text = "Script Is Loading"
 UpdateLabelScript.Text = "!"
 UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/apocloader.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/apocloader.lua", true))()
 end
 end	
 --]--End Of Script
