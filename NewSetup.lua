@@ -1081,10 +1081,10 @@ StartLoading(100, 100, 0.01, tostring(MakeUpLoadingBar))
 --[[ Final Setup --]]
 
 --[--Run Check
-local success, result = pcall(function()
+--local SuccessPassed, result = pcall(function()
 
 --Anti Bypass Modules
-
+function ProcessScript()
 FishingSimulatorCURRENT = 2
 DoorsCURRENT = 2
 ApocCURRENT = 1
@@ -1301,14 +1301,13 @@ UpdateLabelScript.Text = "Your ScreenSizeX or Y is invalid"
 UpdateLabelInfo1.Text = "Your missing ScreenSize"
 UpdateLabelInfo2.Text = "!"
 end
-		
+end	
 --]--End Of Script
 		
 --]--On Error
-if not success then
-UpdateLabelError.Text = "Error 10: invalid script"
+if Discord_Key~=nil and Theme~=nil and ScreenSizeX~=nil and ScreenSizeY~=nil then ProcessScript() else 
+UpdateLabelError.Text = "Error 10: invalid"
 UpdateLabelScript.Text = "Your script is invalid"
 UpdateLabelInfo1.Text = "Agony stopped loading"
-UpdateLabelInfo2.Text = "!"
-end
+UpdateLabelInfo2.Text = "!" end
 --]--End Of On Error
