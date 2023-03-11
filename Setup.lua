@@ -17,7 +17,7 @@
 
 --]]
 
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/Module.lua?token=GHSAT0AAAAAAB7C53BGY6PILSARBIYA4Y5EZAMSXKA"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/Module.lua?token=GHSAT0AAAAAAB7C53BGADXG4D7OAS2XB23CZAMTBLQ"))()
 local UI = Library.Load({
 	Title = "Agony - MSL",
 	Style = 1,
