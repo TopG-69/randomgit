@@ -17,7 +17,7 @@
 
 --]]
 
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/Module.lua?token=GHSAT0AAAAAAB7C53BGY6PILSARBIYA4Y5EZAMSXKA"))()
 local UI = Library.Load({
 	Title = "Agony - MSL",
 	Style = 1,
@@ -56,7 +56,7 @@ UDISPATCHED = nil
 --[--Setup
 AlertTab = UI.New({Title = "Alerts"})
 wait(0.1)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Version.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/Version.lua?token=GHSAT0AAAAAAB7C53BGQWUCMHRM6MGOKR6AZAMSXQA", true))()
 FixedThemes = Theme == "Aqua" or Theme == "Light" or Theme == "Dark" or Theme == "Jester" or Theme == "Mocha"
 BrokenThemes = Theme ~= "Aqua" or Theme ~= "Light" or Theme ~= "Dark" or Theme ~= "Jester" or Theme ~= "Mocha" or Theme == nil
 IsPatched = TPT2ISPATCHED == false and UDISPATCHED == false and FSISPATCHED == false and DOORSISPATCHED == false and ApocISPATCHED == false
@@ -72,7 +72,7 @@ wait(0.1)
 if game.PlaceId == 2866967438 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and FSISPATCHED == false and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Fishing Simulator Script Is Loading"})
 wait(5)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Fishing%20Simulator.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/Fishing%20Simulator.lua?token=GHSAT0AAAAAAB7C53BG7UIA3WDIXGJDJPVKZAMSXNA", true))()
 	
 elseif game.PlaceId == 69184822 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and TPT2ISPATCHED == false and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Theme Park Tycoon 2 Script Is Loading"})
@@ -93,7 +93,7 @@ elseif game.PlaceId == 237590761 or game.PlaceId == 237590657 or game.PlaceId ==
 AlertList = AlertTab.Label({Text = "MultiScript (apoc) Script Is Loading"})
 wait(5)
 AlertList = AlertTab.Label({Text = "Gui might not close so minimise it!"})
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/apocloader.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/apocloader.lua?token=GHSAT0AAAAAAB7C53BGJD4SXGYXJBHBLBB6ZAMSXLQ", true))()
 	
 elseif IsAGameThatWorks and BrokenThemes and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and IsPatched and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Error1! - NT"})
@@ -161,7 +161,7 @@ end, })
 	
 AlertList = AlertTab.Label({Text = "Loading Universal Version In 10 Secs"})
 wait(10)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/UniversalScript.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/UniversalScript.lua?token=GHSAT0AAAAAAB7C53BHU6GQD24XGDONQHACZAMSXLA", true))()
 
 elseif IsAGameThatWorks and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and DOORSISPATCHED == true or TPT2ISPATCHED == true or UDISPATCHED == true or APOCISPATCHED == true or FSISPATCHED == true and ScreenCheckX and ScreenCheckY then
 AlertList = AlertTab.Label({Text = "Error5! - SIP"})
