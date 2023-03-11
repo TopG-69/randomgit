@@ -1271,7 +1271,7 @@ elseif game.PlaceId ~= 237590657 and game.PlaceId ~= 1228674372 and game.PlaceId
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 4: unsupported game"
 UpdateLabelScript.Text = "Your game isn't supported"
-UpdateLabelInfo1.Text = "Game has teleported you"
+UpdateLabelInfo1.Text = "Universal Script is blocked"
 UpdateLabelInfo2.Text = "!"
 LoadingBar.BackgroundColor3 = Color3.fromRGB(255, 255, 60)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/UniversalScript.lua", true))()
@@ -1282,29 +1282,29 @@ UpdateLabelError.Text = "Script Is Loading"
 UpdateLabelScript.Text = "!"
 UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Fishing%20Simulator.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/Fishing%20Simulator.lua?token=GHSAT0AAAAAAB7C53BHFNHBRGYIVO4W7EFUZAMTP4Q", true))()
 	
 elseif game.PlaceId == 69184822 then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Script Is Loading"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
+UpdateLabelScript.Text = "Fixing Agony"
+UpdateLabelInfo1.Text = "Script is blocked"
 UpdateLabelInfo2.Text = "!"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/ThemeParkTycoon2.lua", true))()
 	
 elseif game.PlaceId == 54865335  then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Script Is Loading"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
+UpdateLabelScript.Text = "Fixing Agony"
+UpdateLabelInfo1.Text = "Script is blocked"
 UpdateLabelInfo2.Text = "!"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Ultimate%20Driving.lua", true))()
 	
 elseif game.PlaceId == 6516141723 or game.PlaceId == 6839171747 then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Script Is Loading"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
+UpdateLabelScript.Text = "Fixing Agony"
+UpdateLabelInfo1.Text = "Script is blocked"
 UpdateLabelInfo2.Text = "!"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Doors.lua", true))()
 	
@@ -1314,7 +1314,7 @@ UpdateLabelError.Text = "Script Is Loading"
 UpdateLabelScript.Text = "!"
 UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/apocloader.lua?token=GHSAT0AAAAAAB7C53BHXIYJ2HMRVYZ5LRPMZAMTIJA", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/apocloader.lua?token=GHSAT0AAAAAAB7C53BHWJNAHHKYDAASPQZIZAMTNTA", true))()
 end
 end	
 --]--End Of Script
