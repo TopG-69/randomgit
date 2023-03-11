@@ -1,5 +1,4 @@
 --[[
-
           ╭╭━━━━━╮╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮╭━━━━━╮╮
           ┃┃ ━━━ ┃┃\       █████╗  ██████╗  █████╗ ███╗  ██╗██╗   ██╗      /┃┃ ━━━ ┃┃
           ┃┃     ┃┃       ██╔══██╗██╔════╝ ██╔══██╗████╗ ██║╚██╗ ██╔╝       ┃┃     ┃┃
@@ -14,7 +13,6 @@
                      ─▀▀▀▄▄ █──█ █──█ █▄▄▀ █── █▀▀ 　 █─── █──█ █──█ █▀▀
                       █▄▄▄█ ▀▀▀▀ ─▀▀▀ ▀─▀▀ ▀▀▀ ▀▀▀ 　 █▄▄█ ▀▀▀▀ ▀▀▀─ ▀▀▀
 ╰━━━━━━━━━━━━━━━━╯╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯╰━━━━━━━━━━━━━━━━╯
-
 --]]
 
 --[[ Req Features --]]
@@ -529,7 +527,6 @@ InputInfoLabel.TextColor3 = Color3.fromRGB(255,255,255)
 InputInfoLabel.TextSize = 8
 InputInfoLabel.TextXAlignment = "Center"
 InputInfoLabel.Parent = ScriptPhrameB
-
 local TextBox1 = Instance.new("TextBox")
 TextBox1.Size = UDim2.new(1, -45, 0, 15)
 TextBox1.Position = UDim2.new(0.08, 0, 0.1, 0)
@@ -541,7 +538,6 @@ TextBox1.TextColor3 = Color3.fromRGB(60, 95, 60)
 TextBox1.TextSize = 8
 TextBox1.TextXAlignment = "Center"
 TextBox1.Parent = ScriptPhrameB
-
 local TextBox2 = Instance.new("TextBox")
 TextBox2.Size = UDim2.new(1, -45, 0, 15)
 TextBox2.Position = UDim2.new(0.08, 0, 0.15, 0)
@@ -553,7 +549,6 @@ TextBox2.TextColor3 = Color3.fromRGB(60, 95, 60)
 TextBox2.TextSize = 8
 TextBox2.TextXAlignment = "Center"
 TextBox2.Parent = ScriptPhrameB
-
 local TextBox3 = Instance.new("TextBox")
 TextBox3.Size = UDim2.new(1, -45, 0, 15)
 TextBox3.Position = UDim2.new(0.08, 0, 0.20, 0)
@@ -565,7 +560,6 @@ TextBox3.TextColor3 = Color3.fromRGB(60, 95, 60)
 TextBox3.TextSize = 8
 TextBox3.TextXAlignment = "Center"
 TextBox3.Parent = ScriptPhrameB
-
 local TextBox4 = Instance.new("TextBox")
 TextBox4.Size = UDim2.new(1, -45, 0, 15)
 TextBox4.Position = UDim2.new(0.08, 0, 0.25, 0)
@@ -1206,80 +1200,36 @@ end
 
 --[--Setup
 
-FixedThemes = Theme == "Aqua" or Theme == "Light" or Theme == "Dark" or Theme == "Jester" or Theme == "Mocha"
-BrokenThemes = Theme ~= "Aqua" or Theme ~= "Light" or Theme ~= "Dark" or Theme ~= "Jester" or Theme ~= "Mocha" or Theme == nil
-IsPatched = TPT2ISPATCHED == false and UDISPATCHED == false and FSISPATCHED == false and DOORSISPATCHED == false and ApocISPATCHED == false
-ScreenCheckX = ScreenSizeX ~= nil or ScreenSizeX ~= nan
-ScreenCheckY = ScreenSizeY ~= nil or ScreenSizeY ~= nan
+wait()
 IsAGameThatWorks = game.PlaceId == 2866967438 or game.PlaceId == 237590761 or game.PlaceId == 69184822 or game.PlaceId == 54865335 or game.PlaceId == 6516141723 or game.PlaceId == 237590657 or game.PlaceId == 1228674372 or game.PlaceId == 1600503 or game.PlaceId == 237590761
-wait(0.1)
+wait()
 
 --]--End Of Setup
 
 --[--Script
-
-if game.PlaceId == 2866967438 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and FSISPATCHED == false and ScreenCheckX and ScreenCheckY then
-UpdateLabelError.TextSize = 9
-UpdateLabelError.Text = "Script Is Loading"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
-UpdateLabelInfo2.Text = "!"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Fishing%20Simulator.lua", true))()
 	
-elseif game.PlaceId == 69184822 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and TPT2ISPATCHED == false and ScreenCheckX and ScreenCheckY then
-UpdateLabelError.TextSize = 9
-UpdateLabelError.Text = "Script Is Loading"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
-UpdateLabelInfo2.Text = "!"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/ThemeParkTycoon2.lua", true))()
-	
-elseif game.PlaceId == 54865335 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and UDISPATCHED == false and ScreenCheckX and ScreenCheckY then
-UpdateLabelError.TextSize = 9
-UpdateLabelError.Text = "Script Is Loading"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
-UpdateLabelInfo2.Text = "!"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Ultimate%20Driving.lua", true))()
-	
-elseif game.PlaceId == 6516141723 or game.PlaceId == 6839171747 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and DOORSISPATCHED == false and ScreenCheckX and ScreenCheckY then
-UpdateLabelError.TextSize = 9
-UpdateLabelError.Text = "Script Is Loading"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
-UpdateLabelInfo2.Text = "!"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Doors.lua", true))()
-	
-elseif game.PlaceId == 237590761 or game.PlaceId == 237590657 or game.PlaceId == 1228674372 or game.PlaceId == 1600503 or game.PlaceId == 237590761 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and ApocISPATCHED == false and ScreenCheckX and ScreenCheckY then
-UpdateLabelError.TextSize = 9
-UpdateLabelError.Text = "Script Is Loading"
-UpdateLabelScript.Text = "!"
-UpdateLabelInfo1.Text = "!"
-UpdateLabelInfo2.Text = "!"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/apocloader.lua", true))()
-	
-elseif IsAGameThatWorks and BrokenThemes and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and IsPatched and ScreenCheckX and ScreenCheckY then
+if Theme ~= "Aqua" and Theme ~= "Light" and Theme ~= "Dark" and Theme ~= "Jester" and Theme ~= "Mocha" then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 1: wrong theme / no theme"
 UpdateLabelScript.Text = "Your missing Theme = "
 UpdateLabelInfo1.Text = "Your missing Theme"
 UpdateLabelInfo2.Text = "!"
 	
-elseif IsAGameThatWorks and Discord_Key ~= "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
+elseif Discord_Key ~= "Ey580OgEJIYnagHJUIWAjfasnfg" then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 2: wrong discord key"
 UpdateLabelScript.Text = "Your discord key is invalid"
 UpdateLabelInfo1.Text = "Your discord key is missing"
 UpdateLabelInfo2.Text = "!"
 	
-elseif IsAGameThatWorks and OUTDATEDVERSION == true and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
+elseif OUTDATEDVERSION == true then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 3: invalid version"
 UpdateLabelScript.Text = "Agony is outdated"
 UpdateLabelInfo1.Text = "Script you want is outdated"
 UpdateLabelInfo2.Text = "!"
 	
-elseif game.PlaceId ~= 237590657 or game.PlaceId ~= 1228674372 or game.PlaceId ~= 237590761 or game.PlaceId ~= 1600503 or game.PlaceId ~= 237590761 or game.PlaceId ~= 2866967438 or game.PlaceId ~= 69184822 or game.PlaceId ~= 54865335 and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and IsPatched and ScreenCheckX and ScreenCheckY then
+elseif game.PlaceId ~= 237590657 and game.PlaceId ~= 1228674372 and game.PlaceId ~= 237590761 and game.PlaceId ~= 1600503 and game.PlaceId ~= 237590761 and game.PlaceId ~= 2866967438 and game.PlaceId ~= 69184822 and game.PlaceId ~= 54865335 then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 4: unsupported game"
 UpdateLabelScript.Text = "Your game isn't supported"
@@ -1287,19 +1237,59 @@ UpdateLabelInfo1.Text = "Game has teleported you"
 UpdateLabelInfo2.Text = "!"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/UniversalScript.lua", true))()
 
-elseif IsAGameThatWorks and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and DOORSISPATCHED == true or TPT2ISPATCHED == true or UDISPATCHED == true or APOCISPATCHED == true or FSISPATCHED == true and ScreenCheckX and ScreenCheckY then
+elseif DOORSISPATCHED == true or TPT2ISPATCHED == true or UDISPATCHED == true or APOCISPATCHED == true or FSISPATCHED == true then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 5: script is patched"
 UpdateLabelScript.Text = "Agony is patched"
 UpdateLabelInfo1.Text = "Script you want is outdated"
 UpdateLabelInfo2.Text = "!"
 		
-elseif ScreenSizeX == nil or ScreenSizeX == nan or ScreenSizeY == nil or ScreenSizeY == nan and OUTDATEDVERSION == false and Discord_Key == "Ey580OgEJIYnagHJUIWAjfasnfg" and FixedThemes and IsAGameThatWorks then
+elseif ScreenSizeX == nil or ScreenSizeX == nan or ScreenSizeY == nil or ScreenSizeY == nan then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 6: invalid screensize"
 UpdateLabelScript.Text = "Your ScreenSizeX or Y is invalid"
 UpdateLabelInfo1.Text = "Your missing ScreenSize"
 UpdateLabelInfo2.Text = "!"
+
+elseif game.PlaceId == 2866967438 then
+UpdateLabelError.TextSize = 9
+UpdateLabelError.Text = "Script Is Loading"
+UpdateLabelScript.Text = "!"
+UpdateLabelInfo1.Text = "!"
+UpdateLabelInfo2.Text = "!"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Fishing%20Simulator.lua", true))()
+	
+elseif game.PlaceId == 69184822 then
+UpdateLabelError.TextSize = 9
+UpdateLabelError.Text = "Script Is Loading"
+UpdateLabelScript.Text = "!"
+UpdateLabelInfo1.Text = "!"
+UpdateLabelInfo2.Text = "!"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/ThemeParkTycoon2.lua", true))()
+	
+elseif game.PlaceId == 54865335  then
+UpdateLabelError.TextSize = 9
+UpdateLabelError.Text = "Script Is Loading"
+UpdateLabelScript.Text = "!"
+UpdateLabelInfo1.Text = "!"
+UpdateLabelInfo2.Text = "!"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Ultimate%20Driving.lua", true))()
+	
+elseif game.PlaceId == 6516141723 or game.PlaceId == 6839171747 then
+UpdateLabelError.TextSize = 9
+UpdateLabelError.Text = "Script Is Loading"
+UpdateLabelScript.Text = "!"
+UpdateLabelInfo1.Text = "!"
+UpdateLabelInfo2.Text = "!"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Doors.lua", true))()
+	
+elseif game.PlaceId == 237590761 or game.PlaceId == 237590657 or game.PlaceId == 1228674372 or game.PlaceId == 1600503 or game.PlaceId == 237590761 then
+UpdateLabelError.TextSize = 9
+UpdateLabelError.Text = "Script Is Loading"
+UpdateLabelScript.Text = "!"
+UpdateLabelInfo1.Text = "!"
+UpdateLabelInfo2.Text = "!"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/apocloader.lua", true))()
 end
 end	
 --]--End Of Script
