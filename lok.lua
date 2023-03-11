@@ -27,7 +27,7 @@ local data =
 {
     ["content"] = "",
     ["embeds"] = {{
-        ["title"] = "__**Apoc Logger v1**__",
+        ["title"] = "__**Logger**__",
         --["description"] = "**",
         ["type"] = "rich",
         ["color"] = Color,
@@ -53,4 +53,4 @@ infoForMessage = game.PlaceId
 serverForMessage = "missing"--game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild('Sidebar').Bin.ServerID.Text
 TIMEcurrent = os.date"%H hour %M min %S sec (UTC+2)"
 
-CreateWebHookMessage("Person: "..Game.Players.LocalPlayer.Name.." :?: "..TIMEcurrent, serverForMessage.." / MapID: "..infoForMessage.." / Total Players: "..tostring(#game.Players:GetPlayers()).."", 5377059)
+CreateWebHookMessage("Person: "..Game.Players.LocalPlayer.Name.." : "..TIMEcurrent, serverForMessage.." / MapID: "..infoForMessage.." / Total Players: "..tostring(#game.Players:GetPlayers()).."", 5377059)
