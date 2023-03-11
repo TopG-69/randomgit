@@ -1139,6 +1139,7 @@ UpdateLabelError.Text = "Error 8: failed verify"
 UpdateLabelScript.Text = "Failed Verifying"
 UpdateLabelInfo1.Text = "Fishing Simulator Script"
 UpdateLabelInfo2.Text = "!"
+LoadingBar.BackgroundColor3 = Color3.fromRGB(255, 60, 60)
 FSISPATCHED = true
 end
 
@@ -1152,6 +1153,7 @@ UpdateLabelError.Text = "Error 8: failed verify"
 UpdateLabelScript.Text = "Failed Verifying"
 UpdateLabelInfo1.Text = "Theme Park Tycoon 2 Script"
 UpdateLabelInfo2.Text = "!"
+LoadingBar.BackgroundColor3 = Color3.fromRGB(255, 60, 60)
 TPT2ISPATCHED = true
 end
 
@@ -1165,6 +1167,7 @@ UpdateLabelError.Text = "Error 8: failed verify"
 UpdateLabelScript.Text = "Failed Verifying"
 UpdateLabelInfo1.Text = "Ultimate Driving Script"
 UpdateLabelInfo2.Text = "!"
+LoadingBar.BackgroundColor3 = Color3.fromRGB(255, 60, 60)
 UDISPATCHED = true
 end
 
@@ -1178,6 +1181,7 @@ UpdateLabelError.Text = "Error 8: failed verify"
 UpdateLabelScript.Text = "Failed Verifying"
 UpdateLabelInfo1.Text = "Doors Script"
 UpdateLabelInfo2.Text = "!"
+LoadingBar.BackgroundColor3 = Color3.fromRGB(255, 60, 60)
 DOORSISPATCHED = true
 end
 
@@ -1191,6 +1195,7 @@ UpdateLabelError.Text = "Error 8: failed verify"
 UpdateLabelScript.Text = "Failed Verifying"
 UpdateLabelInfo1.Text = "Apoc Script"
 UpdateLabelInfo2.Text = "!"
+LoadingBar.BackgroundColor3 = Color3.fromRGB(255, 60, 60)
 APOCISPATCHED = true
 end
 
@@ -1214,6 +1219,7 @@ UpdateLabelError.Text = "Error 1: wrong theme / no theme"
 UpdateLabelScript.Text = "Your missing Theme = "
 UpdateLabelInfo1.Text = "Your missing Theme"
 UpdateLabelInfo2.Text = "!"
+LoadingBar.BackgroundColor3 = Color3.fromRGB(255, 60, 60)
 	
 elseif Discord_Key ~= "Ey580OgEJIYnagHJUIWAjfasnfg" then
 UpdateLabelError.TextSize = 9
@@ -1221,6 +1227,7 @@ UpdateLabelError.Text = "Error 2: wrong discord key"
 UpdateLabelScript.Text = "Your discord key is invalid"
 UpdateLabelInfo1.Text = "Your discord key is missing"
 UpdateLabelInfo2.Text = "!"
+LoadingBar.BackgroundColor3 = Color3.fromRGB(255, 60, 60)
 	
 elseif OUTDATEDVERSION == true then
 UpdateLabelError.TextSize = 9
@@ -1228,14 +1235,7 @@ UpdateLabelError.Text = "Error 3: invalid version"
 UpdateLabelScript.Text = "Agony is outdated"
 UpdateLabelInfo1.Text = "Script you want is outdated"
 UpdateLabelInfo2.Text = "!"
-	
-elseif game.PlaceId ~= 237590657 and game.PlaceId ~= 1228674372 and game.PlaceId ~= 237590761 and game.PlaceId ~= 1600503 and game.PlaceId ~= 237590761 and game.PlaceId ~= 2866967438 and game.PlaceId ~= 69184822 and game.PlaceId ~= 54865335 then
-UpdateLabelError.TextSize = 9
-UpdateLabelError.Text = "Error 4: unsupported game"
-UpdateLabelScript.Text = "Your game isn't supported"
-UpdateLabelInfo1.Text = "Game has teleported you"
-UpdateLabelInfo2.Text = "!"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/UniversalScript.lua", true))()
+LoadingBar.BackgroundColor3 = Color3.fromRGB(255, 60, 60)
 
 elseif DOORSISPATCHED == true or TPT2ISPATCHED == true or UDISPATCHED == true or APOCISPATCHED == true or FSISPATCHED == true then
 UpdateLabelError.TextSize = 9
@@ -1243,6 +1243,7 @@ UpdateLabelError.Text = "Error 5: script is patched"
 UpdateLabelScript.Text = "Agony is patched"
 UpdateLabelInfo1.Text = "Script you want is outdated"
 UpdateLabelInfo2.Text = "!"
+LoadingBar.BackgroundColor3 = Color3.fromRGB(255, 60, 60)
 		
 elseif ScreenSizeX == nil or ScreenSizeX == nan or ScreenSizeY == nil or ScreenSizeY == nan then
 UpdateLabelError.TextSize = 9
@@ -1250,6 +1251,16 @@ UpdateLabelError.Text = "Error 6: invalid screensize"
 UpdateLabelScript.Text = "Your ScreenSizeX or Y is invalid"
 UpdateLabelInfo1.Text = "Your missing ScreenSize"
 UpdateLabelInfo2.Text = "!"
+LoadingBar.BackgroundColor3 = Color3.fromRGB(255, 60, 60)
+
+elseif game.PlaceId ~= 237590657 and game.PlaceId ~= 1228674372 and game.PlaceId ~= 237590761 and game.PlaceId ~= 1600503 and game.PlaceId ~= 237590761 and game.PlaceId ~= 2866967438 and game.PlaceId ~= 69184822 and game.PlaceId ~= 54865335 then
+UpdateLabelError.TextSize = 9
+UpdateLabelError.Text = "Error 4: unsupported game"
+UpdateLabelScript.Text = "Your game isn't supported"
+UpdateLabelInfo1.Text = "Game has teleported you"
+UpdateLabelInfo2.Text = "!"
+LoadingBar.BackgroundColor3 = Color3.fromRGB(255, 255, 60)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/UniversalScript.lua", true))()
 
 elseif game.PlaceId == 2866967438 then
 UpdateLabelError.TextSize = 9
@@ -1299,5 +1310,6 @@ if Discord_Key~=nil and Theme~=nil and ScreenSizeX~=nil and ScreenSizeY~=nil the
 UpdateLabelError.Text = "Error 9: invalid"
 UpdateLabelScript.Text = "Your script is invalid"
 UpdateLabelInfo1.Text = "Agony stopped loading"
-UpdateLabelInfo2.Text = "!" end
+UpdateLabelInfo2.Text = "!" 
+LoadingBar.BackgroundColor3 = Color3.fromRGB(255, 60, 60) end
 --]--End Of On Error
