@@ -94,14 +94,14 @@ TextButton.MouseButton1Click:Connect(function()
     Close()
     wait(0.1)
 	if PremiumKey ~= "EJOHFDNSIBTREKPQWNDIASDHUBEJNOWBNTEORBNJSACNJOSVNIDASNOVUESNAVUBORTB" then
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/Apoc.lua?token=GHSAT0AAAAAAB7C53BGDWKEMECHYB3BAL5GZAMSXMQ", true))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/Apoc.lua?token=GHSAT0AAAAAAB7C53BG2ELS2LATSVAPIWR4ZAMTGZA", true))()
 	else
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/Apoc.lua?token=GHSAT0AAAAAAB7C53BGDWKEMECHYB3BAL5GZAMSXMQ", true))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/Apoc.lua?token=GHSAT0AAAAAAB7C53BG2ELS2LATSVAPIWR4ZAMTGZA", true))()
 	end
 end)
 
 TextButton_2.MouseButton1Click:Connect(function()
     Close()
     wait(0.1)
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/victiniv2.lua?token=GHSAT0AAAAAAB7C53BG5N3NW7HRC5PP5KPAZAMSXPQ", true))()   
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/victiniv2.lua?token=GHSAT0AAAAAAB7C53BHRTELLMKMNE73PVVIZAMTH2A", true))()   
 end)
