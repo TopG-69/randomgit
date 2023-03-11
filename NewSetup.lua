@@ -1296,7 +1296,7 @@ end
 		
 --]--On Error
 if Discord_Key~=nil and Theme~=nil and ScreenSizeX~=nil and ScreenSizeY~=nil then ProcessScript() else 
-UpdateLabelError.Text = "Error 10: invalid"
+UpdateLabelError.Text = "Error 9: invalid"
 UpdateLabelScript.Text = "Your script is invalid"
 UpdateLabelInfo1.Text = "Agony stopped loading"
 UpdateLabelInfo2.Text = "!" end
