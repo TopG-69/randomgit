@@ -1,5 +1,5 @@
 FAILEDLOADING = false
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Module.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/Module.lua?token=GHSAT0AAAAAAB7C53BGY6PILSARBIYA4Y5EZAMSXKA"))()
 local UI = Library.Load({
 	Title = "Fishing Simulator V3",
 	Style = 3,
@@ -945,7 +945,7 @@ ConfigI = Config.Button({
 --[--Fix
 wait(0.1)
 --Actual Fixes
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/log.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/log.lua?token=GHSAT0AAAAAAB7C53BH6EK2EZI7N47O6FMIZAMS3JA", true))()
 CreateFloatingTextBox("Script Loaded Correctly!", 3, 25, 255, 25)
 --]--End Of Fix
 
