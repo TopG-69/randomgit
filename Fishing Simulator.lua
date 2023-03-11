@@ -1,5 +1,5 @@
 FAILEDLOADING = false
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/Module.lua?token=GHSAT0AAAAAAB7C53BGY6PILSARBIYA4Y5EZAMSXKA"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/-/main/Module.lua?token=GHSAT0AAAAAAB7C53BGLYQDNR2TLNDM4MQ4ZAMTEKA"))()
 local UI = Library.Load({
 	Title = "Fishing Simulator V3",
 	Style = 3,
