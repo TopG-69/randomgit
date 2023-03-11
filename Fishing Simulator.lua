@@ -875,7 +875,7 @@ ConfigI = Config.Button({
 ConfigI = Config.Button({
 	Text = "Beta Test Login/Register Gui",
 	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/login.lua", true))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/login.lua", true))()
 	end,
 	Menu = {
 		Information = function(self)
@@ -888,8 +888,7 @@ ConfigI = Config.Button({
 ConfigI = Config.Button({
 	Text = "Restart Agony",
 	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/LoadModules.lua", true))()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Setup.lua", true))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/Fishing%20Simulator.lua", true))()
 	end,
 	Menu = {
 		Information = function(self)
@@ -902,7 +901,7 @@ ConfigI = Config.Button({
 ConfigI = Config.Button({
 	Text = "Load Old Fishing Simulator Script",
 	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/Gui-Ui/main/Old-Fishing-Simulator.lua", true))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/Old-Fishing-Simulator.lua", true))()
 	end,
 	Menu = {
 		Information = function(self)
