@@ -192,13 +192,13 @@ for i = 0, Amount do
 local LoadedAmount = math.floor(250-(i/Amount*Val))
 local LoadedAmountQ = math.floor(400-(i/Amount*ValQ))
 local LoadedAmountB = math.floor(10-i)
-ThetaLoaderPhrameBottomInfo.TextSize = LoadedAmountB
-ThetaLoaderPhrameInfo1.TextSize = LoadedAmountB
-ThetaLoaderPhrameInfo2.TextSize = LoadedAmountB
-ThetaLoaderPhrameInfo3.TextSize = LoadedAmountB
-ThetaLoaderPhrameVersion.TextSize = LoadedAmountB
-ThetaBarText1.TextSize = LoadedAmountB
-ThetaBarText2.TextSize = LoadedAmountB
+ThetaLoaderPhrameBottomInfo.TextSize = math.floor(LoadedAmountB-4)
+ThetaLoaderPhrameInfo1.TextSize = math.floor(LoadedAmountB-2)
+ThetaLoaderPhrameInfo2.TextSize = math.floor(LoadedAmountB-2)
+ThetaLoaderPhrameInfo3.TextSize = math.floor(LoadedAmountB-2)
+ThetaLoaderPhrameVersion.TextSize = math.floor(LoadedAmountB-4)
+ThetaBarText1.TextSize = math.floor(LoadedAmountB-2)
+ThetaBarText2.TextSize = math.floor(LoadedAmountB-2)
 OeroPhrame.Size = UDim2.new(0, LoadedAmount, 0, LoadedAmountQ)
 wait(Time)
 end
