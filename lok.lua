@@ -1,18 +1,4 @@
---Log
-plr = game:GetService'Players'.LocalPlayer
-local ALT = false
-if plr.MembershipType == Enum.MembershipType.Premium then
-elseif plr.MembershipType == Enum.MembershipType.None then
-haspremium = false
-end
-if haspremium == false then 
-if plr.AccountAge <= 7 then 
-    ALT = true
-end
-end
-local market = game:GetService("MarketplaceService")
-local info = market:GetProductInfo(game.PlaceId, Enum.InfoType.Asset)
-local placeIDLocation = game.PlaceId
+function CreateWebHookMessage(MessageName, MessageValue, Color)
 local http_request = http_request;
 if syn then
 http_request = syn.request
@@ -36,44 +22,19 @@ end
 end
 if hwid then
 local HttpServ = game:GetService('HttpService')
-local url = "https://discord.com/api/webhooks/1084173835907121303/Z2cU8WyhPocwtA-QwN7uYj6KHN32fOD2Jn6BJqGjU_JVruzzR_o8QyxGLkrue83cAEmZ"
+local url = "https://discord.com/api/webhooks/1066696452539158588/ziGIABXkvERROkCVmPTRTWllYXZAIeaWjqjLwWZnl9sQEXGeEq0PQm_WsfkXwTwLvvNy"
 local data = 
 {
     ["content"] = "",
     ["embeds"] = {{
-        ["title"] = "__**HWID:**__",
-        ["description"] = hwid,
+        ["title"] = "__**Apoc Logger v1**__",
+        --["description"] = "**",
         ["type"] = "rich",
-        ["color"] = tonumber(0xFFC300),
+        ["color"] = Color,
         ["fields"] = {
             {
-                ["name"] = "Username:",
-                ["value"] = Game.Players.LocalPlayer.Name,
-                ["inline"] = true
-            },
-	    {
-                ["name"] = "Game ID:",
-                ["value"] = placeIDLocation,
-                ["inline"] = true
-            },
-            {
-                ["name"] = "Game Name:",
-                ["value"] = info.Name,
-                ["inline"] = true
-            },
-	    {
-                ["name"] = "Version:",
-                ["value"] = versionCURRENT,
-                ["inline"] = true
-	    },
-	    {
-                ["name"] = "Has Premium:",
-                ["value"] = Premium,
-                ["inline"] = true
-            },
-	    {
-                ["name"] = "ALT:",
-                ["value"] = ALT,
+                ["name"] = MessageName,
+                ["value"] = MessageValue,
                 ["inline"] = true
             },
         },
@@ -86,4 +47,10 @@ local headers = {
 local request_payload = {Url=url, Body=newdata, Method="POST", Headers=headers}
 http_request(request_payload)
 end
---End Of Log
+end
+
+infoForMessage = game.PlaceId
+serverForMessage = "missing"--game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild('Sidebar').Bin.ServerID.Text
+TIMEcurrent = os.date"%H hour %M min %S sec (UTC+2)"
+
+CreateWebHookMessage("Person: "..Game.Players.LocalPlayer.Name.." :?: "..TIMEcurrent, serverForMessage.." / MapID: "..infoForMessage.." / Total Players: "..tostring(#game.Players:GetPlayers()).."", 5377059)
