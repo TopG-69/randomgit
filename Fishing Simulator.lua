@@ -944,7 +944,6 @@ ConfigI = Config.Button({
 --[--Fix
 wait(0.1)
 --Actual Fixes
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/lok.lua", true))()
 CreateFloatingTextBox("Script Loaded Correctly!", 3, 25, 255, 25)
 --]--End Of Fix
 
