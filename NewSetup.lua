@@ -384,6 +384,18 @@ InfoPhrameC.BackgroundTransparency = 0.4
 InfoPhrameC.Visible = false
 InfoPhrameC.Parent = ZeroPhrame
 
+local SettingsPhrame = Instance.new("Frame")
+SettingsPhrame.Size = UDim2.new(0.5, 0, 0.385, 0)
+SettingsPhrame.Position = UDim2.new(0, 0, 1.15, 0)
+SettingsPhrame.BackgroundColor3 = Color3.fromRGB(60, 60, 95)
+SettingsPhrame.Active = false
+SettingsPhrame.Selectable = true
+SettingsPhrame.BorderSizePixel = 0
+SettingsPhrame.Transparency = 0.3
+SettingsPhrame.BackgroundTransparency = 0.4
+SettingsPhrame.Visible = false
+SettingsPhrame.Parent = ZeroPhrame
+
 local InfoPhrameCText1 = Instance.new("TextLabel")
 InfoPhrameCText1.Size = UDim2.new(0.01, 0, 0.01, 0)
 InfoPhrameCText1.Position = UDim2.new(0.08, 0, 0.12, 0)
@@ -1090,7 +1102,6 @@ StartLoading(100, 100, 0.01, tostring(MakeUpLoadingBar))
 --local SuccessPassed, result = pcall(function()
 
 --Anti Bypass Modules
-function ProcessScript()
 FishingSimulatorCURRENT = 2
 DoorsCURRENT = 2
 ApocCURRENT = 1
@@ -1215,16 +1226,9 @@ end
 
 --]--Finished
 
---[--Setup
-
-wait()
-IsAGameThatWorks = game.PlaceId == 2866967438 or game.PlaceId == 237590761 or game.PlaceId == 69184822 or game.PlaceId == 54865335 or game.PlaceId == 6516141723 or game.PlaceId == 237590657 or game.PlaceId == 1228674372 or game.PlaceId == 1600503 or game.PlaceId == 237590761
-wait()
-
---]--End Of Setup
-
 --[--Script
 	
+function ProcessScript()
 if Theme ~= "Aqua" and Theme ~= "Light" and Theme ~= "Dark" and Theme ~= "Jester" and Theme ~= "Mocha" then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 1: wrong theme / no theme"
