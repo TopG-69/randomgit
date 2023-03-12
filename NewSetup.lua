@@ -38,7 +38,6 @@ NotifyLabel.Size = UDim2.new(0, 170, 0, NotifyFrame.Size.Y.Offset)
 NotifyLabel.Font = Enum.Font.SourceSans
 NotifyLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
 NotifyLabel.TextSize = 20
-NotifyLabel.TextWrapped = true
 NotifyLabel.Visible = false
 
 function Notify(Text, Time, ColorR, ColorG, ColorB)
