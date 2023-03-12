@@ -189,25 +189,32 @@ local function CloseThetaGui(Val, ValQ, Time, Amount)
 ThetaLoaderPhrameLoadingImage.Size = UDim2.new(0, 1, 0, 1)
 local MakeUpRandomNumber = math.random(20, 100)
 for i = 0, Amount do
-local LoadedAmount = math.floor(250-(i/Amount*Val))
-local LoadedAmountQ = math.floor(400-(i/Amount*ValQ))
-local LoadedAmountB = math.floor(10-i)
+local LoadedAmount = math.floor(260-(i/Amount*Val))
+local LoadedAmountQ = math.floor(410-(i/Amount*ValQ))
+local LoadedAmountB = math.floor(20-i)
 ThetaLoaderPhrameBottomInfo.TextSize = math.floor(LoadedAmountB-4)
-ThetaLoaderPhrameInfo1.TextSize = math.floor(LoadedAmountB-2)
-ThetaLoaderPhrameInfo2.TextSize = math.floor(LoadedAmountB-2)
-ThetaLoaderPhrameInfo3.TextSize = math.floor(LoadedAmountB-2)
-ThetaLoaderPhrameVersion.TextSize = math.floor(LoadedAmountB-4)
-ThetaBarText1.TextSize = math.floor(LoadedAmountB-2)
-ThetaBarText2.TextSize = math.floor(LoadedAmountB-2)
+ThetaLoaderPhrameInfo1.TextSize = math.floor(LoadedAmountB-8)
+ThetaLoaderPhrameInfo2.TextSize = math.floor(LoadedAmountB-8)
+ThetaLoaderPhrameInfo3.TextSize = math.floor(LoadedAmountB-8)
+ThetaLoaderPhrameVersion.TextSize = math.floor(LoadedAmountB-10)
+ThetaBarText1.TextSize = math.floor(LoadedAmountB-8)
+ThetaBarText2.TextSize = math.floor(LoadedAmountB-8)
 OeroPhrame.Size = UDim2.new(0, LoadedAmount, 0, LoadedAmountQ)
 wait(Time)
 end
+ThetaLoaderPhrameBottomInfo.TextSize = 0
+ThetaLoaderPhrameInfo1.TextSize = 0
+ThetaLoaderPhrameInfo2.TextSize = 0
+ThetaLoaderPhrameInfo3.TextSize = 0
+ThetaLoaderPhrameVersion.TextSize = 0
+ThetaBarText1.TextSize = 0
+ThetaBarText2.TextSize = 0
 OeroPhrame:destroy()
 end
 CloseThetaGui(250, 400, 0.01, 10)
 --[[ Req Features --]]
 
-wait()
+
 
 --[[ Loader Frame --]]
 local ZeroPhrame = Instance.new("Frame")
