@@ -20,6 +20,64 @@ local MainGui = Instance.new("ScreenGui")
 MainGui.Name = "ApocGui"
 MainGui.Parent = game.CoreGui
 
+NotifyFrame = Instance.new("Frame", MainGui)
+NotifyFrame.Name = "NotifyFrame"
+NotifyFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+NotifyFrame.BackgroundTransparency = 1
+NotifyFrame.BorderSizePixel = 0
+NotifyFrame.Position = UDim2.new(0.4405, 0, 0.2, 0)
+NotifyFrame.Size = UDim2.new(0, 1, 0, 20)
+
+NotifyLabel = Instance.new("TextLabel", NotifyFrame)
+NotifyLabel.Name = "NotifyLabel"
+NotifyLabel.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+NotifyLabel.BackgroundTransparency = 1
+NotifyLabel.BorderColor3 = Color3.fromRGB(110, 172, 216)
+NotifyLabel.BorderSizePixel = 0
+NotifyLabel.Size = UDim2.new(0, 170, 0, NotifyFrame.Size.Y.Offset)
+NotifyLabel.Font = Enum.Font.SourceSans
+NotifyLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+NotifyLabel.TextSize = 20
+NotifyLabel.TextWrapped = true
+NotifyLabel.Visible = false
+
+function Notify(Text, Time, ColorR, ColorG, ColorB)
+	NotifyLabel.TextColor3 = Color3.fromRGB(ColorR, ColorG, ColorB)
+	local OldCon = syn_context_get()
+    for i, v in pairs(NotifyFrame:GetChildren()) do
+		if v ~= NotifyLabel then
+			v.Position = UDim2.new(0, 0, 0, -NotifyLabel.Size.Y.Offset*(#NotifyFrame:GetChildren()-(i-1)))
+		end
+    end
+    local F = NotifyLabel:Clone()
+	F.Visible = true
+    F.Parent = NotifyFrame
+    F.Position = UDim2.new(0, 0, 0, 0)
+    F.Text = Text
+    if Time == nil then
+        Time = 3
+    end
+    spawn(function()
+        wait(Time)
+        F:remove()
+        for i, v in pairs(NotifyFrame:GetChildren()) do
+			if v ~= NotifyLabel then 
+				v.Position = UDim2.new(0, 0, 0, -NotifyLabel.Size.Y.Offset*(#NotifyFrame:GetChildren()-(i)))
+			end
+        end
+    end)
+	syn_context_set(OldCon)
+end
+
+--[[Notify("[Success]", 1, 60, 160, 60)
+Notify("[Update]", 1, 60, 160, 60)
+Notify("[Fail]", 1, 95, 60, 60)
+Notify("[Error]", 1, 95, 60, 60)
+Notify("[Clear]", 1, 70, 70, 255)
+Notify("[Save]", 1, 70, 70, 255)
+Notify("[Fix]", 1, 130, 130, 60)
+Notify("[Missing]", 1, 130, 130, 60)--]]
+
 local OeroPhrame = Instance.new("Frame")
 OeroPhrame.Size = UDim2.new(0, 250, 0, 400)
 OeroPhrame.Position = UDim2.new(0.4, 0, 0.2, 0)
