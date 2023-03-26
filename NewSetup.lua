@@ -78,7 +78,7 @@ Notify("[Fix]", 1, 130, 130, 60)
 Notify("[Missing]", 1, 130, 130, 60)--]]
 
 local OeroPhrame = Instance.new("Frame")
-OeroPhrame.Size = UDim2.new(0, 250, 0, 400)
+OeroPhrame.Size = UDim2.new(0, 250, 0, 320)
 OeroPhrame.Position = UDim2.new(0.4, 0, 0.2, 0)
 OeroPhrame.BorderSizePixel = 5
 OeroPhrame.Transparency = 1
@@ -126,51 +126,49 @@ ThetaLoaderPhrame.Size = UDim2.new(1, 0, 1, 0)
 ThetaLoaderPhrame.Position = UDim2.new(0, 0, 0.08, 0)
 ThetaLoaderPhrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
 ThetaLoaderPhrame.BorderSizePixel = 0
-ThetaLoaderPhrame.Transparency = 0.01
+ThetaLoaderPhrame.Transparency = 0.3
 ThetaLoaderPhrame.Active = true
 ThetaLoaderPhrame.Selectable = true
 ThetaLoaderPhrame.Parent = OeroPhrame
 
+local ThetaLoaderTextPhrame = Instance.new("Frame")
+ThetaLoaderTextPhrame.Size = UDim2.new(0.9, 0, 0.5, 0)
+ThetaLoaderTextPhrame.Position = UDim2.new(0.05, 0, 0.47, 0)
+ThetaLoaderTextPhrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+ThetaLoaderTextPhrame.BorderSizePixel = 0
+ThetaLoaderTextPhrame.Transparency = 0.2
+ThetaLoaderTextPhrame.Active = true
+ThetaLoaderTextPhrame.Selectable = true
+ThetaLoaderTextPhrame.Parent = ThetaLoaderPhrame
+
 local ThetaLoaderPhrameLoadingImage = Instance.new("ImageLabel")
 ThetaLoaderPhrameLoadingImage.Size = UDim2.new(0, 120, 0, 120)
-ThetaLoaderPhrameLoadingImage.Position = UDim2.new(0.25, 0, 0.07, 0)
+ThetaLoaderPhrameLoadingImage.Position = UDim2.new(0.24, 0, 0.07, 0)
 ThetaLoaderPhrameLoadingImage.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
 ThetaLoaderPhrameLoadingImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 ThetaLoaderPhrameLoadingImage.BackgroundTransparency = 1
-ThetaLoaderPhrameLoadingImage.Transparency = 1
+ThetaLoaderPhrameLoadingImage.ImageTransparency = 0
 ThetaLoaderPhrameLoadingImage.BorderSizePixel = 0
-ThetaLoaderPhrameLoadingImage.Transparency = 0
 ThetaLoaderPhrameLoadingImage.Visible = true
-ThetaLoaderPhrameLoadingImage.Image = "rbxassetid://6034509993"
+ThetaLoaderPhrameLoadingImage.Image = "rbxassetid://12897667997"
 ThetaLoaderPhrameLoadingImage.ImageColor3 = Color3.fromRGB(100, 100, 100)
 ThetaLoaderPhrameLoadingImage.Parent = ThetaLoaderPhrame
 
-local ThetaLoaderPhrameSeperator1 = Instance.new("Frame")
-ThetaLoaderPhrameSeperator1.Size = UDim2.new(1, 0, 0, 1)
-ThetaLoaderPhrameSeperator1.Position = UDim2.new(0, 0, 0.57, 0)
-ThetaLoaderPhrameSeperator1.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-ThetaLoaderPhrameSeperator1.BorderSizePixel = 0
-ThetaLoaderPhrameSeperator1.Transparency = 0
-ThetaLoaderPhrameSeperator1.Draggable = true
-ThetaLoaderPhrameSeperator1.Active = true
-ThetaLoaderPhrameSeperator1.Selectable = true
-ThetaLoaderPhrameSeperator1.Parent = OeroPhrame
-
 local ThetaLoaderPhrameVersion = Instance.new("TextLabel")
 ThetaLoaderPhrameVersion.Size = UDim2.new(0.01, 0, 0.01, 0)
-ThetaLoaderPhrameVersion.Position = UDim2.new(0.5, 0, 0.45, 0)
+ThetaLoaderPhrameVersion.Position = UDim2.new(0.48, 0, 0.03, 0)
 ThetaLoaderPhrameVersion.BorderSizePixel = 0
-ThetaLoaderPhrameVersion.Text = "2.0.0A"
+ThetaLoaderPhrameVersion.Text = "v.2.0.1a"
 ThetaLoaderPhrameVersion.TextColor3 = Color3.fromRGB(0,255,255)
 ThetaLoaderPhrameVersion.Transparency = 0.1
-ThetaLoaderPhrameVersion.TextSize = 20
+ThetaLoaderPhrameVersion.TextSize = 12
 ThetaLoaderPhrameVersion.BackgroundTransparency = 1
 ThetaLoaderPhrameVersion.TextXAlignment = "Center"
 ThetaLoaderPhrameVersion.Parent = ThetaLoaderPhrame
 
 local ThetaLoaderPhrameInfo1 = Instance.new("TextLabel")
 ThetaLoaderPhrameInfo1.Size = UDim2.new(0.01, 0, 0.01, 0)
-ThetaLoaderPhrameInfo1.Position = UDim2.new(0.1, 0, 0.55, 0)
+ThetaLoaderPhrameInfo1.Position = UDim2.new(0.1, 0, 0.5, 0)
 ThetaLoaderPhrameInfo1.BorderSizePixel = 0
 ThetaLoaderPhrameInfo1.Text = "Welcome "..Game.Players.LocalPlayer.Name.."!"
 ThetaLoaderPhrameInfo1.TextColor3 = Color3.fromRGB(255,255,255)
@@ -182,7 +180,7 @@ ThetaLoaderPhrameInfo1.Parent = ThetaLoaderPhrame
 
 local ThetaLoaderPhrameInfo2 = Instance.new("TextLabel")
 ThetaLoaderPhrameInfo2.Size = UDim2.new(0.01, 0, 0.01, 0)
-ThetaLoaderPhrameInfo2.Position = UDim2.new(0.1, 0, 0.60, 0)
+ThetaLoaderPhrameInfo2.Position = UDim2.new(0.1, 0, 0.55, 0)
 ThetaLoaderPhrameInfo2.BorderSizePixel = 0
 ThetaLoaderPhrameInfo2.Text = "Agony™ 2022/2023"
 ThetaLoaderPhrameInfo2.TextColor3 = Color3.fromRGB(255,255,255)
@@ -194,7 +192,7 @@ ThetaLoaderPhrameInfo2.Parent = ThetaLoaderPhrame
 
 local ThetaLoaderPhrameInfo3 = Instance.new("TextLabel")
 ThetaLoaderPhrameInfo3.Size = UDim2.new(0.01, 0, 0.01, 0)
-ThetaLoaderPhrameInfo3.Position = UDim2.new(0.1, 0, 0.65, 0)
+ThetaLoaderPhrameInfo3.Position = UDim2.new(0.1, 0, 0.6, 0)
 ThetaLoaderPhrameInfo3.BorderSizePixel = 0
 ThetaLoaderPhrameInfo3.Text = "Agony is Loading"
 ThetaLoaderPhrameInfo3.TextColor3 = Color3.fromRGB(255,255,255)
@@ -206,7 +204,7 @@ ThetaLoaderPhrameInfo3.Parent = ThetaLoaderPhrame
 
 local ThetaLoaderPhrameBottomInfo = Instance.new("TextLabel")
 ThetaLoaderPhrameBottomInfo.Size = UDim2.new(0.01, 0, 0.01, 0)
-ThetaLoaderPhrameBottomInfo.Position = UDim2.new(0.26, 0, 0.95, 0)
+ThetaLoaderPhrameBottomInfo.Position = UDim2.new(0.26, 0, 0.9, 0)
 ThetaLoaderPhrameBottomInfo.BorderSizePixel = 0
 ThetaLoaderPhrameBottomInfo.Text = "Ass script #1"
 ThetaLoaderPhrameBottomInfo.TextColor3 = Color3.fromRGB(255,255,255)
@@ -226,7 +224,7 @@ wait(Time)
 end
 end
 
-OpenThetaGui(250, 400, 0.01, 10)
+OpenThetaGui(250, 320, 0.01, 10)
 
 local function MakeLoadingImageSpin()
 for i = 0, 60 do
@@ -247,7 +245,7 @@ ThetaLoaderPhrameLoadingImage.Size = UDim2.new(0, 1, 0, 1)
 local MakeUpRandomNumber = math.random(20, 100)
 for i = 0, Amount do
 local LoadedAmount = math.floor(260-(i/Amount*Val))
-local LoadedAmountQ = math.floor(410-(i/Amount*ValQ))
+local LoadedAmountQ = math.floor(330-(i/Amount*ValQ))
 local LoadedAmountB = math.floor(10-i)
 ThetaLoaderPhrameBottomInfo.TextSize = math.floor(LoadedAmountB)
 ThetaLoaderPhrameInfo1.TextSize = math.floor(LoadedAmountB)
@@ -261,7 +259,7 @@ wait(Time)
 end
 OeroPhrame:destroy()
 end
-CloseThetaGui(250, 400, 0.01, 10)
+CloseThetaGui(250, 320, 0.01, 10)
 --[[ Req Features --]]
 
 
@@ -856,9 +854,131 @@ end)
 
 
 --[[ Update Log --]]
+local BigUpdateTextLocation = 0.05 --old value + 2
+local SmallUpdateTextLocationA = 0.1 --old value + 2
+local SmallUpdateTextLocationB = 0.13 --old value + 2
+local SmallUpdateTextLocationC = 0.16 --old value + 2
+local SmallUpdateTextLocationD = 0.19 --old value + 2
+
+local BigUpdateText5 = Instance.new("TextLabel")
+BigUpdateText5.Size = UDim2.new(0.01, 0, 0.01, 0)
+BigUpdateText5.Position = UDim2.new(0.05, 0, tostring(BigUpdateTextLocation), 0)
+BigUpdateText5.BorderSizePixel = 0
+BigUpdateText5.Text = "New Update [12/03/2023] [16/26] ━━━━━━━━━━━━━"
+BigUpdateText5.TextColor3 = Color3.fromRGB(255,255,255)
+BigUpdateText5.TextSize = 8
+BigUpdateText5.BackgroundTransparency = 1
+BigUpdateText5.TextXAlignment = "Left"
+BigUpdateText5.Parent = UpdateLogPhrame
+
+local SmallUpdateText13 = Instance.new("TextLabel")
+SmallUpdateText13.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText13.Position = UDim2.new(0.08, 0, tostring(SmallUpdateTextLocationA), 0)
+SmallUpdateText13.BorderSizePixel = 0
+SmallUpdateText13.Text = "(+) tweaked some stuff"
+SmallUpdateText13.TextColor3 = Color3.fromRGB(60,160,60)
+SmallUpdateText13.TextSize = 6
+SmallUpdateText13.BackgroundTransparency = 1
+SmallUpdateText13.TextXAlignment = "Left"
+SmallUpdateText13.Parent = UpdateLogPhrame
+local SmallUpdateText14 = Instance.new("TextLabel")
+SmallUpdateText14.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText14.Position = UDim2.new(0.08, 0, tostring(SmallUpdateTextLocationB), 0)
+SmallUpdateText14.BorderSizePixel = 0
+SmallUpdateText14.Text = "(/) tested with some stuff"
+SmallUpdateText14.TextColor3 = Color3.fromRGB(130,130,60)
+SmallUpdateText14.TextSize = 6
+SmallUpdateText14.BackgroundTransparency = 1
+SmallUpdateText14.TextXAlignment = "Left"
+SmallUpdateText14.Parent = UpdateLogPhrame
+
+local BigUpdateText3 = Instance.new("TextLabel")
+BigUpdateText3.Size = UDim2.new(0.01, 0, 0.01, 0)
+BigUpdateText3.Position = UDim2.new(0.05, 0, tostring(BigUpdateTextLocation+0.2), 0)
+BigUpdateText3.BorderSizePixel = 0
+BigUpdateText3.Text = "New Update [25/03/2023] [23/13] ━━━━━━━━━━━━━"
+BigUpdateText3.TextColor3 = Color3.fromRGB(255,255,255)
+BigUpdateText3.TextSize = 8
+BigUpdateText3.BackgroundTransparency = 1
+BigUpdateText3.TextXAlignment = "Left"
+BigUpdateText3.Parent = UpdateLogPhrame
+
+local SmallUpdateText7 = Instance.new("TextLabel")
+SmallUpdateText7.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText7.Position = UDim2.new(0.08, 0, tostring(SmallUpdateTextLocationA+0.2), 0)
+SmallUpdateText7.BorderSizePixel = 0
+SmallUpdateText7.Text = "(+) improved animations"
+SmallUpdateText7.TextColor3 = Color3.fromRGB(60,160,60)
+SmallUpdateText7.TextSize = 6
+SmallUpdateText7.BackgroundTransparency = 1
+SmallUpdateText7.TextXAlignment = "Left"
+SmallUpdateText7.Parent = UpdateLogPhrame
+local SmallUpdateText8 = Instance.new("TextLabel")
+SmallUpdateText8.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText8.Position = UDim2.new(0.08, 0, tostring(SmallUpdateTextLocationB+0.2), 0)
+SmallUpdateText8.BorderSizePixel = 0
+SmallUpdateText8.Text = "(+) new loader for first page"
+SmallUpdateText8.TextColor3 = Color3.fromRGB(60,160,60)
+SmallUpdateText8.TextSize = 6
+SmallUpdateText8.BackgroundTransparency = 1
+SmallUpdateText8.TextXAlignment = "Left"
+SmallUpdateText8.Parent = UpdateLogPhrame
+local SmallUpdateText9 = Instance.new("TextLabel")
+SmallUpdateText9.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText9.Position = UDim2.new(0.08, 0, tostring(SmallUpdateTextLocationC+0.2), 0)
+SmallUpdateText9.BorderSizePixel = 0
+SmallUpdateText9.Text = "(+) updated icons"
+SmallUpdateText9.TextColor3 = Color3.fromRGB(130,130,60)
+SmallUpdateText9.TextSize = 6
+SmallUpdateText9.BackgroundTransparency = 1
+SmallUpdateText9.TextXAlignment = "Left"
+SmallUpdateText9.Parent = UpdateLogPhrame
+local SmallUpdateText12 = Instance.new("TextLabel")
+SmallUpdateText12.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText12.Position = UDim2.new(0.08, 0, tostring(SmallUpdateTextLocationC+0.2), 0)
+SmallUpdateText12.BorderSizePixel = 0
+SmallUpdateText12.Text = "(+) added a box to the random message thing text"
+SmallUpdateText12.TextColor3 = Color3.fromRGB(130,130,60)
+SmallUpdateText12.TextSize = 6
+SmallUpdateText12.BackgroundTransparency = 1
+SmallUpdateText12.TextXAlignment = "Left"
+SmallUpdateText12.Parent = UpdateLogPhrame
+
+local BigUpdateText4 = Instance.new("TextLabel")
+BigUpdateText4.Size = UDim2.new(0.01, 0, 0.01, 0)
+BigUpdateText4.Position = UDim2.new(0.05, 0, tostring(BigUpdateTextLocation+0.4), 0)
+BigUpdateText4.BorderSizePixel = 0
+BigUpdateText4.Text = "New Update [12/03/2023] [16/26] ━━━━━━━━━━━━━"
+BigUpdateText4.TextColor3 = Color3.fromRGB(255,255,255)
+BigUpdateText4.TextSize = 8
+BigUpdateText4.BackgroundTransparency = 1
+BigUpdateText4.TextXAlignment = "Left"
+BigUpdateText4.Parent = UpdateLogPhrame
+
+local SmallUpdateText11 = Instance.new("TextLabel")
+SmallUpdateText11.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText11.Position = UDim2.new(0.08, 0, tostring(SmallUpdateTextLocationA+0.4), 0)
+SmallUpdateText11.BorderSizePixel = 0
+SmallUpdateText11.Text = "(+) made some random message text"
+SmallUpdateText11.TextColor3 = Color3.fromRGB(60,160,60)
+SmallUpdateText11.TextSize = 6
+SmallUpdateText11.BackgroundTransparency = 1
+SmallUpdateText11.TextXAlignment = "Left"
+SmallUpdateText11.Parent = UpdateLogPhrame
+local SmallUpdateText10 = Instance.new("TextLabel")
+SmallUpdateText10.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallUpdateText10.Position = UDim2.new(0.08, 0, tostring(SmallUpdateTextLocationB+0.4), 0)
+SmallUpdateText10.BorderSizePixel = 0
+SmallUpdateText10.Text = "(/) tested with the random message thing text creator idk"
+SmallUpdateText10.TextColor3 = Color3.fromRGB(130,130,60)
+SmallUpdateText10.TextSize = 6
+SmallUpdateText10.BackgroundTransparency = 1
+SmallUpdateText10.TextXAlignment = "Left"
+SmallUpdateText10.Parent = UpdateLogPhrame
+
 local BigUpdateText1 = Instance.new("TextLabel")
 BigUpdateText1.Size = UDim2.new(0.01, 0, 0.01, 0)
-BigUpdateText1.Position = UDim2.new(0.05, 0, 0.05, 0)
+BigUpdateText1.Position = UDim2.new(0.05, 0, tostring(BigUpdateTextLocation+0.6), 0)
 BigUpdateText1.BorderSizePixel = 0
 BigUpdateText1.Text = "New Update [12/03/2023] [14/41] ━━━━━━━━━━━━━"
 BigUpdateText1.TextColor3 = Color3.fromRGB(255,255,255)
@@ -869,7 +989,7 @@ BigUpdateText1.Parent = UpdateLogPhrame
 
 local SmallUpdateText1 = Instance.new("TextLabel")
 SmallUpdateText1.Size = UDim2.new(0.01, 0, 0.01, 0)
-SmallUpdateText1.Position = UDim2.new(0.08, 0, 0.1, 0)
+SmallUpdateText1.Position = UDim2.new(0.08, 0, tostring(SmallUpdateTextLocationA+0.6), 0)
 SmallUpdateText1.BorderSizePixel = 0
 SmallUpdateText1.Text = "(+) improved animations"
 SmallUpdateText1.TextColor3 = Color3.fromRGB(60,160,60)
@@ -879,7 +999,7 @@ SmallUpdateText1.TextXAlignment = "Left"
 SmallUpdateText1.Parent = UpdateLogPhrame
 local SmallUpdateText2 = Instance.new("TextLabel")
 SmallUpdateText2.Size = UDim2.new(0.01, 0, 0.01, 0)
-SmallUpdateText2.Position = UDim2.new(0.08, 0, 0.13, 0)
+SmallUpdateText2.Position = UDim2.new(0.08, 0, tostring(SmallUpdateTextLocationB+0.6), 0)
 SmallUpdateText2.BorderSizePixel = 0
 SmallUpdateText2.Text = "(+) improved error detection"
 SmallUpdateText2.TextColor3 = Color3.fromRGB(60,160,60)
@@ -889,7 +1009,7 @@ SmallUpdateText2.TextXAlignment = "Left"
 SmallUpdateText2.Parent = UpdateLogPhrame
 local SmallUpdateText3 = Instance.new("TextLabel")
 SmallUpdateText3.Size = UDim2.new(0.01, 0, 0.01, 0)
-SmallUpdateText3.Position = UDim2.new(0.08, 0, 0.16, 0)
+SmallUpdateText3.Position = UDim2.new(0.08, 0, tostring(SmallUpdateTextLocationC+0.6), 0)
 SmallUpdateText3.BorderSizePixel = 0
 SmallUpdateText3.Text = "(/) errors on page 2 btw"
 SmallUpdateText3.TextColor3 = Color3.fromRGB(130,130,60)
@@ -900,7 +1020,7 @@ SmallUpdateText3.Parent = UpdateLogPhrame
 
 local BigUpdateText2 = Instance.new("TextLabel")
 BigUpdateText2.Size = UDim2.new(0.01, 0, 0.01, 0)
-BigUpdateText2.Position = UDim2.new(0.05, 0, 0.25, 0)
+BigUpdateText2.Position = UDim2.new(0.05, 0, tostring(BigUpdateTextLocation+0.8), 0)
 BigUpdateText2.BorderSizePixel = 0
 BigUpdateText2.Text = "Last Update [12/03/2023] [12/15] ━━━━━━━━━━━━━"
 BigUpdateText2.TextColor3 = Color3.fromRGB(255,255,255)
@@ -911,7 +1031,7 @@ BigUpdateText2.Parent = UpdateLogPhrame
 
 local SmallUpdateText4 = Instance.new("TextLabel")
 SmallUpdateText4.Size = UDim2.new(0.01, 0, 0.01, 0)
-SmallUpdateText4.Position = UDim2.new(0.08, 0, 0.30, 0)
+SmallUpdateText4.Position = UDim2.new(0.08, 0, tostring(SmallUpdateTextLocationA+0.8), 0)
 SmallUpdateText4.BorderSizePixel = 0
 SmallUpdateText4.Text = "(+) fully fixed the github issue by obfuscating the code"
 SmallUpdateText4.TextColor3 = Color3.fromRGB(60,160,60)
@@ -921,7 +1041,7 @@ SmallUpdateText4.TextXAlignment = "Left"
 SmallUpdateText4.Parent = UpdateLogPhrame
 local SmallUpdateText5 = Instance.new("TextLabel")
 SmallUpdateText5.Size = UDim2.new(0.01, 0, 0.01, 0)
-SmallUpdateText5.Position = UDim2.new(0.08, 0, 0.33, 0)
+SmallUpdateText5.Position = UDim2.new(0.08, 0, tostring(SmallUpdateTextLocationB+0.8), 0)
 SmallUpdateText5.BorderSizePixel = 0
 SmallUpdateText5.Text = "(+) fixed some error's not showing / being replaced"
 SmallUpdateText5.TextColor3 = Color3.fromRGB(60,160,60)
@@ -931,7 +1051,7 @@ SmallUpdateText5.TextXAlignment = "Left"
 SmallUpdateText5.Parent = UpdateLogPhrame
 local SmallUpdateText6 = Instance.new("TextLabel")
 SmallUpdateText6.Size = UDim2.new(0.01, 0, 0.01, 0)
-SmallUpdateText6.Position = UDim2.new(0.08, 0, 0.36, 0)
+SmallUpdateText6.Position = UDim2.new(0.08, 0, tostring(SmallUpdateTextLocationC+0.8), 0)
 SmallUpdateText6.BorderSizePixel = 0
 SmallUpdateText6.Text = "(/) replaced statistic logger"
 SmallUpdateText6.TextColor3 = Color3.fromRGB(130,130,60)
@@ -984,6 +1104,9 @@ UpdateLabelInfo2.TextSize = 4
 ErrorUpdateButton.TextSize = 4
 BigUpdateText1.TextSize = 4
 BigUpdateText2.TextSize = 4
+BigUpdateText3.TextSize = 4
+BigUpdateText4.TextSize = 4
+BigUpdateText5.TextSize = 4
 MinimiseRestroreButton.TextSize = 10
 BarText1.TextSize = 4.5
 BarText2.TextSize = 4.5
@@ -1000,6 +1123,13 @@ SmallUpdateText3.TextSize = 3
 SmallUpdateText4.TextSize = 3
 SmallUpdateText5.TextSize = 3
 SmallUpdateText6.TextSize = 3
+SmallUpdateText7.TextSize = 3
+SmallUpdateText8.TextSize = 3
+SmallUpdateText9.TextSize = 3
+SmallUpdateText10.TextSize = 3
+SmallUpdateText11.TextSize = 3
+SmallUpdateText12.TextSize = 3
+SmallUpdateText13.TextSize = 3
 local MakeUpRandomNumber = math.random(20, 100)
 for i = 0, Amount do
 local LoadedAmount = math.floor(0+(i/Amount*Val))
@@ -1034,6 +1164,9 @@ UpdateLabelInfo2.TextSize = 8
 ErrorUpdateButton.TextSize = 8
 BigUpdateText1.TextSize = 8
 BigUpdateText2.TextSize = 8
+BigUpdateText3.TextSize = 8
+BigUpdateText4.TextSize = 8
+BigUpdateText5.TextSize = 8
 MinimiseRestroreButton.TextSize = 20
 BarText1.TextSize = 9
 BarText2.TextSize = 9
@@ -1050,6 +1183,14 @@ SmallUpdateText3.TextSize = 6
 SmallUpdateText4.TextSize = 6
 SmallUpdateText5.TextSize = 6
 SmallUpdateText6.TextSize = 6
+SmallUpdateText7.TextSize = 6
+SmallUpdateText8.TextSize = 6
+SmallUpdateText9.TextSize = 6
+SmallUpdateText10.TextSize = 6
+SmallUpdateText11.TextSize = 6
+SmallUpdateText12.TextSize = 6
+SmallUpdateText13.TextSize = 6
+SmallUpdateText14.TextSize = 6
 end
 
 local function MakeCoolVisualClose(Val, ValQ, Time, Amount)
@@ -1085,6 +1226,9 @@ UpdateLabelInfo2.TextSize = LoadedAmountB
 ErrorUpdateButton.TextSize = LoadedAmountB
 BigUpdateText1.TextSize = math.floor(LoadedAmountB)
 BigUpdateText2.TextSize = math.floor(LoadedAmountB)
+BigUpdateText3.TextSize = math.floor(LoadedAmountB)
+BigUpdateText4.TextSize = math.floor(LoadedAmountB)
+BigUpdateText5.TextSize = math.floor(LoadedAmountB)
 MinimiseRestroreButton.TextSize = LoadedAmountB
 BarText1.TextSize = math.floor(LoadedAmountB)
 BarText2.TextSize = math.floor(LoadedAmountB)
@@ -1101,6 +1245,14 @@ SmallUpdateText3.TextSize = math.floor(LoadedAmountB)
 SmallUpdateText4.TextSize = math.floor(LoadedAmountB)
 SmallUpdateText5.TextSize = math.floor(LoadedAmountB)
 SmallUpdateText6.TextSize = math.floor(LoadedAmountB)
+SmallUpdateText7.TextSize = math.floor(LoadedAmountB)
+SmallUpdateText8.TextSize = math.floor(LoadedAmountB)
+SmallUpdateText9.TextSize = math.floor(LoadedAmountB)
+SmallUpdateText10.TextSize = math.floor(LoadedAmountB)
+SmallUpdateText11.TextSize = math.floor(LoadedAmountB)
+SmallUpdateText12.TextSize = math.floor(LoadedAmountB)
+SmallUpdateText13.TextSize = math.floor(LoadedAmountB)
+SmallUpdateText14.TextSize = math.floor(LoadedAmountB)
 ZeroPhrame.Size = UDim2.new(0, LoadedAmount, 0, LoadedAmountQ)
 wait(Time)
 end
