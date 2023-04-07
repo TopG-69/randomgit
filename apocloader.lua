@@ -11,11 +11,17 @@ local TextLabel_3 = Instance.new("TextLabel")
 local TextButton_4 = Instance.new("TextButton")
 local TextLabel_4 = Instance.new("TextLabel")
 
+
+
 --Properties:
+
+
 
 Popup.Name = "Popup"
 Popup.Parent = game:GetService("CoreGui")
 Popup.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+
 
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = Popup
@@ -26,7 +32,11 @@ MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
 MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 MainFrame.Size = UDim2.new(0, 977, 0, 278)
 
+
+
 UICorner.Parent = MainFrame
+
+
 
 TextButton.Parent = MainFrame
 TextButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
@@ -39,7 +49,11 @@ TextButton.Text = ""
 TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
 TextButton.TextSize = 14.000
 
+
+
 UICorner_2.Parent = TextButton
+
+
 
 TextLabel.Parent = TextButton
 TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -50,6 +64,8 @@ TextLabel.Font = Enum.Font.SourceSans
 TextLabel.Text = "XR-Hub"
 TextLabel.TextColor3 = Color3.fromRGB(111,124,125)
 TextLabel.TextSize = 40.000
+
+
 
 TextLabel_2.Parent = MainFrame
 TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -64,6 +80,8 @@ TextLabel_2.TextSize = 40.000
 TextLabel_2.TextStrokeTransparency = 0.800
 TextLabel_2.TextWrapped = true
 
+
+
 TextButton_2.Parent = MainFrame
 TextButton_2.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 TextButton_2.BackgroundTransparency = 0.300
@@ -75,7 +93,11 @@ TextButton_2.Text = ""
 TextButton_2.TextColor3 = Color3.fromRGB(0, 0, 0)
 TextButton_2.TextSize = 14.000
 
+
+
 UICorner_3.Parent = TextButton_2
+
+
 
 TextLabel_3.Parent = TextButton_2
 TextLabel_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -88,6 +110,8 @@ TextLabel_3.TextColor3 = Color3.fromRGB(25,255,25)
 TextLabel_3.TextSize = 40.000
 TextLabel_3.TextWrapped = true
 
+
+
 TextButton_4.Parent = MainFrame
 TextButton_4.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 TextButton_4.BackgroundTransparency = 0.300
@@ -98,6 +122,8 @@ TextButton_4.Font = Enum.Font.SourceSans
 TextButton_4.Text = ""
 TextButton_4.TextColor3 = Color3.fromRGB(0, 0, 0)
 TextButton_4.TextSize = 14.000
+
+
 
 TextLabel_4.Parent = TextButton_4
 TextLabel_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -110,9 +136,13 @@ TextLabel_4.TextColor3 = Color3.fromRGB(25,255,255)
 TextLabel_4.TextSize = 40.000
 TextLabel_4.TextWrapped = true
 
+
+
 local function Close()
     Popup:Destroy()
 end
+
+
 
 TextButton.MouseButton1Click:Connect(function()
     Close()
