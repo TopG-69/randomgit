@@ -61,8 +61,8 @@ TextLabel.BackgroundTransparency = 1.000
 TextLabel.Position = UDim2.new(0.03, 0, 0.3, 0)
 TextLabel.Size = UDim2.new(0, 200, 0, 50)
 TextLabel.Font = Enum.Font.SourceSans
-TextLabel.Text = "XR-Hub"
-TextLabel.TextColor3 = Color3.fromRGB(111,124,125)
+TextLabel.Text = "New Script (synapse)"
+TextLabel.TextColor3 = Color3.fromRGB(25,255,255)
 TextLabel.TextSize = 40.000
 
 
@@ -131,8 +131,8 @@ TextLabel_4.BackgroundTransparency = 1.000
 TextLabel_4.Position = UDim2.new(0.0, 0, 0.07, 0)
 TextLabel_4.Size = UDim2.new(0, 200, 0, 122)
 TextLabel_4.Font = Enum.Font.SourceSans
-TextLabel_4.Text = "New Script (synapse)"
-TextLabel_4.TextColor3 = Color3.fromRGB(25,255,255)
+TextLabel_4.Text = "XR Hub"
+TextLabel_4.TextColor3 = Color3.fromRGB(111,124,125)
 TextLabel_4.TextSize = 40.000
 TextLabel_4.TextWrapped = true
 
@@ -147,7 +147,7 @@ end
 TextButton.MouseButton1Click:Connect(function()
     Close()
     wait(0.1)
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/Apoc.lua", true))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/Apoc-gui-beta.lua", true))()
 end)
 
 TextButton_2.MouseButton1Click:Connect(function()
@@ -159,5 +159,5 @@ end)
 TextButton_4.MouseButton1Click:Connect(function()
     Close()
     wait(0.1)
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/Apoc-gui-beta.lua", true))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/Apoc.lua", true))()
 end)
