@@ -19,6 +19,7 @@ OSstart = os.time()
 ShowFunctionAlerts = true
 ShowLeaveAlerts = true
 ShowJoinAlerts = true
+ShowSpawnedItemAlerts = false
 ShowExploitAlerts = true
 TogglePunishExploiters = false
 ExecutorName = syn and "Synapse X" or getexecutorname and "ScriptWare" or KRNL_LOADED and "Krnl / Oxygen U / Comet" or is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or secure_load and "Sentinel" or "n/a"
@@ -1933,8 +1934,8 @@ SmallText = Instance.new("TextLabel")
 SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
 SmallText.Position = UDim2.new(0.08, 0, 0.4, 0)
 SmallText.BorderSizePixel = 0
-SmallText.Text = "(/) Script version: 125"
-SmallText.TextColor3 = Color3.fromRGB(255,255,255)
+SmallText.Text = "(/) Script version: 126"
+SmallText.TextColor3 = Color3.fromRGB(255,255,120)
 SmallText.TextSize = 8
 SmallText.BackgroundTransparency = 1
 SmallText.TextXAlignment = "Left"
@@ -3528,9 +3529,16 @@ local LootS = game.Lighting.LootDrops
 local LootSI = SpawningTabSelectedItem
 local SPlayer = game.Players:FindFirstChild(SpawningTabSelectedPlayer)
 local Amount = ItemSpawningAmount
-    for i = 1, Amount do
-		SpawnItem(SPlayer, LootSI, LootS, Vector3.new(math.random(-ItemSpawningRadius, ItemSpawningRadius), -ItemSpawningRadiusH, math.random(-ItemSpawningRadius, ItemSpawningRadius)), math.random(-5, 5))
-    end
+	if SPlayer then
+		for i = 1, Amount do
+			SpawnItem(SPlayer, LootSI, LootS, Vector3.new(math.random(-ItemSpawningRadius, ItemSpawningRadius), -1*ItemSpawningRadiusH, math.random(-ItemSpawningRadius, ItemSpawningRadius)), math.random(-5, 5))
+			if ShowSpawnedItemAlerts then
+				AnnounceBox("Spawned " .. LootSI .. "!", "SPAWNER", 2, 60, 160, 60, 255, 255, 255)
+			end
+		end
+	else
+		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+	end
 end)
 --frames
 
@@ -5073,9 +5081,47 @@ Settings1Page2FeaturesToggleExploiterDetectionMessages.MouseButton1Click:Connect
 	end
 end)
 
+Settings1Page2FeaturesToggleSpawnedItemMessages = Instance.new("TextButton")
+Settings1Page2FeaturesToggleSpawnedItemMessages.Size = UDim2.new(0, 160, 0, 20)
+Settings1Page2FeaturesToggleSpawnedItemMessages.Position = UDim2.new(0.02, 0, 0.42, 0)
+Settings1Page2FeaturesToggleSpawnedItemMessages.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Settings1Page2FeaturesToggleSpawnedItemMessages.BackgroundTransparency = 0.4
+Settings1Page2FeaturesToggleSpawnedItemMessages.BorderSizePixel = 1
+Settings1Page2FeaturesToggleSpawnedItemMessages.Text = "Spawned Item Alerts"
+Settings1Page2FeaturesToggleSpawnedItemMessages.TextColor3 = Color3.fromRGB(255, 255, 255)
+Settings1Page2FeaturesToggleSpawnedItemMessages.TextSize = 8
+Settings1Page2FeaturesToggleSpawnedItemMessages.TextXAlignment = "Center"
+Settings1Page2FeaturesToggleSpawnedItemMessages.Parent = Settings1PageSection2Phrame
+
+Settings1Page2FeaturesToggleSpawnedItemMessagesImage = Instance.new("ImageLabel")
+Settings1Page2FeaturesToggleSpawnedItemMessagesImage.Size = UDim2.new(0, 20, 0, 20)
+Settings1Page2FeaturesToggleSpawnedItemMessagesImage.Position = UDim2.new(0.012, 0, 0.42, 0)
+Settings1Page2FeaturesToggleSpawnedItemMessagesImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Settings1Page2FeaturesToggleSpawnedItemMessagesImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Settings1Page2FeaturesToggleSpawnedItemMessagesImage.BackgroundTransparency = 1
+Settings1Page2FeaturesToggleSpawnedItemMessagesImage.BorderSizePixel = 0
+Settings1Page2FeaturesToggleSpawnedItemMessagesImage.Visible = true
+Settings1Page2FeaturesToggleSpawnedItemMessagesImage.Image = "rbxassetid://13001049350"
+Settings1Page2FeaturesToggleSpawnedItemMessagesImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Settings1Page2FeaturesToggleSpawnedItemMessagesImage.Parent = Settings1PageSection2Phrame
+
+Settings1Page2FeaturesToggleSpawnedItemMessages.MouseButton1Click:Connect(function()
+	if Settings1Page2FeaturesToggleSpawnedItemMessages.TextColor3 == Color3.fromRGB(255, 255, 255) then
+	    AnnounceBox("Showing item alert messages!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		Settings1Page2FeaturesToggleSpawnedItemMessages.TextColor3 = Color3.fromRGB(170, 170, 170)
+		Settings1Page2FeaturesToggleSpawnedItemMessagesImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+		ShowSpawnedItemAlerts = true
+	elseif Settings1Page2FeaturesToggleSpawnedItemMessages.TextColor3 == Color3.fromRGB(170, 170, 170) then
+		AnnounceBox("No longer showing item alert messages!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		Settings1Page2FeaturesToggleSpawnedItemMessages.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Settings1Page2FeaturesToggleSpawnedItemMessagesImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		ShowSpawnedItemAlerts = false
+	end
+end)
+
 Settings1Page2FeaturesAutoCleanInterval = Instance.new("TextBox")
 Settings1Page2FeaturesAutoCleanInterval.Size = UDim2.new(0, 160, 0, 20)
-Settings1Page2FeaturesAutoCleanInterval.Position = UDim2.new(0.02, 0, 0.42, 0)
+Settings1Page2FeaturesAutoCleanInterval.Position = UDim2.new(0.02, 0, 0.52, 0)
 Settings1Page2FeaturesAutoCleanInterval.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
 Settings1Page2FeaturesAutoCleanInterval.BackgroundTransparency = 0.4
 Settings1Page2FeaturesAutoCleanInterval.BorderSizePixel = 1
@@ -5101,7 +5147,7 @@ end)
 
 Settings1Page2FeaturesDetectExploitsInterval = Instance.new("TextBox")
 Settings1Page2FeaturesDetectExploitsInterval.Size = UDim2.new(0, 160, 0, 20)
-Settings1Page2FeaturesDetectExploitsInterval.Position = UDim2.new(0.02, 0, 0.52, 0)
+Settings1Page2FeaturesDetectExploitsInterval.Position = UDim2.new(0.02, 0, 0.62, 0)
 Settings1Page2FeaturesDetectExploitsInterval.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
 Settings1Page2FeaturesDetectExploitsInterval.BackgroundTransparency = 0.4
 Settings1Page2FeaturesDetectExploitsInterval.BorderSizePixel = 1
@@ -5127,7 +5173,7 @@ end)
 
 Settings1Page2FeaturesAgeLockInterval = Instance.new("TextBox")
 Settings1Page2FeaturesAgeLockInterval.Size = UDim2.new(0, 160, 0, 20)
-Settings1Page2FeaturesAgeLockInterval.Position = UDim2.new(0.02, 0, 0.62, 0)
+Settings1Page2FeaturesAgeLockInterval.Position = UDim2.new(0.02, 0, 0.72, 0)
 Settings1Page2FeaturesAgeLockInterval.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
 Settings1Page2FeaturesAgeLockInterval.BackgroundTransparency = 0.4
 Settings1Page2FeaturesAgeLockInterval.BorderSizePixel = 1
