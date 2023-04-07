@@ -3417,7 +3417,7 @@ end
 
 Tools1Page2FeaturesSpawning = Instance.new("TextButton")
 Tools1Page2FeaturesSpawning.Size = UDim2.new(0, 100, 0, 20)
-Tools1Page2FeaturesSpawning.Position = UDim2.new(0.02, 0, 0.22, 0)
+Tools1Page2FeaturesSpawning.Position = UDim2.new(0.02, 0, 0.32, 0)
 Tools1Page2FeaturesSpawning.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Tools1Page2FeaturesSpawning.BackgroundTransparency = 0.4
 Tools1Page2FeaturesSpawning.BorderSizePixel = 1
@@ -3429,7 +3429,7 @@ Tools1Page2FeaturesSpawning.Parent = Tools1PageSection2Phrame
 
 Tools1Page2FeaturesSpawningImage = Instance.new("ImageLabel")
 Tools1Page2FeaturesSpawningImage.Size = UDim2.new(0, 20, 0, 20)
-Tools1Page2FeaturesSpawningImage.Position = UDim2.new(0.012, 0, 0.22, 0)
+Tools1Page2FeaturesSpawningImage.Position = UDim2.new(0.012, 0, 0.32, 0)
 Tools1Page2FeaturesSpawningImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Tools1Page2FeaturesSpawningImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Tools1Page2FeaturesSpawningImage.BackgroundTransparency = 1
@@ -3471,7 +3471,7 @@ Tools1Page2FeaturesSpawningItemAmountRadius.Position = UDim2.new(0.02, 0, 0.12, 
 Tools1Page2FeaturesSpawningItemAmountRadius.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
 Tools1Page2FeaturesSpawningItemAmountRadius.BackgroundTransparency = 0.4
 Tools1Page2FeaturesSpawningItemAmountRadius.BorderSizePixel = 1
-Tools1Page2FeaturesSpawningItemAmountRadius.Text = "Radius"
+Tools1Page2FeaturesSpawningItemAmountRadius.Text = "Radius W"
 Tools1Page2FeaturesSpawningItemAmountRadius.TextColor3 = Color3.fromRGB(255, 255, 255)
 Tools1Page2FeaturesSpawningItemAmountRadius.TextSize = 8
 Tools1Page2FeaturesSpawningItemAmountRadius.TextWrapped = true
@@ -3484,7 +3484,33 @@ Tools1Page2FeaturesSpawningItemAmountRadius.FocusLost:Connect(function(enterPres
     if enterPressed then
 		if GetValue then
 			ItemSpawningRadius = GetValue
-			AnnounceBox("Set item spawning radius to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+			AnnounceBox("Set item spawning wide radius to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		else
+			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	end
+end)
+
+Tools1Page2FeaturesSpawningItemAmountRadiusH = Instance.new("TextBox")
+Tools1Page2FeaturesSpawningItemAmountRadiusH.Size = UDim2.new(0, 100, 0, 20)
+Tools1Page2FeaturesSpawningItemAmountRadiusH.Position = UDim2.new(0.02, 0, 0.22, 0)
+Tools1Page2FeaturesSpawningItemAmountRadiusH.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools1Page2FeaturesSpawningItemAmountRadiusH.BackgroundTransparency = 0.4
+Tools1Page2FeaturesSpawningItemAmountRadiusH.BorderSizePixel = 1
+Tools1Page2FeaturesSpawningItemAmountRadiusH.Text = "Radius H"
+Tools1Page2FeaturesSpawningItemAmountRadiusH.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools1Page2FeaturesSpawningItemAmountRadiusH.TextSize = 8
+Tools1Page2FeaturesSpawningItemAmountRadiusH.TextWrapped = true
+Tools1Page2FeaturesSpawningItemAmountRadiusH.TextXAlignment = "Center"
+Tools1Page2FeaturesSpawningItemAmountRadiusH.Parent = Tools1PageSection2Phrame
+
+local ItemSpawningRadiusH = 2
+Tools1Page2FeaturesSpawningItemAmountRadius.FocusLost:Connect(function(enterPressed)
+	local GetValue = tonumber(Tools1Page2FeaturesSpawningItemAmountRadius.Text)
+    if enterPressed then
+		if GetValue then
+			ItemSpawningRadiusH = GetValue
+			AnnounceBox("Set item spawning lenght radius to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 		else
 			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 		end
@@ -3497,7 +3523,7 @@ local LootSI = SpawningTabSelectedItem
 local SPlayer = game.Players:FindFirstChild(SpawningTabSelectedPlayer)
 local Amount = ItemSpawningAmount
     for i = 1, Amount do
-		SpawnItem(SPlayer, LootSI, LootS, Vector3.new(math.random(-ItemSpawningRadius, ItemSpawningRadius), 2, math.random(-ItemSpawningRadius, ItemSpawningRadius)), math.random(-5, 5))
+		SpawnItem(SPlayer, LootSI, LootS, Vector3.new(math.random(-ItemSpawningRadius, ItemSpawningRadius), ItemSpawningRadiusH, math.random(-ItemSpawningRadius, ItemSpawningRadius)), math.random(-5, 5))
     end
 end)
 --frames
