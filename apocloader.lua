@@ -61,7 +61,7 @@ TextLabel.BackgroundTransparency = 1.000
 TextLabel.Position = UDim2.new(0.03, 0, 0.3, 0)
 TextLabel.Size = UDim2.new(0, 200, 0, 50)
 TextLabel.Font = Enum.Font.SourceSans
-TextLabel.Text = "New Script (synapse)"
+TextLabel.Text = "New Script"
 TextLabel.TextColor3 = Color3.fromRGB(25,255,255)
 TextLabel.TextSize = 40.000
 
