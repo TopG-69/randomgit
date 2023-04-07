@@ -3505,8 +3505,8 @@ Tools1Page2FeaturesSpawningItemAmountRadiusH.TextXAlignment = "Center"
 Tools1Page2FeaturesSpawningItemAmountRadiusH.Parent = Tools1PageSection2Phrame
 
 local ItemSpawningRadiusH = 2
-Tools1Page2FeaturesSpawningItemAmountRadius.FocusLost:Connect(function(enterPressed)
-	local GetValue = tonumber(Tools1Page2FeaturesSpawningItemAmountRadius.Text)
+Tools1Page2FeaturesSpawningItemAmountRadiusH.FocusLost:Connect(function(enterPressed)
+	local GetValue = tonumber(Tools1Page2FeaturesSpawningItemAmountRadiusH.Text)
     if enterPressed then
 		if GetValue then
 			ItemSpawningRadiusH = GetValue
