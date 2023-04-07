@@ -60,9 +60,7 @@ game.StarterGui:SetCore("SendNotification",  {
 })
 
 
-local library = loadstring(game:HttpGet("https://pastebin.com/raw/yKdTYbTe")) ()
---local library2 = loadstring(game:HttpGet("https://raw.githubusercontent.com/HELLLO1073/Roblox-scripts-2.0/main/UIS/venyxUI-mod.lua"))()
---local Library3 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/ModuleQ")) ()
 
 local window = library.initiate("- XR - Made By LiHort#1000/Cjremenak", {
     default = UDim2.new(0, 600, 0, 700),
