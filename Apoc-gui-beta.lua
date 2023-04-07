@@ -224,7 +224,6 @@ Loot = Lighting.LootDrops
 Mats = Lighting.Materials
 Bags = Lighting.Backpacks
 Vehicles = game.Workspace:FindFirstChild("Vehicles")
-rconsoleprint("[!] " .. tostring(Loot) .. "\n")
 if Vehicles == nil then
 R.AddClothing:FireServer("Vehicles", game.Workspace, "", "", "")
 Vehicles = game.Workspace:WaitForChild("Vehicles")
@@ -1917,7 +1916,7 @@ SmallText = Instance.new("TextLabel")
 SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
 SmallText.Position = UDim2.new(0.08, 0, 0.4, 0)
 SmallText.BorderSizePixel = 0
-SmallText.Text = "(/) Script version: 117"
+SmallText.Text = "(/) Script version: 123"
 SmallText.TextColor3 = Color3.fromRGB(255,255,255)
 SmallText.TextSize = 8
 SmallText.BackgroundTransparency = 1
@@ -6547,6 +6546,9 @@ game.Players.PlayerRemoving:Connect(function(player)
     end
 end)
 
+local AntiMessUpLastModiefiedInvis = false
+local AntiMessUpLastModiefiedZInvis = false
+local AntiMessUpLastModiefiedFreeze = false
 local Other1OldSelectedPlayer = ""
 local Other1Page2Features2PKGodprevStatus = ""
 local Other1Page2Features2ToggleVestprevStatus = ""
@@ -6565,25 +6567,31 @@ function UpdateOtherTab1Statuses()
             end
         end
         
-        if Other1LastModifiedInvisPlayer == LocalTab1SelectedPlayer and Other1Page2Features3InvisImage.Image == "rbxassetid://12900717295" then
-            Other1Page2Features3InvisImage.Image = "rbxassetid://12900770221"
-            Other1LastModifiedInvisPlayer = ""
-        elseif Other1OldSelectedPlayer ~= LocalTab1SelectedPlayer and Other1LastModifiedInvisPlayer ~= LocalTab1SelectedPlayer then
-            Other1Page2Features3InvisImage.Image = "rbxassetid://12900717295"
+        if Other1OldSelectedPlayer ~= LocalTab1SelectedPlayer then
+            if Other1LastModifiedInvisPlayer == LocalTab1SelectedPlayer and Other1Page2Features3InvisImage.Image == "rbxassetid://12900717295" then
+                Other1Page2Features3InvisImage.Image = "rbxassetid://12900770221"
+                Other1LastModifiedInvisPlayer = ""
+            else
+                Other1Page2Features3InvisImage.Image = "rbxassetid://12900717295"
+            end
         end
         
-        if Other1LastModifiedZInvisPlayer == LocalTab1SelectedPlayer and Other1Page2Features3ZIvisImage.Image == "rbxassetid://12900717295" then
-            Other1Page2Features3ZIvisImage.Image = "rbxassetid://12900770221"
-            Other1LastModifiedZInvisPlayer = ""
-        elseif Other1OldSelectedPlayer ~= LocalTab1SelectedPlayer and Other1LastModifiedZInvisPlayer ~= LocalTab1SelectedPlayer then
-            Other1Page2Features3ZIvisImage.Image = "rbxassetid://12900717295"
+        if Other1OldSelectedPlayer ~= LocalTab1SelectedPlayer then
+            if Other1LastModifiedZInvisPlayer == LocalTab1SelectedPlayer and Other1Page2Features3ZIvisImage.Image == "rbxassetid://12900717295" then
+                Other1Page2Features3ZIvisImage.Image = "rbxassetid://12900770221"
+                Other1LastModifiedZInvisPlayer = ""
+            else
+                Other1Page2Features3ZIvisImage.Image = "rbxassetid://12900717295"
+            end
         end
     
-        if Other1LastModifiedFreezedPlayer == LocalTab1SelectedPlayer and Other1Page2FeaturesFreeze.Text == "Freeze" then
-            Other1Page2FeaturesFreeze.Text = "UnFreeze"
-            Other1LastModifiedFreezedPlayer = ""
-        elseif Other1OldSelectedPlayer ~= LocalTab1SelectedPlayer and Other1LastModifiedFreezedPlayer ~= LocalTab1SelectedPlayer then
-            Other1Page2FeaturesFreeze.Text = "Freeze"
+        if Other1OldSelectedPlayer ~= LocalTab1SelectedPlayer then
+            if Other1LastModifiedFreezedPlayer == LocalTab1SelectedPlayer and Other1Page2FeaturesFreeze.Text == "Freeze" then
+                Other1Page2FeaturesFreeze.Text = "UnFreeze"
+                Other1LastModifiedFreezedPlayer = ""
+            else
+                Other1Page2FeaturesFreeze.Text = "Freeze"
+            end
         end
 		
 		local hasvest = false;
