@@ -3523,7 +3523,7 @@ local LootSI = SpawningTabSelectedItem
 local SPlayer = game.Players:FindFirstChild(SpawningTabSelectedPlayer)
 local Amount = ItemSpawningAmount
     for i = 1, Amount do
-		SpawnItem(SPlayer, LootSI, LootS, Vector3.new(math.random(-ItemSpawningRadius, ItemSpawningRadius), ItemSpawningRadiusH, math.random(-ItemSpawningRadius, ItemSpawningRadius)), math.random(-5, 5))
+		SpawnItem(SPlayer, LootSI, LootS, Vector3.new(math.random(-ItemSpawningRadius, ItemSpawningRadius), -ItemSpawningRadiusH, math.random(-ItemSpawningRadius, ItemSpawningRadius)), math.random(-5, 5))
     end
 end)
 --frames
