@@ -29,27 +29,6 @@ success, result = pcall(function()
 
 
 
---create files
-makefolder("Agony")
-wait()
-writefile("Agony/Test", "return 'testfile'", "\n")
-makefolder("Agony/Account")
-makefolder("Agony/Settings")
-wait()
-writefile("Agony/Account/current.txt", "return nil", "\n")
-writefile("Agony/Settings/global.txt", "return nil", "\n")
-writefile("Agony/Settings/gui.txt", "return nil", "\n")
-wait()
-makefolder("Agony/Apoc")
-wait()
-writefile("Agony/Apoc/kits.txt", "return nil", "\n")
-writefile("Agony/Apoc/bans.txt", "return nil", "\n")
-writefile("Agony/Apoc/customcommands.txt", "return nil", "\n")
-writefile("Agony/Apoc/settings.txt", "return nil", "\n")
---create files
-
-
-
 --setup
 MainGui = Instance.new("ScreenGui")
 MainGui.Name = "ApocGui"
@@ -245,6 +224,7 @@ Loot = Lighting.LootDrops
 Mats = Lighting.Materials
 Bags = Lighting.Backpacks
 Vehicles = game.Workspace:FindFirstChild("Vehicles")
+rconsoleprint("[!] " .. tostring(Loot) .. "\n")
 if Vehicles == nil then
 R.AddClothing:FireServer("Vehicles", game.Workspace, "", "", "")
 Vehicles = game.Workspace:WaitForChild("Vehicles")
@@ -538,6 +518,30 @@ function TransferItem(Plr, Ob)
 	end
 end
 
+local SpawnedItems = {}
+function SpawnItem(Par, OF, SelectedItem, SelectedPlayer)
+if SelectedPlayer == nil or SelectedItem == nil then
+return
+end
+if SpawnedItems[SelectedItem] == nil then
+SpawnedItems[SelectedItem] = {true}
+else
+table.insert(SpawnedItems[SelectedItem], true)
+end
+if SelectedItem.Parent ~= Mats then
+fireserver("ChangeParent", Par:WaitForChild(tostring(SelectedItem)), Mats)
+end
+local ItemI = Mats:WaitForChild(tostring(SelectedItem))
+pcall(function() R["PlaceMaterial"]:FireServer(Mats:WaitForChild(tostring(SelectedItem)).Name, SelectedPlayer.Character.Torso.Position-ItemI.PrimaryPart.Position-OF) end)
+spawn(function()
+wait(2)
+table.remove(SpawnedItems[SelectedItem], 1)
+if #SpawnedItems[SelectedItem] < 1 then
+fireserver("ChangeParent", Mats:WaitForChild(tostring(SelectedItem)), Par)
+end
+end)
+end
+
 PlrInventoryTab = {}
 function UpdatePlayerInventory(Plr, Scroll)
     for i, v in pairs(Scroll:GetChildren()) do
@@ -623,6 +627,75 @@ function Inventory(Plr)
 	end
 end
 
+function GetContexts()
+    local gtcx;
+    local stcx; 
+    for i, v in pairs(getgenv()) do
+        if typeof(v) == "function" and string.find(tostring(i), "context") or string.find(tostring(i), "identity") then
+            if string.find(tostring(i), "get") then
+                gtcx = v
+            elseif string.find(tostring(i), "set") then
+                stcx = v
+            end
+        end
+    end
+    return gtcx, stcx
+end
+getcontext, setcontext = GetContexts()
+syn_context_get = getcontext
+syn_context_set = setcontext
+
+meta = getrawmetatable(game)
+if getgenv().MetaSet == nil or getgenv().MetaSet == true then
+	local id = meta.__index
+	local ni = meta.__newindex
+	local nc = meta.__namecall
+	getgenv().MetaSet = {["id"] = meta.__index, ["ni"] = meta.__newindex, ["nc"] = meta.__namecall}
+end
+
+local id = getgenv().MetaSet["id"]
+local ni = getgenv().MetaSet["ni"]
+local nc = getgenv().MetaSet["nc"]
+setreadonly(meta, false)
+meta.__newindex = newcclosure(function(rc, ind, id)
+	if ind == "Health" and LocalPlayer.Character ~= nil and rc == LocalPlayer.Character:FindFirstChild("Humanoid") and id < 100 then
+		return
+	elseif ind == "Parent" and ((rc:IsA("Player") and not id and rc.Parent ~= nil) or rc:IsA("RemoteEvent") or rc:IsA("RemoteFunction")) then
+		return
+	elseif ind == "Value" and typeof(rc) == "Instance" and fireserver then
+		fireserver("ChangeValue", rc, id)
+	end
+	return ni(rc, ind, id)
+end)
+meta.__index = newcclosure(function(rc, i)
+    if i == "Name" and tostring(rc) == "PermanentBan" then
+		AnnounceBox("Someone attempted to free you!", "WARNING", 5, 130, 130, 60, 255, 255, 255)
+		return "Nope"
+	elseif i == "Name" and tostring(rc) == "Remote" and RemoteTable and RemoteTable[i] then
+		return RemoteTable[i]
+    end
+    return id(rc, i)
+end)
+meta.__namecall = newcclosure(function(rc, ...)
+	args = {...}
+	if getnamecallmethod() == "FindFirstChild" and args[1] == "PermanentBan" and rc == LocalPlayer then
+		AnnounceBox("Someone attempted to freeze you!", "WARNING", 5, 130, 130, 60, 255, 255, 255)
+		return
+	elseif (tostring(rc) == "ReplicateModel" or tostring(rc) == "ReplicatePart") and getnamecallmethod() == "FireServer" and typeof(args[1]) == "Instance" then
+		if not args[1].FindFirstChild(args[1], "IsBuildingMaterial") and args[1].Parent ~= nil then
+			R.AddClothing.FireServer(R.AddClothing, "IsBuildingMaterial", args[1], "", "", "")
+			AddWaitForChild(args[1], "IsBuildingMaterial", "FireServer", nc, rc, args)
+			return
+		elseif args[1].Parent == nil then
+			return
+		end
+		setnamecallmethod("FireServer")
+	elseif getnamecallmethod() == "DistanceFromCharacter" then
+		return 0
+	end
+	return nc(rc, ...)
+end)
+
 function KillServer()
 	if IsXbox then
 		return
@@ -674,12 +747,17 @@ function SetupHumanoidWatch()
                     wait()
                 until Ch.Parent == nil
             end)
-            Notify("Someone attempted to kick you!", 6)
+			if ShowFunctionAlerts then
+				AnnounceBox("Someone attempted to kick you!", "ANTI KICK", 5, 130, 130, 60, 255, 255, 255)
+			end
 			spawn(function()
 				for i = 1, 30 do
 					for a = 1, #TempPlrTab do
 						if not game.Players:FindFirstChild(tostring(TempPlrTab[a])) and tostring(TempPlrTab[a]) ~= "nil" then
 							Notify("Possible Kicker: "..tostring(TempPlrTab[a]), 5)
+							if ShowFunctionAlerts then
+								AnnounceBox("Possible kicker ".. tostring(TempPlrTab[a]) .. "!", "ANTI KICK", 5, 130, 130, 60, 255, 255, 255)
+							end
 							table.remove(TempPlrTab, a)
 						end
 					end
@@ -706,6 +784,22 @@ function SetupHumanoidWatch()
 	if LocalPlayer:FindFirstChild("PlayerGui") and LocalPlayer.PlayerGui:WaitForChild("SkyboxRenderMode") then
 		LocalPlayer.PlayerGui.SkyboxRenderMode:Destroy()
 	end
+end
+
+function Punish(Plr, Val)
+    if Plr == nil or Plr.Character == nil then
+        return
+    elseif Plr == LPlr and Plr.Character.Parent ~= game.Workspace then
+        fireserver("ChangeParent", Plr.Character, game.Workspace)
+        return
+    elseif Plr == LPlr then
+        return
+    end
+    if Val == false then
+        fireserver("ChangeParent", Plr.Character, game.Workspace)
+    else
+        fireserver("ChangeParent", Plr.Character, game.Lighting)
+    end
 end
 
 ExploitersList = {}
@@ -1015,167 +1109,7 @@ function CleanParts()
     end
 end
 
-function GetContexts()
-    local gtcx;
-    local stcx; 
-    for i, v in pairs(getgenv()) do
-        if typeof(v) == "function" and string.find(tostring(i), "context") or string.find(tostring(i), "identity") then
-            if string.find(tostring(i), "get") then
-                gtcx = v
-            elseif string.find(tostring(i), "set") then
-                stcx = v
-            end
-        end
-    end
-    return gtcx, stcx
-end
-getcontext, setcontext = GetContexts()
-syn_context_get = getcontext
-syn_context_set = setcontext
-meta = getrawmetatable(game)
-if getgenv().MetaSet == nil or getgenv().MetaSet == true then
-	local id = meta.__index
-	local ni = meta.__newindex
-	local nc = meta.__namecall
-	getgenv().MetaSet = {["id"] = meta.__index, ["ni"] = meta.__newindex, ["nc"] = meta.__namecall}
-end
-local id = getgenv().MetaSet["id"]
-local ni = getgenv().MetaSet["ni"]
-local nc = getgenv().MetaSet["nc"]
-setreadonly(meta, false)
-meta.__newindex = newcclosure(function(rc, ind, id)
-	if ind == "Health" and LocalPlayer.Character ~= nil and rc == LocalPlayer.Character:FindFirstChild("Humanoid") and id < 100 then
-		return
-	elseif ind == "Parent" and ((rc:IsA("Player") and not id and rc.Parent ~= nil) or rc:IsA("RemoteEvent") or rc:IsA("RemoteFunction")) then
-		return
-	elseif ind == "Value" and typeof(rc) == "Instance" and fireserver then
-		fireserver("ChangeValue", rc, id)
-	end
-	return ni(rc, ind, id)
-end)
-meta.__index = newcclosure(function(rc, i)
-    if i == "Name" and tostring(rc) == "PermanentBan" then
-        if ShowFunctionAlerts then
-            AnnounceBox("Someone attempted to free you!", "WARNING", 5, 130, 130, 60, 255, 255, 255)
-        end
-		return "Nope"
-	elseif i == "Name" and tostring(rc) == "Remote" and RemoteTable and RemoteTable[i] then
-		return RemoteTable[i]
-    end
-    return id(rc, i)
-end)
-meta.__namecall = newcclosure(function(rc, ...)
-	args = {...}
-	if getnamecallmethod() == "FindFirstChild" and args[1] == "PermanentBan" and rc == LocalPlayer then
-        if ShowFunctionAlerts then
-            AnnounceBox("Someone attempted to freeze you!", "WARNING", 5, 130, 130, 60, 255, 255, 255)
-        end
-		return "Nope"
-	elseif (tostring(rc) == "ReplicateModel" or tostring(rc) == "ReplicatePart") and getnamecallmethod() == "FireServer" and typeof(args[1]) == "Instance" then
-		if not args[1].FindFirstChild(args[1], "IsBuildingMaterial") and args[1].Parent ~= nil then
-			R.AddClothing.FireServer(R.AddClothing, "IsBuildingMaterial", args[1], "", "", "")
-			AddWaitForChild(args[1], "IsBuildingMaterial", "FireServer", nc, rc, args)
-			return
-		elseif args[1].Parent == nil then
-			return
-		end
-		setnamecallmethod("FireServer")
-	elseif getnamecallmethod() == "DistanceFromCharacter" then
-		return 0
-	end
-	return nc(rc, ...)
-end)
-
-function KillServer()
-	if IsXbox then
-		return
-	end
-	local Re = R:FindFirstChild("SpawnCrate")
-	for i, v in pairs(game:GetChildren()) do
-		if tostring(v) ~= "CoreGui" then
-			for a, b in pairs(v:GetChildren()) do
-				if not b:IsA("BasePart") and b ~= R then
-					if Re then
-						Re:FireServer(b)
-					else
-						fireserver("ChangeParent", b)
-					end
-				end
-			end
-		end
-	end
-	if Re then
-		Re:FireServer(R)
-	else
-		fireserver("ChangeParent", R)
-	end
-end
-if not LocalPlayer or not pcall(function() return (LocalPlayer == game.Players.LocalPlayer) end) then
-	KillServer()
-end
-LocalPlayer:GetPropertyChangedSignal("Parent"):connect(function()
-	if LocalPlayer.Parent == nil then
-		KillServer()
-	end
-end)
-
-function SetupHumanoidWatch()
-    repeat
-        wait()
-    until LocalPlayer.Character ~= nil and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-	local Root = LocalPlayer.Character.HumanoidRootPart
-	local Hum = LocalPlayer.Character.Humanoid
-    local DidTryKick = false
-	Root.ChildAdded:connect(function(Ch)
-        if tostring(Ch) == "IsBuildingMaterial" then
-            R.Detonate:FireServer(Ch)
-			local TempPlrTab = game.Players:GetPlayers()
-			DidTryKick =  true
-            pcall(function()
-                repeat
-                    fireserver("ChangeParent", Ch)
-                    wait()
-                until Ch.Parent == nil
-            end)
-            if ShowFunctionAlerts then
-                AnnounceBox("Someone attempted to kick you!", "WARNING", 5, 130, 130, 60, 255, 255, 255)
-            end
-			spawn(function()
-				for i = 1, 30 do
-					for a = 1, #TempPlrTab do
-						if not game.Players:FindFirstChild(tostring(TempPlrTab[a])) and tostring(TempPlrTab[a]) ~= "nil" then
-                            if ShowFunctionAlerts then
-                                AnnounceBox("Possible kicker " .. tostring(TempPlrTab[a]) .. "!", "WARNING", 5, 130, 130, 60, 255, 255, 255)
-                            end
-							table.remove(TempPlrTab, a)
-						end
-					end
-					wait(0.1)
-				end
-				DidTryKick = false
-			end)
-        end
-    end)
-	local LastPos = LocalPlayer.Character.HumanoidRootPart.Position
-	Root:GetPropertyChangedSignal("Position"):connect(function()
-		wait(0.1)
-		if LocalPlayer.Character == nil or not LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-			return
-		end
-		if (Root.Position - LastPos).Magnitude > 100 and DidTryKick == true then
-			Root.Velocity = Vector3.new()
-			DidTryKick = false
-			LocalPlayer.Character:MoveTo(LastPos)
-		else
-			LastPos = Root.Position
-		end
-	end)
-	if LocalPlayer:FindFirstChild("PlayerGui") and LocalPlayer.PlayerGui:WaitForChild("SkyboxRenderMode") then
-		LocalPlayer.PlayerGui.SkyboxRenderMode:Destroy()
-	end
-end
-
-function Vitals(player, mode)
+function Vitals(player, mode, amount)
 	if mode == 1 then
     	fireserver("ChangeValue", player.playerstats.Hunger, nil)
 		fireserver("ChangeValue", player.playerstats.Thirst, nil)
@@ -1185,6 +1119,22 @@ function Vitals(player, mode)
 	elseif mode == 3 then
     	fireserver("ChangeValue", player.playerstats.Hunger, 100)
 		fireserver("ChangeValue", player.playerstats.Thirst, 100)
+	elseif mode == 4 then
+		if amount == nil then
+			if ShowFunctionAlerts then
+				AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+			end
+		else
+			fireserver("ChangeValue", player.playerstats.Hunger, amount)
+		end
+	elseif mode == 5 then
+		if amount == nil then
+			if ShowFunctionAlerts then
+				AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+			end
+		else
+			fireserver("ChangeValue", player.playerstats.Thirst, amount)
+		end
 	elseif mode == nil or mode == nan then
 		--Notify("[Error]: Invalid mode usage!", 5, 95, 60, 60)
 		if ShowFunctionAlerts then
@@ -1907,7 +1857,7 @@ BigText = Instance.new("TextLabel")
 BigText.Size = UDim2.new(0.01, 0, 0.01, 0)
 BigText.Position = UDim2.new(0.05, 0, 0.05, 0)
 BigText.BorderSizePixel = 0
-BigText.Text = "Script Info [26/03/2023] [1/48] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+BigText.Text = "Script Info [7/04/2023] [17/12] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 BigText.TextColor3 = Color3.fromRGB(255,255,255)
 BigText.TextSize = 8
 BigText.BackgroundTransparency = 1
@@ -1963,10 +1913,20 @@ SmallText.TextSize = 8
 SmallText.BackgroundTransparency = 1
 SmallText.TextXAlignment = "Left"
 SmallText.Parent = Welcome1PageSection1Phrame
+SmallText = Instance.new("TextLabel")
+SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallText.Position = UDim2.new(0.08, 0, 0.4, 0)
+SmallText.BorderSizePixel = 0
+SmallText.Text = "(/) Script version: 117"
+SmallText.TextColor3 = Color3.fromRGB(255,255,255)
+SmallText.TextSize = 8
+SmallText.BackgroundTransparency = 1
+SmallText.TextXAlignment = "Left"
+SmallText.Parent = Welcome1PageSection1Phrame
 
 --[[AgonyLogoImage = Instance.new("ImageLabel")
-AgonyLogoImage.Size = UDim2.new(0, 60, 0, 30)
-AgonyLogoImage.Position = UDim2.new(0.65, 0, 0.75, 0)
+AgonyLogoImage.Size = UDim2.new(0, 200, 0, 120)
+AgonyLogoImage.Position = UDim2.new(0.6, 0, 0.5, 0)
 AgonyLogoImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 AgonyLogoImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 AgonyLogoImage.BackgroundTransparency = 1
@@ -1975,6 +1935,50 @@ AgonyLogoImage.Visible = true
 AgonyLogoImage.Image = "rbxassetid://13010662773"
 AgonyLogoImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
 AgonyLogoImage.Parent = Welcome1PageSection1Phrame--]]
+
+Welcome1PageSection1Phrame1Statuses = Instance.new("Frame")
+Welcome1PageSection1Phrame1Statuses.Size = UDim2.new(0, 160, 0, 20)
+Welcome1PageSection1Phrame1Statuses.Position = UDim2.new(0.01, 0, 0.90, 0)
+Welcome1PageSection1Phrame1Statuses.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Welcome1PageSection1Phrame1Statuses.BorderSizePixel = 1
+Welcome1PageSection1Phrame1Statuses.Transparency = 0.2
+Welcome1PageSection1Phrame1Statuses.Active = false
+Welcome1PageSection1Phrame1Statuses.Selectable = true
+Welcome1PageSection1Phrame1Statuses.Visible = true
+Welcome1PageSection1Phrame1Statuses.Parent = Welcome1PageSection1Phrame
+
+AgonyStatusText0 = Instance.new("TextLabel")
+AgonyStatusText0.Size = UDim2.new(0.01, 0, 0.01, 0)
+AgonyStatusText0.Position = UDim2.new(0.56, 0, 0.45, 0)
+AgonyStatusText0.BorderSizePixel = 0
+AgonyStatusText0.Text = "(ORIGINAL)"
+AgonyStatusText0.TextColor3 = Color3.fromRGB(170,170,170)
+AgonyStatusText0.TextSize = 8
+AgonyStatusText0.BackgroundTransparency = 1
+AgonyStatusText0.TextXAlignment = "Left"
+AgonyStatusText0.Parent = Welcome1PageSection1Phrame1Statuses
+
+AgonyStatusText1 = Instance.new("TextLabel")
+AgonyStatusText1.Size = UDim2.new(0.01, 0, 0.01, 0)
+AgonyStatusText1.Position = UDim2.new(0.01, 0, 0.45, 0)
+AgonyStatusText1.BorderSizePixel = 0
+AgonyStatusText1.Text = "Status"
+AgonyStatusText1.TextColor3 = Color3.fromRGB(255,255,255)
+AgonyStatusText1.TextSize = 8
+AgonyStatusText1.BackgroundTransparency = 1
+AgonyStatusText1.TextXAlignment = "Left"
+AgonyStatusText1.Parent = Welcome1PageSection1Phrame1Statuses
+
+AgonyStatusText2 = Instance.new("TextLabel")
+AgonyStatusText2.Size = UDim2.new(0.01, 0, 0.01, 0)
+AgonyStatusText2.Position = UDim2.new(0.26, 0, 0.45, 0)
+AgonyStatusText2.BorderSizePixel = 0
+AgonyStatusText2.Text = "Online"
+AgonyStatusText2.TextColor3 = Color3.fromRGB(0,255,255)
+AgonyStatusText2.TextSize = 8
+AgonyStatusText2.BackgroundTransparency = 1
+AgonyStatusText2.TextXAlignment = "Left"
+AgonyStatusText2.Parent = Welcome1PageSection1Phrame1Statuses
 --frames
 
 
@@ -2532,29 +2536,48 @@ Other1Page2FeaturesRocket.MouseButton1Click:Connect(function()
 	end
 end)
 
-Other1Page2Features = Instance.new("TextButton")
-Other1Page2Features.Size = UDim2.new(0, 120, 0, 20)
-Other1Page2Features.Position = UDim2.new(0.02, 0, 0.72, 0)
-Other1Page2Features.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Other1Page2Features.BackgroundTransparency = 0.4
-Other1Page2Features.BorderSizePixel = 1
-Other1Page2Features.Text = "Freeze"
-Other1Page2Features.TextColor3 = Color3.fromRGB(255, 255, 255)
-Other1Page2Features.TextSize = 8
-Other1Page2Features.TextXAlignment = "Center"
-Other1Page2Features.Parent = Other1PageSection2Phrame
+Other1Page2FeaturesFreeze = Instance.new("TextButton")
+Other1Page2FeaturesFreeze.Size = UDim2.new(0, 120, 0, 20)
+Other1Page2FeaturesFreeze.Position = UDim2.new(0.02, 0, 0.72, 0)
+Other1Page2FeaturesFreeze.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other1Page2FeaturesFreeze.BackgroundTransparency = 0.4
+Other1Page2FeaturesFreeze.BorderSizePixel = 1
+Other1Page2FeaturesFreeze.Text = "Freeze"
+Other1Page2FeaturesFreeze.TextColor3 = Color3.fromRGB(255, 255, 255)
+Other1Page2FeaturesFreeze.TextSize = 8
+Other1Page2FeaturesFreeze.TextXAlignment = "Center"
+Other1Page2FeaturesFreeze.Parent = Other1PageSection2Phrame
 
-Other1Page2FeaturesImage = Instance.new("ImageLabel")
-Other1Page2FeaturesImage.Size = UDim2.new(0, 20, 0, 20)
-Other1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.72, 0)
-Other1Page2FeaturesImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Other1Page2FeaturesImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Other1Page2FeaturesImage.BackgroundTransparency = 1
-Other1Page2FeaturesImage.BorderSizePixel = 0
-Other1Page2FeaturesImage.Visible = true
-Other1Page2FeaturesImage.Image = "rbxassetid://12900618433"
-Other1Page2FeaturesImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
-Other1Page2FeaturesImage.Parent = Other1PageSection2Phrame
+Other1Page2FeaturesFreezeImage = Instance.new("ImageLabel")
+Other1Page2FeaturesFreezeImage.Size = UDim2.new(0, 20, 0, 20)
+Other1Page2FeaturesFreezeImage.Position = UDim2.new(0.012, 0, 0.72, 0)
+Other1Page2FeaturesFreezeImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other1Page2FeaturesFreezeImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Other1Page2FeaturesFreezeImage.BackgroundTransparency = 1
+Other1Page2FeaturesFreezeImage.BorderSizePixel = 0
+Other1Page2FeaturesFreezeImage.Visible = true
+Other1Page2FeaturesFreezeImage.Image = "rbxassetid://12900618433"
+Other1Page2FeaturesFreezeImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Other1Page2FeaturesFreezeImage.Parent = Other1PageSection2Phrame
+
+local Other1LastModifiedFreezedPlayer = ""
+Other1Page2FeaturesFreeze.MouseButton1Click:Connect(function()
+	local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
+	if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
+	    Other1LastModifiedFreezedPlayer = LocalTab1SelectedPlayer
+		if Other1Page2FeaturesFreeze.Text == "Freeze" then
+			Other1Page2FeaturesFreeze.Text = "UnFreeze"
+			AnnounceBox("Punished " .. LocalTab1SelectedPlayer .. "!", "PUNISH", 5, 60, 160, 60, 255, 255, 255)
+			Punish(SPlayer, true)
+		elseif Other1Page2FeaturesFreeze.Text == "UnFreeze" then
+			Other1Page2FeaturesFreeze.Text = "Freeze"
+			AnnounceBox("Unpunished " .. LocalTab1SelectedPlayer .. "!", "PUNISH", 5, 60, 160, 60, 255, 255, 255)
+			Punish(SPlayer, false)
+		end
+	else
+		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+	end
+end)
 
 Other1Page2Features = Instance.new("TextButton")
 Other1Page2Features.Size = UDim2.new(0, 120, 0, 20)
@@ -3204,6 +3227,276 @@ Other1Page2Features3Image.Parent = Other1PageSection2Phrame
 
 
 --frames
+Tools1PageSection1Phrame = Instance.new("ScrollingFrame")
+Tools1PageSection1Phrame.Size = UDim2.new(0.27, 0, 0.80, 0)
+Tools1PageSection1Phrame.Position = UDim2.new(0.01, 0, 0.05, 0)
+Tools1PageSection1Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools1PageSection1Phrame.CanvasSize = UDim2.new(0, 0, 30, 0)
+Tools1PageSection1Phrame.BorderSizePixel = 1
+Tools1PageSection1Phrame.Transparency = 0.2
+Tools1PageSection1Phrame.Active = false
+Tools1PageSection1Phrame.Selectable = true
+Tools1PageSection1Phrame.Visible = false
+Tools1PageSection1Phrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+Tools1PageSection1Phrame.ScrollBarThickness = 4
+Tools1PageSection1Phrame.Parent = GuiPhrame
+
+Tools1PageSection2Phrame = Instance.new("Frame")
+Tools1PageSection2Phrame.Size = UDim2.new(0.42, 0, 0.9, 0)
+Tools1PageSection2Phrame.Position = UDim2.new(0.57, 0, 0.05, 0)
+Tools1PageSection2Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools1PageSection2Phrame.BorderSizePixel = 1
+Tools1PageSection2Phrame.Transparency = 0.2
+Tools1PageSection2Phrame.Active = false
+Tools1PageSection2Phrame.Selectable = true
+Tools1PageSection2Phrame.Visible = false
+Tools1PageSection2Phrame.Parent = GuiPhrame
+
+
+Tools1PageSection3Phrame = Instance.new("ScrollingFrame")
+Tools1PageSection3Phrame.Size = UDim2.new(0.27, 0, 0.9, 0)
+Tools1PageSection3Phrame.Position = UDim2.new(0.29, 0, 0.05, 0)
+Tools1PageSection3Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools1PageSection3Phrame.BorderSizePixel = 1
+Tools1PageSection3Phrame.Transparency = 0.2
+Tools1PageSection3Phrame.CanvasSize = UDim2.new(0, 0, 3, 0)
+Tools1PageSection3Phrame.Active = false
+Tools1PageSection3Phrame.Selectable = true
+Tools1PageSection3Phrame.Visible = false
+Tools1PageSection3Phrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+Tools1PageSection3Phrame.ScrollBarThickness = 4
+Tools1PageSection3Phrame.Parent = GuiPhrame
+
+PlayerListFrame4 = Instance.new("Frame", Tools1PageSection1Phrame)
+PlayerListFrame4.Name = "NotifyFrame4"
+PlayerListFrame4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListFrame4.BackgroundTransparency = 1
+PlayerListFrame4.BorderSizePixel = 0
+PlayerListFrame4.Position = UDim2.new(0, 0, 0, 0)
+PlayerListFrame4.Size = UDim2.new(0, 1, 0, 20)
+
+PlayerListLabel4 = Instance.new("TextButton", PlayerListFrame4)
+PlayerListLabel4.Name = "NotifyLabel5"
+PlayerListLabel4.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+PlayerListLabel4.BackgroundTransparency = 1
+PlayerListLabel4.BorderColor3 = Color3.fromRGB(110, 172, 216)
+PlayerListLabel4.BorderSizePixel = 0
+PlayerListLabel4.Size = UDim2.new(0, 160, 0, PlayerListFrame4.Size.Y.Offset)
+PlayerListLabel4.Font = Enum.Font.SourceSans
+PlayerListLabel4.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListLabel4.TextSize = 20
+PlayerListLabel4.Visible = false
+
+local SpawningTabSelectedItem = ""
+function CreatePlayerListsLabelP4(Text)
+    for i, v in pairs(PlayerListFrame4:GetChildren()) do
+		if v ~= PlayerListLabel4 then
+			v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame4:GetChildren()-(i-1)))
+		end
+    end
+    local F = PlayerListLabel4:Clone()
+	F.Visible = true
+    F.Parent = PlayerListFrame4
+    F.Position = UDim2.new(0, 0, 0, 0)
+    F.Text = Text
+    if Time == nil then
+        Time = 3
+    end
+    F.MouseButton1Click:Connect(function()
+		F.TextColor3 = Color3.fromRGB(170, 170, 170)
+		SpawningTabSelectedItem = F.Text
+		if ShowFunctionAlerts then
+			AnnounceBox("Item ".. F.Text .. " was selected!", "ITEM", 5, 255, 255, 255, 255, 255, 255)
+		end
+		wait(1)
+		F.TextColor3 = Color3.fromRGB(255, 255, 255)
+	end)
+    spawn(function()
+        for i, v in pairs(PlayerListFrame4:GetChildren()) do
+			if v ~= PlayerListLabel4 then 
+				v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame4:GetChildren()-(i)))
+			end
+        end
+    end)
+end
+
+function ClearDisplay()
+for i, v in pairs(PlayerListLabel4:GetChildren()) do
+v:remove()
+end
+end
+
+function ItemsDisplay(Specific)
+ClearDisplay()
+wait()
+    for i, v in pairs(game.Lighting.LootDrops:GetChildren()) do
+        if Specific == nil or string.match(string.lower(v.Name), string.lower(Specific)) then
+            CreatePlayerListsLabelP4(tostring(v))
+            --rconsoleprint("[!] " .. tostring(v) .. "\n")
+        end
+    end
+end
+
+ItemsDisplay()
+
+Tools1Page2FeaturesSearch = Instance.new("TextBox")
+Tools1Page2FeaturesSearch.Size = UDim2.new(0, 162, 0, 20)
+Tools1Page2FeaturesSearch.Position = UDim2.new(-1.332, 0, 0.92, 0)
+Tools1Page2FeaturesSearch.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools1Page2FeaturesSearch.BackgroundTransparency = 0.4
+Tools1Page2FeaturesSearch.BorderSizePixel = 1
+Tools1Page2FeaturesSearch.Text = "Search"
+Tools1Page2FeaturesSearch.TextColor3 = Color3.fromRGB(255, 255, 255)
+--Tools1Page2FeaturesAmount.TextScaled = true
+Tools1Page2FeaturesSearch.TextSize = 8
+Tools1Page2FeaturesSearch.TextWrapped = true
+Tools1Page2FeaturesSearch.TextXAlignment = "Center"
+Tools1Page2FeaturesSearch.Parent = Tools1PageSection2Phrame
+
+Tools1Page2FeaturesSearch.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+        ItemsDisplay(Tools1Page2FeaturesSearch.Text)
+    end
+end)
+
+--setup players
+PlayerListFrame3 = Instance.new("Frame", Tools1PageSection3Phrame)
+PlayerListFrame3.Name = "NotifyFrame8"
+PlayerListFrame3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListFrame3.BackgroundTransparency = 1
+PlayerListFrame3.BorderSizePixel = 0
+PlayerListFrame3.Position = UDim2.new(0, 0, 0, 0)
+PlayerListFrame3.Size = UDim2.new(0, 1, 0, 20)
+
+PlayerListLabel3 = Instance.new("TextButton", PlayerListFrame3)
+PlayerListLabel3.Name = "NotifyLabel7"
+PlayerListLabel3.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+PlayerListLabel3.BackgroundTransparency = 1
+PlayerListLabel3.BorderColor3 = Color3.fromRGB(110, 172, 216)
+PlayerListLabel3.BorderSizePixel = 0
+PlayerListLabel3.Size = UDim2.new(0, 160, 0, PlayerListFrame3.Size.Y.Offset)
+PlayerListLabel3.Font = Enum.Font.SourceSans
+PlayerListLabel3.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListLabel3.TextSize = 20
+PlayerListLabel3.Visible = false
+
+local SpawningTabSelectedPlayer = ""
+function CreatePlayerListsLabelP3(Text, Time)
+    for i, v in pairs(PlayerListFrame3:GetChildren()) do
+		if v ~= PlayerListLabel3 then
+			v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame3:GetChildren()-(i-1)))
+		end
+    end
+    local F = PlayerListLabel3:Clone()
+	F.Visible = true
+    F.Parent = PlayerListFrame3
+    F.Position = UDim2.new(0, 0, 0, 0)
+    F.Text = Text
+    if Time == nil then
+        Time = 3
+    end
+    F.MouseButton1Click:Connect(function()
+		F.TextColor3 = Color3.fromRGB(170, 170, 170)
+		SpawningTabSelectedPlayer = F.Text
+		if ShowFunctionAlerts then
+			AnnounceBox("Player ".. F.Text .. " was selected!", "PLAYER", 5, 255, 255, 255, 255, 255, 255)
+		end
+		wait(1)
+		F.TextColor3 = Color3.fromRGB(255, 255, 255)
+	end)
+    spawn(function()
+        wait(Time)
+        F:remove()
+        for i, v in pairs(PlayerListFrame3:GetChildren()) do
+			if v ~= PlayerListLabel3 then 
+				v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame3:GetChildren()-(i)))
+			end
+        end
+    end)
+end
+--setup players
+
+--setup players	
+spawn(function()
+while wait(30) do
+    for _, v in pairs(Players:GetPlayers()) do
+    	--if v ~= Client then
+    	CreatePlayerListsLabelP3(tostring(v), 30, 60, 160, 60)
+    	--end
+	end
+  end
+end)
+
+for _, v in pairs(Players:GetPlayers()) do
+    CreatePlayerListsLabelP3(tostring(v), 30, 60, 160, 60)
+end
+--setup players
+
+Tools1Page2FeaturesSpawning = Instance.new("TextButton")
+Tools1Page2FeaturesSpawning.Size = UDim2.new(0, 100, 0, 20)
+Tools1Page2FeaturesSpawning.Position = UDim2.new(0.02, 0, 0.12, 0)
+Tools1Page2FeaturesSpawning.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools1Page2FeaturesSpawning.BackgroundTransparency = 0.4
+Tools1Page2FeaturesSpawning.BorderSizePixel = 1
+Tools1Page2FeaturesSpawning.Text = "Spawn"
+Tools1Page2FeaturesSpawning.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools1Page2FeaturesSpawning.TextSize = 8
+Tools1Page2FeaturesSpawning.TextXAlignment = "Center"
+Tools1Page2FeaturesSpawning.Parent = Tools1PageSection2Phrame
+
+Tools1Page2FeaturesSpawningImage = Instance.new("ImageLabel")
+Tools1Page2FeaturesSpawningImage.Size = UDim2.new(0, 20, 0, 20)
+Tools1Page2FeaturesSpawningImage.Position = UDim2.new(0.012, 0, 0.12, 0)
+Tools1Page2FeaturesSpawningImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools1Page2FeaturesSpawningImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Tools1Page2FeaturesSpawningImage.BackgroundTransparency = 1
+Tools1Page2FeaturesSpawningImage.BorderSizePixel = 0
+Tools1Page2FeaturesSpawningImage.Visible = true
+Tools1Page2FeaturesSpawningImage.Image = "rbxassetid://12900618433"
+Tools1Page2FeaturesSpawningImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Tools1Page2FeaturesSpawningImage.Parent = Tools1PageSection2Phrame
+
+Tools1Page2FeaturesSpawningItemAmount = Instance.new("TextBox")
+Tools1Page2FeaturesSpawningItemAmount.Size = UDim2.new(0, 100, 0, 20)
+Tools1Page2FeaturesSpawningItemAmount.Position = UDim2.new(0.02, 0, 0.02, 0)
+Tools1Page2FeaturesSpawningItemAmount.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools1Page2FeaturesSpawningItemAmount.BackgroundTransparency = 0.4
+Tools1Page2FeaturesSpawningItemAmount.BorderSizePixel = 1
+Tools1Page2FeaturesSpawningItemAmount.Text = "Amount"
+Tools1Page2FeaturesSpawningItemAmount.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools1Page2FeaturesSpawningItemAmount.TextSize = 8
+Tools1Page2FeaturesSpawningItemAmount.TextWrapped = true
+Tools1Page2FeaturesSpawningItemAmount.TextXAlignment = "Center"
+Tools1Page2FeaturesSpawningItemAmount.Parent = Tools1PageSection2Phrame
+
+local ItemSpawningAmount = 1
+Tools1Page2FeaturesSpawningItemAmount.FocusLost:Connect(function(enterPressed)
+	local GetValue = tonumber(Tools1Page2FeaturesSpawningItemAmount.Text)
+    if enterPressed then
+		if GetValue then
+			ItemSpawningAmount = GetValue
+			AnnounceBox("Set item amount to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		else
+			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	end
+end)
+
+Tools1Page2FeaturesSpawning.MouseButton1Down:connect(function()
+local LightS = game:GetService("Lighting")
+local LootS = LightS.LootDrops
+local LootSI = SpawningTabSelectedItem
+local SPlayer = game.Players:FindFirstChild(SpawningTabSelectedPlayer)
+local Amount = ItemSpawningAmount
+    for i = 1, Amount do
+        SpawnItem(LootS, Vector3.new(3, 2, 0), LootSI, SPlayer)
+    end
+end)
+--frames
+
+
+
+--frames
 Scripts1PageSection2Phrame = Instance.new("Frame")
 Scripts1PageSection2Phrame.Size = UDim2.new(0.9, 0, 0.9, 0)
 Scripts1PageSection2Phrame.Position = UDim2.new(0.05, 0, 0.05, 0)
@@ -3532,6 +3825,18 @@ Local1Page2FeaturesHungerAmount.TextWrapped = true
 Local1Page2FeaturesHungerAmount.TextXAlignment = "Center"
 Local1Page2FeaturesHungerAmount.Parent = Local1PageSection2Phrame
 
+Local1Page2FeaturesHungerAmount.FocusLost:Connect(function(enterPressed)
+	local GetValue = tonumber(Local1Page2FeaturesHungerAmount.Text)
+    if enterPressed then
+		if GetValue then
+			AnnounceBox("Set hunger to " .. GetValue .. "!", "HUNGER", 5, 255, 255, 255, 255, 255, 255)
+			Vitals(LocalPlayer, 4, GetValue)
+		else
+			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	end
+end)
+
 Local1Page2FeaturesThirstAmount = Instance.new("TextBox")
 Local1Page2FeaturesThirstAmount.Size = UDim2.new(0, 160, 0, 20)
 Local1Page2FeaturesThirstAmount.Position = UDim2.new(0.02, 0, 0.12, 0)
@@ -3545,6 +3850,18 @@ Local1Page2FeaturesThirstAmount.TextSize = 8
 Local1Page2FeaturesThirstAmount.TextWrapped = true
 Local1Page2FeaturesThirstAmount.TextXAlignment = "Center"
 Local1Page2FeaturesThirstAmount.Parent = Local1PageSection2Phrame
+
+Local1Page2FeaturesThirstAmount.FocusLost:Connect(function(enterPressed)
+	local GetValue = tonumber(Local1Page2FeaturesThirstAmount.Text)
+    if enterPressed then
+		if GetValue then
+			AnnounceBox("Set thirst to " .. GetValue .. "!", "THIRST", 5, 255, 255, 255, 255, 255, 255)
+			Vitals(LocalPlayer, 5, GetValue)
+		else
+			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	end
+end)
 
 Local1Page2Features = Instance.new("TextButton")
 Local1Page2Features.Size = UDim2.new(0, 160, 0, 20)
@@ -4729,10 +5046,16 @@ Settings1Page2FeaturesAutoCleanInterval.TextWrapped = true
 Settings1Page2FeaturesAutoCleanInterval.TextXAlignment = "Center"
 Settings1Page2FeaturesAutoCleanInterval.Parent = Settings1PageSection2Phrame
 
-AutoCleanInterval = 300
+local AutoCleanInterval = 300
 Settings1Page2FeaturesAutoCleanInterval.FocusLost:Connect(function(enterPressed)
+	local GetValue = tonumber(Settings1Page2FeaturesAutoCleanInterval.Text)
     if enterPressed then
-		AutoCleanInterval = tonumber(Settings1Page2FeaturesAutoCleanInterval.Text)
+		if GetValue then
+			AutoCleanInterval = GetValue
+			AnnounceBox("Set AutoCleanInterval to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		else
+			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
 	end
 end)
 
@@ -4749,10 +5072,42 @@ Settings1Page2FeaturesDetectExploitsInterval.TextWrapped = true
 Settings1Page2FeaturesDetectExploitsInterval.TextXAlignment = "Center"
 Settings1Page2FeaturesDetectExploitsInterval.Parent = Settings1PageSection2Phrame
 
-DetectExploitsInterval = 30
+local DetectExploitsInterval = 30
 Settings1Page2FeaturesDetectExploitsInterval.FocusLost:Connect(function(enterPressed)
+	local GetValue = tonumber(Settings1Page2FeaturesDetectExploitsInterval.Text)
     if enterPressed then
-		DetectExploitsInterval = tonumber(Settings1Page2FeaturesDetectExploitsInterval.Text)
+		if GetValue then
+			DetectExploitsInterval = GetValue
+			AnnounceBox("Set DetectExploitsInterval to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		else
+			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	end
+end)
+
+Settings1Page2FeaturesAgeLockInterval = Instance.new("TextBox")
+Settings1Page2FeaturesAgeLockInterval.Size = UDim2.new(0, 160, 0, 20)
+Settings1Page2FeaturesAgeLockInterval.Position = UDim2.new(0.02, 0, 0.62, 0)
+Settings1Page2FeaturesAgeLockInterval.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Settings1Page2FeaturesAgeLockInterval.BackgroundTransparency = 0.4
+Settings1Page2FeaturesAgeLockInterval.BorderSizePixel = 1
+Settings1Page2FeaturesAgeLockInterval.Text = "Age Lock Amount (100)"
+Settings1Page2FeaturesAgeLockInterval.TextColor3 = Color3.fromRGB(255, 255, 255)
+Settings1Page2FeaturesAgeLockInterval.TextSize = 8
+Settings1Page2FeaturesAgeLockInterval.TextWrapped = true
+Settings1Page2FeaturesAgeLockInterval.TextXAlignment = "Center"
+Settings1Page2FeaturesAgeLockInterval.Parent = Settings1PageSection2Phrame
+
+local AgeLockInterval = 100
+Settings1Page2FeaturesAgeLockInterval.FocusLost:Connect(function(enterPressed)
+	local GetValue = tonumber(Settings1Page2FeaturesAgeLockInterval.Text)
+    if enterPressed then
+		if GetValue then
+			AgeLockInterval = GetValue
+			AnnounceBox("Set AgeLockInterval to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		else
+			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
 	end
 end)
 --frames
@@ -5235,7 +5590,7 @@ function ValidateAccountAge(player)
     local SPlayer = game.Players:FindFirstChild(player)
     if AgeLockToggle then
         spawn(function()
-            if player ~= LocalPlayer and player.AccountAge <= 100 then
+            if player ~= LocalPlayer and player.AccountAge <= AgeLockInterval then
                 Kick(player)
                 if ShowFunctionAlerts then
 		            AnnounceBox("Kicked " .. player.Name .. " account age was " .. player.AccountAge .. "!", "AGE LOCK", 5, 130, 130, 60, 255, 255, 255)
@@ -5416,6 +5771,9 @@ LocalButton.MouseButton1Click:Connect(function()
 		GuiLocalEBarPhrame.Visible = true
 		
 		Other1PageSection2Phrame.Visible = false
+		Tools1PageSection1Phrame.Visible = false
+		Tools1PageSection2Phrame.Visible = false
+		Tools1PageSection3Phrame.Visible = false
 		Settings1PageSection2Phrame.Visible = false
 		Other1PageSection1Phrame.Visible = false	
 		Other2PageSection2Phrame.Visible = false
@@ -5458,6 +5816,9 @@ OtherButton.MouseButton1Click:Connect(function()
 		Other1PageSection2Phrame.Visible = false
 		Other1PageSection1Phrame.Visible = false	
 		Other2PageSection2Phrame.Visible = false
+		Tools1PageSection1Phrame.Visible = false
+		Tools1PageSection2Phrame.Visible = false
+		Tools1PageSection3Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
 		Settings1PageSection2Phrame.Visible = false
 		Server1PageSection2Phrame.Visible = false
@@ -5501,6 +5862,9 @@ ServerButton.MouseButton1Click:Connect(function()
 		Misc1PageSection2Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
 		Settings1PageSection2Phrame.Visible = false
+		Tools1PageSection1Phrame.Visible = false
+		Tools1PageSection2Phrame.Visible = false
+		Tools1PageSection3Phrame.Visible = false
 		Server1PageSection2Phrame.Visible = false
 		GuiToolsEBarPhrame.Visible = false
 		Other2PageSection1Phrame.Visible = false
@@ -5539,6 +5903,9 @@ MiscButton.MouseButton1Click:Connect(function()
 		Other1PageSection1Phrame.Visible = false	
 		Other2PageSection2Phrame.Visible = false
 		Other2PageSection1Phrame.Visible = false
+		Tools1PageSection1Phrame.Visible = false
+		Tools1PageSection2Phrame.Visible = false
+		Tools1PageSection3Phrame.Visible = false
 		Test1PageSection2Phrame.Visible = false
 		Settings1PageSection2Phrame.Visible = false
 		Server1PageSection2Phrame.Visible = false
@@ -5581,6 +5948,9 @@ SettingsButton.MouseButton1Click:Connect(function()
 		Other2PageSection2Phrame.Visible = false
 		Misc1PageSection2Phrame.Visible = false
 		Other2PageSection1Phrame.Visible = false
+		Tools1PageSection1Phrame.Visible = false
+		Tools1PageSection2Phrame.Visible = false
+		Tools1PageSection3Phrame.Visible = false
 		Test1PageSection2Phrame.Visible = false
 		Server1PageSection2Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
@@ -5623,6 +5993,9 @@ TestButton.MouseButton1Click:Connect(function()
 		Settings1PageSection2Phrame.Visible = false
 		Misc1PageSection2Phrame.Visible = false
 		Server1PageSection2Phrame.Visible = false
+		Tools1PageSection1Phrame.Visible = false
+		Tools1PageSection2Phrame.Visible = false
+		Tools1PageSection3Phrame.Visible = false
 		GuiServerEBarPhrame.Visible = false
 		Other2PageSection1Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
@@ -5664,6 +6037,9 @@ ToolsButton.MouseButton1Click:Connect(function()
 		Other2PageSection1Phrame.Visible = false
 		Server1PageSection2Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
+		Tools1PageSection1Phrame.Visible = false
+		Tools1PageSection2Phrame.Visible = false
+		Tools1PageSection3Phrame.Visible = false
 		Settings1PageSection2Phrame.Visible = false
 		GuiServerEBarPhrame.Visible = false
 		Misc1PageSection2Phrame.Visible = false
@@ -5705,6 +6081,9 @@ ScripButton.MouseButton1Click:Connect(function()
 		Settings1PageSection2Phrame.Visible = false
 		Test1PageSection2Phrame.Visible = false
 		GuiOtherEBarPhrame.Visible = false
+		Tools1PageSection1Phrame.Visible = false
+		Tools1PageSection2Phrame.Visible = false
+		Tools1PageSection3Phrame.Visible = false
 		GuiLocalEBarPhrame.Visible = false
 		Welcome1PageSection1Phrame.Visible = false
 		Misc1PageSection2Phrame.Visible = false
@@ -5743,6 +6122,9 @@ FavoriteButton.MouseButton1Click:Connect(function()
 		Other2PageSection2Phrame.Visible = false
 		Other2PageSection1Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
+		Tools1PageSection1Phrame.Visible = false
+		Tools1PageSection2Phrame.Visible = false
+		Tools1PageSection3Phrame.Visible = false
 		Test1PageSection2Phrame.Visible = false
 		GuiToolsEBarPhrame.Visible = false
 		GuiServerEBarPhrame.Visible = false
@@ -5853,6 +6235,9 @@ end)
 ToolsTab1Button.MouseButton1Click:Connect(function()
 	if ToolsTab1Button.ImageColor3 == Color3.fromRGB(95, 60, 60) then
 		ToolsTab1Button.ImageColor3 = Color3.fromRGB(60, 95, 60)
+		Tools1PageSection2Phrame.Visible = true
+		Tools1PageSection1Phrame.Visible = true
+		Tools1PageSection3Phrame.Visible = true
 		
 		Welcome1PageSection1Phrame.Visible = false
 		ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -6188,6 +6573,13 @@ function UpdateOtherTab1Statuses()
             Other1Page2Features3ZIvisImage.Image = "rbxassetid://12900717295"
         end
     
+        if Other1LastModifiedFreezedPlayer == LocalTab1SelectedPlayer and Other1Page2FeaturesFreeze.Text == "Freeze" then
+            Other1Page2FeaturesFreeze.Text = "UnFreeze"
+            Other1LastModifiedFreezedPlayer = ""
+        elseif Other1OldSelectedPlayer ~= LocalTab1SelectedPlayer and Other1LastModifiedFreezedPlayer ~= LocalTab1SelectedPlayer then
+            Other1Page2FeaturesFreeze.Text = "Freeze"
+        end
+		
 		local hasvest = false;
 		for i, v in pairs(Lighting.PlayerVests:GetChildren()) do
 			if SPlayer:FindFirstChild(v.Name) then
@@ -6228,10 +6620,6 @@ FinalOStime = (OSend-OSstart)
 AnnounceBox("Loaded in "..tostring(FinalOStime).."s!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 --[[ Req Features --]]
 
-		
-		
-		
-		
 end)
 if success then
     --[[rconsoleprint("@@GREEN@@")
