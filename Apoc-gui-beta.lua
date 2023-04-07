@@ -1933,7 +1933,7 @@ SmallText = Instance.new("TextLabel")
 SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
 SmallText.Position = UDim2.new(0.08, 0, 0.4, 0)
 SmallText.BorderSizePixel = 0
-SmallText.Text = "(/) Script version: 123"
+SmallText.Text = "(/) Script version: 125"
 SmallText.TextColor3 = Color3.fromRGB(255,255,255)
 SmallText.TextSize = 8
 SmallText.BackgroundTransparency = 1
@@ -3469,7 +3469,7 @@ Tools1Page2FeaturesSpawning.MouseButton1Down:connect(function()
 local LootS = game.Lighting.LootDrops
 local LootSI = SpawningTabSelectedItem
 local SPlayer = game.Players:FindFirstChild(SpawningTabSelectedPlayer)
-local Amount = tonumber(ItemSpawningAmount)
+local Amount = ItemSpawningAmount
     for i = 1, Amount do
         --SpawnItem(LootS, Vector3.new(3, 2, 0), LootSI, SPlayer, math.random(-5, 5))
 		--(SelectedPlayer, Item, Parent, OF, SP)
