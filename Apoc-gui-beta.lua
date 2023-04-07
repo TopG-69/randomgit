@@ -2079,6 +2079,8 @@ function CreatePlayerListsLabelP2(Text)
 end
 --setup players
 
+CreatePlayerListsLabelP2("Others", 60, 160, 60)
+CreatePlayerListsLabelP2("All", 60, 160, 60)
 for _, v in pairs(Players:GetPlayers()) do
     CreatePlayerListsLabelP2(tostring(v), 60, 160, 60)
 end
@@ -2184,6 +2186,8 @@ function CreatePlayerListsLabelP1(Text)
 end
 --setup players
 
+CreatePlayerListsLabelP1("Others", 60, 160, 60)
+CreatePlayerListsLabelP1("All", 60, 160, 60)
 for _, v in pairs(Players:GetPlayers()) do
     CreatePlayerListsLabelP1(tostring(v), 60, 160, 60)
 end
@@ -3409,6 +3413,8 @@ function CreatePlayerListsLabelP3(Text)
 end
 --setup players
 
+CreatePlayerListsLabelP3("Others", 60, 160, 60)
+CreatePlayerListsLabelP3("All", 60, 160, 60)
 for _, v in pairs(Players:GetPlayers()) do
     CreatePlayerListsLabelP3(tostring(v), 60, 160, 60)
 end
@@ -6592,6 +6598,12 @@ game.Players.PlayerAdded:Connect(function(player)
 			j:remove()
 		end
 	end
+	CreatePlayerListsLabelP1("Others", 60, 160, 60)
+	CreatePlayerListsLabelP1("All", 60, 160, 60)
+	CreatePlayerListsLabelP2("Others", 60, 160, 60)
+	CreatePlayerListsLabelP2("All", 60, 160, 60)
+	CreatePlayerListsLabelP3("Others", 60, 160, 60)
+	CreatePlayerListsLabelP3("All", 60, 160, 60)
 	for _, v in pairs(Players:GetPlayers()) do
 		CreatePlayerListsLabelP1(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP2(tostring(v), 60, 160, 60)
@@ -6619,6 +6631,12 @@ game.Players.PlayerRemoving:Connect(function(player)
 			j:remove()
 		end
 	end
+	CreatePlayerListsLabelP1("Others", 60, 160, 60)
+	CreatePlayerListsLabelP1("All", 60, 160, 60)
+	CreatePlayerListsLabelP2("Others", 60, 160, 60)
+	CreatePlayerListsLabelP2("All", 60, 160, 60)
+	CreatePlayerListsLabelP3("Others", 60, 160, 60)
+	CreatePlayerListsLabelP3("All", 60, 160, 60)
 	for _, v in pairs(Players:GetPlayers()) do
 		CreatePlayerListsLabelP1(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP2(tostring(v), 60, 160, 60)
