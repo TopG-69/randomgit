@@ -1384,6 +1384,52 @@ function StatMod(player, value, mode)
     end
 end
 
+function GetCar()
+	local Client = Players.LocalPlayer
+    local Seatfound = false
+    for _, v in pairs(Workspace.Vehicles:GetDescendants()) do
+        if v.Name ~= "VehicleWreck" and v:IsA("Weld") and v.Name == "SeatWeld" and v.Part1 ~= nil and v.Part1.Parent.Name == Client.Name then
+            Seatfound = true
+            if v.Parent.Parent.Parent.Name == "Seats" then
+                return vehicles, v.Parent.Parent.Parent.Parent
+            else
+                return v.Parent.Parent.Parent
+            end
+        end
+    end
+    if Seatfound == false then
+        return false
+    end
+end
+
+function VehicleMod(value, mode)
+	local CurrentVehicle = GetCar()
+	if mode == 1 then
+		fireserver("ChangeValue", CurrentVehicle.Stats.Armor.Max, value)
+		fireserver("ChangeValue", CurrentVehicle.Stats.Armor, value)
+    elseif mode == 2 then
+		fireserver("ChangeValue", CurrentVehicle.Stats.Engine.Max, value)
+		fireserver("ChangeValue", CurrentVehicle.Stats.Engine, value)
+	elseif mode == 3 then
+		fireserver("ChangeValue", CurrentVehicle.Stats.Fuel.Max, value)
+		fireserver("ChangeValue", CurrentVehicle.Stats.Fuel, value)
+	elseif mode == 4 then
+		fireserver("ChangeValue", CurrentVehicle.Stats.Tank.Max, value)
+		fireserver("ChangeValue", CurrentVehicle.Stats.Tank, value)
+	elseif mode == 5 then
+		fireserver("ChangeValue", CurrentVehicle.Stats.Hull.Max, value)
+		fireserver("ChangeValue", CurrentVehicle.Stats.Hull, value)
+	elseif mode == 6 then
+	  fireserver("ChangeValue", CurrentVehicle.Stats.MaxSpeed, value)
+	elseif mode == 7 then
+	  fireserver("ChangeValue", CurrentVehicle.Stats.MaxSpeed.Offroad, value)
+    elseif mode == nil or mode == nan then
+		if ShowFunctionAlerts then
+			AnnounceBox("Invalid mode usage!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+    end
+end
+
 function Buildings(mode)
 	if mode == 1 then
 		fireserver("ChangeParent", Workspace["Anchored Objects"]["Towns/Cities"], Lighting)
@@ -3929,6 +3975,14 @@ Tools2Page2FeaturesVehicleGodImage.Image = "rbxassetid://12900618433"
 Tools2Page2FeaturesVehicleGodImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Tools2Page2FeaturesVehicleGodImage.Parent = Tools2PageSection2Phrame
 
+Tools2Page2FeaturesVehicleGod.MouseButton1Down:connect(function()
+	VehicleMod(math.huge, 1)
+	VehicleMod(math.huge, 2)
+	VehicleMod(math.huge, 3)
+	VehicleMod(math.huge, 4)
+	VehicleMod(math.huge, 5)
+end)
+
 Tools2Page2FeaturesVehicleDestroy = Instance.new("TextButton")
 Tools2Page2FeaturesVehicleDestroy.Size = UDim2.new(0, 100, 0, 20)
 Tools2Page2FeaturesVehicleDestroy.Position = UDim2.new(0.582, 0, 0.22, 0)
@@ -3953,6 +4007,14 @@ Tools2Page2FeaturesVehicleDestroyImage.Image = "rbxassetid://12900618433"
 Tools2Page2FeaturesVehicleDestroyImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Tools2Page2FeaturesVehicleDestroyImage.Parent = Tools2PageSection2Phrame
 
+Tools2Page2FeaturesVehicleDestroy.MouseButton1Down:connect(function()
+	VehicleMod(0, 1)
+	VehicleMod(0, 2)
+	VehicleMod(0, 3)
+	VehicleMod(0, 4)
+	VehicleMod(0, 5)
+end)
+
 Tools2Page2FeaturesVehicleSpawningItemAmount = Instance.new("TextBox")
 Tools2Page2FeaturesVehicleSpawningItemAmount.Size = UDim2.new(0, 100, 0, 20)
 Tools2Page2FeaturesVehicleSpawningItemAmount.Position = UDim2.new(0.02, 0, 0.02, 0)
@@ -3972,7 +4034,7 @@ Tools2Page2FeaturesVehicleSpawningItemAmount.FocusLost:Connect(function(enterPre
     if enterPressed then
 		if GetValue then
 			VehicleSpawningAmount = GetValue
-			AnnounceBox("Set item amount to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+			AnnounceBox("Set vehicle amount to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 		else
 			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 		end
@@ -3996,6 +4058,7 @@ Tools2Page2FeaturesSpawningVehicleAmountHull.FocusLost:Connect(function(enterPre
 	local GetValue = tonumber(Tools2Page2FeaturesSpawningVehicleAmountHull.Text)
     if enterPressed then
 		if GetValue then
+			VehicleMod(GetValue, 5)
 			AnnounceBox("Set vehicle hull to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 		else
 			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
@@ -4020,7 +4083,7 @@ Tools2Page2FeaturesSpawningVehicleAmountArmor.FocusLost:Connect(function(enterPr
 	local GetValue = tonumber(Tools2Page2FeaturesSpawningVehicleAmountArmor.Text)
     if enterPressed then
 		if GetValue then
-			ItemSpawningRadiusH = GetValue
+			VehicleMod(GetValue, 1)
 			AnnounceBox("Set vehicle armor to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 		else
 			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
@@ -4045,6 +4108,7 @@ Tools2Page2FeaturesSpawningVehicleAmountEngine.FocusLost:Connect(function(enterP
 	local GetValue = tonumber(Tools2Page2FeaturesSpawningVehicleAmountEngine.Text)
     if enterPressed then
 		if GetValue then
+			VehicleMod(GetValue, 2)
 			AnnounceBox("Set vehicle engine to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 		else
 			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
@@ -4069,6 +4133,7 @@ Tools2Page2FeaturesSpawningVehicleAmountTank.FocusLost:Connect(function(enterPre
 	local GetValue = tonumber(Tools2Page2FeaturesSpawningVehicleAmountTank.Text)
     if enterPressed then
 		if GetValue then
+			VehicleMod(GetValue, 4)
 			AnnounceBox("Set vehicle tank to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 		else
 			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
@@ -4093,6 +4158,7 @@ Tools2Page2FeaturesSpawningVehicleAmountFuel.FocusLost:Connect(function(enterPre
 	local GetValue = tonumber(Tools2Page2FeaturesSpawningVehicleAmountFuel.Text)
     if enterPressed then
 		if GetValue then
+			VehicleMod(GetValue, 3)
 			AnnounceBox("Set vehicle fuel to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 		else
 			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
@@ -4117,6 +4183,7 @@ Tools2Page2FeaturesSpawningVehicleAmountSpeedOnRoad.FocusLost:Connect(function(e
 	local GetValue = tonumber(Tools2Page2FeaturesSpawningVehicleAmountSpeedOnRoad.Text)
     if enterPressed then
 		if GetValue then
+			VehicleMod(GetValue, 6)
 			AnnounceBox("Set vehicle speed to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 		else
 			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
@@ -4141,6 +4208,7 @@ Tools2Page2FeaturesSpawningVehicleAmountSpeedOffRoad.FocusLost:Connect(function(
 	local GetValue = tonumber(Tools2Page2FeaturesSpawningVehicleAmountSpeedOffRoad.Text)
     if enterPressed then
 		if GetValue then
+			VehicleMod(GetValue, 7)
 			AnnounceBox("Set vehicle speed to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 		else
 			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
