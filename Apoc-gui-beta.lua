@@ -6336,6 +6336,9 @@ IdkButton.MouseButton1Click:Connect(function()
 		Server1PageSection2Phrame.Visible = false
 		GuiServerEBarPhrame.Visible = false
 		GuiToolsEBarPhrame.Visible = false
+		Tools1PageSection1Phrame.Visible = false
+		Tools1PageSection2Phrame.Visible = false
+		Tools1PageSection3Phrame.Visible = false
 		OtherButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		SettingsButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -6362,6 +6365,9 @@ IdkButton.MouseButton1Click:Connect(function()
 		GuiOtherEBarPhrame.Visible = false
 		Server1PageSection2Phrame.Visible = false
 		GuiServerEBarPhrame.Visible = false
+		Tools1PageSection1Phrame.Visible = false
+		Tools1PageSection2Phrame.Visible = false
+		Tools1PageSection3Phrame.Visible = false
 		OtherButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		SettingsButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
