@@ -6448,6 +6448,9 @@ RestoreFromMinimizeButton.MouseButton1Click:Connect(function()
 	Server1PageSection2Phrame.Visible = false
 	GuiServerEBarPhrame.Visible = false
 	GuiToolsEBarPhrame.Visible = false
+	Tools1PageSection1Phrame.Visible = false
+	Tools1PageSection2Phrame.Visible = false
+	Tools1PageSection3Phrame.Visible = false
 	OtherButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	ServerButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	SettingsButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -6636,12 +6639,6 @@ AnnounceBox("Loaded in "..tostring(FinalOStime).."s!", "SCRIPT", 5, 255, 255, 25
 
 end)
 if success then
-    --[[rconsoleprint("@@GREEN@@")
-    rconsoleprint("[Success] " .. "script works!.\n")
-    rconsoleprint("@@YELLOW@@")
-    rconsoleprint("[Check] " .. tostring(result) .. "\n")--]]
 else
-    --[[rconsoleprint("@@RED@@")
-    rconsoleprint("[Error] " .. tostring(result) .. "\n")--]]
 	AnnounceBox("Error detected " .. tostring(result) .. "", "SCRIPT", 20, 255, 255, 255, 255, 255, 255)
 end
