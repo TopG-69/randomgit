@@ -219,7 +219,7 @@ Lighting = game:GetService("Lighting")
 Workspace = game:GetService("Workspace")
 Players = game:GetService("Players")
 ReplicatedStorage = game:GetService("ReplicatedStorage")
-RunService = Game:GetService("RunService")
+RunService = game:GetService("RunService")
 Loot = Lighting.LootDrops
 Mats = Lighting.Materials
 Bags = Lighting.Backpacks
@@ -517,28 +517,45 @@ function TransferItem(Plr, Ob)
 	end
 end
 
+function GetItemFromString(Item, Parent)
+	if Parent:FindFirstChild(Item) then
+		return Parent[Item]
+	elseif Mats:FindFirstChild(Item) then
+		return Mats[Item]
+	end
+end
+
 local SpawnedItems = {}
-function SpawnItem(Par, OF, SelectedItem, SelectedPlayer)
-if SelectedPlayer == nil or SelectedItem == nil then
-return
-end
-if SpawnedItems[SelectedItem] == nil then
-SpawnedItems[SelectedItem] = {true}
-else
-table.insert(SpawnedItems[SelectedItem], true)
-end
-if SelectedItem.Parent ~= Mats then
-fireserver("ChangeParent", Par:WaitForChild(tostring(SelectedItem)), Mats)
-end
-local ItemI = Mats:WaitForChild(tostring(SelectedItem))
-pcall(function() R["PlaceMaterial"]:FireServer(Mats:WaitForChild(tostring(SelectedItem)).Name, SelectedPlayer.Character.Torso.Position-ItemI.PrimaryPart.Position-OF) end)
-spawn(function()
-wait(2)
-table.remove(SpawnedItems[SelectedItem], 1)
-if #SpawnedItems[SelectedItem] < 1 then
-fireserver("ChangeParent", Mats:WaitForChild(tostring(SelectedItem)), Par)
-end
-end)
+function SpawnItem(SelectedPlayer, Item, Parent, OF, SP)
+	if SelectedPlayer == nil or Item == nil or GetItemFromString(Item, Parent) == nil then
+		return
+	end
+	Item = GetItemFromString(Item, Parent)
+	if SP == nil then
+		wait(0.1)
+	end
+	if SpawnedItems[Item] == nil then
+		SpawnedItems[Item] = {true}
+	else
+		table.insert(SpawnedItems[Item], true)
+	end
+	if Item.Parent ~= Mats then
+		fireserver("ChangeParent", Parent:WaitForChild(tostring(Item)), Mats)
+	end
+	local ItemI = Mats:WaitForChild(tostring(Item))
+	if ItemI.PrimaryPart == nil then
+		ItemI.PrimaryPart = GetPart(ItemI)
+	end
+	pcall(function()
+		R.PlaceMaterial:FireServer(Mats:WaitForChild(tostring(Item)).Name, SelectedPlayer.Character.Torso.Position - ItemI.PrimaryPart.Position - OF)
+	end)
+	spawn(function()
+		wait(2)
+		table.remove(SpawnedItems[Item], 1)
+		if #SpawnedItems[Item] < 1 then
+			fireserver("ChangeParent", Mats:WaitForChild(tostring(Item)), Parent)
+		end
+	end)
 end
 
 PlrInventoryTab = {}
@@ -2029,7 +2046,7 @@ PlayerListLabel2.TextColor3 = Color3.fromRGB(255, 255, 255)
 PlayerListLabel2.TextSize = 20
 PlayerListLabel2.Visible = false
 
-function CreatePlayerListsLabelP2(Text, Time)
+function CreatePlayerListsLabelP2(Text)
     for i, v in pairs(PlayerListFrame2:GetChildren()) do
 		if v ~= PlayerListLabel2 then
 			v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame2:GetChildren()-(i-1)))
@@ -2053,8 +2070,6 @@ function CreatePlayerListsLabelP2(Text, Time)
 		F.TextColor3 = Color3.fromRGB(255, 255, 255)
 	end)
     spawn(function()
-        wait(Time)
-        F:remove()
         for i, v in pairs(PlayerListFrame2:GetChildren()) do
 			if v ~= PlayerListLabel2 then 
 				v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame2:GetChildren()-(i)))
@@ -2064,20 +2079,10 @@ function CreatePlayerListsLabelP2(Text, Time)
 end
 --setup players
 
---setup players	
-spawn(function()
-while wait(30) do
-    for _, v in pairs(Players:GetPlayers()) do
-    	--if v ~= Client then
-    	CreatePlayerListsLabelP2(tostring(v), 30, 60, 160, 60)
-    	--end
-	end
-  end
-end)
-
 for _, v in pairs(Players:GetPlayers()) do
-    CreatePlayerListsLabelP2(tostring(v), 30, 60, 160, 60)
+    CreatePlayerListsLabelP2(tostring(v), 60, 160, 60)
 end
+
 --setup players
 
 Other2Page2FeaturesAmount = Instance.new("TextBox")
@@ -2145,7 +2150,7 @@ PlayerListLabel.TextSize = 20
 PlayerListLabel.Visible = false
 
 local LocalTab1SelectedPlayer = ""
-function CreatePlayerListsLabelP1(Text, Time)
+function CreatePlayerListsLabelP1(Text)
     for i, v in pairs(PlayerListFrame:GetChildren()) do
 		if v ~= PlayerListLabel then
 			v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame:GetChildren()-(i-1)))
@@ -2170,8 +2175,6 @@ function CreatePlayerListsLabelP1(Text, Time)
 		F.TextColor3 = Color3.fromRGB(255, 255, 255)
 	end)
     spawn(function()
-        wait(Time)
-        F:remove()
         for i, v in pairs(PlayerListFrame:GetChildren()) do
 			if v ~= PlayerListLabel then 
 				v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame:GetChildren()-(i)))
@@ -2181,19 +2184,10 @@ function CreatePlayerListsLabelP1(Text, Time)
 end
 --setup players
 
---setup players	
-spawn(function()
-while wait(30) do
-    for _, v in pairs(Players:GetPlayers()) do
-    	--if v ~= Client then
-    	CreatePlayerListsLabelP1(tostring(v), 30, 60, 160, 60)
-    	--end
-	end
-  end
-end)
 for _, v in pairs(Players:GetPlayers()) do
-    CreatePlayerListsLabelP1(tostring(v), 30, 60, 160, 60)
+    CreatePlayerListsLabelP1(tostring(v), 60, 160, 60)
 end
+
 --setup players
 
 Other1Page2FeaturesAmount = Instance.new("TextBox")
@@ -3320,9 +3314,11 @@ function CreatePlayerListsLabelP4(Text)
 end
 
 function ClearDisplay()
-for i, v in pairs(PlayerListLabel4:GetChildren()) do
-v:remove()
-end
+    for i, v in pairs(PlayerListFrame4:GetChildren()) do
+        if v ~= PlayerListLabel4 then 
+            v:remove()
+        end
+    end
 end
 
 function ItemsDisplay(Specific)
@@ -3368,7 +3364,7 @@ PlayerListFrame3.Position = UDim2.new(0, 0, 0, 0)
 PlayerListFrame3.Size = UDim2.new(0, 1, 0, 20)
 
 PlayerListLabel3 = Instance.new("TextButton", PlayerListFrame3)
-PlayerListLabel3.Name = "NotifyLabel7"
+PlayerListLabel3.Name = ""
 PlayerListLabel3.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
 PlayerListLabel3.BackgroundTransparency = 1
 PlayerListLabel3.BorderColor3 = Color3.fromRGB(110, 172, 216)
@@ -3380,7 +3376,7 @@ PlayerListLabel3.TextSize = 20
 PlayerListLabel3.Visible = false
 
 local SpawningTabSelectedPlayer = ""
-function CreatePlayerListsLabelP3(Text, Time)
+function CreatePlayerListsLabelP3(Text)
     for i, v in pairs(PlayerListFrame3:GetChildren()) do
 		if v ~= PlayerListLabel3 then
 			v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame3:GetChildren()-(i-1)))
@@ -3404,8 +3400,6 @@ function CreatePlayerListsLabelP3(Text, Time)
 		F.TextColor3 = Color3.fromRGB(255, 255, 255)
 	end)
     spawn(function()
-        wait(Time)
-        F:remove()
         for i, v in pairs(PlayerListFrame3:GetChildren()) do
 			if v ~= PlayerListLabel3 then 
 				v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame3:GetChildren()-(i)))
@@ -3415,20 +3409,10 @@ function CreatePlayerListsLabelP3(Text, Time)
 end
 --setup players
 
---setup players	
-spawn(function()
-while wait(30) do
-    for _, v in pairs(Players:GetPlayers()) do
-    	--if v ~= Client then
-    	CreatePlayerListsLabelP3(tostring(v), 30, 60, 160, 60)
-    	--end
-	end
-  end
-end)
-
 for _, v in pairs(Players:GetPlayers()) do
-    CreatePlayerListsLabelP3(tostring(v), 30, 60, 160, 60)
+    CreatePlayerListsLabelP3(tostring(v), 60, 160, 60)
 end
+
 --setup players
 
 Tools1Page2FeaturesSpawning = Instance.new("TextButton")
@@ -3482,13 +3466,14 @@ Tools1Page2FeaturesSpawningItemAmount.FocusLost:Connect(function(enterPressed)
 end)
 
 Tools1Page2FeaturesSpawning.MouseButton1Down:connect(function()
-local LightS = game:GetService("Lighting")
-local LootS = LightS.LootDrops
+local LootS = game.Lighting.LootDrops
 local LootSI = SpawningTabSelectedItem
 local SPlayer = game.Players:FindFirstChild(SpawningTabSelectedPlayer)
-local Amount = ItemSpawningAmount
+local Amount = tonumber(ItemSpawningAmount)
     for i = 1, Amount do
-        SpawnItem(LootS, Vector3.new(3, 2, 0), LootSI, SPlayer)
+        --SpawnItem(LootS, Vector3.new(3, 2, 0), LootSI, SPlayer, math.random(-5, 5))
+		--(SelectedPlayer, Item, Parent, OF, SP)
+		SpawnItem(SPlayer, LootSI, LootS, Vector3.new(3, 2, 0), math.random(-5, 5))
     end
 end)
 --frames
@@ -6541,12 +6526,54 @@ game.Players.PlayerAdded:Connect(function(player)
 			end
 		end)
 	end
+	
+	for i, q in pairs(PlayerListFrame:GetChildren()) do
+		if q ~= PlayerListLabel then 
+			q:remove()
+		end
+	end
+	for i, z in pairs(PlayerListFrame2:GetChildren()) do
+		if z ~= PlayerListLabel2 then 
+			z:remove()
+		end
+	end
+	for i, j in pairs(PlayerListFrame3:GetChildren()) do
+		if j ~= PlayerListLabel3 then 
+			j:remove()
+		end
+	end
+	for _, v in pairs(Players:GetPlayers()) do
+		CreatePlayerListsLabelP1(tostring(v), 60, 160, 60)
+		CreatePlayerListsLabelP2(tostring(v), 60, 160, 60)
+		CreatePlayerListsLabelP3(tostring(v), 60, 160, 60)
+	end
 end)
 
 game.Players.PlayerRemoving:Connect(function(player)
     if ShowLeaveAlerts then
         AnnounceBox(player.Name.." has left! (" .. player.AccountAge .. ")", "LEAVE", 2, 255, 255, 255, 255, 255, 255)
     end
+	
+	for i, q in pairs(PlayerListFrame:GetChildren()) do
+		if q ~= PlayerListLabel then 
+			q:remove()
+		end
+	end
+	for i, z in pairs(PlayerListFrame2:GetChildren()) do
+		if z ~= PlayerListLabel2 then 
+			z:remove()
+		end
+	end
+	for i, j in pairs(PlayerListFrame3:GetChildren()) do
+		if j ~= PlayerListLabel3 then 
+			j:remove()
+		end
+	end
+	for _, v in pairs(Players:GetPlayers()) do
+		CreatePlayerListsLabelP1(tostring(v), 60, 160, 60)
+		CreatePlayerListsLabelP2(tostring(v), 60, 160, 60)
+		CreatePlayerListsLabelP3(tostring(v), 60, 160, 60)
+	end
 end)
 
 local AntiMessUpLastModiefiedInvis = false
@@ -6639,6 +6666,12 @@ AnnounceBox("Loaded in "..tostring(FinalOStime).."s!", "SCRIPT", 5, 255, 255, 25
 
 end)
 if success then
+    --[[rconsoleprint("@@GREEN@@")
+    rconsoleprint("[Success] " .. "script works!.\n")
+    rconsoleprint("@@YELLOW@@")
+    rconsoleprint("[Check] " .. tostring(result) .. "\n")--]]
 else
+    --[[rconsoleprint("@@RED@@")
+    rconsoleprint("[Error] " .. tostring(result) .. "\n")--]]
 	AnnounceBox("Error detected " .. tostring(result) .. "", "SCRIPT", 20, 255, 255, 255, 255, 255, 255)
 end
