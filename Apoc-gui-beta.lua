@@ -3981,6 +3981,7 @@ Tools2Page2FeaturesVehicleGod.MouseButton1Down:connect(function()
 	VehicleMod(math.huge, 3)
 	VehicleMod(math.huge, 4)
 	VehicleMod(math.huge, 5)
+	AnnounceBox("Godded current vehicle!", "GOD", 5, 60, 160, 60, 255, 255, 255)
 end)
 
 Tools2Page2FeaturesVehicleDestroy = Instance.new("TextButton")
@@ -4013,6 +4014,7 @@ Tools2Page2FeaturesVehicleDestroy.MouseButton1Down:connect(function()
 	VehicleMod(0, 3)
 	VehicleMod(0, 4)
 	VehicleMod(0, 5)
+	AnnounceBox("Destroyed current vehicle!", "DESTROY", 5, 60, 160, 60, 255, 255, 255)
 end)
 
 Tools2Page2FeaturesVehicleSpawningItemAmount = Instance.new("TextBox")
@@ -4059,7 +4061,7 @@ Tools2Page2FeaturesSpawningVehicleAmountHull.FocusLost:Connect(function(enterPre
     if enterPressed then
 		if GetValue then
 			VehicleMod(GetValue, 5)
-			AnnounceBox("Set vehicle hull to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+			AnnounceBox("Set vehicle hull to " .. GetValue .. "!", "VEHICLE MOD", 5, 60, 160, 60, 255, 255, 255)
 		else
 			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 		end
@@ -4084,7 +4086,7 @@ Tools2Page2FeaturesSpawningVehicleAmountArmor.FocusLost:Connect(function(enterPr
     if enterPressed then
 		if GetValue then
 			VehicleMod(GetValue, 1)
-			AnnounceBox("Set vehicle armor to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+			AnnounceBox("Set vehicle armor to " .. GetValue .. "!", "VEHICLE MOD", 5, 60, 160, 60, 255, 255, 255)
 		else
 			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 		end
@@ -4109,7 +4111,7 @@ Tools2Page2FeaturesSpawningVehicleAmountEngine.FocusLost:Connect(function(enterP
     if enterPressed then
 		if GetValue then
 			VehicleMod(GetValue, 2)
-			AnnounceBox("Set vehicle engine to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+			AnnounceBox("Set vehicle engine to " .. GetValue .. "!", "VEHICLE MOD", 5, 60, 160, 60, 255, 255, 255)
 		else
 			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 		end
@@ -4134,7 +4136,7 @@ Tools2Page2FeaturesSpawningVehicleAmountTank.FocusLost:Connect(function(enterPre
     if enterPressed then
 		if GetValue then
 			VehicleMod(GetValue, 4)
-			AnnounceBox("Set vehicle tank to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+			AnnounceBox("Set vehicle tank to " .. GetValue .. "!", "VEHICLE MOD", 5, 60, 160, 60, 255, 255, 255)
 		else
 			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 		end
@@ -4159,7 +4161,7 @@ Tools2Page2FeaturesSpawningVehicleAmountFuel.FocusLost:Connect(function(enterPre
     if enterPressed then
 		if GetValue then
 			VehicleMod(GetValue, 3)
-			AnnounceBox("Set vehicle fuel to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+			AnnounceBox("Set vehicle fuel to " .. GetValue .. "!", "VEHICLE MOD", 5, 60, 160, 60, 255, 255, 255)
 		else
 			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 		end
@@ -4184,7 +4186,7 @@ Tools2Page2FeaturesSpawningVehicleAmountSpeedOnRoad.FocusLost:Connect(function(e
     if enterPressed then
 		if GetValue then
 			VehicleMod(GetValue, 6)
-			AnnounceBox("Set vehicle speed to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+			AnnounceBox("Set vehicle speed to " .. GetValue .. "!", "VEHICLE MOD", 5, 60, 160, 60, 255, 255, 255)
 		else
 			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 		end
@@ -4209,7 +4211,7 @@ Tools2Page2FeaturesSpawningVehicleAmountSpeedOffRoad.FocusLost:Connect(function(
     if enterPressed then
 		if GetValue then
 			VehicleMod(GetValue, 7)
-			AnnounceBox("Set vehicle speed to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+			AnnounceBox("Set vehicle speed to " .. GetValue .. "!", "VEHICLE MOD", 5, 60, 160, 60, 255, 255, 255)
 		else
 			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 		end
