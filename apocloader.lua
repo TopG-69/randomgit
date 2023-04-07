@@ -150,11 +150,15 @@ TextButton.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/Apoc-gui-beta.lua", true))()
 end)
 
+
+
 TextButton_2.MouseButton1Click:Connect(function()
     Close()
     wait(0.1)
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/victiniv2.lua", true))()
 end)
+
+
 
 TextButton_4.MouseButton1Click:Connect(function()
     Close()
