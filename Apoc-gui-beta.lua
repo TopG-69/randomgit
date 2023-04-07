@@ -310,6 +310,9 @@ end
 Vehicles.ChildAdded:connect(function(Ch)
 	VehiclesTab[tostring(Ch)] = true
 end)
+Vehicles.ChildRemoved:connect(function(Ch)
+	VehiclesTab[tostring(Ch)] = false
+end)
 
 function GetPartPosition(Mod)
 	if Mod then
@@ -353,6 +356,109 @@ function PlayerTeleport(teleporter, reciver, mode)
 			AnnounceBox("Invalid mode usage!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 		end
 	end
+end
+
+PremadeSkins = {
+    {22,1,16,1},
+    {22,1,17,1},
+    {22,1,19,1},
+    {22,1,20,1},
+    {22,1,24,1},
+    {22,1,27,1},
+    {22,1,57,1},
+    {22,1,18,1},
+    {22,1,21,1},
+    {21,1,22,1},
+    {22,1,22,1},
+    {64,1,65,1},
+    {17,1,16,1},
+    {16,1,17,1},
+    {19,1,16,1},
+    {16,1,19,1},
+    {16,1,18,1},
+    {18,1,17,1},
+    {57,1,17,1},
+    {17,1,57,1},
+    {16,1,16,1},
+    {17,1,17,1},
+    {19,1,19,1},
+    {20,1,20,1},
+    {22,1,24,1},
+    {22,1,27,1},
+    {57,1,57,1},
+    {22,1,18,1},
+    {21,1,16,1},
+    {16,1,21,1},
+    {21,1,17,1},
+    {17,1,21,1},
+    {21,1,19,1},
+    {19,1,21,1},
+    {21,1,20,1},
+    {20,1,21,1},
+    {21,1,24,1},
+    {24,1,21,1},
+    {21,1,27,1},
+    {27,1,21,1},
+    {21,1,57,1},
+    {57,1,21,1},
+    {21,1,18,1},
+    {18,1,21,1},
+    {17,4,19,4},
+    {19,4,17,4},
+    {22,5,22,5},
+    {47,3,44,3},
+    {38,10,21,1}
+}
+
+function Skins(plr)
+	for i, v in pairs(plr.playerstats.skins:GetChildren()) do
+        if i <= #PremadeSkins then
+            fireserver("ChangeValue", v.Parent["skin"..tostring(i)], PremadeSkins[i][1])
+            fireserver("ChangeValue", v.Parent["skin"..tostring(i)].material, PremadeSkins[i][2])
+            fireserver("ChangeValue", v.Parent["skin"..tostring(i)].secondary, PremadeSkins[i][3])
+            fireserver("ChangeValue", v.Parent["skin"..tostring(i)].secondary.material, PremadeSkins[i][4])
+        end
+    end
+end
+
+function SpawnVehicle(SelectedVehicle, SelectedPlayer, Amount)
+	spawn(function()
+		for i = 1, Amount do
+			if SelectedVehicle == nil or SelectedPlayer == nil then
+				return
+			end
+			if game.Workspace:FindFirstChild(tostring(SelectedVehicle)) then
+				for i, v in pairs(game.Workspace:GetChildren()) do
+					if v.Name == tostring(SelectedVehicle) then
+						fireserver("GrabItem", Vehicles, v, v)
+					end
+				end
+			end
+			SpawnItem(SelectedPlayer, SelectedVehicle, Vehicles, Vector3.new(math.random(19, 26), -5, math.random(19, 26)), math.random(-5, 5))
+			repeat
+				wait()
+			until game.Workspace:FindFirstChild(tostring(SelectedVehicle))
+			newCar = game.Workspace[tostring(SelectedVehicle)]
+			fireserver("GrabItem", Vehicles, game.Players, newCar)
+			for i, v in pairs(newCar:WaitForChild("Stats"):GetChildren()) do
+				if v.Name == "Armor" or v.Name == "Tank" or v.Name == "Hull" or v.Name == "Engine" or v.Name == "Fuel" then
+					if v:FindFirstChild("Max") then
+						fireserver("ChangeValue", v.Max, 1999999999)
+						fireserver("ChangeValue", v, 1999999999)
+					end
+					if v.Name == "MaxSpeed" then
+						fireserver("ChangeValue", v, 200)
+					end
+					if v:FindFirstChild("Offroad") then
+						fireserver("ChangeValue", v.Offroad, 200)
+					end
+				end
+			end
+			for i, v in pairs(newCar:WaitForChild("Wheels"):GetChildren()) do
+				fireserver("WheelVisibleSet", v, "Normal")
+			end
+		end
+	end)
 end
 
 local S = LocalPlayer.PlayerGui.ViewContents.Storage.SlotScript
@@ -1934,7 +2040,7 @@ SmallText = Instance.new("TextLabel")
 SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
 SmallText.Position = UDim2.new(0.08, 0, 0.4, 0)
 SmallText.BorderSizePixel = 0
-SmallText.Text = "(/) Script version: 126"
+SmallText.Text = "(/) Script version: 128"
 SmallText.TextColor3 = Color3.fromRGB(255,255,120)
 SmallText.TextSize = 8
 SmallText.BackgroundTransparency = 1
@@ -3173,29 +3279,39 @@ Other1Page2Features3Image.Image = "rbxassetid://12900618433"
 Other1Page2Features3Image.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Other1Page2Features3Image.Parent = Other1PageSection2Phrame
 
-Other1Page2Features3 = Instance.new("TextButton")
-Other1Page2Features3.Size = UDim2.new(0, 120, 0, 20)
-Other1Page2Features3.Position = UDim2.new(0.698, 0, 0.72, 0)
-Other1Page2Features3.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Other1Page2Features3.BackgroundTransparency = 0.4
-Other1Page2Features3.BorderSizePixel = 1
-Other1Page2Features3.Text = "Skins"
-Other1Page2Features3.TextColor3 = Color3.fromRGB(255, 255, 255)
-Other1Page2Features3.TextSize = 8
-Other1Page2Features3.TextXAlignment = "Center"
-Other1Page2Features3.Parent = Other1PageSection2Phrame
+Other1Page2Features3Skins = Instance.new("TextButton")
+Other1Page2Features3Skins.Size = UDim2.new(0, 120, 0, 20)
+Other1Page2Features3Skins.Position = UDim2.new(0.698, 0, 0.72, 0)
+Other1Page2Features3Skins.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other1Page2Features3Skins.BackgroundTransparency = 0.4
+Other1Page2Features3Skins.BorderSizePixel = 1
+Other1Page2Features3Skins.Text = "Skins"
+Other1Page2Features3Skins.TextColor3 = Color3.fromRGB(255, 255, 255)
+Other1Page2Features3Skins.TextSize = 8
+Other1Page2Features3Skins.TextXAlignment = "Center"
+Other1Page2Features3Skins.Parent = Other1PageSection2Phrame
 
-Other1Page2Features3Image = Instance.new("ImageLabel")
-Other1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
-Other1Page2Features3Image.Position = UDim2.new(0.698, 0, 0.72, 0)
-Other1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Other1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Other1Page2Features3Image.BackgroundTransparency = 1
-Other1Page2Features3Image.BorderSizePixel = 0
-Other1Page2Features3Image.Visible = true
-Other1Page2Features3Image.Image = "rbxassetid://12900618433"
-Other1Page2Features3Image.ImageColor3 = Color3.fromRGB(255, 255, 255)
-Other1Page2Features3Image.Parent = Other1PageSection2Phrame
+Other1Page2Features3SkinsImage = Instance.new("ImageLabel")
+Other1Page2Features3SkinsImage.Size = UDim2.new(0, 20, 0, 20)
+Other1Page2Features3SkinsImage.Position = UDim2.new(0.698, 0, 0.72, 0)
+Other1Page2Features3SkinsImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other1Page2Features3SkinsImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Other1Page2Features3SkinsImage.BackgroundTransparency = 1
+Other1Page2Features3SkinsImage.BorderSizePixel = 0
+Other1Page2Features3SkinsImage.Visible = true
+Other1Page2Features3SkinsImage.Image = "rbxassetid://12900618433"
+Other1Page2Features3SkinsImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Other1Page2Features3SkinsImage.Parent = Other1PageSection2Phrame
+
+Other1Page2Features3Skins.MouseButton1Click:Connect(function()
+	local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
+	if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
+		AnnounceBox("Gave " .. LocalTab1SelectedPlayer .. " all skins!", "Skins", 5, 60, 160, 60, 255, 255, 255)
+		Skins(SPlayer)
+	else
+		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+	end
+end)
 
 Other1Page2Features3 = Instance.new("TextButton")
 Other1Page2Features3.Size = UDim2.new(0, 120, 0, 20)
@@ -3535,6 +3651,511 @@ local Amount = ItemSpawningAmount
 			if ShowSpawnedItemAlerts then
 				AnnounceBox("Spawned " .. LootSI .. "!", "SPAWNER", 2, 60, 160, 60, 255, 255, 255)
 			end
+		end
+	else
+		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+	end
+end)
+--frames
+
+
+
+--frames
+Tools2PageSection1Phrame = Instance.new("ScrollingFrame")
+Tools2PageSection1Phrame.Size = UDim2.new(0.27, 0, 0.80, 0)
+Tools2PageSection1Phrame.Position = UDim2.new(0.01, 0, 0.05, 0)
+Tools2PageSection1Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools2PageSection1Phrame.CanvasSize = UDim2.new(0, 0, 30, 0)
+Tools2PageSection1Phrame.BorderSizePixel = 1
+Tools2PageSection1Phrame.Transparency = 0.2
+Tools2PageSection1Phrame.Active = false
+Tools2PageSection1Phrame.Selectable = true
+Tools2PageSection1Phrame.Visible = false
+Tools2PageSection1Phrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+Tools2PageSection1Phrame.ScrollBarThickness = 4
+Tools2PageSection1Phrame.Parent = GuiPhrame
+
+Tools2PageSection2Phrame = Instance.new("Frame")
+Tools2PageSection2Phrame.Size = UDim2.new(0.42, 0, 0.9, 0)
+Tools2PageSection2Phrame.Position = UDim2.new(0.57, 0, 0.05, 0)
+Tools2PageSection2Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools2PageSection2Phrame.BorderSizePixel = 1
+Tools2PageSection2Phrame.Transparency = 0.2
+Tools2PageSection2Phrame.Active = false
+Tools2PageSection2Phrame.Selectable = true
+Tools2PageSection2Phrame.Visible = false
+Tools2PageSection2Phrame.Parent = GuiPhrame
+
+
+Tools2PageSection3Phrame = Instance.new("ScrollingFrame")
+Tools2PageSection3Phrame.Size = UDim2.new(0.27, 0, 0.9, 0)
+Tools2PageSection3Phrame.Position = UDim2.new(0.29, 0, 0.05, 0)
+Tools2PageSection3Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools2PageSection3Phrame.BorderSizePixel = 1
+Tools2PageSection3Phrame.Transparency = 0.2
+Tools2PageSection3Phrame.CanvasSize = UDim2.new(0, 0, 3, 0)
+Tools2PageSection3Phrame.Active = false
+Tools2PageSection3Phrame.Selectable = true
+Tools2PageSection3Phrame.Visible = false
+Tools2PageSection3Phrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+Tools2PageSection3Phrame.ScrollBarThickness = 4
+Tools2PageSection3Phrame.Parent = GuiPhrame
+
+PlayerListFrame5 = Instance.new("Frame", Tools2PageSection1Phrame)
+PlayerListFrame5.Name = "NotifyFrame4"
+PlayerListFrame5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListFrame5.BackgroundTransparency = 1
+PlayerListFrame5.BorderSizePixel = 0
+PlayerListFrame5.Position = UDim2.new(0, 0, 0, 0)
+PlayerListFrame5.Size = UDim2.new(0, 1, 0, 20)
+
+PlayerListLabel5 = Instance.new("TextButton", PlayerListFrame5)
+PlayerListLabel5.Name = "NotifyLabel5"
+PlayerListLabel5.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+PlayerListLabel5.BackgroundTransparency = 1
+PlayerListLabel5.BorderColor3 = Color3.fromRGB(110, 172, 216)
+PlayerListLabel5.BorderSizePixel = 0
+PlayerListLabel5.Size = UDim2.new(0, 160, 0, PlayerListFrame5.Size.Y.Offset)
+PlayerListLabel5.Font = Enum.Font.SourceSans
+PlayerListLabel5.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListLabel5.TextSize = 20
+PlayerListLabel5.Visible = false
+
+local SpawningTabSelectedVehicle = ""
+function CreatePlayerListsLabelP5(Text)
+    for i, v in pairs(PlayerListFrame5:GetChildren()) do
+		if v ~= PlayerListLabel5 then
+			v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame5:GetChildren()-(i-1)))
+		end
+    end
+    local F = PlayerListLabel5:Clone()
+	F.Visible = true
+    F.Parent = PlayerListFrame5
+    F.Position = UDim2.new(0, 0, 0, 0)
+    F.Text = Text
+    if Time == nil then
+        Time = 3
+    end
+    F.MouseButton1Click:Connect(function()
+		F.TextColor3 = Color3.fromRGB(170, 170, 170)
+		SpawningTabSelectedVehicle = F.Text
+		if ShowFunctionAlerts then
+			AnnounceBox("Item ".. F.Text .. " was selected!", "ITEM", 5, 255, 255, 255, 255, 255, 255)
+		end
+		wait(1)
+		F.TextColor3 = Color3.fromRGB(255, 255, 255)
+	end)
+    spawn(function()
+        for i, v in pairs(PlayerListFrame5:GetChildren()) do
+			if v ~= PlayerListLabel5 then 
+				v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame5:GetChildren()-(i)))
+			end
+        end
+    end)
+end
+
+function ClearVehicles()
+    for i, v in pairs(PlayerListFrame5:GetChildren()) do
+        if v ~= PlayerListLabel5 then 
+            v:remove()
+        end
+    end
+end
+
+function VehicleDisplay(Specific)
+ClearVehicles()
+wait()
+    for i, v in pairs(Vehicles:GetChildren()) do
+        if Specific == nil or string.match(string.lower(v.Name), string.lower(Specific)) then
+            CreatePlayerListsLabelP5(tostring(v))
+        end
+    end
+end
+
+VehicleDisplay()
+
+Tools2Page2FeaturesSearch = Instance.new("TextBox")
+Tools2Page2FeaturesSearch.Size = UDim2.new(0, 162, 0, 20)
+Tools2Page2FeaturesSearch.Position = UDim2.new(-1.332, 0, 0.92, 0)
+Tools2Page2FeaturesSearch.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools2Page2FeaturesSearch.BackgroundTransparency = 0.4
+Tools2Page2FeaturesSearch.BorderSizePixel = 1
+Tools2Page2FeaturesSearch.Text = "Search"
+Tools2Page2FeaturesSearch.TextColor3 = Color3.fromRGB(255, 255, 255)
+--Tools2Page2FeaturesAmount.TextScaled = true
+Tools2Page2FeaturesSearch.TextSize = 8
+Tools2Page2FeaturesSearch.TextWrapped = true
+Tools2Page2FeaturesSearch.TextXAlignment = "Center"
+Tools2Page2FeaturesSearch.Parent = Tools2PageSection2Phrame
+
+Tools2Page2FeaturesSearch.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+        VehicleDisplay(Tools2Page2FeaturesSearch.Text)
+    end
+end)
+
+--setup players
+PlayerListFrame6 = Instance.new("Frame", Tools2PageSection3Phrame)
+PlayerListFrame6.Name = "NotifyFrame8"
+PlayerListFrame6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListFrame6.BackgroundTransparency = 1
+PlayerListFrame6.BorderSizePixel = 0
+PlayerListFrame6.Position = UDim2.new(0, 0, 0, 0)
+PlayerListFrame6.Size = UDim2.new(0, 1, 0, 20)
+
+PlayerListLabel6 = Instance.new("TextButton", PlayerListFrame6)
+PlayerListLabel6.Name = ""
+PlayerListLabel6.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+PlayerListLabel6.BackgroundTransparency = 1
+PlayerListLabel6.BorderColor3 = Color3.fromRGB(110, 172, 216)
+PlayerListLabel6.BorderSizePixel = 0
+PlayerListLabel6.Size = UDim2.new(0, 160, 0, PlayerListFrame6.Size.Y.Offset)
+PlayerListLabel6.Font = Enum.Font.SourceSans
+PlayerListLabel6.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListLabel6.TextSize = 20
+PlayerListLabel6.Visible = false
+
+local VehicleSpawningTabSelectedPlayer = ""
+function CreatePlayerListsLabelP6(Text)
+    for i, v in pairs(PlayerListFrame6:GetChildren()) do
+		if v ~= PlayerListLabel6 then
+			v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame6:GetChildren()-(i-1)))
+		end
+    end
+    local F = PlayerListLabel6:Clone()
+	F.Visible = true
+    F.Parent = PlayerListFrame6
+    F.Position = UDim2.new(0, 0, 0, 0)
+    F.Text = Text
+    if Time == nil then
+        Time = 3
+    end
+    F.MouseButton1Click:Connect(function()
+		F.TextColor3 = Color3.fromRGB(170, 170, 170)
+		VehicleSpawningTabSelectedPlayer = F.Text
+		if ShowFunctionAlerts then
+			AnnounceBox("Player ".. F.Text .. " was selected!", "PLAYER", 5, 255, 255, 255, 255, 255, 255)
+		end
+		wait(1)
+		F.TextColor3 = Color3.fromRGB(255, 255, 255)
+	end)
+    spawn(function()
+        for i, v in pairs(PlayerListFrame6:GetChildren()) do
+			if v ~= PlayerListLabel6 then 
+				v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame6:GetChildren()-(i)))
+			end
+        end
+    end)
+end
+--setup players
+
+CreatePlayerListsLabelP6("Others", 60, 160, 60)
+CreatePlayerListsLabelP6("All", 60, 160, 60)
+for _, v in pairs(Players:GetPlayers()) do
+    CreatePlayerListsLabelP6(tostring(v), 60, 160, 60)
+end
+
+--setup players
+
+Tools2Page2FeaturesVehicleSpawning = Instance.new("TextButton")
+Tools2Page2FeaturesVehicleSpawning.Size = UDim2.new(0, 100, 0, 20)
+Tools2Page2FeaturesVehicleSpawning.Position = UDim2.new(0.582, 0, 0.32, 0)
+Tools2Page2FeaturesVehicleSpawning.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools2Page2FeaturesVehicleSpawning.BackgroundTransparency = 0.4
+Tools2Page2FeaturesVehicleSpawning.BorderSizePixel = 1
+Tools2Page2FeaturesVehicleSpawning.Text = "Spawn"
+Tools2Page2FeaturesVehicleSpawning.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesVehicleSpawning.TextSize = 8
+Tools2Page2FeaturesVehicleSpawning.TextXAlignment = "Center"
+Tools2Page2FeaturesVehicleSpawning.Parent = Tools2PageSection2Phrame
+
+Tools2Page2FeaturesVehicleSpawningImage = Instance.new("ImageLabel")
+Tools2Page2FeaturesVehicleSpawningImage.Size = UDim2.new(0, 20, 0, 20)
+Tools2Page2FeaturesVehicleSpawningImage.Position = UDim2.new(0.5812, 0, 0.32, 0)
+Tools2Page2FeaturesVehicleSpawningImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools2Page2FeaturesVehicleSpawningImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesVehicleSpawningImage.BackgroundTransparency = 1
+Tools2Page2FeaturesVehicleSpawningImage.BorderSizePixel = 0
+Tools2Page2FeaturesVehicleSpawningImage.Visible = true
+Tools2Page2FeaturesVehicleSpawningImage.Image = "rbxassetid://12900618433"
+Tools2Page2FeaturesVehicleSpawningImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesVehicleSpawningImage.Parent = Tools2PageSection2Phrame
+
+Tools2Page2FeaturesVehicleUnweld = Instance.new("TextButton")
+Tools2Page2FeaturesVehicleUnweld.Size = UDim2.new(0, 100, 0, 20)
+Tools2Page2FeaturesVehicleUnweld.Position = UDim2.new(0.582, 0, 0.02, 0)
+Tools2Page2FeaturesVehicleUnweld.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools2Page2FeaturesVehicleUnweld.BackgroundTransparency = 0.4
+Tools2Page2FeaturesVehicleUnweld.BorderSizePixel = 1
+Tools2Page2FeaturesVehicleUnweld.Text = "Unweld"
+Tools2Page2FeaturesVehicleUnweld.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesVehicleUnweld.TextSize = 8
+Tools2Page2FeaturesVehicleUnweld.TextXAlignment = "Center"
+Tools2Page2FeaturesVehicleUnweld.Parent = Tools2PageSection2Phrame
+
+Tools2Page2FeaturesVehicleUnweldImage = Instance.new("ImageLabel")
+Tools2Page2FeaturesVehicleUnweldImage.Size = UDim2.new(0, 20, 0, 20)
+Tools2Page2FeaturesVehicleUnweldImage.Position = UDim2.new(0.5812, 0, 0.02, 0)
+Tools2Page2FeaturesVehicleUnweldImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools2Page2FeaturesVehicleUnweldImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesVehicleUnweldImage.BackgroundTransparency = 1
+Tools2Page2FeaturesVehicleUnweldImage.BorderSizePixel = 0
+Tools2Page2FeaturesVehicleUnweldImage.Visible = true
+Tools2Page2FeaturesVehicleUnweldImage.Image = "rbxassetid://12900618433"
+Tools2Page2FeaturesVehicleUnweldImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesVehicleUnweldImage.Parent = Tools2PageSection2Phrame
+
+Tools2Page2FeaturesVehicleGod = Instance.new("TextButton")
+Tools2Page2FeaturesVehicleGod.Size = UDim2.new(0, 100, 0, 20)
+Tools2Page2FeaturesVehicleGod.Position = UDim2.new(0.582, 0, 0.12, 0)
+Tools2Page2FeaturesVehicleGod.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools2Page2FeaturesVehicleGod.BackgroundTransparency = 0.4
+Tools2Page2FeaturesVehicleGod.BorderSizePixel = 1
+Tools2Page2FeaturesVehicleGod.Text = "God"
+Tools2Page2FeaturesVehicleGod.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesVehicleGod.TextSize = 8
+Tools2Page2FeaturesVehicleGod.TextXAlignment = "Center"
+Tools2Page2FeaturesVehicleGod.Parent = Tools2PageSection2Phrame
+
+Tools2Page2FeaturesVehicleGodImage = Instance.new("ImageLabel")
+Tools2Page2FeaturesVehicleGodImage.Size = UDim2.new(0, 20, 0, 20)
+Tools2Page2FeaturesVehicleGodImage.Position = UDim2.new(0.5812, 0, 0.12, 0)
+Tools2Page2FeaturesVehicleGodImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools2Page2FeaturesVehicleGodImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesVehicleGodImage.BackgroundTransparency = 1
+Tools2Page2FeaturesVehicleGodImage.BorderSizePixel = 0
+Tools2Page2FeaturesVehicleGodImage.Visible = true
+Tools2Page2FeaturesVehicleGodImage.Image = "rbxassetid://12900618433"
+Tools2Page2FeaturesVehicleGodImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesVehicleGodImage.Parent = Tools2PageSection2Phrame
+
+Tools2Page2FeaturesVehicleDestroy = Instance.new("TextButton")
+Tools2Page2FeaturesVehicleDestroy.Size = UDim2.new(0, 100, 0, 20)
+Tools2Page2FeaturesVehicleDestroy.Position = UDim2.new(0.582, 0, 0.22, 0)
+Tools2Page2FeaturesVehicleDestroy.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools2Page2FeaturesVehicleDestroy.BackgroundTransparency = 0.4
+Tools2Page2FeaturesVehicleDestroy.BorderSizePixel = 1
+Tools2Page2FeaturesVehicleDestroy.Text = "Destroy"
+Tools2Page2FeaturesVehicleDestroy.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesVehicleDestroy.TextSize = 8
+Tools2Page2FeaturesVehicleDestroy.TextXAlignment = "Center"
+Tools2Page2FeaturesVehicleDestroy.Parent = Tools2PageSection2Phrame
+
+Tools2Page2FeaturesVehicleDestroyImage = Instance.new("ImageLabel")
+Tools2Page2FeaturesVehicleDestroyImage.Size = UDim2.new(0, 20, 0, 20)
+Tools2Page2FeaturesVehicleDestroyImage.Position = UDim2.new(0.5812, 0, 0.22, 0)
+Tools2Page2FeaturesVehicleDestroyImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools2Page2FeaturesVehicleDestroyImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesVehicleDestroyImage.BackgroundTransparency = 1
+Tools2Page2FeaturesVehicleDestroyImage.BorderSizePixel = 0
+Tools2Page2FeaturesVehicleDestroyImage.Visible = true
+Tools2Page2FeaturesVehicleDestroyImage.Image = "rbxassetid://12900618433"
+Tools2Page2FeaturesVehicleDestroyImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesVehicleDestroyImage.Parent = Tools2PageSection2Phrame
+
+Tools2Page2FeaturesVehicleSpawningItemAmount = Instance.new("TextBox")
+Tools2Page2FeaturesVehicleSpawningItemAmount.Size = UDim2.new(0, 100, 0, 20)
+Tools2Page2FeaturesVehicleSpawningItemAmount.Position = UDim2.new(0.02, 0, 0.02, 0)
+Tools2Page2FeaturesVehicleSpawningItemAmount.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools2Page2FeaturesVehicleSpawningItemAmount.BackgroundTransparency = 0.4
+Tools2Page2FeaturesVehicleSpawningItemAmount.BorderSizePixel = 1
+Tools2Page2FeaturesVehicleSpawningItemAmount.Text = "Amount"
+Tools2Page2FeaturesVehicleSpawningItemAmount.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesVehicleSpawningItemAmount.TextSize = 8
+Tools2Page2FeaturesVehicleSpawningItemAmount.TextWrapped = true
+Tools2Page2FeaturesVehicleSpawningItemAmount.TextXAlignment = "Center"
+Tools2Page2FeaturesVehicleSpawningItemAmount.Parent = Tools2PageSection2Phrame
+
+local VehicleSpawningAmount = 1
+Tools2Page2FeaturesVehicleSpawningItemAmount.FocusLost:Connect(function(enterPressed)
+	local GetValue = tonumber(Tools2Page2FeaturesVehicleSpawningItemAmount.Text)
+    if enterPressed then
+		if GetValue then
+			VehicleSpawningAmount = GetValue
+			AnnounceBox("Set item amount to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		else
+			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	end
+end)
+
+Tools2Page2FeaturesSpawningVehicleAmountHull = Instance.new("TextBox")
+Tools2Page2FeaturesSpawningVehicleAmountHull.Size = UDim2.new(0, 100, 0, 20)
+Tools2Page2FeaturesSpawningVehicleAmountHull.Position = UDim2.new(0.02, 0, 0.12, 0)
+Tools2Page2FeaturesSpawningVehicleAmountHull.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools2Page2FeaturesSpawningVehicleAmountHull.BackgroundTransparency = 0.4
+Tools2Page2FeaturesSpawningVehicleAmountHull.BorderSizePixel = 1
+Tools2Page2FeaturesSpawningVehicleAmountHull.Text = "Hull"
+Tools2Page2FeaturesSpawningVehicleAmountHull.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesSpawningVehicleAmountHull.TextSize = 8
+Tools2Page2FeaturesSpawningVehicleAmountHull.TextWrapped = true
+Tools2Page2FeaturesSpawningVehicleAmountHull.TextXAlignment = "Center"
+Tools2Page2FeaturesSpawningVehicleAmountHull.Parent = Tools2PageSection2Phrame
+
+Tools2Page2FeaturesSpawningVehicleAmountHull.FocusLost:Connect(function(enterPressed)
+	local GetValue = tonumber(Tools2Page2FeaturesSpawningVehicleAmountHull.Text)
+    if enterPressed then
+		if GetValue then
+			AnnounceBox("Set vehicle hull to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		else
+			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	end
+end)
+
+Tools2Page2FeaturesSpawningVehicleAmountArmor = Instance.new("TextBox")
+Tools2Page2FeaturesSpawningVehicleAmountArmor.Size = UDim2.new(0, 100, 0, 20)
+Tools2Page2FeaturesSpawningVehicleAmountArmor.Position = UDim2.new(0.02, 0, 0.22, 0)
+Tools2Page2FeaturesSpawningVehicleAmountArmor.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools2Page2FeaturesSpawningVehicleAmountArmor.BackgroundTransparency = 0.4
+Tools2Page2FeaturesSpawningVehicleAmountArmor.BorderSizePixel = 1
+Tools2Page2FeaturesSpawningVehicleAmountArmor.Text = "Armor"
+Tools2Page2FeaturesSpawningVehicleAmountArmor.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesSpawningVehicleAmountArmor.TextSize = 8
+Tools2Page2FeaturesSpawningVehicleAmountArmor.TextWrapped = true
+Tools2Page2FeaturesSpawningVehicleAmountArmor.TextXAlignment = "Center"
+Tools2Page2FeaturesSpawningVehicleAmountArmor.Parent = Tools2PageSection2Phrame
+
+Tools2Page2FeaturesSpawningVehicleAmountArmor.FocusLost:Connect(function(enterPressed)
+	local GetValue = tonumber(Tools2Page2FeaturesSpawningVehicleAmountArmor.Text)
+    if enterPressed then
+		if GetValue then
+			ItemSpawningRadiusH = GetValue
+			AnnounceBox("Set vehicle armor to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		else
+			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	end
+end)
+
+Tools2Page2FeaturesSpawningVehicleAmountEngine = Instance.new("TextBox")
+Tools2Page2FeaturesSpawningVehicleAmountEngine.Size = UDim2.new(0, 100, 0, 20)
+Tools2Page2FeaturesSpawningVehicleAmountEngine.Position = UDim2.new(0.02, 0, 0.32, 0)
+Tools2Page2FeaturesSpawningVehicleAmountEngine.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools2Page2FeaturesSpawningVehicleAmountEngine.BackgroundTransparency = 0.4
+Tools2Page2FeaturesSpawningVehicleAmountEngine.BorderSizePixel = 1
+Tools2Page2FeaturesSpawningVehicleAmountEngine.Text = "Engine"
+Tools2Page2FeaturesSpawningVehicleAmountEngine.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesSpawningVehicleAmountEngine.TextSize = 8
+Tools2Page2FeaturesSpawningVehicleAmountEngine.TextWrapped = true
+Tools2Page2FeaturesSpawningVehicleAmountEngine.TextXAlignment = "Center"
+Tools2Page2FeaturesSpawningVehicleAmountEngine.Parent = Tools2PageSection2Phrame
+
+Tools2Page2FeaturesSpawningVehicleAmountEngine.FocusLost:Connect(function(enterPressed)
+	local GetValue = tonumber(Tools2Page2FeaturesSpawningVehicleAmountEngine.Text)
+    if enterPressed then
+		if GetValue then
+			AnnounceBox("Set vehicle engine to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		else
+			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	end
+end)
+
+Tools2Page2FeaturesSpawningVehicleAmountTank = Instance.new("TextBox")
+Tools2Page2FeaturesSpawningVehicleAmountTank.Size = UDim2.new(0, 100, 0, 20)
+Tools2Page2FeaturesSpawningVehicleAmountTank.Position = UDim2.new(0.02, 0, 0.42, 0)
+Tools2Page2FeaturesSpawningVehicleAmountTank.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools2Page2FeaturesSpawningVehicleAmountTank.BackgroundTransparency = 0.4
+Tools2Page2FeaturesSpawningVehicleAmountTank.BorderSizePixel = 1
+Tools2Page2FeaturesSpawningVehicleAmountTank.Text = "Tank"
+Tools2Page2FeaturesSpawningVehicleAmountTank.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesSpawningVehicleAmountTank.TextSize = 8
+Tools2Page2FeaturesSpawningVehicleAmountTank.TextWrapped = true
+Tools2Page2FeaturesSpawningVehicleAmountTank.TextXAlignment = "Center"
+Tools2Page2FeaturesSpawningVehicleAmountTank.Parent = Tools2PageSection2Phrame
+
+Tools2Page2FeaturesSpawningVehicleAmountTank.FocusLost:Connect(function(enterPressed)
+	local GetValue = tonumber(Tools2Page2FeaturesSpawningVehicleAmountTank.Text)
+    if enterPressed then
+		if GetValue then
+			AnnounceBox("Set vehicle tank to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		else
+			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	end
+end)
+
+Tools2Page2FeaturesSpawningVehicleAmountFuel = Instance.new("TextBox")
+Tools2Page2FeaturesSpawningVehicleAmountFuel.Size = UDim2.new(0, 100, 0, 20)
+Tools2Page2FeaturesSpawningVehicleAmountFuel.Position = UDim2.new(0.02, 0, 0.52, 0)
+Tools2Page2FeaturesSpawningVehicleAmountFuel.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools2Page2FeaturesSpawningVehicleAmountFuel.BackgroundTransparency = 0.4
+Tools2Page2FeaturesSpawningVehicleAmountFuel.BorderSizePixel = 1
+Tools2Page2FeaturesSpawningVehicleAmountFuel.Text = "Fuel"
+Tools2Page2FeaturesSpawningVehicleAmountFuel.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesSpawningVehicleAmountFuel.TextSize = 8
+Tools2Page2FeaturesSpawningVehicleAmountFuel.TextWrapped = true
+Tools2Page2FeaturesSpawningVehicleAmountFuel.TextXAlignment = "Center"
+Tools2Page2FeaturesSpawningVehicleAmountFuel.Parent = Tools2PageSection2Phrame
+
+Tools2Page2FeaturesSpawningVehicleAmountFuel.FocusLost:Connect(function(enterPressed)
+	local GetValue = tonumber(Tools2Page2FeaturesSpawningVehicleAmountFuel.Text)
+    if enterPressed then
+		if GetValue then
+			AnnounceBox("Set vehicle fuel to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		else
+			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	end
+end)
+
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOnRoad = Instance.new("TextBox")
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOnRoad.Size = UDim2.new(0, 100, 0, 20)
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOnRoad.Position = UDim2.new(0.02, 0, 0.62, 0)
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOnRoad.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOnRoad.BackgroundTransparency = 0.4
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOnRoad.BorderSizePixel = 1
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOnRoad.Text = "Speed -road"
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOnRoad.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOnRoad.TextSize = 8
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOnRoad.TextWrapped = true
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOnRoad.TextXAlignment = "Center"
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOnRoad.Parent = Tools2PageSection2Phrame
+
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOnRoad.FocusLost:Connect(function(enterPressed)
+	local GetValue = tonumber(Tools2Page2FeaturesSpawningVehicleAmountSpeedOnRoad.Text)
+    if enterPressed then
+		if GetValue then
+			AnnounceBox("Set vehicle speed to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		else
+			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	end
+end)
+
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOffRoad = Instance.new("TextBox")
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOffRoad.Size = UDim2.new(0, 100, 0, 20)
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOffRoad.Position = UDim2.new(0.02, 0, 0.72, 0)
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOffRoad.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOffRoad.BackgroundTransparency = 0.4
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOffRoad.BorderSizePixel = 1
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOffRoad.Text = "Speed -offroad"
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOffRoad.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOffRoad.TextSize = 8
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOffRoad.TextWrapped = true
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOffRoad.TextXAlignment = "Center"
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOffRoad.Parent = Tools2PageSection2Phrame
+
+Tools2Page2FeaturesSpawningVehicleAmountSpeedOffRoad.FocusLost:Connect(function(enterPressed)
+	local GetValue = tonumber(Tools2Page2FeaturesSpawningVehicleAmountSpeedOffRoad.Text)
+    if enterPressed then
+		if GetValue then
+			AnnounceBox("Set vehicle speed to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		else
+			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	end
+end)
+
+Tools2Page2FeaturesVehicleSpawning.MouseButton1Down:connect(function()
+local SelectedVehicle = SpawningTabSelectedVehicle
+local SPlayer = game.Players:FindFirstChild(VehicleSpawningTabSelectedPlayer)
+local Amount = VehicleSpawningAmount
+	if SPlayer then
+		SpawnVehicle(SelectedVehicle, SPlayer, Amount)
+		if ShowSpawnedItemAlerts then
+			AnnounceBox("Spawned " .. SelectedVehicle .. "!", "SPAWNER", 2, 60, 160, 60, 255, 255, 255)
 		end
 	else
 		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
@@ -5860,6 +6481,9 @@ LocalButton.MouseButton1Click:Connect(function()
 		Tools1PageSection1Phrame.Visible = false
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
+		Tools2PageSection1Phrame.Visible = false
+		Tools2PageSection2Phrame.Visible = false
+		Tools2PageSection3Phrame.Visible = false
 		Settings1PageSection2Phrame.Visible = false
 		Other1PageSection1Phrame.Visible = false	
 		Other2PageSection2Phrame.Visible = false
@@ -5904,6 +6528,9 @@ OtherButton.MouseButton1Click:Connect(function()
 		Other2PageSection2Phrame.Visible = false
 		Tools1PageSection1Phrame.Visible = false
 		Tools1PageSection2Phrame.Visible = false
+		Tools2PageSection1Phrame.Visible = false
+		Tools2PageSection2Phrame.Visible = false
+		Tools2PageSection3Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
 		Settings1PageSection2Phrame.Visible = false
@@ -5945,6 +6572,9 @@ ServerButton.MouseButton1Click:Connect(function()
 		Other1PageSection2Phrame.Visible = false
 		Other1PageSection1Phrame.Visible = false	
 		Other2PageSection2Phrame.Visible = false
+		Tools2PageSection1Phrame.Visible = false
+		Tools2PageSection2Phrame.Visible = false
+		Tools2PageSection3Phrame.Visible = false
 		Misc1PageSection2Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
 		Settings1PageSection2Phrame.Visible = false
@@ -5992,6 +6622,9 @@ MiscButton.MouseButton1Click:Connect(function()
 		Tools1PageSection1Phrame.Visible = false
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
+		Tools2PageSection1Phrame.Visible = false
+		Tools2PageSection2Phrame.Visible = false
+		Tools2PageSection3Phrame.Visible = false
 		Test1PageSection2Phrame.Visible = false
 		Settings1PageSection2Phrame.Visible = false
 		Server1PageSection2Phrame.Visible = false
@@ -6037,6 +6670,9 @@ SettingsButton.MouseButton1Click:Connect(function()
 		Tools1PageSection1Phrame.Visible = false
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
+		Tools2PageSection1Phrame.Visible = false
+		Tools2PageSection2Phrame.Visible = false
+		Tools2PageSection3Phrame.Visible = false
 		Test1PageSection2Phrame.Visible = false
 		Server1PageSection2Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
@@ -6082,6 +6718,9 @@ TestButton.MouseButton1Click:Connect(function()
 		Tools1PageSection1Phrame.Visible = false
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
+		Tools2PageSection1Phrame.Visible = false
+		Tools2PageSection2Phrame.Visible = false
+		Tools2PageSection3Phrame.Visible = false
 		GuiServerEBarPhrame.Visible = false
 		Other2PageSection1Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
@@ -6126,6 +6765,9 @@ ToolsButton.MouseButton1Click:Connect(function()
 		Tools1PageSection1Phrame.Visible = false
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
+		Tools2PageSection1Phrame.Visible = false
+		Tools2PageSection2Phrame.Visible = false
+		Tools2PageSection3Phrame.Visible = false
 		Settings1PageSection2Phrame.Visible = false
 		GuiServerEBarPhrame.Visible = false
 		Misc1PageSection2Phrame.Visible = false
@@ -6170,6 +6812,9 @@ ScripButton.MouseButton1Click:Connect(function()
 		Tools1PageSection1Phrame.Visible = false
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
+		Tools2PageSection1Phrame.Visible = false
+		Tools2PageSection2Phrame.Visible = false
+		Tools2PageSection3Phrame.Visible = false
 		GuiLocalEBarPhrame.Visible = false
 		Welcome1PageSection1Phrame.Visible = false
 		Misc1PageSection2Phrame.Visible = false
@@ -6211,6 +6856,9 @@ FavoriteButton.MouseButton1Click:Connect(function()
 		Tools1PageSection1Phrame.Visible = false
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
+		Tools2PageSection1Phrame.Visible = false
+		Tools2PageSection2Phrame.Visible = false
+		Tools2PageSection3Phrame.Visible = false
 		Test1PageSection2Phrame.Visible = false
 		GuiToolsEBarPhrame.Visible = false
 		GuiServerEBarPhrame.Visible = false
@@ -6326,6 +6974,9 @@ ToolsTab1Button.MouseButton1Click:Connect(function()
 		Tools1PageSection3Phrame.Visible = true
 		
 		Welcome1PageSection1Phrame.Visible = false
+		Tools2PageSection1Phrame.Visible = false
+		Tools2PageSection2Phrame.Visible = false
+		Tools2PageSection3Phrame.Visible = false
 		ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	end
@@ -6333,7 +6984,13 @@ end)
 ToolsTab2Button.MouseButton1Click:Connect(function()
 	if ToolsTab2Button.ImageColor3 == Color3.fromRGB(95, 60, 60) then
 		ToolsTab2Button.ImageColor3 = Color3.fromRGB(60, 95, 60)
+		Tools2PageSection1Phrame.Visible = true
+		Tools2PageSection2Phrame.Visible = true
+		Tools2PageSection3Phrame.Visible = true
 		
+		Tools1PageSection2Phrame.Visible = false
+		Tools1PageSection1Phrame.Visible = false
+		Tools1PageSection3Phrame.Visible = false
 		Welcome1PageSection1Phrame.Visible = false
 		ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -6343,7 +7000,13 @@ ToolsTab3Button.MouseButton1Click:Connect(function()
 	if ToolsTab3Button.ImageColor3 == Color3.fromRGB(95, 60, 60) then
 		ToolsTab3Button.ImageColor3 = Color3.fromRGB(60, 95, 60)
 		
+		Tools1PageSection2Phrame.Visible = false
+		Tools1PageSection1Phrame.Visible = false
+		Tools1PageSection3Phrame.Visible = false
 		Welcome1PageSection1Phrame.Visible = false
+		Tools2PageSection1Phrame.Visible = false
+		Tools2PageSection2Phrame.Visible = false
+		Tools2PageSection3Phrame.Visible = false
 		ToolsTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	end
@@ -6425,6 +7088,9 @@ IdkButton.MouseButton1Click:Connect(function()
 		Tools1PageSection1Phrame.Visible = false
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
+		Tools2PageSection1Phrame.Visible = false
+		Tools2PageSection2Phrame.Visible = false
+		Tools2PageSection3Phrame.Visible = false
 		OtherButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		SettingsButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -6454,6 +7120,9 @@ IdkButton.MouseButton1Click:Connect(function()
 		Tools1PageSection1Phrame.Visible = false
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
+		Tools2PageSection1Phrame.Visible = false
+		Tools2PageSection2Phrame.Visible = false
+		Tools2PageSection3Phrame.Visible = false
 		OtherButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		SettingsButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -6538,6 +7207,9 @@ RestoreFromMinimizeButton.MouseButton1Click:Connect(function()
 	Tools1PageSection1Phrame.Visible = false
 	Tools1PageSection2Phrame.Visible = false
 	Tools1PageSection3Phrame.Visible = false
+	Tools2PageSection1Phrame.Visible = false
+	Tools2PageSection2Phrame.Visible = false
+	Tools2PageSection3Phrame.Visible = false
 	OtherButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	ServerButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	SettingsButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -6644,16 +7316,24 @@ game.Players.PlayerAdded:Connect(function(player)
 			j:remove()
 		end
 	end
+	for i, h in pairs(PlayerListFrame6:GetChildren()) do
+		if h ~= PlayerListLabel3 then 
+			h:remove()
+		end
+	end
 	CreatePlayerListsLabelP1("Others", 60, 160, 60)
 	CreatePlayerListsLabelP1("All", 60, 160, 60)
 	CreatePlayerListsLabelP2("Others", 60, 160, 60)
 	CreatePlayerListsLabelP2("All", 60, 160, 60)
 	CreatePlayerListsLabelP3("Others", 60, 160, 60)
 	CreatePlayerListsLabelP3("All", 60, 160, 60)
+	CreatePlayerListsLabelP6("Others", 60, 160, 60)
+	CreatePlayerListsLabelP6("All", 60, 160, 60)
 	for _, v in pairs(Players:GetPlayers()) do
 		CreatePlayerListsLabelP1(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP2(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP3(tostring(v), 60, 160, 60)
+		CreatePlayerListsLabelP6(tostring(v), 60, 160, 60)
 	end
 end)
 
@@ -6677,16 +7357,24 @@ game.Players.PlayerRemoving:Connect(function(player)
 			j:remove()
 		end
 	end
+	for i, h in pairs(PlayerListFrame6:GetChildren()) do
+		if h ~= PlayerListLabel3 then 
+			h:remove()
+		end
+	end
 	CreatePlayerListsLabelP1("Others", 60, 160, 60)
 	CreatePlayerListsLabelP1("All", 60, 160, 60)
 	CreatePlayerListsLabelP2("Others", 60, 160, 60)
 	CreatePlayerListsLabelP2("All", 60, 160, 60)
 	CreatePlayerListsLabelP3("Others", 60, 160, 60)
 	CreatePlayerListsLabelP3("All", 60, 160, 60)
+	CreatePlayerListsLabelP6("Others", 60, 160, 60)
+	CreatePlayerListsLabelP6("All", 60, 160, 60)
 	for _, v in pairs(Players:GetPlayers()) do
 		CreatePlayerListsLabelP1(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP2(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP3(tostring(v), 60, 160, 60)
+		CreatePlayerListsLabelP6(tostring(v), 60, 160, 60)
 	end
 end)
 
