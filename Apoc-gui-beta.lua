@@ -276,6 +276,23 @@ pcall(function()
 	end
 end)
 
+local Oldmakefolder = makefolder
+makefolder = function(Name)
+	if not isfolder(Name) then
+		Oldmakefolder(Name) 
+	end
+end
+
+makefolder("Agony")
+makefolder("Agony/Bases")
+
+function WriteFile(fn, txt)
+	writefile("Agony/"..fn..".txt", txt)
+end
+function ReadFile(fn)
+	return pcall(function() return readfile("Agony/"..fn..".txt") end)
+end
+
 local ItemValueList = {}
 for i, v in pairs(game:GetService("Lighting"):GetDescendants()) do
     if v:FindFirstChild("ObjectID") then
@@ -1549,6 +1566,40 @@ function Kick(Plr)
     	end)
 	end
 end
+
+Banned = {}
+function SaveBans()
+	local BanStr = "return {"
+	for i, v in pairs(Banned) do
+		BanStr = BanStr..'"'..tostring(i)..'", '
+	end
+	WriteFile("Bans", BanStr.."}")
+end
+
+function Ban(Plr)
+	if Plr ~= "" then
+		Banned[tostring(Plr)] = true
+		Kick(Plr)
+		SaveBans()
+	end
+end
+
+function LoadBans()
+	local Bool, TempBansList = ReadFile("Bans")
+	if Bool then
+		TempBansList = loadstring(TempBansList)()
+		for i = 1, #TempBansList do
+			Banned[TempBansList[i] ] = true
+		end
+	end
+	for i, v in pairs(game.Players:GetPlayers()) do
+		if Banned[tostring(v)] == true then
+			Kick(v)
+		end
+	end
+end
+
+LoadBans()
 --functions
 
 
@@ -2108,7 +2159,7 @@ SmallText = Instance.new("TextLabel")
 SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
 SmallText.Position = UDim2.new(0.08, 0, 0.4, 0)
 SmallText.BorderSizePixel = 0
-SmallText.Text = "(/) Script version: 130"
+SmallText.Text = "(/) Script version: 131"
 SmallText.TextColor3 = Color3.fromRGB(255,255,120)
 SmallText.TextSize = 8
 SmallText.BackgroundTransparency = 1
@@ -3542,6 +3593,296 @@ Other1Page2Features3Image.Parent = Other1PageSection2Phrame
 
 
 --frames
+BansPageSection1Phrame = Instance.new("ScrollingFrame")
+BansPageSection1Phrame.Size = UDim2.new(0.27, 0, 0.80, 0)
+BansPageSection1Phrame.Position = UDim2.new(0.01, 0, 0.05, 0)
+BansPageSection1Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+BansPageSection1Phrame.CanvasSize = UDim2.new(0, 0, 30, 0)
+BansPageSection1Phrame.BorderSizePixel = 1
+BansPageSection1Phrame.Transparency = 0.2
+BansPageSection1Phrame.Active = false
+BansPageSection1Phrame.Selectable = true
+BansPageSection1Phrame.Visible = false
+BansPageSection1Phrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+BansPageSection1Phrame.ScrollBarThickness = 4
+BansPageSection1Phrame.Parent = GuiPhrame
+
+Bans1PageSection1 = Instance.new("Frame")
+Bans1PageSection1.Size = UDim2.new(0.42, 0, 0.9, 0)
+Bans1PageSection1.Position = UDim2.new(0.57, 0, 0.05, 0)
+Bans1PageSection1.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Bans1PageSection1.BorderSizePixel = 1
+Bans1PageSection1.Transparency = 0.2
+Bans1PageSection1.Active = false
+Bans1PageSection1.Selectable = true
+Bans1PageSection1.Visible = false
+Bans1PageSection1.Parent = GuiPhrame
+
+Bans1PageSection3Phrame = Instance.new("ScrollingFrame")
+Bans1PageSection3Phrame.Size = UDim2.new(0.27, 0, 0.9, 0)
+Bans1PageSection3Phrame.Position = UDim2.new(0.29, 0, 0.05, 0)
+Bans1PageSection3Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Bans1PageSection3Phrame.BorderSizePixel = 1
+Bans1PageSection3Phrame.Transparency = 0.2
+Bans1PageSection3Phrame.CanvasSize = UDim2.new(0, 0, 5, 0)
+Bans1PageSection3Phrame.Active = false
+Bans1PageSection3Phrame.Selectable = true
+Bans1PageSection3Phrame.Visible = false
+Bans1PageSection3Phrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+Bans1PageSection3Phrame.ScrollBarThickness = 4
+Bans1PageSection3Phrame.Parent = GuiPhrame
+
+PlayerListFrame11 = Instance.new("Frame", BansPageSection1Phrame)
+PlayerListFrame11.Name = "NotifyFrame40"
+PlayerListFrame11.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListFrame11.BackgroundTransparency = 1
+PlayerListFrame11.BorderSizePixel = 0
+PlayerListFrame11.Position = UDim2.new(0, 0, 0, 0)
+PlayerListFrame11.Size = UDim2.new(0, 1, 0, 20)
+
+PlayerListLabel11 = Instance.new("TextButton", PlayerListFrame11)
+PlayerListLabel11.Name = "NotifyLabel50"
+PlayerListLabel11.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+PlayerListLabel11.BackgroundTransparency = 1
+PlayerListLabel11.BorderColor3 = Color3.fromRGB(110, 172, 216)
+PlayerListLabel11.BorderSizePixel = 0
+PlayerListLabel11.Size = UDim2.new(0, 160, 0, PlayerListFrame11.Size.Y.Offset)
+PlayerListLabel11.Font = Enum.Font.SourceSans
+PlayerListLabel11.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListLabel11.TextSize = 20
+PlayerListLabel11.Visible = false
+
+local BannedTabSelectedPlayer;
+function CreatePlayerListsLabelP11(Text)
+    for i, v in pairs(PlayerListFrame11:GetChildren()) do
+		if v ~= PlayerListLabel11 then
+			v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame11:GetChildren()-(i-1)))
+		end
+    end
+    local F = PlayerListLabel11:Clone()
+	F.Visible = true
+    F.Parent = PlayerListFrame11
+    F.Position = UDim2.new(0, 0, 0, 0)
+    F.Text = Text
+    if Time == nil then
+        Time = 3
+    end
+    F.MouseButton1Click:Connect(function()
+		F.TextColor3 = Color3.fromRGB(170, 170, 170)
+		BannedTabSelectedPlayer = F.Text
+		if ShowFunctionAlerts then
+			AnnounceBox("Player ".. F.Text .. " was selected!", "PLAYER", 5, 255, 255, 255, 255, 255, 255)
+		end
+		wait(1)
+		F.TextColor3 = Color3.fromRGB(255, 255, 255)
+	end)
+    spawn(function()
+        for i, v in pairs(PlayerListFrame11:GetChildren()) do
+			if v ~= PlayerListLabel11 then 
+				v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame11:GetChildren()-(i)))
+				BansPageSection1Phrame.CanvasSize = UDim2.new(0, 0, 0, (i)*20)
+			end
+        end
+    end)
+end
+
+function ClearBannedListDisplay()
+    for i, v in pairs(PlayerListFrame11:GetChildren()) do
+        if v ~= PlayerListLabel11 then 
+            v:remove()
+        end
+    end
+end
+
+function BannedListDisplay(Specific)
+ClearBannedListDisplay()
+wait()
+    for i, v in pairs(Banned) do
+        if Specific == nil or string.match(string.lower(v.Name), string.lower(Specific)) then
+            CreatePlayerListsLabelP11(tostring(i))
+        end
+    end
+end
+
+BannedListDisplay()
+	
+Bans1Page2FeaturesSearch = Instance.new("TextBox")
+Bans1Page2FeaturesSearch.Size = UDim2.new(0, 162, 0, 20)
+Bans1Page2FeaturesSearch.Position = UDim2.new(-1.332, 0, 0.92, 0)
+Bans1Page2FeaturesSearch.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Bans1Page2FeaturesSearch.BackgroundTransparency = 0.4
+Bans1Page2FeaturesSearch.BorderSizePixel = 1
+Bans1Page2FeaturesSearch.Text = "Search"
+Bans1Page2FeaturesSearch.TextColor3 = Color3.fromRGB(255, 255, 255)
+--Bans1Page2FeaturesAmount.TextScaled = true
+Bans1Page2FeaturesSearch.TextSize = 8
+Bans1Page2FeaturesSearch.TextWrapped = true
+Bans1Page2FeaturesSearch.TextXAlignment = "Center"
+Bans1Page2FeaturesSearch.Parent = Bans1PageSection1
+
+Bans1Page2FeaturesSearch.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+        BannedListDisplay(Bans1Page2FeaturesSearch.Text)
+    end
+end)
+
+--setup players
+PlayerListFrame10 = Instance.new("Frame", Bans1PageSection3Phrame)
+PlayerListFrame10.Name = "NotifyFrame14"
+PlayerListFrame10.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListFrame10.BackgroundTransparency = 1
+PlayerListFrame10.BorderSizePixel = 0
+PlayerListFrame10.Position = UDim2.new(0, 0, 0, 0)
+PlayerListFrame10.Size = UDim2.new(0, 1, 0, 20)
+
+PlayerListLabel10 = Instance.new("TextButton", PlayerListFrame10)
+PlayerListLabel10.Name = ""
+PlayerListLabel10.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+PlayerListLabel10.BackgroundTransparency = 1
+PlayerListLabel10.BorderColor3 = Color3.fromRGB(110, 172, 216)
+PlayerListLabel10.BorderSizePixel = 0
+PlayerListLabel10.Size = UDim2.new(0, 160, 0, PlayerListFrame10.Size.Y.Offset)
+PlayerListLabel10.Font = Enum.Font.SourceSans
+PlayerListLabel10.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListLabel10.TextSize = 20
+PlayerListLabel10.Visible = false
+
+local BanningTabSelectedPlayer = ""
+function CreatePlayerListsLabelP10(Text)
+    for i, v in pairs(PlayerListFrame10:GetChildren()) do
+		if v ~= PlayerListLabel10 then
+			v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame10:GetChildren()-(i-1)))
+		end
+    end
+    local F = PlayerListLabel10:Clone()
+	F.Visible = true
+    F.Parent = PlayerListFrame10
+    F.Position = UDim2.new(0, 0, 0, 0)
+    F.Text = Text
+    if Time == nil then
+        Time = 3
+    end
+    F.MouseButton1Click:Connect(function()
+		F.TextColor3 = Color3.fromRGB(170, 170, 170)
+		BanningTabSelectedPlayer = F.Text
+		if ShowFunctionAlerts then
+			AnnounceBox("Player ".. F.Text .. " was selected!", "PLAYER", 5, 255, 255, 255, 255, 255, 255)
+		end
+		wait(1)
+		F.TextColor3 = Color3.fromRGB(255, 255, 255)
+	end)
+    spawn(function()
+        for i, v in pairs(PlayerListFrame10:GetChildren()) do
+			if v ~= PlayerListLabel10 then 
+				v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame10:GetChildren()-(i)))
+			end
+        end
+    end)
+end
+--setup players
+
+CreatePlayerListsLabelP10("Others", 60, 160, 60)
+CreatePlayerListsLabelP10("All", 60, 160, 60)
+for _, v in pairs(Players:GetPlayers()) do
+    CreatePlayerListsLabelP10(tostring(v), 60, 160, 60)
+end
+
+--setup players
+
+Bans1Page2FeaturesBan = Instance.new("TextButton")
+Bans1Page2FeaturesBan.Size = UDim2.new(0, 100, 0, 20)
+Bans1Page2FeaturesBan.Position = UDim2.new(0.02, 0, 0.02, 0)
+Bans1Page2FeaturesBan.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Bans1Page2FeaturesBan.BackgroundTransparency = 0.4
+Bans1Page2FeaturesBan.BorderSizePixel = 1
+Bans1Page2FeaturesBan.Text = "Ban"
+Bans1Page2FeaturesBan.TextColor3 = Color3.fromRGB(255, 255, 255)
+Bans1Page2FeaturesBan.TextSize = 8
+Bans1Page2FeaturesBan.TextXAlignment = "Center"
+Bans1Page2FeaturesBan.Parent = Bans1PageSection1
+
+Bans1Page2FeaturesBanImage = Instance.new("ImageLabel")
+Bans1Page2FeaturesBanImage.Size = UDim2.new(0, 20, 0, 20)
+Bans1Page2FeaturesBanImage.Position = UDim2.new(0.012, 0, 0.02, 0)
+Bans1Page2FeaturesBanImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Bans1Page2FeaturesBanImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Bans1Page2FeaturesBanImage.BackgroundTransparency = 1
+Bans1Page2FeaturesBanImage.BorderSizePixel = 0
+Bans1Page2FeaturesBanImage.Visible = true
+Bans1Page2FeaturesBanImage.Image = "rbxassetid://12900618433"
+Bans1Page2FeaturesBanImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Bans1Page2FeaturesBanImage.Parent = Bans1PageSection1
+
+Bans1Page2FeaturesBan.MouseButton1Click:Connect(function()
+	local SPlayer = game.Players:FindFirstChild(BanningTabSelectedPlayer)
+	if BanningTabSelectedPlayer ~= nil and BanningTabSelectedPlayer ~= nan and BanningTabSelectedPlayer ~= "" then
+		for _, v in pairs(Banned) do
+			Kick(v)
+		end
+		if BanningTabSelectedPlayer ~= "All" and BanningTabSelectedPlayer ~= "Others" then
+			AnnounceBox("Banned " .. BanningTabSelectedPlayer .. "!", "BAN", 5, 60, 160, 60, 255, 255, 255)
+			Ban(SPlayer)
+		elseif BanningTabSelectedPlayer == "All" then
+			for _, v in pairs(Players:GetPlayers()) do
+				if v ~= LocalPlayer then
+					AnnounceBox("Banned " .. BanningTabSelectedPlayer .. "!", "BAN", 5, 60, 160, 60, 255, 255, 255)
+					Ban(v)
+				end
+			end
+		elseif BanningTabSelectedPlayer == "Others" then
+			for _, v in pairs(Players:GetPlayers()) do
+				if v ~= LocalPlayer then
+					AnnounceBox("Banned " .. BanningTabSelectedPlayer .. "!", "BAN", 5, 60, 160, 60, 255, 255, 255)
+					Ban(v)
+				end
+			end
+		end
+		BannedListDisplay()
+	else
+		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+	end
+end)
+
+Bans1Page2FeaturesUnBan = Instance.new("TextButton")
+Bans1Page2FeaturesUnBan.Size = UDim2.new(0, 100, 0, 20)
+Bans1Page2FeaturesUnBan.Position = UDim2.new(0.02, 0, 0.12, 0)
+Bans1Page2FeaturesUnBan.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Bans1Page2FeaturesUnBan.BackgroundTransparency = 0.4
+Bans1Page2FeaturesUnBan.BorderSizePixel = 1
+Bans1Page2FeaturesUnBan.Text = "UnBan"
+Bans1Page2FeaturesUnBan.TextColor3 = Color3.fromRGB(255, 255, 255)
+Bans1Page2FeaturesUnBan.TextSize = 8
+Bans1Page2FeaturesUnBan.TextXAlignment = "Center"
+Bans1Page2FeaturesUnBan.Parent = Bans1PageSection1
+
+Bans1Page2FeaturesUnBanImage = Instance.new("ImageLabel")
+Bans1Page2FeaturesUnBanImage.Size = UDim2.new(0, 20, 0, 20)
+Bans1Page2FeaturesUnBanImage.Position = UDim2.new(0.012, 0, 0.12, 0)
+Bans1Page2FeaturesUnBanImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Bans1Page2FeaturesUnBanImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Bans1Page2FeaturesUnBanImage.BackgroundTransparency = 1
+Bans1Page2FeaturesUnBanImage.BorderSizePixel = 0
+Bans1Page2FeaturesUnBanImage.Visible = true
+Bans1Page2FeaturesUnBanImage.Image = "rbxassetid://12900618433"
+Bans1Page2FeaturesUnBanImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Bans1Page2FeaturesUnBanImage.Parent = Bans1PageSection1
+
+Bans1Page2FeaturesUnBan.MouseButton1Click:Connect(function()
+	if BannedTabSelectedPlayer ~= nil and BannedTabSelectedPlayer ~= nan and BannedTabSelectedPlayer ~= "" then
+		AnnounceBox("Unbanned " .. BannedTabSelectedPlayer .. "!", "BAN", 5, 60, 160, 60, 255, 255, 255)
+		Banned[tostring(BannedTabSelectedPlayer)] = nil
+		SaveBans()
+		wait()
+		BannedListDisplay()
+	else
+		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+	end
+end)
+--frames
+
+
+
+--frames
 Tools1PageSection1Phrame = Instance.new("ScrollingFrame")
 Tools1PageSection1Phrame.Size = UDim2.new(0.27, 0, 0.80, 0)
 Tools1PageSection1Phrame.Position = UDim2.new(0.01, 0, 0.05, 0)
@@ -3630,6 +3971,7 @@ function CreatePlayerListsLabelP4(Text)
         for i, v in pairs(PlayerListFrame4:GetChildren()) do
 			if v ~= PlayerListLabel4 then 
 				v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame4:GetChildren()-(i)))
+				Tools1PageSection1Phrame.CanvasSize = UDim2.new(0, 0, 0, (i)*20)
 			end
         end
     end)
@@ -3884,7 +4226,7 @@ Tools2PageSection1Phrame = Instance.new("ScrollingFrame")
 Tools2PageSection1Phrame.Size = UDim2.new(0.27, 0, 0.80, 0)
 Tools2PageSection1Phrame.Position = UDim2.new(0.01, 0, 0.05, 0)
 Tools2PageSection1Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
-Tools2PageSection1Phrame.CanvasSize = UDim2.new(0, 0, 5, 0)
+Tools2PageSection1Phrame.CanvasSize = UDim2.new(0, 0, 30, 0)
 Tools2PageSection1Phrame.BorderSizePixel = 1
 Tools2PageSection1Phrame.Transparency = 0.2
 Tools2PageSection1Phrame.Active = false
@@ -3968,6 +4310,7 @@ function CreatePlayerListsLabelP5(Text)
         for i, v in pairs(PlayerListFrame5:GetChildren()) do
 			if v ~= PlayerListLabel5 then 
 				v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame5:GetChildren()-(i)))
+				Tools2PageSection1Phrame.CanvasSize = UDim2.new(0, 0, 0, (i)*20)
 			end
         end
     end)
@@ -4566,6 +4909,7 @@ function CreatePlayerListsLabelP8(Text)
         for i, v in pairs(PlayerListFrame8:GetChildren()) do
 			if v ~= PlayerListLabel8 then 
 				v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame8:GetChildren()-(i)))
+				Tools3PageSection1Phrame.CanvasSize = UDim2.new(0, 0, 0, (i)*20)
 			end
         end
     end)
@@ -4640,6 +4984,7 @@ function CreatePlayerListsLabelP9(Text)
         for i, v in pairs(PlayerListFrame9:GetChildren()) do
 			if v ~= PlayerListLabel9 then 
 				v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame9:GetChildren()-(i)))
+				Tools3PageSection4Phrame.CanvasSize = UDim2.new(0, 0, 0, (i)*20)
 			end
         end
     end)
@@ -7209,6 +7554,9 @@ LocalButton.MouseButton1Click:Connect(function()
 		Tools2PageSection1Phrame.Visible = false
 		Tools2PageSection2Phrame.Visible = false
 		Tools2PageSection3Phrame.Visible = false
+		BansPageSection1Phrame.Visible = false
+		Bans1PageSection1.Visible = false
+		Bans1PageSection3Phrame.Visible = false
 		Tools3PageSection4Phrame.Visible = false
 		Tools3PageSection1Phrame.Visible = false
 		Tools3PageSection2Phrame.Visible = false
@@ -7265,6 +7613,9 @@ OtherButton.MouseButton1Click:Connect(function()
 		Tools3PageSection2Phrame.Visible = false
 		Tools3PageSection4Phrame.Visible = false
 		Tools3PageSection3Phrame.Visible = false
+		BansPageSection1Phrame.Visible = false
+		Bans1PageSection1.Visible = false
+		Bans1PageSection3Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
 		Settings1PageSection2Phrame.Visible = false
 		Server1PageSection2Phrame.Visible = false
@@ -7312,6 +7663,9 @@ ServerButton.MouseButton1Click:Connect(function()
 		Tools3PageSection1Phrame.Visible = false
 		Tools3PageSection2Phrame.Visible = false
 		Tools3PageSection4Phrame.Visible = false
+		BansPageSection1Phrame.Visible = false
+		Bans1PageSection1.Visible = false
+		Bans1PageSection3Phrame.Visible = false
 		Tools3PageSection3Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
 		Settings1PageSection2Phrame.Visible = false
@@ -7360,6 +7714,9 @@ MiscButton.MouseButton1Click:Connect(function()
 		Tools1PageSection1Phrame.Visible = false
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
+		BansPageSection1Phrame.Visible = false
+		Bans1PageSection1.Visible = false
+		Bans1PageSection3Phrame.Visible = false
 		Tools2PageSection1Phrame.Visible = false
 		Tools2PageSection2Phrame.Visible = false
 		Tools3PageSection1Phrame.Visible = false
@@ -7418,6 +7775,9 @@ SettingsButton.MouseButton1Click:Connect(function()
 		Tools2PageSection1Phrame.Visible = false
 		Tools2PageSection2Phrame.Visible = false
 		Tools2PageSection3Phrame.Visible = false
+		BansPageSection1Phrame.Visible = false
+		Bans1PageSection1.Visible = false
+		Bans1PageSection3Phrame.Visible = false
 		Test1PageSection2Phrame.Visible = false
 		Server1PageSection2Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
@@ -7466,6 +7826,9 @@ TestButton.MouseButton1Click:Connect(function()
 		Tools2PageSection1Phrame.Visible = false
 		Tools3PageSection1Phrame.Visible = false
 		Tools3PageSection2Phrame.Visible = false
+		BansPageSection1Phrame.Visible = false
+		Bans1PageSection1.Visible = false
+		Bans1PageSection3Phrame.Visible = false
 		Tools3PageSection3Phrame.Visible = false
 		Tools2PageSection2Phrame.Visible = false
 		Tools2PageSection3Phrame.Visible = false
@@ -7525,6 +7888,9 @@ ToolsButton.MouseButton1Click:Connect(function()
 		GuiServerEBarPhrame.Visible = false
 		Misc1PageSection2Phrame.Visible = false
 		Test1PageSection2Phrame.Visible = false
+		BansPageSection1Phrame.Visible = false
+		Bans1PageSection1.Visible = false
+		Bans1PageSection3Phrame.Visible = false
 		GuiOtherEBarPhrame.Visible = false
 		GuiLocalEBarPhrame.Visible = false
 		Local1PageSection2Phrame.Visible = false
@@ -7572,6 +7938,9 @@ ScripButton.MouseButton1Click:Connect(function()
 		Tools3PageSection1Phrame.Visible = false
 		Tools3PageSection2Phrame.Visible = false
 		Tools3PageSection3Phrame.Visible = false
+		BansPageSection1Phrame.Visible = false
+		Bans1PageSection1.Visible = false
+		Bans1PageSection3Phrame.Visible = false
 		GuiLocalEBarPhrame.Visible = false
 		Welcome1PageSection1Phrame.Visible = false
 		Misc1PageSection2Phrame.Visible = false
@@ -7620,6 +7989,9 @@ FavoriteButton.MouseButton1Click:Connect(function()
 		Tools3PageSection1Phrame.Visible = false
 		Tools3PageSection2Phrame.Visible = false
 		Tools3PageSection3Phrame.Visible = false
+		BansPageSection1Phrame.Visible = false
+		Bans1PageSection1.Visible = false
+		Bans1PageSection3Phrame.Visible = false
 		Test1PageSection2Phrame.Visible = false
 		GuiToolsEBarPhrame.Visible = false
 		GuiServerEBarPhrame.Visible = false
@@ -7798,6 +8170,9 @@ OtherTab1Button.MouseButton1Click:Connect(function()
 		Welcome1PageSection1Phrame.Visible = false	
 		Other2PageSection2Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
+		BansPageSection1Phrame.Visible = false
+		Bans1PageSection1.Visible = false
+		Bans1PageSection3Phrame.Visible = false
 		Other2PageSection1Phrame.Visible = false
 		Local1PageSection2Phrame.Visible = false
 		OtherTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -7813,6 +8188,9 @@ OtherTab2Button.MouseButton1Click:Connect(function()
 		Other1PageSection2Phrame.Visible = false
 		Welcome1PageSection1Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
+		BansPageSection1Phrame.Visible = false
+		Bans1PageSection1.Visible = false
+		Bans1PageSection3Phrame.Visible = false
 		Local1PageSection2Phrame.Visible = false
 		Other1PageSection1Phrame.Visible = false	
 		OtherTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -7822,6 +8200,9 @@ end)
 OtherTab3Button.MouseButton1Click:Connect(function()
 	if OtherTab3Button.ImageColor3 == Color3.fromRGB(95, 60, 60) then
 		OtherTab3Button.ImageColor3 = Color3.fromRGB(60, 95, 60)
+		BansPageSection1Phrame.Visible = true
+		Bans1PageSection1.Visible = true
+		Bans1PageSection3Phrame.Visible = true
 		
 		Other1PageSection2Phrame.Visible = false
 		Welcome1PageSection1Phrame.Visible = false
@@ -7853,6 +8234,9 @@ IdkButton.MouseButton1Click:Connect(function()
 		Test1PageSection2Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
 		Local1PageSection2Phrame.Visible = false
+		BansPageSection1Phrame.Visible = false
+		Bans1PageSection1.Visible = false
+		Bans1PageSection3Phrame.Visible = false
 		Misc1PageSection2Phrame.Visible = false
 		GuiOtherEBarPhrame.Visible = false
 		Server1PageSection2Phrame.Visible = false
@@ -7901,6 +8285,9 @@ IdkButton.MouseButton1Click:Connect(function()
 		Tools1PageSection1Phrame.Visible = false
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
+		BansPageSection1Phrame.Visible = false
+		Bans1PageSection1.Visible = false
+		Bans1PageSection3Phrame.Visible = false
 		Tools2PageSection1Phrame.Visible = false
 		Tools2PageSection2Phrame.Visible = false
 		Tools2PageSection3Phrame.Visible = false
@@ -7995,6 +8382,9 @@ RestoreFromMinimizeButton.MouseButton1Click:Connect(function()
 	Tools2PageSection1Phrame.Visible = false
 	Tools2PageSection2Phrame.Visible = false
 	Tools2PageSection3Phrame.Visible = false
+	BansPageSection1Phrame.Visible = false
+	Bans1PageSection1.Visible = false
+	Bans1PageSection3Phrame.Visible = false
 	OtherButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	ServerButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	SettingsButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -8069,6 +8459,9 @@ game.Players.PlayerAdded:Connect(function(player)
     if ShowJoinAlerts then
         AnnounceBox(player.Name.." has joined! (" .. player.AccountAge .. ")", "JOIN", 2, 255, 255, 255, 255, 255, 255)
     end
+	if Banned[tostring(player)] == true then
+		Kick(v)
+	end
 	if ToggleServerLock then
 		AnnounceBox("Kicked " .. player.Name .. " player joined while server lock is on!", "SERVER LOCK", 5, 130, 130, 60, 255, 255, 255)
 		Kick(player)
@@ -8111,6 +8504,11 @@ game.Players.PlayerAdded:Connect(function(player)
 			m:remove()
 		end
 	end
+	for i, n in pairs(PlayerListFrame10:GetChildren()) do
+		if n ~= PlayerListLabel10 then 
+			n:remove()
+		end
+	end
 	CreatePlayerListsLabelP1("Others", 60, 160, 60)
 	CreatePlayerListsLabelP1("All", 60, 160, 60)
 	CreatePlayerListsLabelP2("Others", 60, 160, 60)
@@ -8121,12 +8519,15 @@ game.Players.PlayerAdded:Connect(function(player)
 	CreatePlayerListsLabelP6("All", 60, 160, 60)
 	CreatePlayerListsLabelP7("Others", 60, 160, 60)
 	CreatePlayerListsLabelP7("All", 60, 160, 60)
+	CreatePlayerListsLabelP10("Others", 60, 160, 60)
+	CreatePlayerListsLabelP10("All", 60, 160, 60)
 	for _, v in pairs(Players:GetPlayers()) do
 		CreatePlayerListsLabelP1(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP2(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP3(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP6(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP7(tostring(v), 60, 160, 60)
+		CreatePlayerListsLabelP10(tostring(v), 60, 160, 60)
 	end
 end)
 
@@ -8160,6 +8561,11 @@ game.Players.PlayerRemoving:Connect(function(player)
 			m:remove()
 		end
 	end
+	for i, n in pairs(PlayerListFrame10:GetChildren()) do
+		if n ~= PlayerListLabel10 then 
+			n:remove()
+		end
+	end
 	CreatePlayerListsLabelP1("Others", 60, 160, 60)
 	CreatePlayerListsLabelP1("All", 60, 160, 60)
 	CreatePlayerListsLabelP2("Others", 60, 160, 60)
@@ -8170,12 +8576,15 @@ game.Players.PlayerRemoving:Connect(function(player)
 	CreatePlayerListsLabelP6("All", 60, 160, 60)
 	CreatePlayerListsLabelP7("Others", 60, 160, 60)
 	CreatePlayerListsLabelP7("All", 60, 160, 60)
+	CreatePlayerListsLabelP10("Others", 60, 160, 60)
+	CreatePlayerListsLabelP10("All", 60, 160, 60)
 	for _, v in pairs(Players:GetPlayers()) do
 		CreatePlayerListsLabelP1(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP2(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP3(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP6(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP7(tostring(v), 60, 160, 60)
+		CreatePlayerListsLabelP10(tostring(v), 60, 160, 60)
 	end
 end)
 
