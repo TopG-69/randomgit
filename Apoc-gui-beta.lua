@@ -2482,24 +2482,44 @@ Other1Page2FeaturesSpectate.MouseButton1Click:Connect(function()
 	local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
 	if Other1Page2FeaturesSpectateImage.Image == "rbxassetid://12900717295" then
 		if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
-			Other1Page2FeaturesSpectateImage.Image = "rbxassetid://12900770221"
-			--Notify("[Spectate]: Spectating ".. LocalTab1SelectedPlayer .. "!", 5, 60, 160, 60)
-			AnnounceBox("Spectating " .. LocalTab1SelectedPlayer .. "!", "SPECTATE", 5, 60, 160, 60, 255, 255, 255)
-			SpectatingPhrame.Visible = true
-			SpectatingPhrameFeaturesName.Text = LocalTab1SelectedPlayer
-			workspace.CurrentCamera.CameraSubject = SPlayer.Character.Humanoid
+			if LocalTab1SelectedPlayer ~= "All" and LocalTab1SelectedPlayer ~= "Others" then
+				Other1Page2FeaturesSpectateImage.Image = "rbxassetid://12900770221"
+				AnnounceBox("Spectating " .. LocalTab1SelectedPlayer .. "!", "SPECTATE", 5, 60, 160, 60, 255, 255, 255)
+				SpectatingPhrame.Visible = true
+				SpectatingPhrameFeaturesName.Text = LocalTab1SelectedPlayer
+				workspace.CurrentCamera.CameraSubject = SPlayer.Character.Humanoid
+			elseif LocalTab1SelectedPlayer == "All" then
+				for _, v in pairs(Players:GetPlayers()) do
+					if v.Character then
+						if v ~= LocalPlayer then
+							fireserver('ChangeParent', v.Character:FindFirstChild('Humanoid'), LocalPlayer.Character)
+						end
+					end
+				end
+			elseif LocalTab1SelectedPlayer == "Others" then
+				for _, v in pairs(Players:GetPlayers()) do
+					if v.Character and v ~= LocalPlayer then
+						if v ~= LocalPlayer then
+							fireserver('ChangeParent', v.Character:FindFirstChild('Humanoid'), LocalPlayer.Character)
+						end
+					end
+				end
+			end
 		else
-			--Notify("[Error]: No player selected!", 5, 95, 60, 60)
 			AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 			SpectatingPhrame.Visible = false
 			workspace.CurrentCamera.CameraSubject = LocalPlayer.Character.Humanoid
 		end
 	else
 		Other1Page2FeaturesSpectateImage.Image = "rbxassetid://12900717295"
-		--Notify("[Spectate]: Spectating ".. Game.Players.LocalPlayer.Name .. "!", 5, 60, 160, 60)
 		AnnounceBox("Spectating " .. Game.Players.LocalPlayer.Name .. "!", "SPECTATE", 5, 60, 160, 60, 255, 255, 255)
 		SpectatingPhrame.Visible = false
 		workspace.CurrentCamera.CameraSubject = LocalPlayer.Character.Humanoid
+		for _, v in pairs(Players:GetPlayers()) do
+			if v.Character then
+				fireserver('ChangeParent', v.Character:FindFirstChild('Humanoid'), v.Character)
+			end
+		end
 	end
 end)
 
@@ -2530,11 +2550,23 @@ Other1Page2FeaturesBringImage.Parent = Other1PageSection2Phrame
 Other1Page2FeaturesBring.MouseButton1Click:Connect(function()
 	local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
 	if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
-		--Notify("[Teleport]: Teleported ".. LocalTab1SelectedPlayer .. " to you!", 5, 60, 160, 60)
-		AnnounceBox("Teleported " .. LocalTab1SelectedPlayer .. " to you!", "TELEPORT", 5, 60, 160, 60, 255, 255, 255)
-		PlayerTeleport(SPlayer, LocalPlayer, 1)
+		if LocalTab1SelectedPlayer ~= "All" and LocalTab1SelectedPlayer ~= "Others" then
+			AnnounceBox("Teleported " .. LocalTab1SelectedPlayer .. " to you!", "TELEPORT", 5, 60, 160, 60, 255, 255, 255)
+			PlayerTeleport(SPlayer, LocalPlayer, 1)
+		elseif LocalTab1SelectedPlayer == "All" then
+			for _, v in pairs(Players:GetPlayers()) do
+				AnnounceBox("Teleported " .. tostring(v) .. " to you!", "TELEPORT", 5, 60, 160, 60, 255, 255, 255)
+				PlayerTeleport(v, LocalPlayer, 1)
+			end
+		elseif LocalTab1SelectedPlayer == "Others" then
+			for _, v in pairs(Players:GetPlayers()) do
+				if v ~= LocalPlayer then
+					AnnounceBox("Teleported " .. tostring(v) .. " to you!", "TELEPORT", 5, 60, 160, 60, 255, 255, 255)
+					PlayerTeleport(v, LocalPlayer, 1)
+				end
+			end
+		end
 	else
-		--Notify("[Error]: No player selected!", 5, 95, 60, 60)
 		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 	end
 end)
@@ -2566,11 +2598,23 @@ Other1Page2FeaturesGoToImage.Parent = Other1PageSection2Phrame
 Other1Page2FeaturesGoTo.MouseButton1Click:Connect(function()
 	local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
 	if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
-		--Notify("[Teleport]: Teleported you to ".. LocalTab1SelectedPlayer .. "!", 5, 60, 160, 60)
-		AnnounceBox("Teleported you to " .. LocalTab1SelectedPlayer .. "!", "TELEPORT", 5, 60, 160, 60, 255, 255, 255)
-		PlayerTeleport(LocalPlayer, SPlayer, 1)
+		if LocalTab1SelectedPlayer ~= "All" and LocalTab1SelectedPlayer ~= "Others" then
+			AnnounceBox("Teleported you to " .. LocalTab1SelectedPlayer .. "!", "TELEPORT", 5, 60, 160, 60, 255, 255, 255)
+			PlayerTeleport(LocalPlayer, SPlayer, 1)
+		elseif LocalTab1SelectedPlayer == "All" then
+			for _, v in pairs(Players:GetPlayers()) do
+				AnnounceBox("Teleported " .. tostring(v) .. " to " .. tostring(SPlayer) .. "!", "TELEPORT", 5, 60, 160, 60, 255, 255, 255)
+				PlayerTeleport(v, SPlayer, 1)
+			end
+		elseif LocalTab1SelectedPlayer == "Others" then
+			for _, v in pairs(Players:GetPlayers()) do
+				if v ~= LocalPlayer then
+					AnnounceBox("Teleported " .. tostring(v) .. " to " .. tostring(SPlayer) .. "!", "TELEPORT", 5, 60, 160, 60, 255, 255, 255)
+					PlayerTeleport(v, SPlayer, 1)
+				end
+			end
+		end
 	else
-		--Notify("[Error]: No player selected!", 5, 95, 60, 60)
 		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 	end
 end)
