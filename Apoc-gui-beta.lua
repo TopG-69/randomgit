@@ -4465,6 +4465,432 @@ end)
 
 
 --frames
+Tools3PageSection1Phrame = Instance.new("ScrollingFrame")
+Tools3PageSection1Phrame.Size = UDim2.new(0.27, 0, 0.80, 0)
+Tools3PageSection1Phrame.Position = UDim2.new(0.01, 0, 0.05, 0)
+Tools3PageSection1Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools3PageSection1Phrame.CanvasSize = UDim2.new(0, 0, 30, 0)
+Tools3PageSection1Phrame.BorderSizePixel = 1
+Tools3PageSection1Phrame.Transparency = 0.2
+Tools3PageSection1Phrame.Active = false
+Tools3PageSection1Phrame.Selectable = true
+Tools3PageSection1Phrame.Visible = false
+Tools3PageSection1Phrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+Tools3PageSection1Phrame.ScrollBarThickness = 4
+Tools3PageSection1Phrame.Parent = GuiPhrame
+
+Tools3PageSection2Phrame = Instance.new("Frame")
+Tools3PageSection2Phrame.Size = UDim2.new(0.42, 0, 0.9, 0)
+Tools3PageSection2Phrame.Position = UDim2.new(0.57, 0, 0.05, 0)
+Tools3PageSection2Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools3PageSection2Phrame.BorderSizePixel = 1
+Tools3PageSection2Phrame.Transparency = 0.2
+Tools3PageSection2Phrame.Active = false
+Tools3PageSection2Phrame.Selectable = true
+Tools3PageSection2Phrame.Visible = false
+Tools3PageSection2Phrame.Parent = GuiPhrame
+
+Tools3PageSection3Phrame = Instance.new("ScrollingFrame")
+Tools3PageSection3Phrame.Size = UDim2.new(0.27, 0, 0.44, 0)
+Tools3PageSection3Phrame.Position = UDim2.new(0.29, 0, 0.05, 0)
+Tools3PageSection3Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools3PageSection3Phrame.BorderSizePixel = 1
+Tools3PageSection3Phrame.Transparency = 0.2
+Tools3PageSection3Phrame.CanvasSize = UDim2.new(0, 0, 3, 0)
+Tools3PageSection3Phrame.Active = false
+Tools3PageSection3Phrame.Selectable = true
+Tools3PageSection3Phrame.Visible = false
+Tools3PageSection3Phrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+Tools3PageSection3Phrame.ScrollBarThickness = 4
+Tools3PageSection3Phrame.Parent = GuiPhrame
+
+Tools3PageSection4Phrame = Instance.new("ScrollingFrame")
+Tools3PageSection4Phrame.Size = UDim2.new(0.27, 0, 0.44, 0)
+Tools3PageSection4Phrame.Position = UDim2.new(0.29, 0, 0.51, 0)
+Tools3PageSection4Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Tools3PageSection4Phrame.BorderSizePixel = 1
+Tools3PageSection4Phrame.Transparency = 0.2
+Tools3PageSection4Phrame.CanvasSize = UDim2.new(0, 0, 3, 0)
+Tools3PageSection4Phrame.Active = false
+Tools3PageSection4Phrame.Selectable = true
+Tools3PageSection4Phrame.Visible = false
+Tools3PageSection4Phrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+Tools3PageSection4Phrame.ScrollBarThickness = 4
+Tools3PageSection4Phrame.Parent = GuiPhrame
+
+PlayerListFrame8 = Instance.new("Frame", Tools3PageSection1Phrame)
+PlayerListFrame8.Name = "NotifyFrame11"
+PlayerListFrame8.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListFrame8.BackgroundTransparency = 1
+PlayerListFrame8.BorderSizePixel = 0
+PlayerListFrame8.Position = UDim2.new(0, 0, 0, 0)
+PlayerListFrame8.Size = UDim2.new(0, 1, 0, 20)
+
+PlayerListLabel8 = Instance.new("TextButton", PlayerListFrame8)
+PlayerListLabel8.Name = "NotifyLabel12"
+PlayerListLabel8.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+PlayerListLabel8.BackgroundTransparency = 1
+PlayerListLabel8.BorderColor3 = Color3.fromRGB(110, 172, 216)
+PlayerListLabel8.BorderSizePixel = 0
+PlayerListLabel8.Size = UDim2.new(0, 160, 0, PlayerListFrame8.Size.Y.Offset)
+PlayerListLabel8.Font = Enum.Font.SourceSans
+PlayerListLabel8.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListLabel8.TextSize = 20
+PlayerListLabel8.Visible = false
+
+local KitsSpawningTabSelectedItem = ""
+function CreatePlayerListsLabelP8(Text)
+    for i, v in pairs(PlayerListFrame8:GetChildren()) do
+		if v ~= PlayerListLabel8 then
+			v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame8:GetChildren()-(i-1)))
+		end
+    end
+    local F = PlayerListLabel8:Clone()
+	F.Visible = true
+    F.Parent = PlayerListFrame8
+    F.Position = UDim2.new(0, 0, 0, 0)
+    F.Text = Text
+    if Time == nil then
+        Time = 3
+    end
+    F.MouseButton1Click:Connect(function()
+		F.TextColor3 = Color3.fromRGB(170, 170, 170)
+		KitsSpawningTabSelectedItem = F.Text
+		if ShowFunctionAlerts then
+			AnnounceBox("Item ".. F.Text .. " was selected!", "ITEM", 5, 255, 255, 255, 255, 255, 255)
+		end
+		wait(1)
+		F.TextColor3 = Color3.fromRGB(255, 255, 255)
+	end)
+    spawn(function()
+        for i, v in pairs(PlayerListFrame8:GetChildren()) do
+			if v ~= PlayerListLabel8 then 
+				v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame8:GetChildren()-(i)))
+			end
+        end
+    end)
+end
+
+function KitsClearDisplay()
+    for i, v in pairs(PlayerListFrame8:GetChildren()) do
+        if v ~= PlayerListLabel8 then 
+            v:remove()
+        end
+    end
+end
+
+function KitsItemsDisplay(Specific)
+KitsClearDisplay()
+wait()
+    for i, v in pairs(game.Lighting.LootDrops:GetChildren()) do
+        if Specific == nil or string.match(string.lower(v.Name), string.lower(Specific)) then
+            CreatePlayerListsLabelP8(tostring(v))
+            --rconsoleprint("[!] " .. tostring(v) .. "\n")
+        end
+    end
+end
+
+KitsItemsDisplay()
+
+PlayerListFrame9 = Instance.new("Frame", Tools3PageSection4Phrame)
+PlayerListFrame9.Name = "NotifyFrame11"
+PlayerListFrame9.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListFrame9.BackgroundTransparency = 1
+PlayerListFrame9.BorderSizePixel = 0
+PlayerListFrame9.Position = UDim2.new(0, 0, 0, 0)
+PlayerListFrame9.Size = UDim2.new(0, 1, 0, 20)
+
+PlayerListLabel9 = Instance.new("TextButton", PlayerListFrame9)
+PlayerListLabel9.Name = "NotifyLabel12"
+PlayerListLabel9.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+PlayerListLabel9.BackgroundTransparency = 1
+PlayerListLabel9.BorderColor3 = Color3.fromRGB(110, 172, 216)
+PlayerListLabel9.BorderSizePixel = 0
+PlayerListLabel9.Size = UDim2.new(0, 160, 0, PlayerListFrame9.Size.Y.Offset)
+PlayerListLabel9.Font = Enum.Font.SourceSans
+PlayerListLabel9.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListLabel9.TextSize = 20
+PlayerListLabel9.Visible = false
+
+local KitsSpawningTabSelectedItemInItems = ""
+function CreatePlayerListsLabelP9(Text)
+    for i, v in pairs(PlayerListFrame9:GetChildren()) do
+		if v ~= PlayerListLabel9 then
+			v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame9:GetChildren()-(i-1)))
+		end
+    end
+    local F = PlayerListLabel9:Clone()
+	F.Visible = true
+    F.Parent = PlayerListFrame9
+    F.Position = UDim2.new(0, 0, 0, 0)
+    F.Text = Text
+    if Time == nil then
+        Time = 3
+    end
+    F.MouseButton1Click:Connect(function()
+		F.TextColor3 = Color3.fromRGB(170, 170, 170)
+		KitsSpawningTabSelectedItemInItems = F.Text
+		if ShowFunctionAlerts then
+			AnnounceBox("Item ".. F.Text .. " was selected!", "ITEM", 5, 255, 255, 255, 255, 255, 255)
+		end
+		wait(1)
+		F.TextColor3 = Color3.fromRGB(255, 255, 255)
+	end)
+    spawn(function()
+        for i, v in pairs(PlayerListFrame9:GetChildren()) do
+			if v ~= PlayerListLabel9 then 
+				v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame9:GetChildren()-(i)))
+			end
+        end
+    end)
+end
+
+function KitsClearItemDisplay()
+    for i, v in pairs(PlayerListFrame8:GetChildren()) do
+        if v ~= PlayerListLabel8 then 
+            v:remove()
+        end
+    end
+end
+
+function KitsItemsItemDisplay(Item, clear)
+if clear then
+	KitsClearItemDisplay()
+end
+wait()
+	CreatePlayerListsLabelP9(Item)
+end
+
+Tools3Page2FeaturesSearch = Instance.new("TextBox")
+Tools3Page2FeaturesSearch.Size = UDim2.new(0, 162, 0, 20)
+Tools3Page2FeaturesSearch.Position = UDim2.new(-1.332, 0, 0.92, 0)
+Tools3Page2FeaturesSearch.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools3Page2FeaturesSearch.BackgroundTransparency = 0.4
+Tools3Page2FeaturesSearch.BorderSizePixel = 1
+Tools3Page2FeaturesSearch.Text = "Search"
+Tools3Page2FeaturesSearch.TextColor3 = Color3.fromRGB(255, 255, 255)
+--Tools3Page2FeaturesAmount.TextScaled = true
+Tools3Page2FeaturesSearch.TextSize = 8
+Tools3Page2FeaturesSearch.TextWrapped = true
+Tools3Page2FeaturesSearch.TextXAlignment = "Center"
+Tools3Page2FeaturesSearch.Parent = Tools3PageSection2Phrame
+
+Tools3Page2FeaturesSearch.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+        KitsItemsDisplay(Tools3Page2FeaturesSearch.Text)
+    end
+end)
+
+--setup players
+PlayerListFrame7 = Instance.new("Frame", Tools3PageSection3Phrame)
+PlayerListFrame7.Name = "NotifyFrame9"
+PlayerListFrame7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListFrame7.BackgroundTransparency = 1
+PlayerListFrame7.BorderSizePixel = 0
+PlayerListFrame7.Position = UDim2.new(0, 0, 0, 0)
+PlayerListFrame7.Size = UDim2.new(0, 1, 0, 20)
+
+PlayerListLabel7 = Instance.new("TextButton", PlayerListFrame7)
+PlayerListLabel7.Name = ""
+PlayerListLabel7.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+PlayerListLabel7.BackgroundTransparency = 1
+PlayerListLabel7.BorderColor3 = Color3.fromRGB(110, 172, 216)
+PlayerListLabel7.BorderSizePixel = 0
+PlayerListLabel7.Size = UDim2.new(0, 160, 0, PlayerListFrame7.Size.Y.Offset)
+PlayerListLabel7.Font = Enum.Font.SourceSans
+PlayerListLabel7.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListLabel7.TextSize = 20
+PlayerListLabel7.Visible = false
+
+local SpawningTabSelectedPlayer = ""
+function CreatePlayerListsLabelP7(Text)
+    for i, v in pairs(PlayerListFrame7:GetChildren()) do
+		if v ~= PlayerListLabel7 then
+			v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame7:GetChildren()-(i-1)))
+		end
+    end
+    local F = PlayerListLabel7:Clone()
+	F.Visible = true
+    F.Parent = PlayerListFrame7
+    F.Position = UDim2.new(0, 0, 0, 0)
+    F.Text = Text
+    if Time == nil then
+        Time = 3
+    end
+    F.MouseButton1Click:Connect(function()
+		F.TextColor3 = Color3.fromRGB(170, 170, 170)
+		SpawningTabSelectedPlayer = F.Text
+		if ShowFunctionAlerts then
+			AnnounceBox("Player ".. F.Text .. " was selected!", "PLAYER", 5, 255, 255, 255, 255, 255, 255)
+		end
+		wait(1)
+		F.TextColor3 = Color3.fromRGB(255, 255, 255)
+	end)
+    spawn(function()
+        for i, v in pairs(PlayerListFrame7:GetChildren()) do
+			if v ~= PlayerListLabel7 then 
+				v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame7:GetChildren()-(i)))
+			end
+        end
+    end)
+end
+--setup players
+
+CreatePlayerListsLabelP7("Others", 60, 160, 60)
+CreatePlayerListsLabelP7("All", 60, 160, 60)
+for _, v in pairs(Players:GetPlayers()) do
+    CreatePlayerListsLabelP7(tostring(v), 60, 160, 60)
+end
+
+--setup players
+
+Tools3Page2FeaturesSpawningAdd = Instance.new("TextButton")
+Tools3Page2FeaturesSpawningAdd.Size = UDim2.new(0, 100, 0, 20)
+Tools3Page2FeaturesSpawningAdd.Position = UDim2.new(0.02, 0, 0.12, 0)
+Tools3Page2FeaturesSpawningAdd.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools3Page2FeaturesSpawningAdd.BackgroundTransparency = 0.4
+Tools3Page2FeaturesSpawningAdd.BorderSizePixel = 1
+Tools3Page2FeaturesSpawningAdd.Text = "Add"
+Tools3Page2FeaturesSpawningAdd.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools3Page2FeaturesSpawningAdd.TextSize = 8
+Tools3Page2FeaturesSpawningAdd.TextXAlignment = "Center"
+Tools3Page2FeaturesSpawningAdd.Parent = Tools3PageSection2Phrame
+
+Tools3Page2FeaturesSpawningAddImage = Instance.new("ImageLabel")
+Tools3Page2FeaturesSpawningAddImage.Size = UDim2.new(0, 20, 0, 20)
+Tools3Page2FeaturesSpawningAddImage.Position = UDim2.new(0.012, 0, 0.12, 0)
+Tools3Page2FeaturesSpawningAddImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools3Page2FeaturesSpawningAddImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Tools3Page2FeaturesSpawningAddImage.BackgroundTransparency = 1
+Tools3Page2FeaturesSpawningAddImage.BorderSizePixel = 0
+Tools3Page2FeaturesSpawningAddImage.Visible = true
+Tools3Page2FeaturesSpawningAddImage.Image = "rbxassetid://12900618433"
+Tools3Page2FeaturesSpawningAddImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Tools3Page2FeaturesSpawningAddImage.Parent = Tools3PageSection2Phrame
+
+Tools3Page2FeaturesSpawningRem = Instance.new("TextButton")
+Tools3Page2FeaturesSpawningRem.Size = UDim2.new(0, 100, 0, 20)
+Tools3Page2FeaturesSpawningRem.Position = UDim2.new(0.02, 0, 0.22, 0)
+Tools3Page2FeaturesSpawningRem.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools3Page2FeaturesSpawningRem.BackgroundTransparency = 0.4
+Tools3Page2FeaturesSpawningRem.BorderSizePixel = 1
+Tools3Page2FeaturesSpawningRem.Text = "Remove"
+Tools3Page2FeaturesSpawningRem.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools3Page2FeaturesSpawningRem.TextSize = 8
+Tools3Page2FeaturesSpawningRem.TextXAlignment = "Center"
+Tools3Page2FeaturesSpawningRem.Parent = Tools3PageSection2Phrame
+
+Tools3Page2FeaturesSpawningRemImage = Instance.new("ImageLabel")
+Tools3Page2FeaturesSpawningRemImage.Size = UDim2.new(0, 20, 0, 20)
+Tools3Page2FeaturesSpawningRemImage.Position = UDim2.new(0.012, 0, 0.22, 0)
+Tools3Page2FeaturesSpawningRemImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools3Page2FeaturesSpawningRemImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Tools3Page2FeaturesSpawningRemImage.BackgroundTransparency = 1
+Tools3Page2FeaturesSpawningRemImage.BorderSizePixel = 0
+Tools3Page2FeaturesSpawningRemImage.Visible = true
+Tools3Page2FeaturesSpawningRemImage.Image = "rbxassetid://12900618433"
+Tools3Page2FeaturesSpawningRemImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Tools3Page2FeaturesSpawningRemImage.Parent = Tools3PageSection2Phrame
+
+Tools3Page2FeaturesSpawningCreate = Instance.new("TextButton")
+Tools3Page2FeaturesSpawningCreate.Size = UDim2.new(0, 100, 0, 20)
+Tools3Page2FeaturesSpawningCreate.Position = UDim2.new(0.02, 0, 0.32, 0)
+Tools3Page2FeaturesSpawningCreate.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools3Page2FeaturesSpawningCreate.BackgroundTransparency = 0.4
+Tools3Page2FeaturesSpawningCreate.BorderSizePixel = 1
+Tools3Page2FeaturesSpawningCreate.Text = "Create"
+Tools3Page2FeaturesSpawningCreate.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools3Page2FeaturesSpawningCreate.TextSize = 8
+Tools3Page2FeaturesSpawningCreate.TextXAlignment = "Center"
+Tools3Page2FeaturesSpawningCreate.Parent = Tools3PageSection2Phrame
+
+Tools3Page2FeaturesSpawningCreateImage = Instance.new("ImageLabel")
+Tools3Page2FeaturesSpawningCreateImage.Size = UDim2.new(0, 20, 0, 20)
+Tools3Page2FeaturesSpawningCreateImage.Position = UDim2.new(0.012, 0, 0.32, 0)
+Tools3Page2FeaturesSpawningCreateImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools3Page2FeaturesSpawningCreateImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Tools3Page2FeaturesSpawningCreateImage.BackgroundTransparency = 1
+Tools3Page2FeaturesSpawningCreateImage.BorderSizePixel = 0
+Tools3Page2FeaturesSpawningCreateImage.Visible = true
+Tools3Page2FeaturesSpawningCreateImage.Image = "rbxassetid://12900618433"
+Tools3Page2FeaturesSpawningCreateImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Tools3Page2FeaturesSpawningCreateImage.Parent = Tools3PageSection2Phrame
+
+Tools3Page2FeaturesSpawningSpawn = Instance.new("TextButton")
+Tools3Page2FeaturesSpawningSpawn.Size = UDim2.new(0, 100, 0, 20)
+Tools3Page2FeaturesSpawningSpawn.Position = UDim2.new(0.02, 0, 0.42, 0)
+Tools3Page2FeaturesSpawningSpawn.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools3Page2FeaturesSpawningSpawn.BackgroundTransparency = 0.4
+Tools3Page2FeaturesSpawningSpawn.BorderSizePixel = 1
+Tools3Page2FeaturesSpawningSpawn.Text = "Spawn"
+Tools3Page2FeaturesSpawningSpawn.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools3Page2FeaturesSpawningSpawn.TextSize = 8
+Tools3Page2FeaturesSpawningSpawn.TextXAlignment = "Center"
+Tools3Page2FeaturesSpawningSpawn.Parent = Tools3PageSection2Phrame
+
+Tools3Page2FeaturesSpawningSpawnImage = Instance.new("ImageLabel")
+Tools3Page2FeaturesSpawningSpawnImage.Size = UDim2.new(0, 20, 0, 20)
+Tools3Page2FeaturesSpawningSpawnImage.Position = UDim2.new(0.012, 0, 0.42, 0)
+Tools3Page2FeaturesSpawningSpawnImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools3Page2FeaturesSpawningSpawnImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Tools3Page2FeaturesSpawningSpawnImage.BackgroundTransparency = 1
+Tools3Page2FeaturesSpawningSpawnImage.BorderSizePixel = 0
+Tools3Page2FeaturesSpawningSpawnImage.Visible = true
+Tools3Page2FeaturesSpawningSpawnImage.Image = "rbxassetid://12900618433"
+Tools3Page2FeaturesSpawningSpawnImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Tools3Page2FeaturesSpawningSpawnImage.Parent = Tools3PageSection2Phrame
+
+Tools3Page2FeaturesSpawningItemAmount = Instance.new("TextBox")
+Tools3Page2FeaturesSpawningItemAmount.Size = UDim2.new(0, 100, 0, 20)
+Tools3Page2FeaturesSpawningItemAmount.Position = UDim2.new(0.02, 0, 0.02, 0)
+Tools3Page2FeaturesSpawningItemAmount.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools3Page2FeaturesSpawningItemAmount.BackgroundTransparency = 0.4
+Tools3Page2FeaturesSpawningItemAmount.BorderSizePixel = 1
+Tools3Page2FeaturesSpawningItemAmount.Text = "Amount"
+Tools3Page2FeaturesSpawningItemAmount.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools3Page2FeaturesSpawningItemAmount.TextSize = 8
+Tools3Page2FeaturesSpawningItemAmount.TextWrapped = true
+Tools3Page2FeaturesSpawningItemAmount.TextXAlignment = "Center"
+Tools3Page2FeaturesSpawningItemAmount.Parent = Tools3PageSection2Phrame
+
+local KitsItemSpawningAdd = 1
+Tools3Page2FeaturesSpawningItemAmount.FocusLost:Connect(function(enterPressed)
+	local GetValue = tonumber(Tools3Page2FeaturesSpawningItemAmount.Text)
+    if enterPressed then
+		if GetValue then
+			KitsItemSpawningAdd = GetValue
+			AnnounceBox("Set item amount to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		else
+			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	end
+end)
+
+Tools3Page2FeaturesSpawningAdd.MouseButton1Down:connect(function()
+local Amount = KitsItemSpawningAdd
+	if KitsSpawningTabSelectedItem ~= nil and KitsSpawningTabSelectedItem ~= "nan" and KitsSpawningTabSelectedItem ~= "" then
+		CreatePlayerListsLabelP9(KitsSpawningTabSelectedItem.. " (" .. Amount .. ")")
+	else
+		AnnounceBox("No item was selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+	end
+end)
+
+Tools3Page2FeaturesSpawningSpawn.MouseButton1Down:connect(function()
+local LootS = game.Lighting.LootDrops
+local LootSI = SpawningTabSelectedItem
+local SPlayer = game.Players:FindFirstChild(KitsSpawningTabSelectedPlayer)
+local Amount = KitsItemSpawningAdd
+	if KitsSpawningTabSelectedPlayer ~= nil and KitsSpawningTabSelectedPlayer ~= "nan" and KitsSpawningTabSelectedPlayer ~= ""  then
+		AnnounceBox("Code not finished!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+	else
+		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+	end
+end)
+--frames
+
+
+
+--frames
 Scripts1PageSection2Phrame = Instance.new("Frame")
 Scripts1PageSection2Phrame.Size = UDim2.new(0.9, 0, 0.9, 0)
 Scripts1PageSection2Phrame.Position = UDim2.new(0.05, 0, 0.05, 0)
@@ -6783,6 +7209,10 @@ LocalButton.MouseButton1Click:Connect(function()
 		Tools2PageSection1Phrame.Visible = false
 		Tools2PageSection2Phrame.Visible = false
 		Tools2PageSection3Phrame.Visible = false
+		Tools3PageSection4Phrame.Visible = false
+		Tools3PageSection1Phrame.Visible = false
+		Tools3PageSection2Phrame.Visible = false
+		Tools3PageSection3Phrame.Visible = false
 		Settings1PageSection2Phrame.Visible = false
 		Other1PageSection1Phrame.Visible = false	
 		Other2PageSection2Phrame.Visible = false
@@ -6831,6 +7261,10 @@ OtherButton.MouseButton1Click:Connect(function()
 		Tools2PageSection2Phrame.Visible = false
 		Tools2PageSection3Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
+		Tools3PageSection1Phrame.Visible = false
+		Tools3PageSection2Phrame.Visible = false
+		Tools3PageSection4Phrame.Visible = false
+		Tools3PageSection3Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
 		Settings1PageSection2Phrame.Visible = false
 		Server1PageSection2Phrame.Visible = false
@@ -6875,6 +7309,10 @@ ServerButton.MouseButton1Click:Connect(function()
 		Tools2PageSection2Phrame.Visible = false
 		Tools2PageSection3Phrame.Visible = false
 		Misc1PageSection2Phrame.Visible = false
+		Tools3PageSection1Phrame.Visible = false
+		Tools3PageSection2Phrame.Visible = false
+		Tools3PageSection4Phrame.Visible = false
+		Tools3PageSection3Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
 		Settings1PageSection2Phrame.Visible = false
 		Tools1PageSection1Phrame.Visible = false
@@ -6918,11 +7356,15 @@ MiscButton.MouseButton1Click:Connect(function()
 		Other1PageSection1Phrame.Visible = false	
 		Other2PageSection2Phrame.Visible = false
 		Other2PageSection1Phrame.Visible = false
+		Tools3PageSection4Phrame.Visible = false
 		Tools1PageSection1Phrame.Visible = false
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
 		Tools2PageSection1Phrame.Visible = false
 		Tools2PageSection2Phrame.Visible = false
+		Tools3PageSection1Phrame.Visible = false
+		Tools3PageSection2Phrame.Visible = false
+		Tools3PageSection3Phrame.Visible = false
 		Tools2PageSection3Phrame.Visible = false
 		Test1PageSection2Phrame.Visible = false
 		Settings1PageSection2Phrame.Visible = false
@@ -6968,6 +7410,10 @@ SettingsButton.MouseButton1Click:Connect(function()
 		Other2PageSection1Phrame.Visible = false
 		Tools1PageSection1Phrame.Visible = false
 		Tools1PageSection2Phrame.Visible = false
+		Tools3PageSection1Phrame.Visible = false
+		Tools3PageSection4Phrame.Visible = false
+		Tools3PageSection2Phrame.Visible = false
+		Tools3PageSection3Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
 		Tools2PageSection1Phrame.Visible = false
 		Tools2PageSection2Phrame.Visible = false
@@ -7018,8 +7464,12 @@ TestButton.MouseButton1Click:Connect(function()
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
 		Tools2PageSection1Phrame.Visible = false
+		Tools3PageSection1Phrame.Visible = false
+		Tools3PageSection2Phrame.Visible = false
+		Tools3PageSection3Phrame.Visible = false
 		Tools2PageSection2Phrame.Visible = false
 		Tools2PageSection3Phrame.Visible = false
+		Tools3PageSection4Phrame.Visible = false
 		GuiServerEBarPhrame.Visible = false
 		Other2PageSection1Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
@@ -7065,6 +7515,10 @@ ToolsButton.MouseButton1Click:Connect(function()
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
 		Tools2PageSection1Phrame.Visible = false
+		Tools3PageSection1Phrame.Visible = false
+		Tools3PageSection4Phrame.Visible = false
+		Tools3PageSection2Phrame.Visible = false
+		Tools3PageSection3Phrame.Visible = false
 		Tools2PageSection2Phrame.Visible = false
 		Tools2PageSection3Phrame.Visible = false
 		Settings1PageSection2Phrame.Visible = false
@@ -7113,7 +7567,11 @@ ScripButton.MouseButton1Click:Connect(function()
 		Tools1PageSection3Phrame.Visible = false
 		Tools2PageSection1Phrame.Visible = false
 		Tools2PageSection2Phrame.Visible = false
+		Tools3PageSection4Phrame.Visible = false
 		Tools2PageSection3Phrame.Visible = false
+		Tools3PageSection1Phrame.Visible = false
+		Tools3PageSection2Phrame.Visible = false
+		Tools3PageSection3Phrame.Visible = false
 		GuiLocalEBarPhrame.Visible = false
 		Welcome1PageSection1Phrame.Visible = false
 		Misc1PageSection2Phrame.Visible = false
@@ -7158,6 +7616,10 @@ FavoriteButton.MouseButton1Click:Connect(function()
 		Tools2PageSection1Phrame.Visible = false
 		Tools2PageSection2Phrame.Visible = false
 		Tools2PageSection3Phrame.Visible = false
+		Tools3PageSection4Phrame.Visible = false
+		Tools3PageSection1Phrame.Visible = false
+		Tools3PageSection2Phrame.Visible = false
+		Tools3PageSection3Phrame.Visible = false
 		Test1PageSection2Phrame.Visible = false
 		GuiToolsEBarPhrame.Visible = false
 		GuiServerEBarPhrame.Visible = false
@@ -7274,8 +7736,12 @@ ToolsTab1Button.MouseButton1Click:Connect(function()
 		
 		Welcome1PageSection1Phrame.Visible = false
 		Tools2PageSection1Phrame.Visible = false
+		Tools3PageSection4Phrame.Visible = false
 		Tools2PageSection2Phrame.Visible = false
 		Tools2PageSection3Phrame.Visible = false
+		Tools3PageSection1Phrame.Visible = false
+		Tools3PageSection2Phrame.Visible = false
+		Tools3PageSection3Phrame.Visible = false
 		ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	end
@@ -7289,7 +7755,11 @@ ToolsTab2Button.MouseButton1Click:Connect(function()
 		
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection1Phrame.Visible = false
+		Tools3PageSection4Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
+		Tools3PageSection1Phrame.Visible = false
+		Tools3PageSection2Phrame.Visible = false
+		Tools3PageSection3Phrame.Visible = false
 		Welcome1PageSection1Phrame.Visible = false
 		ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -7298,6 +7768,10 @@ end)
 ToolsTab3Button.MouseButton1Click:Connect(function()
 	if ToolsTab3Button.ImageColor3 == Color3.fromRGB(95, 60, 60) then
 		ToolsTab3Button.ImageColor3 = Color3.fromRGB(60, 95, 60)
+		Tools3PageSection1Phrame.Visible = true
+		Tools3PageSection2Phrame.Visible = true
+		Tools3PageSection3Phrame.Visible = true
+		Tools3PageSection4Phrame.Visible = true
 		
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection1Phrame.Visible = false
@@ -7389,7 +7863,11 @@ IdkButton.MouseButton1Click:Connect(function()
 		Tools1PageSection3Phrame.Visible = false
 		Tools2PageSection1Phrame.Visible = false
 		Tools2PageSection2Phrame.Visible = false
-		Tools2PageSection3Phrame.Visible = false
+		Tools3PageSection1Phrame.Visible = false
+		Tools3PageSection2Phrame.Visible = false
+		Tools3PageSection3Phrame.Visible = false
+		Tools2PageSection3Phrame.Visible = false	
+		Tools3PageSection4Phrame.Visible = false
 		OtherButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		SettingsButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -7405,10 +7883,14 @@ IdkButton.MouseButton1Click:Connect(function()
 		GuiLocalEBarPhrame.Visible = false
 		Misc1PageSection2Phrame.Visible = false
 		GuiToolsEBarPhrame.Visible = false
-		Other1PageSection2Phrame.Visible = false
+		Other1PageSection2Phrame.Visible = false	
+		Tools3PageSection4Phrame.Visible = false
 		Other1PageSection1Phrame.Visible = false	
 		Other2PageSection2Phrame.Visible = false
 		Other2PageSection1Phrame.Visible = false
+		Tools3PageSection1Phrame.Visible = false
+		Tools3PageSection2Phrame.Visible = false
+		Tools3PageSection3Phrame.Visible = false
 		Settings1PageSection2Phrame.Visible = false
 		Test1PageSection2Phrame.Visible = false
 		Scripts1PageSection2Phrame.Visible = false
@@ -7491,8 +7973,12 @@ RestoreFromMinimizeButton.MouseButton1Click:Connect(function()
 		
 	GuiLocalEBarPhrame.Visible = false	
 	Other1PageSection2Phrame.Visible = false
+	Tools3PageSection1Phrame.Visible = false
+	Tools3PageSection2Phrame.Visible = false
+	Tools3PageSection3Phrame.Visible = false
 	Other1PageSection1Phrame.Visible = false
 	Settings1PageSection2Phrame.Visible = false	
+	Tools3PageSection4Phrame.Visible = false
 	Other2PageSection2Phrame.Visible = false
 	Other2PageSection1Phrame.Visible = false
 	Test1PageSection2Phrame.Visible = false
@@ -7620,6 +8106,11 @@ game.Players.PlayerAdded:Connect(function(player)
 			h:remove()
 		end
 	end
+	for i, m in pairs(PlayerListFrame7:GetChildren()) do
+		if m ~= PlayerListLabel7 then 
+			m:remove()
+		end
+	end
 	CreatePlayerListsLabelP1("Others", 60, 160, 60)
 	CreatePlayerListsLabelP1("All", 60, 160, 60)
 	CreatePlayerListsLabelP2("Others", 60, 160, 60)
@@ -7628,11 +8119,14 @@ game.Players.PlayerAdded:Connect(function(player)
 	CreatePlayerListsLabelP3("All", 60, 160, 60)
 	CreatePlayerListsLabelP6("Others", 60, 160, 60)
 	CreatePlayerListsLabelP6("All", 60, 160, 60)
+	CreatePlayerListsLabelP7("Others", 60, 160, 60)
+	CreatePlayerListsLabelP7("All", 60, 160, 60)
 	for _, v in pairs(Players:GetPlayers()) do
 		CreatePlayerListsLabelP1(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP2(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP3(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP6(tostring(v), 60, 160, 60)
+		CreatePlayerListsLabelP7(tostring(v), 60, 160, 60)
 	end
 end)
 
@@ -7661,6 +8155,11 @@ game.Players.PlayerRemoving:Connect(function(player)
 			h:remove()
 		end
 	end
+	for i, m in pairs(PlayerListFrame7:GetChildren()) do
+		if m ~= PlayerListLabel7 then 
+			m:remove()
+		end
+	end
 	CreatePlayerListsLabelP1("Others", 60, 160, 60)
 	CreatePlayerListsLabelP1("All", 60, 160, 60)
 	CreatePlayerListsLabelP2("Others", 60, 160, 60)
@@ -7669,11 +8168,14 @@ game.Players.PlayerRemoving:Connect(function(player)
 	CreatePlayerListsLabelP3("All", 60, 160, 60)
 	CreatePlayerListsLabelP6("Others", 60, 160, 60)
 	CreatePlayerListsLabelP6("All", 60, 160, 60)
+	CreatePlayerListsLabelP7("Others", 60, 160, 60)
+	CreatePlayerListsLabelP7("All", 60, 160, 60)
 	for _, v in pairs(Players:GetPlayers()) do
 		CreatePlayerListsLabelP1(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP2(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP3(tostring(v), 60, 160, 60)
 		CreatePlayerListsLabelP6(tostring(v), 60, 160, 60)
+		CreatePlayerListsLabelP7(tostring(v), 60, 160, 60)
 	end
 end)
 
