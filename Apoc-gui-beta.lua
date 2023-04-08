@@ -351,7 +351,6 @@ function PlayerTeleport(teleporter, reciver, mode)
 	elseif mode == 2 then
 		--for map locations!
 	elseif mode == nil or mode == nan then
-		--Notify("[Error]: Invalid mode usage!", 5, 95, 60, 60)
 		if ShowFunctionAlerts then
 			AnnounceBox("Invalid mode usage!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 		end
@@ -610,7 +609,9 @@ function TransferItem(Plr, Ob)
 	local TransferFrom = LocalPlayer
 	if Plr == LocalPlayer then
 		TransferTo = ToWatchTab[2]
+		TransferFrom = ToWatchTab[1]
 	else
+		TransferTo = ToWatchTab[1]
 		TransferFrom = ToWatchTab[2]
 	end
 	if TransferTo == nil or TransferFrom == nil then
@@ -1014,6 +1015,26 @@ LocalPlayer.PlayerGui.ChildAdded:connect(function(Ch)
 		HandleExploitPlayerList()
 	end
 end)
+
+function Stamina(player, mode, amount)
+	if mode == 1 then
+    	fireserver("ChangeValue", player.playerstats.Stamina, nil)
+	elseif mode == 2 then
+    	fireserver("ChangeValue", player.playerstats.Stamina, math.huge)
+	elseif mode == 3 then
+		if amount == nil then
+			if ShowFunctionAlerts then
+				AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+			end
+		else
+			fireserver("ChangeValue", player.playerstats.Stamina, amount)
+		end
+	elseif mode == nil or mode == nan then
+		if ShowFunctionAlerts then
+		    AnnounceBox("Invalid mode usage!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	end
+end
 
 function CheckNumber(Numb)
     return tonumber(string.sub(tostring(Numb), 1, 1))
@@ -2086,7 +2107,7 @@ SmallText = Instance.new("TextLabel")
 SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
 SmallText.Position = UDim2.new(0.08, 0, 0.4, 0)
 SmallText.BorderSizePixel = 0
-SmallText.Text = "(/) Script version: 128"
+SmallText.Text = "(/) Script version: 129"
 SmallText.TextColor3 = Color3.fromRGB(255,255,120)
 SmallText.TextSize = 8
 SmallText.BackgroundTransparency = 1
@@ -2804,11 +2825,23 @@ Other1Page2Features2KillImage.Parent = Other1PageSection2Phrame
 Other1Page2Features2Kill.MouseButton1Click:Connect(function()
 	local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
 	if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
-		--Notify("[Kill]: Killed ".. LocalTab1SelectedPlayer .. "!", 5, 60, 160, 60)
-		AnnounceBox("Killed " .. LocalTab1SelectedPlayer .. "!", "KILL", 5, 60, 160, 60, 255, 255, 255)
-		Kill(SPlayer)
+		if LocalTab1SelectedPlayer ~= "All" and LocalTab1SelectedPlayer ~= "Others" then
+			AnnounceBox("Killed " .. LocalTab1SelectedPlayer .. "!", "KILL", 5, 60, 160, 60, 255, 255, 255)
+			Kill(SPlayer)
+		elseif LocalTab1SelectedPlayer == "All" then
+			for _, v in pairs(Players:GetPlayers()) do
+				AnnounceBox("Killed " .. tostring(v) .. "!", "KILL", 5, 60, 160, 60, 255, 255, 255)
+				Kill(v)
+			end
+		elseif LocalTab1SelectedPlayer == "Others" then
+			for _, v in pairs(Players:GetPlayers()) do
+				if v ~= LocalPlayer then
+					AnnounceBox("Killed " .. tostring(v) .. "!", "KILL", 5, 60, 160, 60, 255, 255, 255)
+					Kill(v)
+				end
+			end
+		end
 	else
-		--Notify("[Error]: No player selected!", 5, 95, 60, 60)
 		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 	end
 end)
@@ -2840,11 +2873,23 @@ Other1Page2Features2KickImage.Parent = Other1PageSection2Phrame
 Other1Page2Features2Kick.MouseButton1Click:Connect(function()
 	local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
 	if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
-		--Notify("[Kill]: Kicked ".. LocalTab1SelectedPlayer .. "!", 5, 60, 160, 60)
-		AnnounceBox("Kicked " .. LocalTab1SelectedPlayer .. "!", "KICK", 5, 60, 160, 60, 255, 255, 255)
-		Kick(SPlayer)
+		if LocalTab1SelectedPlayer ~= "All" and LocalTab1SelectedPlayer ~= "Others" then
+			AnnounceBox("Kicked " .. LocalTab1SelectedPlayer .. "!", "KICK", 5, 60, 160, 60, 255, 255, 255)
+			Kick(SPlayer)
+		elseif LocalTab1SelectedPlayer == "All" then
+			for _, v in pairs(Players:GetPlayers()) do
+				AnnounceBox("Kicked " .. tostring(v) .. "!", "KICK", 5, 60, 160, 60, 255, 255, 255)
+				Kick(v)
+			end
+		elseif LocalTab1SelectedPlayer == "Others" then
+			for _, v in pairs(Players:GetPlayers()) do
+				if v ~= LocalPlayer then
+					AnnounceBox("Kicked " .. tostring(v) .. "!", "KICK", 5, 60, 160, 60, 255, 255, 255)
+					Kick(v)
+				end
+			end
+		end
 	else
-		--Notify("[Error]: No player selected!", 5, 95, 60, 60)
 		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 	end
 end)
@@ -2967,22 +3012,18 @@ Other1Page2Features2PKGod.MouseButton1Click:Connect(function()
 	local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
 	if Other1Page2Features2PKGod.Text == "God" then
 		if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
-			--Notify("[PKGod]: Gave PKGod to ".. LocalTab1SelectedPlayer .. "!", 5, 60, 160, 60)
 			AnnounceBox("Gave PKGod to " .. LocalTab1SelectedPlayer .. "!", "PKGOD", 5, 60, 160, 60, 255, 255, 255)
 			Other1Page2Features2PKGod.Text = "UnGod"
 			PKGod(SPlayer, 1)
 		else
-			--Notify("[Error]: No player selected!", 5, 95, 60, 60)
 			AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 		end
 	else
 		if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
-			--Notify("[PKGod]: Removed PKGod from ".. LocalTab1SelectedPlayer .. "!", 5, 60, 160, 60)
 			AnnounceBox("Removed PKGod from " .. LocalTab1SelectedPlayer .. "!", "PKGOD", 5, 60, 160, 60, 255, 255, 255)
 			Other1Page2Features2PKGod.Text = "God"
 			PKGod(SPlayer, 2)
 		else
-			--Notify("[Error]: No player selected!", 5, 95, 60, 60)
 			AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 		end
 	end
@@ -3015,11 +3056,23 @@ Other1Page2Features2VitalsRemImage.Parent = Other1PageSection2Phrame
 Other1Page2Features2VitalsRem.MouseButton1Click:Connect(function()
 	local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
 	if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
-		--Notify("[Vitals]: Gave no-vitals to ".. LocalTab1SelectedPlayer .. "!", 5, 60, 160, 60)
-		AnnounceBox("Gave no-vitals to " .. LocalTab1SelectedPlayer .. "!", "VITALS", 5, 60, 160, 60, 255, 255, 255)
-		Vitals(SPlayer, 1)
+		if LocalTab1SelectedPlayer ~= "All" and LocalTab1SelectedPlayer ~= "Others" then
+			AnnounceBox("Gave no-vitals to " .. LocalTab1SelectedPlayer .. "!", "VITALS", 5, 60, 160, 60, 255, 255, 255)
+			Vitals(SPlayer, 1)
+		elseif LocalTab1SelectedPlayer == "All" then
+			for _, v in pairs(Players:GetPlayers()) do
+				AnnounceBox("Gave no-vitals to " .. tostring(v) .. "!", "VITALS", 5, 60, 160, 60, 255, 255, 255)
+				Vitals(v, 1)
+			end
+		elseif LocalTab1SelectedPlayer == "Others" then
+			for _, v in pairs(Players:GetPlayers()) do
+				if v ~= LocalPlayer then
+					AnnounceBox("Gave no-vitals to " .. tostring(v) .. "!", "VITALS", 5, 60, 160, 60, 255, 255, 255)
+					Vitals(v, 1)
+				end
+			end
+		end
 	else
-		--Notify("[Error]: No player selected!", 5, 95, 60, 60)
 		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 	end
 end)
@@ -3051,11 +3104,23 @@ Other1Page2Features2VitalsAddImage.Parent = Other1PageSection2Phrame
 Other1Page2Features2VitalsAdd.MouseButton1Click:Connect(function()
 	local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
 	if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
-		--Notify("[Vitals]: Gave inf-vitals to ".. LocalTab1SelectedPlayer .. "!", 5, 60, 160, 60)
-		AnnounceBox("Gave inf-vitals to " .. LocalTab1SelectedPlayer .. "!", "VITALS", 5, 60, 160, 60, 255, 255, 255)
-		Vitals(SPlayer, 2)
+		if LocalTab1SelectedPlayer ~= "All" and LocalTab1SelectedPlayer ~= "Others" then
+			AnnounceBox("Gave inf-vitals to " .. LocalTab1SelectedPlayer .. "!", "VITALS", 5, 60, 160, 60, 255, 255, 255)
+			Vitals(SPlayer, 2)
+		elseif LocalTab1SelectedPlayer == "All" then
+			for _, v in pairs(Players:GetPlayers()) do
+				AnnounceBox("Gave inf-vitals to " .. tostring(v) .. "!", "VITALS", 5, 60, 160, 60, 255, 255, 255)
+				Vitals(v, 2)
+			end
+		elseif LocalTab1SelectedPlayer == "Others" then
+			for _, v in pairs(Players:GetPlayers()) do
+				if v ~= LocalPlayer then
+					AnnounceBox("Gave inf-vitals to " .. tostring(v) .. "!", "VITALS", 5, 60, 160, 60, 255, 255, 255)
+					Vitals(v, 2)
+				end
+			end
+		end
 	else
-		--Notify("[Error]: No player selected!", 5, 95, 60, 60)
 		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 	end
 end)
@@ -3088,15 +3153,27 @@ Other1Page2Features3ZombieKills.MouseButton1Click:Connect(function()
     local Amount = tonumber(Other1Page2FeaturesAmount.Text)
 	local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
 	if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
-	    --Notify("[Stat]: Set ".. LocalTab1SelectedPlayer .. " zombie kills to " .. Amount .. "!", 5, 60, 160, 60)
 		if Amount then
-		    AnnounceBox("Set " .. LocalTab1SelectedPlayer .. " zombie kills to " .. Amount .. "!", "STAT", 5, 60, 160, 60, 255, 255, 255)
-		    StatMod(SPlayer, Amount, 2)
+			if LocalTab1SelectedPlayer ~= "All" and LocalTab1SelectedPlayer ~= "Others" then
+				AnnounceBox("Set " .. LocalTab1SelectedPlayer .. " zombie kills to " .. Amount .. "!", "STAT", 5, 60, 160, 60, 255, 255, 255)
+				StatMod(SPlayer, Amount, 2)
+			elseif LocalTab1SelectedPlayer == "All" then
+				for _, v in pairs(Players:GetPlayers()) do
+					AnnounceBox("Set " .. tostring(v) .. " zombie kills to " .. Amount .. "!", "STAT", 5, 60, 160, 60, 255, 255, 255)
+					StatMod(v, Amount, 2)
+				end
+			elseif LocalTab1SelectedPlayer == "Others" then
+				for _, v in pairs(Players:GetPlayers()) do
+					if v ~= LocalPlayer then
+						AnnounceBox("Set " .. tostring(v) .. " zombie kills to " .. Amount .. "!", "STAT", 5, 60, 160, 60, 255, 255, 255)
+						StatMod(v, Amount, 2)
+					end
+				end
+			end
 		else
 		    AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 		end
 	else
-		--Notify("[Error]: No player selected!", 5, 95, 60, 60)
 		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 	end
 end)
@@ -3129,10 +3206,23 @@ Other1Page2Features3PlayerKills.MouseButton1Click:Connect(function()
     local Amount = tonumber(Other1Page2FeaturesAmount.Text)
 	local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
 	if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
-	    --Notify("[Stat]: Set ".. LocalTab1SelectedPlayer .. " player kills to " .. Amount .. "!", 5, 60, 160, 60)
 		if Amount then
-		    AnnounceBox("Set " .. LocalTab1SelectedPlayer .. " player kills to " .. Amount .. "!", "STAT", 5, 60, 160, 60, 255, 255, 255)
-		    StatMod(SPlayer, Amount, 1)
+			if LocalTab1SelectedPlayer ~= "All" and LocalTab1SelectedPlayer ~= "Others" then
+				AnnounceBox("Set " .. LocalTab1SelectedPlayer .. " player kills to " .. Amount .. "!", "STAT", 5, 60, 160, 60, 255, 255, 255)
+				StatMod(SPlayer, Amount, 1)
+			elseif LocalTab1SelectedPlayer == "All" then
+				for _, v in pairs(Players:GetPlayers()) do
+					AnnounceBox("Set " .. tostring(v) .. " player kills to " .. Amount .. "!", "STAT", 5, 60, 160, 60, 255, 255, 255)
+					StatMod(v, Amount, 1)
+				end
+			elseif LocalTab1SelectedPlayer == "Others" then
+				for _, v in pairs(Players:GetPlayers()) do
+					if v ~= LocalPlayer then
+						AnnounceBox("Set " .. tostring(v) .. " player kills to " .. Amount .. "!", "STAT", 5, 60, 160, 60, 255, 255, 255)
+						StatMod(v, Amount, 1)
+					end
+				end
+			end
 		else
 		    AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 		end
@@ -3170,15 +3260,27 @@ Other1Page2Features3Days.MouseButton1Click:Connect(function()
     local Amount = tonumber(Other1Page2FeaturesAmount.Text)
 	local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
 	if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
-	    --Notify("[Stat]: Set ".. LocalTab1SelectedPlayer .. " days to " .. Amount .. "!", 5, 60, 160, 60)
 		if Amount then
-		    AnnounceBox("Set " .. LocalTab1SelectedPlayer .. " days to " .. Amount .. "!", "STAT", 5, 60, 160, 60, 255, 255, 255)
-		    StatMod(SPlayer, Amount, 3)
+			if LocalTab1SelectedPlayer ~= "All" and LocalTab1SelectedPlayer ~= "Others" then
+				AnnounceBox("Set " .. LocalTab1SelectedPlayer .. " days to " .. Amount .. "!", "STAT", 5, 60, 160, 60, 255, 255, 255)
+				StatMod(SPlayer, Amount, 3)
+			elseif LocalTab1SelectedPlayer == "All" then
+				for _, v in pairs(Players:GetPlayers()) do
+					AnnounceBox("Set " .. tostring(v) .. " days to " .. Amount .. "!", "STAT", 5, 60, 160, 60, 255, 255, 255)
+					StatMod(v, Amount, 3)
+				end
+			elseif LocalTab1SelectedPlayer == "Others" then
+				for _, v in pairs(Players:GetPlayers()) do
+					if v ~= LocalPlayer then
+						AnnounceBox("Set " .. tostring(v) .. " days to " .. Amount .. "!", "STAT", 5, 60, 160, 60, 255, 255, 255)
+						StatMod(v, Amount, 3)
+					end
+				end
+			end
 		else
 		    AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 		end
 	else
-		--Notify("[Error]: No player selected!", 5, 95, 60, 60)
 		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 	end
 end)
@@ -3214,19 +3316,16 @@ Other1Page2Features3Invis.MouseButton1Click:Connect(function()
 	    Other1LastModifiedInvisPlayer = LocalTab1SelectedPlayer
 		if Other1Page2Features3InvisImage.Image == "rbxassetid://12900717295" then
 			Other1Page2Features3InvisImage.Image = "rbxassetid://12900770221"
-			--Notify("[Invis]: Set visibility of ".. LocalTab1SelectedPlayer .. " to invisible!", 5, 60, 160, 60)
 			AnnounceBox("Set visibility of " .. LocalTab1SelectedPlayer .. " to invisible!", "INVIS", 5, 60, 160, 60, 255, 255, 255)
 			Texture(SPlayer.Character, "Plastic", 1) 
 			Vest(SPlayer, 2)
 		else
 			Other1Page2Features3InvisImage.Image = "rbxassetid://12900717295"
-			--Notify("[Invis]: Set visibility of ".. LocalTab1SelectedPlayer .. " to visible!", 5, 60, 160, 60)
 			AnnounceBox("Set visibility of " .. LocalTab1SelectedPlayer .. " to visible!", "INVIS", 5, 60, 160, 60, 255, 255, 255)
 			Texture(SPlayer.Character, "Plastic", 0) 
 			Vest(SPlayer, 1)
 		end
 	else
-		--Notify("[Error]: No player selected!", 5, 95, 60, 60)
 		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 	end
 end)
@@ -3262,17 +3361,14 @@ Other1Page2Features3ZIvis.MouseButton1Click:Connect(function()
 	    Other1LastModifiedZInvisPlayer = LocalTab1SelectedPlayer
 		if Other1Page2Features3ZIvisImage.Image == "rbxassetid://12900717295" then
 			Other1Page2Features3ZIvisImage.Image = "rbxassetid://12900770221"
-			--Notify("[ZInvis]: Set zombie visibility of ".. LocalTab1SelectedPlayer .. " to invisible!", 5, 60, 160, 60)
 			AnnounceBox("Set zombie visibility of " .. LocalTab1SelectedPlayer .. " to invisible!", "ZINVIS", 5, 60, 160, 60, 255, 255, 255)
 			ZombieVisible(SPlayer, true)
 		elseif Other1Page2Features3ZIvisImage.Image == "rbxassetid://12900770221" then
 			Other1Page2Features3ZIvisImage.Image = "rbxassetid://12900717295"
-			--Notify("[ZInvis]: Set zombie visibility of ".. LocalTab1SelectedPlayer .. " to visible!", 5, 60, 160, 60)
 			AnnounceBox("Set zombie visibility of " .. LocalTab1SelectedPlayer .. " to visible!", "ZINVIS", 5, 60, 160, 60, 255, 255, 255)
 			ZombieVisible(SPlayer, false)
 		end
 	else
-		--Notify("[Error]: No player selected!", 5, 95, 60, 60)
 		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 	end
 end)
@@ -3352,10 +3448,24 @@ Other1Page2Features3SkinsImage.Parent = Other1PageSection2Phrame
 Other1Page2Features3Skins.MouseButton1Click:Connect(function()
 	local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
 	if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
-		AnnounceBox("Gave " .. LocalTab1SelectedPlayer .. " all skins!", "Skins", 5, 60, 160, 60, 255, 255, 255)
-		Skins(SPlayer)
-	else
-		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		if LocalTab1SelectedPlayer ~= "All" and LocalTab1SelectedPlayer ~= "Others" then
+			AnnounceBox("Gave " .. LocalTab1SelectedPlayer .. " all skins!", "Skins", 5, 60, 160, 60, 255, 255, 255)
+			Skins(SPlayer)
+		elseif LocalTab1SelectedPlayer == "All" then
+			for _, v in pairs(Players:GetPlayers()) do
+				AnnounceBox("Gave " .. tostring(v) .. " all skins!", "Skins", 5, 60, 160, 60, 255, 255, 255)
+				Skins(v)
+			end
+		elseif LocalTab1SelectedPlayer == "Others" then
+			for _, v in pairs(Players:GetPlayers()) do
+				if v ~= LocalPlayer then
+					AnnounceBox("Gave " .. tostring(v) .. " all skins!", "Skins", 5, 60, 160, 60, 255, 255, 255)
+					Skins(v)
+				end
+			end
+		else
+			AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
 	end
 end)
 
@@ -3691,11 +3801,29 @@ local LootS = game.Lighting.LootDrops
 local LootSI = SpawningTabSelectedItem
 local SPlayer = game.Players:FindFirstChild(SpawningTabSelectedPlayer)
 local Amount = ItemSpawningAmount
-	if SPlayer then
+	if SpawningTabSelectedPlayer ~= nil and SpawningTabSelectedPlayer ~= "nan" and SpawningTabSelectedPlayer ~= ""  then
 		for i = 1, Amount do
-			SpawnItem(SPlayer, LootSI, LootS, Vector3.new(math.random(-ItemSpawningRadius, ItemSpawningRadius), -1*ItemSpawningRadiusH, math.random(-ItemSpawningRadius, ItemSpawningRadius)), math.random(-5, 5))
-			if ShowSpawnedItemAlerts then
-				AnnounceBox("Spawned " .. LootSI .. "!", "SPAWNER", 2, 60, 160, 60, 255, 255, 255)
+			if SpawningTabSelectedPlayer ~= "All" and SpawningTabSelectedPlayer ~= "Others" then
+				SpawnItem(SPlayer, LootSI, LootS, Vector3.new(math.random(-ItemSpawningRadius, ItemSpawningRadius), -1*ItemSpawningRadiusH, math.random(-ItemSpawningRadius, ItemSpawningRadius)), math.random(-5, 5))
+				if ShowSpawnedItemAlerts then
+					AnnounceBox("Spawned " .. LootSI .. "!", "SPAWNER", 2, 60, 160, 60, 255, 255, 255)
+				end
+			elseif SpawningTabSelectedPlayer == "All" then
+				for _, v in pairs(Players:GetPlayers()) do
+					SpawnItem(v, LootSI, LootS, Vector3.new(math.random(-ItemSpawningRadius, ItemSpawningRadius), -1*ItemSpawningRadiusH, math.random(-ItemSpawningRadius, ItemSpawningRadius)), math.random(-5, 5))
+					if ShowSpawnedItemAlerts then
+						AnnounceBox("Spawned " .. LootSI .. "!", "SPAWNER", 2, 60, 160, 60, 255, 255, 255)
+					end
+				end
+			elseif SpawningTabSelectedPlayer == "Others" then
+				for _, v in pairs(Players:GetPlayers()) do
+					if v ~= LocalPlayer then
+						SpawnItem(v, LootSI, LootS, Vector3.new(math.random(-ItemSpawningRadius, ItemSpawningRadius), -1*ItemSpawningRadiusH, math.random(-ItemSpawningRadius, ItemSpawningRadius)), math.random(-5, 5))
+						if ShowSpawnedItemAlerts then
+							AnnounceBox("Spawned " .. LootSI .. "!", "SPAWNER", 2, 60, 160, 60, 255, 255, 255)
+						end
+					end
+				end
 			end
 		end
 	else
@@ -4222,10 +4350,28 @@ Tools2Page2FeaturesVehicleSpawning.MouseButton1Down:connect(function()
 local SelectedVehicle = SpawningTabSelectedVehicle
 local SPlayer = game.Players:FindFirstChild(VehicleSpawningTabSelectedPlayer)
 local Amount = VehicleSpawningAmount
-	if SPlayer then
-		SpawnVehicle(SelectedVehicle, SPlayer, Amount)
-		if ShowSpawnedItemAlerts then
-			AnnounceBox("Spawned " .. SelectedVehicle .. "!", "SPAWNER", 2, 60, 160, 60, 255, 255, 255)
+	if VehicleSpawningTabSelectedPlayer ~= nil and VehicleSpawningTabSelectedPlayer ~= "nan" and VehicleSpawningTabSelectedPlayer ~= ""  then
+		if SpawningTabSelectedPlayer ~= "All" and SpawningTabSelectedPlayer ~= "Others" then
+			SpawnVehicle(SelectedVehicle, SPlayer, Amount)
+			if ShowSpawnedItemAlerts then
+				AnnounceBox("Spawned " .. SelectedVehicle .. "!", "SPAWNER", 2, 60, 160, 60, 255, 255, 255)
+			end
+		elseif SpawningTabSelectedPlayer == "All" then
+			for _, v in pairs(Players:GetPlayers()) do
+				SpawnVehicle(SelectedVehicle, v, Amount)
+				if ShowSpawnedItemAlerts then
+					AnnounceBox("Spawned " .. SelectedVehicle .. "!", "SPAWNER", 2, 60, 160, 60, 255, 255, 255)
+				end
+			end
+		elseif SpawningTabSelectedPlayer == "Others" then
+			for _, v in pairs(Players:GetPlayers()) do
+				if v ~= LocalPlayer then
+					SpawnVehicle(SelectedVehicle, v, Amount)
+					if ShowSpawnedItemAlerts then
+						AnnounceBox("Spawned " .. SelectedVehicle .. "!", "SPAWNER", 2, 60, 160, 60, 255, 255, 255)
+					end
+				end
+			end
 		end
 	else
 		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
@@ -7455,71 +7601,69 @@ local Other1OldSelectedPlayer = ""
 local Other1Page2Features2PKGodprevStatus = ""
 local Other1Page2Features2ToggleVestprevStatus = ""
 function UpdateOtherTab1Statuses()
-    local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
     if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= "nan" and LocalTab1SelectedPlayer ~= "" then
-        if SPlayer.Character:FindFirstChild("Humanoid") and SPlayer.Character.Humanoid:FindFirstChild("DefenseMultiplier") and tonumber(SPlayer.Character.Humanoid.DefenseMultiplier.Value) <= 0 then
-            if Other1Page2Features2PKGodprevStatus ~= "UnGod" then
-                Other1Page2Features2PKGod.Text = "UnGod"
-                Other1Page2Features2PKGodprevStatus = "UnGod"
-            end
-        else
-            if Other1Page2Features2PKGodprevStatus ~= "God" then
-                Other1Page2Features2PKGod.Text = "God"
-                Other1Page2Features2PKGodprevStatus = "God"
-            end
-        end
-        
-        if Other1OldSelectedPlayer ~= LocalTab1SelectedPlayer then
-            if Other1LastModifiedInvisPlayer == LocalTab1SelectedPlayer and Other1Page2Features3InvisImage.Image == "rbxassetid://12900717295" then
-                Other1Page2Features3InvisImage.Image = "rbxassetid://12900770221"
-                Other1LastModifiedInvisPlayer = ""
-            else
-                Other1Page2Features3InvisImage.Image = "rbxassetid://12900717295"
-            end
-        end
-        
-        if Other1OldSelectedPlayer ~= LocalTab1SelectedPlayer then
-            if Other1LastModifiedZInvisPlayer == LocalTab1SelectedPlayer and Other1Page2Features3ZIvisImage.Image == "rbxassetid://12900717295" then
-                Other1Page2Features3ZIvisImage.Image = "rbxassetid://12900770221"
-                Other1LastModifiedZInvisPlayer = ""
-            else
-                Other1Page2Features3ZIvisImage.Image = "rbxassetid://12900717295"
-            end
-        end
-    
-        if Other1OldSelectedPlayer ~= LocalTab1SelectedPlayer then
-            if Other1LastModifiedFreezedPlayer == LocalTab1SelectedPlayer and Other1Page2FeaturesFreeze.Text == "Freeze" then
-                Other1Page2FeaturesFreeze.Text = "UnFreeze"
-                Other1LastModifiedFreezedPlayer = ""
-            else
-                Other1Page2FeaturesFreeze.Text = "Freeze"
-            end
-        end
-		
-		local hasvest = false;
-		for i, v in pairs(Lighting.PlayerVests:GetChildren()) do
-			if SPlayer:FindFirstChild(v.Name) then
-				hasvest = true
-			end    
-		end
-        if hasvest then
-            if Other1Page2Features2ToggleVestprevStatus ~= "Add Vest" then
-                Other1Page2Features2ToggleVest.Text = "Add Vest"
-                Other1Page2Features2ToggleVestprevStatus = "Add Vest"
-            end
-        else
-            if Other1Page2Features2ToggleVestprevStatus ~= "Rem Vest" then
-                Other1Page2Features2ToggleVest.Text = "Rem Vest"
-                Other1Page2Features2ToggleVestprevStatus = "Rem Vest"
-            end
-        end
-        
-		for i, v in pairs(AnnnounceFrame:GetChildren()) do
-			if v ~= AnnouncementLabel and v ~= TopAnnouncementLabel and v ~= AnnnounceMessageBox and v ~= AnnnounceMessageBoxPersonal then 
-				v.Position = UDim2.new(0, 0, 0, -AnnnounceFrame.Size.Y.Offset*(#AnnnounceFrame:GetChildren()-(i)))
+		if LocalTab1SelectedPlayer ~= "All" and LocalTab1SelectedPlayer ~= "Others" then
+			local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
+				
+			if SPlayer.Character:FindFirstChild("Humanoid") and SPlayer.Character.Humanoid:FindFirstChild("DefenseMultiplier") and tonumber(SPlayer.Character.Humanoid.DefenseMultiplier.Value) <= 0 then
+				if Other1Page2Features2PKGodprevStatus ~= "UnGod" then
+					Other1Page2Features2PKGod.Text = "UnGod"
+					Other1Page2Features2PKGodprevStatus = "UnGod"
+				end
+			else
+				if Other1Page2Features2PKGodprevStatus ~= "God" then
+					Other1Page2Features2PKGod.Text = "God"
+					Other1Page2Features2PKGodprevStatus = "God"
+				end
 			end
+        
+			if Other1OldSelectedPlayer ~= LocalTab1SelectedPlayer then
+				if Other1LastModifiedInvisPlayer == LocalTab1SelectedPlayer and Other1Page2Features3InvisImage.Image == "rbxassetid://12900717295" then
+					Other1Page2Features3InvisImage.Image = "rbxassetid://12900770221"
+					Other1LastModifiedInvisPlayer = ""
+				else
+					Other1Page2Features3InvisImage.Image = "rbxassetid://12900717295"
+				end
+				if Other1LastModifiedZInvisPlayer == LocalTab1SelectedPlayer and Other1Page2Features3ZIvisImage.Image == "rbxassetid://12900717295" then
+					Other1Page2Features3ZIvisImage.Image = "rbxassetid://12900770221"
+					Other1LastModifiedZInvisPlayer = ""
+				else
+					Other1Page2Features3ZIvisImage.Image = "rbxassetid://12900717295"
+				end
+				if Other1LastModifiedFreezedPlayer == LocalTab1SelectedPlayer and Other1Page2FeaturesFreeze.Text == "Freeze" then
+					Other1Page2FeaturesFreeze.Text = "UnFreeze"
+					Other1LastModifiedFreezedPlayer = ""
+				else
+					Other1Page2FeaturesFreeze.Text = "Freeze"
+				end
+			end
+		
+			local hasvest = false;
+			for i, v in pairs(Lighting.PlayerVests:GetChildren()) do
+				if SPlayer:FindFirstChild(v.Name) then
+					hasvest = true
+				end    
+			end
+			if hasvest then
+				if Other1Page2Features2ToggleVestprevStatus ~= "Add Vest" then
+					Other1Page2Features2ToggleVest.Text = "Add Vest"
+					Other1Page2Features2ToggleVestprevStatus = "Add Vest"
+				end
+			else
+				if Other1Page2Features2ToggleVestprevStatus ~= "Rem Vest" then
+					Other1Page2Features2ToggleVest.Text = "Rem Vest"
+					Other1Page2Features2ToggleVestprevStatus = "Rem Vest"
+				end
+			end
+        
+			for i, v in pairs(AnnnounceFrame:GetChildren()) do
+				if v ~= AnnouncementLabel and v ~= TopAnnouncementLabel and v ~= AnnnounceMessageBox and v ~= AnnnounceMessageBoxPersonal then 
+					v.Position = UDim2.new(0, 0, 0, -AnnnounceFrame.Size.Y.Offset*(#AnnnounceFrame:GetChildren()-(i)))
+				end
+			end
+			
+			Other1OldSelectedPlayer = LocalTab1SelectedPlayer
 		end
-        Other1OldSelectedPlayer = LocalTab1SelectedPlayer
     end
 end
 
