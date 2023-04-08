@@ -672,14 +672,13 @@ function DeterminSpace(Plr, SelectedItem)
     return (12+ExtraSpace)-Total-ItemSpace, OpenSlot
 end
 
+ToWatchTab = {}
 function TransferItem(Plr, Ob)
 	local TransferTo = LocalPlayer
 	local TransferFrom = LocalPlayer
 	if Plr == LocalPlayer then
 		TransferTo = ToWatchTab[2]
-		TransferFrom = ToWatchTab[1]
 	else
-		TransferTo = ToWatchTab[1]
 		TransferFrom = ToWatchTab[2]
 	end
 	if TransferTo == nil or TransferFrom == nil then
@@ -780,7 +779,6 @@ function UpdatePlayerInventory(Plr, Scroll)
     end
 end
 
-ToWatchTab = {}
 function SetupWatch(Plr, Val)
 	ToWatchTab[Val] = Plr
 	local SelectedFrameForWatching = LocalPlayerInventory
@@ -5310,7 +5308,9 @@ end)
 Tools3Page2FeaturesSpawningAdd.MouseButton1Down:connect(function()
 local Amount = KitsItemSpawningAdd
 	if KitsSpawningTabSelectedItem ~= nil and KitsSpawningTabSelectedItem ~= "nan" and KitsSpawningTabSelectedItem ~= "" then
-		CreatePlayerListsLabelP9(KitsSpawningTabSelectedItem)--.. " (" .. Amount .. ")")
+		for i = 0, Amount-1 do
+			CreatePlayerListsLabelP9(KitsSpawningTabSelectedItem)
+		end
 	else
 		AnnounceBox("No item was selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 	end
