@@ -3990,7 +3990,7 @@ end
 function ItemsDisplay(Specific)
 ClearDisplay()
 wait()
-    for i, v in pairs(game.Lighting.LootDrops:GetChildren()) do
+    for i, v in pairs(game:GetService("Lighting").LootDrops:GetChildren()) do
         if Specific == nil or string.match(string.lower(v.Name), string.lower(Specific)) then
             CreatePlayerListsLabelP4(tostring(v))
             --rconsoleprint("[!] " .. tostring(v) .. "\n")
@@ -4186,7 +4186,7 @@ Tools1Page2FeaturesSpawningItemAmountRadiusH.FocusLost:Connect(function(enterPre
 end)
 
 Tools1Page2FeaturesSpawning.MouseButton1Down:connect(function()
-local LootS = game.Lighting.LootDrops
+local LootS = game:GetService("Lighting").LootDrops
 local LootSI = SpawningTabSelectedItem
 local SPlayer = game.Players:FindFirstChild(SpawningTabSelectedPlayer)
 local Amount = ItemSpawningAmount
@@ -4928,7 +4928,7 @@ end
 function KitsItemsDisplay(Specific)
 KitsClearDisplay()
 wait()
-    for i, v in pairs(game.Lighting.LootDrops:GetChildren()) do
+    for i, v in pairs(game:GetService("Lighting").LootDrops:GetChildren()) do
         if Specific == nil or string.match(string.lower(v.Name), string.lower(Specific)) then
             CreatePlayerListsLabelP8(tostring(v))
             --rconsoleprint("[!] " .. tostring(v) .. "\n")
@@ -5143,11 +5143,6 @@ Tools3Page2FeaturesSpawningRemImage.Parent = Tools3PageSection2Phrame
 
 Tools3Page2FeaturesSpawningRem.MouseButton1Down:connect(function()
 	KitsSpawningTabSelectedItemInItemsLabel:destroy()
-	--[[for i, v in pairs(PlayerListFrame9:GetChildren()) do
-		if v ~= PlayerListLabel9 then
-			
-		end
-	end--]]
 end)
 
 Tools3Page2FeaturesSpawningCreateName = Instance.new("TextBox")
@@ -5317,7 +5312,7 @@ local Amount = KitsItemSpawningAdd
 end)
 
 Tools3Page2FeaturesSpawningSpawn.MouseButton1Down:connect(function()
-local LootS = game.Lighting.LootDrops
+local LootS = game:GetService("Lighting").LootDrops
 local SPlayer = game.Players:FindFirstChild(KitsSpawningTabSelectedPlayer)
 local Amount = KitsItemSpawningAdd
 	if KitsSpawningTabSelectedPlayer ~= nil and KitsSpawningTabSelectedPlayer ~= "nan" and KitsSpawningTabSelectedPlayer ~= ""  then
