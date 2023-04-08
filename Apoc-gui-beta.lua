@@ -20,6 +20,7 @@ ShowFunctionAlerts = true
 ShowLeaveAlerts = true
 ShowJoinAlerts = true
 ShowSpawnedItemAlerts = false
+BannedPlayerKickAlerts = false
 ShowExploitAlerts = true
 AutoModVehicle = false
 TogglePunishExploiters = false
@@ -286,6 +287,8 @@ end
 
 makefolder("Agony")
 makefolder("Agony/Bases")
+makefolder("Agony/Settings")
+makefolder("Agony/Account")
 
 function WriteFile(fn, txt)
 	writefile("Agony/"..fn..".txt", txt)
@@ -2160,7 +2163,7 @@ SmallText = Instance.new("TextLabel")
 SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
 SmallText.Position = UDim2.new(0.08, 0, 0.4, 0)
 SmallText.BorderSizePixel = 0
-SmallText.Text = "(/) Script version: 133"
+SmallText.Text = "(/) Script version: 134"
 SmallText.TextColor3 = Color3.fromRGB(255,255,120)
 SmallText.TextSize = 8
 SmallText.BackgroundTransparency = 1
@@ -4958,6 +4961,7 @@ PlayerListLabel9.TextSize = 20
 PlayerListLabel9.Visible = false
 
 local KitsSpawningTabSelectedItemInItems = ""
+local KitsSpawningTabSelectedItemInItemsLabel;
 function CreatePlayerListsLabelP9(Text)
     for i, v in pairs(PlayerListFrame9:GetChildren()) do
 		if v ~= PlayerListLabel9 then
@@ -4975,6 +4979,7 @@ function CreatePlayerListsLabelP9(Text)
     F.MouseButton1Click:Connect(function()
 		F.TextColor3 = Color3.fromRGB(170, 170, 170)
 		KitsSpawningTabSelectedItemInItems = F.Text
+		KitsSpawningTabSelectedItemInItemsLabel = F
 		if ShowFunctionAlerts then
 			AnnounceBox("Item ".. F.Text .. " was selected!", "ITEM", 5, 255, 255, 255, 255, 255, 255)
 		end
@@ -4992,8 +4997,8 @@ function CreatePlayerListsLabelP9(Text)
 end
 
 function KitsClearItemDisplay()
-    for i, v in pairs(PlayerListFrame8:GetChildren()) do
-        if v ~= PlayerListLabel8 then 
+    for i, v in pairs(PlayerListFrame9:GetChildren()) do
+        if v ~= PlayerListLabel9 then 
             v:remove()
         end
     end
@@ -5048,7 +5053,7 @@ PlayerListLabel7.TextColor3 = Color3.fromRGB(255, 255, 255)
 PlayerListLabel7.TextSize = 20
 PlayerListLabel7.Visible = false
 
-local SpawningTabSelectedPlayer = ""
+local KitsSpawningTabSelectedPlayer = ""
 function CreatePlayerListsLabelP7(Text)
     for i, v in pairs(PlayerListFrame7:GetChildren()) do
 		if v ~= PlayerListLabel7 then
@@ -5065,7 +5070,7 @@ function CreatePlayerListsLabelP7(Text)
     end
     F.MouseButton1Click:Connect(function()
 		F.TextColor3 = Color3.fromRGB(170, 170, 170)
-		SpawningTabSelectedPlayer = F.Text
+		KitsSpawningTabSelectedPlayer = F.Text
 		if ShowFunctionAlerts then
 			AnnounceBox("Player ".. F.Text .. " was selected!", "PLAYER", 5, 255, 255, 255, 255, 255, 255)
 		end
@@ -5138,9 +5143,44 @@ Tools3Page2FeaturesSpawningRemImage.Image = "rbxassetid://12900618433"
 Tools3Page2FeaturesSpawningRemImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Tools3Page2FeaturesSpawningRemImage.Parent = Tools3PageSection2Phrame
 
+Tools3Page2FeaturesSpawningRem.MouseButton1Down:connect(function()
+	KitsSpawningTabSelectedItemInItemsLabel:destroy()
+	--[[for i, v in pairs(PlayerListFrame9:GetChildren()) do
+		if v ~= PlayerListLabel9 then
+			
+		end
+	end--]]
+end)
+
+Tools3Page2FeaturesSpawningCreateName = Instance.new("TextBox")
+Tools3Page2FeaturesSpawningCreateName.Size = UDim2.new(0, 100, 0, 20)
+Tools3Page2FeaturesSpawningCreateName.Position = UDim2.new(0.02, 0, 0.32, 0)
+Tools3Page2FeaturesSpawningCreateName.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools3Page2FeaturesSpawningCreateName.BackgroundTransparency = 0.4
+Tools3Page2FeaturesSpawningCreateName.BorderSizePixel = 1
+Tools3Page2FeaturesSpawningCreateName.Text = "Name"
+Tools3Page2FeaturesSpawningCreateName.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools3Page2FeaturesSpawningCreateName.TextSize = 8
+Tools3Page2FeaturesSpawningCreateName.TextWrapped = true
+Tools3Page2FeaturesSpawningCreateName.TextXAlignment = "Center"
+Tools3Page2FeaturesSpawningCreateName.Parent = Tools3PageSection2Phrame
+
+local KitsNameOfKit;
+Tools3Page2FeaturesSpawningCreateName.FocusLost:Connect(function(enterPressed)
+	local GetValue = tostring(Tools3Page2FeaturesSpawningCreateName.Text)
+    if enterPressed then
+		if GetValue then
+			KitsNameOfKit = GetValue
+			AnnounceBox("Set kit name to " .. GetValue .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		else
+			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	end
+end)
+
 Tools3Page2FeaturesSpawningCreate = Instance.new("TextButton")
 Tools3Page2FeaturesSpawningCreate.Size = UDim2.new(0, 100, 0, 20)
-Tools3Page2FeaturesSpawningCreate.Position = UDim2.new(0.02, 0, 0.32, 0)
+Tools3Page2FeaturesSpawningCreate.Position = UDim2.new(0.02, 0, 0.42, 0)
 Tools3Page2FeaturesSpawningCreate.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Tools3Page2FeaturesSpawningCreate.BackgroundTransparency = 0.4
 Tools3Page2FeaturesSpawningCreate.BorderSizePixel = 1
@@ -5152,7 +5192,7 @@ Tools3Page2FeaturesSpawningCreate.Parent = Tools3PageSection2Phrame
 
 Tools3Page2FeaturesSpawningCreateImage = Instance.new("ImageLabel")
 Tools3Page2FeaturesSpawningCreateImage.Size = UDim2.new(0, 20, 0, 20)
-Tools3Page2FeaturesSpawningCreateImage.Position = UDim2.new(0.012, 0, 0.32, 0)
+Tools3Page2FeaturesSpawningCreateImage.Position = UDim2.new(0.012, 0, 0.42, 0)
 Tools3Page2FeaturesSpawningCreateImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Tools3Page2FeaturesSpawningCreateImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Tools3Page2FeaturesSpawningCreateImage.BackgroundTransparency = 1
@@ -5162,9 +5202,53 @@ Tools3Page2FeaturesSpawningCreateImage.Image = "rbxassetid://12900618433"
 Tools3Page2FeaturesSpawningCreateImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Tools3Page2FeaturesSpawningCreateImage.Parent = Tools3PageSection2Phrame
 
+IdkIdkIdkXd = {}
+Tools3Page2FeaturesSpawningCreate.MouseButton1Down:connect(function()
+	for i, v in pairs(PlayerListFrame9:GetChildren()) do
+		if v ~= PlayerListLabel9 then
+			IdkIdkIdkXd[tostring(v.Text)] = true
+		end
+	end
+	KitsClearItemDisplay()
+	wait()
+	CreatePlayerListsLabelP9(KitsNameOfKit)
+end)
+
+Tools3Page2FeaturesSpawningRefresh = Instance.new("TextButton")
+Tools3Page2FeaturesSpawningRefresh.Size = UDim2.new(0, 100, 0, 20)
+Tools3Page2FeaturesSpawningRefresh.Position = UDim2.new(0.02, 0, 0.52, 0)
+Tools3Page2FeaturesSpawningRefresh.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools3Page2FeaturesSpawningRefresh.BackgroundTransparency = 0.4
+Tools3Page2FeaturesSpawningRefresh.BorderSizePixel = 1
+Tools3Page2FeaturesSpawningRefresh.Text = "Refresh"
+Tools3Page2FeaturesSpawningRefresh.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools3Page2FeaturesSpawningRefresh.TextSize = 8
+Tools3Page2FeaturesSpawningRefresh.TextXAlignment = "Center"
+Tools3Page2FeaturesSpawningRefresh.Parent = Tools3PageSection2Phrame
+
+Tools3Page2FeaturesSpawningRefreshImage = Instance.new("ImageLabel")
+Tools3Page2FeaturesSpawningRefreshImage.Size = UDim2.new(0, 20, 0, 20)
+Tools3Page2FeaturesSpawningRefreshImage.Position = UDim2.new(0.012, 0, 0.52, 0)
+Tools3Page2FeaturesSpawningRefreshImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools3Page2FeaturesSpawningRefreshImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Tools3Page2FeaturesSpawningRefreshImage.BackgroundTransparency = 1
+Tools3Page2FeaturesSpawningRefreshImage.BorderSizePixel = 0
+Tools3Page2FeaturesSpawningRefreshImage.Visible = true
+Tools3Page2FeaturesSpawningRefreshImage.Image = "rbxassetid://12900618433"
+Tools3Page2FeaturesSpawningRefreshImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Tools3Page2FeaturesSpawningRefreshImage.Parent = Tools3PageSection2Phrame
+
+IdkIdkIdkXd = {}
+Tools3Page2FeaturesSpawningRefresh.MouseButton1Down:connect(function()
+	KitsClearItemDisplay()
+	for i, v in pairs(IdkIdkIdkXd) do
+		IdkIdkIdkXd[tostring(v)] = nil
+	end
+end)
+
 Tools3Page2FeaturesSpawningSpawn = Instance.new("TextButton")
 Tools3Page2FeaturesSpawningSpawn.Size = UDim2.new(0, 100, 0, 20)
-Tools3Page2FeaturesSpawningSpawn.Position = UDim2.new(0.02, 0, 0.42, 0)
+Tools3Page2FeaturesSpawningSpawn.Position = UDim2.new(0.02, 0, 0.62, 0)
 Tools3Page2FeaturesSpawningSpawn.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Tools3Page2FeaturesSpawningSpawn.BackgroundTransparency = 0.4
 Tools3Page2FeaturesSpawningSpawn.BorderSizePixel = 1
@@ -5174,9 +5258,20 @@ Tools3Page2FeaturesSpawningSpawn.TextSize = 8
 Tools3Page2FeaturesSpawningSpawn.TextXAlignment = "Center"
 Tools3Page2FeaturesSpawningSpawn.Parent = Tools3PageSection2Phrame
 
+Tools3Page2FeaturesSpawningCreate.MouseButton1Down:connect(function()
+	for i, v in pairs(PlayerListFrame9:GetChildren()) do
+		if v ~= PlayerListLabel9 then
+			IdkIdkIdkXd[tostring(v.Text)] = true
+		end
+	end
+	KitsClearItemDisplay()
+	wait()
+	CreatePlayerListsLabelP9(KitsNameOfKit)
+end)
+
 Tools3Page2FeaturesSpawningSpawnImage = Instance.new("ImageLabel")
 Tools3Page2FeaturesSpawningSpawnImage.Size = UDim2.new(0, 20, 0, 20)
-Tools3Page2FeaturesSpawningSpawnImage.Position = UDim2.new(0.012, 0, 0.42, 0)
+Tools3Page2FeaturesSpawningSpawnImage.Position = UDim2.new(0.012, 0, 0.62, 0)
 Tools3Page2FeaturesSpawningSpawnImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Tools3Page2FeaturesSpawningSpawnImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Tools3Page2FeaturesSpawningSpawnImage.BackgroundTransparency = 1
@@ -5215,7 +5310,7 @@ end)
 Tools3Page2FeaturesSpawningAdd.MouseButton1Down:connect(function()
 local Amount = KitsItemSpawningAdd
 	if KitsSpawningTabSelectedItem ~= nil and KitsSpawningTabSelectedItem ~= "nan" and KitsSpawningTabSelectedItem ~= "" then
-		CreatePlayerListsLabelP9(KitsSpawningTabSelectedItem.. " (" .. Amount .. ")")
+		CreatePlayerListsLabelP9(KitsSpawningTabSelectedItem)--.. " (" .. Amount .. ")")
 	else
 		AnnounceBox("No item was selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 	end
@@ -5223,11 +5318,52 @@ end)
 
 Tools3Page2FeaturesSpawningSpawn.MouseButton1Down:connect(function()
 local LootS = game.Lighting.LootDrops
-local LootSI = SpawningTabSelectedItem
 local SPlayer = game.Players:FindFirstChild(KitsSpawningTabSelectedPlayer)
 local Amount = KitsItemSpawningAdd
 	if KitsSpawningTabSelectedPlayer ~= nil and KitsSpawningTabSelectedPlayer ~= "nan" and KitsSpawningTabSelectedPlayer ~= ""  then
-		AnnounceBox("Code not finished!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+			if KitsSpawningTabSelectedPlayer ~= "All" and KitsSpawningTabSelectedPlayer ~= "Others" then
+				if KitsSpawningTabSelectedItemInItems == KitsNameOfKit then
+					for i, v in pairs(IdkIdkIdkXd) do
+						SpawnItem(SPlayer, tostring(i), LootS, Vector3.new(math.random(-3, 3), 2, math.random(-3, 3)), math.random(-5, 5))
+						if ShowSpawnedItemAlerts then
+							AnnounceBox("Spawned " .. tostring(i) .. "!", "SPAWNER", 2, 60, 160, 60, 255, 255, 255)
+						end
+					end
+				else
+					for i, v in pairs(PlayerListFrame9:GetChildren()) do
+						if v ~= PlayerListLabel9 then
+							SpawnItem(SPlayer, tostring(v.Text), LootS, Vector3.new(math.random(-3, 3), 2, math.random(-3, 3)), math.random(-5, 5))
+							if ShowSpawnedItemAlerts then
+								AnnounceBox("Spawned " .. tostring(v.Text) .. "!", "SPAWNER", 2, 60, 160, 60, 255, 255, 255)
+							end
+						end
+					end
+				end
+			elseif KitsSpawningTabSelectedPlayer == "All" then
+				for _, v in pairs(Players:GetPlayers()) do
+					for i, q in pairs(PlayerListFrame9:GetChildren()) do
+						if q ~= PlayerListLabel9 then
+							SpawnItem(v, tostring(q.Text), LootS, Vector3.new(math.random(-3, 3), 2, math.random(-3, 3)), math.random(-5, 5))
+							if ShowSpawnedItemAlerts then
+								AnnounceBox("Spawned " .. tostring(q.Text) .. "!", "SPAWNER", 2, 60, 160, 60, 255, 255, 255)
+							end
+						end
+					end
+				end
+			elseif KitsSpawningTabSelectedPlayer == "Others" then
+				for _, v in pairs(Players:GetPlayers()) do
+					if v ~= LocalPlayer then
+						for i, r in pairs(PlayerListFrame9:GetChildren()) do
+							if r ~= PlayerListLabel9 then
+								SpawnItem(v, tostring(r.Text), LootS, Vector3.new(math.random(-3, 3), 2, math.random(-3, 3)), math.random(-5, 5))
+								if ShowSpawnedItemAlerts then
+									AnnounceBox("Spawned " .. tostring(r.Text) .. "!", "SPAWNER", 2, 60, 160, 60, 255, 255, 255)
+								end
+							end
+						end
+					end
+				end
+			end
 	else
 		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 	end
@@ -6915,9 +7051,47 @@ Settings1Page2FeaturesToggleSpawnedItemMessages.MouseButton1Click:Connect(functi
 	end
 end)
 
+Settings1Page2FeaturesToggleBannedAlerts = Instance.new("TextButton")
+Settings1Page2FeaturesToggleBannedAlerts.Size = UDim2.new(0, 160, 0, 20)
+Settings1Page2FeaturesToggleBannedAlerts.Position = UDim2.new(0.02, 0, 0.52, 0)
+Settings1Page2FeaturesToggleBannedAlerts.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Settings1Page2FeaturesToggleBannedAlerts.BackgroundTransparency = 0.4
+Settings1Page2FeaturesToggleBannedAlerts.BorderSizePixel = 1
+Settings1Page2FeaturesToggleBannedAlerts.Text = "Banned Alerts"
+Settings1Page2FeaturesToggleBannedAlerts.TextColor3 = Color3.fromRGB(255, 255, 255)
+Settings1Page2FeaturesToggleBannedAlerts.TextSize = 8
+Settings1Page2FeaturesToggleBannedAlerts.TextXAlignment = "Center"
+Settings1Page2FeaturesToggleBannedAlerts.Parent = Settings1PageSection2Phrame
+
+Settings1Page2FeaturesToggleBannedAlertsImage = Instance.new("ImageLabel")
+Settings1Page2FeaturesToggleBannedAlertsImage.Size = UDim2.new(0, 20, 0, 20)
+Settings1Page2FeaturesToggleBannedAlertsImage.Position = UDim2.new(0.012, 0, 0.52, 0)
+Settings1Page2FeaturesToggleBannedAlertsImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Settings1Page2FeaturesToggleBannedAlertsImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Settings1Page2FeaturesToggleBannedAlertsImage.BackgroundTransparency = 1
+Settings1Page2FeaturesToggleBannedAlertsImage.BorderSizePixel = 0
+Settings1Page2FeaturesToggleBannedAlertsImage.Visible = true
+Settings1Page2FeaturesToggleBannedAlertsImage.Image = "rbxassetid://12902044900"
+Settings1Page2FeaturesToggleBannedAlertsImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Settings1Page2FeaturesToggleBannedAlertsImage.Parent = Settings1PageSection2Phrame
+
+Settings1Page2FeaturesToggleBannedAlerts.MouseButton1Click:Connect(function()
+	if Settings1Page2FeaturesToggleBannedAlerts.TextColor3 == Color3.fromRGB(255, 255, 255) then
+	    AnnounceBox("Showing banned alert messages!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		Settings1Page2FeaturesToggleBannedAlerts.TextColor3 = Color3.fromRGB(170, 170, 170)
+		Settings1Page2FeaturesToggleBannedAlertsImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+		BannedPlayerKickAlerts = true
+	elseif Settings1Page2FeaturesToggleBannedAlerts.TextColor3 == Color3.fromRGB(170, 170, 170) then
+		AnnounceBox("No longer showing banned alert messages!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		Settings1Page2FeaturesToggleBannedAlerts.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Settings1Page2FeaturesToggleBannedAlertsImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		BannedPlayerKickAlerts = false
+	end
+end)
+
 Settings1Page2FeaturesAutoCleanInterval = Instance.new("TextBox")
 Settings1Page2FeaturesAutoCleanInterval.Size = UDim2.new(0, 160, 0, 20)
-Settings1Page2FeaturesAutoCleanInterval.Position = UDim2.new(0.02, 0, 0.52, 0)
+Settings1Page2FeaturesAutoCleanInterval.Position = UDim2.new(0.02, 0, 0.62, 0)
 Settings1Page2FeaturesAutoCleanInterval.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Settings1Page2FeaturesAutoCleanInterval.BackgroundTransparency = 0.4
 Settings1Page2FeaturesAutoCleanInterval.BorderSizePixel = 1
@@ -6943,7 +7117,7 @@ end)
 
 Settings1Page2FeaturesDetectExploitsInterval = Instance.new("TextBox")
 Settings1Page2FeaturesDetectExploitsInterval.Size = UDim2.new(0, 160, 0, 20)
-Settings1Page2FeaturesDetectExploitsInterval.Position = UDim2.new(0.02, 0, 0.62, 0)
+Settings1Page2FeaturesDetectExploitsInterval.Position = UDim2.new(0.02, 0, 0.72, 0)
 Settings1Page2FeaturesDetectExploitsInterval.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Settings1Page2FeaturesDetectExploitsInterval.BackgroundTransparency = 0.4
 Settings1Page2FeaturesDetectExploitsInterval.BorderSizePixel = 1
@@ -6969,7 +7143,7 @@ end)
 
 Settings1Page2FeaturesAgeLockInterval = Instance.new("TextBox")
 Settings1Page2FeaturesAgeLockInterval.Size = UDim2.new(0, 160, 0, 20)
-Settings1Page2FeaturesAgeLockInterval.Position = UDim2.new(0.02, 0, 0.72, 0)
+Settings1Page2FeaturesAgeLockInterval.Position = UDim2.new(0.02, 0, 0.82, 0)
 Settings1Page2FeaturesAgeLockInterval.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Settings1Page2FeaturesAgeLockInterval.BackgroundTransparency = 0.4
 Settings1Page2FeaturesAgeLockInterval.BorderSizePixel = 1
@@ -8566,6 +8740,9 @@ game.Players.PlayerAdded:Connect(function(player)
     end
 	if Banned[tostring(player)] == true then
 		Kick(v)
+		if BannedPlayerKickAlerts then
+			AnnounceBox("Kicked " .. player.Name .. " was on ban list!", "BANNED", 5, 130, 130, 60, 255, 255, 255)
+		end
 	end
 	if ToggleServerLock then
 		AnnounceBox("Kicked " .. player.Name .. " player joined while server lock is on!", "SERVER LOCK", 5, 130, 130, 60, 255, 255, 255)
@@ -8830,9 +9007,9 @@ LoaderLoadedAmount.Parent = LoaderZeroPhrameInner
 LoaderPhrameLoadedUICorner.Parent = LoaderLoadedAmount
 
 LoaderLoadedAmountInner = Instance.new("Frame")
-LoaderLoadedAmountInner.Size = UDim2.new(0, 0, 0.9, 0)
+LoaderLoadedAmountInner.Size = UDim2.new(0, 5, 0.9, 0)
 LoaderLoadedAmountInner.Position = UDim2.new(0, 0, 0.05, 0)
-LoaderLoadedAmountInner.BackgroundColor3 = Color3.fromRGB(90, 170, 170)
+LoaderLoadedAmountInner.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 LoaderLoadedAmountInner.BorderColor3 = Color3.fromRGB(30, 30, 30)
 LoaderLoadedAmountInner.BorderSizePixel = 1
 LoaderLoadedAmountInner.Transparency = 0
@@ -8889,9 +9066,9 @@ LoaderInfoStatusText.BackgroundTransparency = 1
 LoaderInfoStatusText.TextXAlignment = "Left"
 LoaderInfoStatusText.Parent = LoaderZeroPhrameInner
 
-for i = 0, 100 do
-local ZeroPhrameTrans = (1-(i/100*0.8))
-local ZeroPhrameTransInner = (1-(i/100*0.7))
+for i = 0, 10 do
+local ZeroPhrameTrans = (1-(i/10*0.8))
+local ZeroPhrameTransInner = (1-(i/10*0.7))
     LoaderZeroPhrameInner.Transparency = ZeroPhrameTrans
     LoaderZeroPhrame.Transparency = ZeroPhrameTransInner
     LoaderText.Text = "Starting Loader!"
