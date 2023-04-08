@@ -28,10 +28,11 @@ ExecutorName = syn and "Synapse X" or getexecutorname and "ScriptWare" or KRNL_L
 --[[rconsoleclear()
 rconsolename('Log')--]]
 success, result = pcall(function()
-
+    
 
 
 --setup
+function ProcessScript()
 MainGui = Instance.new("ScreenGui")
 MainGui.Name = "ApocGui"
 MainGui.Parent = game.CoreGui
@@ -2159,7 +2160,7 @@ SmallText = Instance.new("TextLabel")
 SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
 SmallText.Position = UDim2.new(0.08, 0, 0.4, 0)
 SmallText.BorderSizePixel = 0
-SmallText.Text = "(/) Script version: 132"
+SmallText.Text = "(/) Script version: 133"
 SmallText.TextColor3 = Color3.fromRGB(255,255,120)
 SmallText.TextSize = 8
 SmallText.BackgroundTransparency = 1
@@ -8776,16 +8777,193 @@ AnnounceBox("Don't spam buttons they will cause you to short term lag!", "SCRIPT
 OSend = os.time()
 FinalOStime = (OSend-OSstart)
 AnnounceBox("Loaded in "..tostring(FinalOStime).."s!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
---[[ Req Features --]]
-
+end
 end)
+
+
+
+--Loader
+function CreateLoader()
+MainGuiForLoader = Instance.new("ScreenGui")
+MainGuiForLoader.Name = "ApocGuiLoader"
+MainGuiForLoader.Parent = game.CoreGui
+
+local LoaderPhrameInnerUICorner = Instance.new("UICorner")
+local LoaderPhrameLoadedInnerUICorner = Instance.new("UICorner")
+local LoaderPhrameLoadedUICorner = Instance.new("UICorner")
+
+LoaderZeroPhrame = Instance.new("Frame")
+LoaderZeroPhrame.Size = UDim2.new(0, 300, 0, 120)
+LoaderZeroPhrame.Position = UDim2.new(0.5, -150, 0.5, -120)
+LoaderZeroPhrame.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+LoaderZeroPhrame.BorderColor3 = Color3.fromRGB(30, 30, 30)
+LoaderZeroPhrame.BorderSizePixel = 1
+LoaderZeroPhrame.Transparency = 0.3
+LoaderZeroPhrame.Draggable = true
+LoaderZeroPhrame.Active = true
+LoaderZeroPhrame.Selectable = true
+LoaderZeroPhrame.Parent = MainGuiForLoader
+
+LoaderZeroPhrameInner = Instance.new("Frame")
+LoaderZeroPhrameInner.Size = UDim2.new(0.9, 0, 0.8, 0)
+LoaderZeroPhrameInner.Position = UDim2.new(0.05, 0, 0.05, 0)
+LoaderZeroPhrameInner.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+LoaderZeroPhrameInner.BorderColor3 = Color3.fromRGB(30, 30, 30)
+LoaderZeroPhrameInner.BorderSizePixel = 1
+LoaderZeroPhrameInner.Transparency = 0.2
+LoaderZeroPhrameInner.Active = true
+LoaderZeroPhrameInner.Selectable = true
+LoaderZeroPhrameInner.Parent = LoaderZeroPhrame
+LoaderPhrameInnerUICorner.Parent = LoaderZeroPhrameInner
+
+LoaderLoadedAmount = Instance.new("Frame")
+LoaderLoadedAmount.Size = UDim2.new(0.9, 0, 0.2, 0)
+LoaderLoadedAmount.Position = UDim2.new(0.05, 0, 0.7, 0)
+LoaderLoadedAmount.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+LoaderLoadedAmount.BorderColor3 = Color3.fromRGB(30, 30, 30)
+LoaderLoadedAmount.BorderSizePixel = 1
+LoaderLoadedAmount.Transparency = 0
+LoaderLoadedAmount.Visible = false
+LoaderLoadedAmount.Active = true
+LoaderLoadedAmount.Selectable = true
+LoaderLoadedAmount.Parent = LoaderZeroPhrameInner
+LoaderPhrameLoadedUICorner.Parent = LoaderLoadedAmount
+
+LoaderLoadedAmountInner = Instance.new("Frame")
+LoaderLoadedAmountInner.Size = UDim2.new(0, 0, 0.9, 0)
+LoaderLoadedAmountInner.Position = UDim2.new(0, 0, 0.05, 0)
+LoaderLoadedAmountInner.BackgroundColor3 = Color3.fromRGB(90, 170, 170)
+LoaderLoadedAmountInner.BorderColor3 = Color3.fromRGB(30, 30, 30)
+LoaderLoadedAmountInner.BorderSizePixel = 1
+LoaderLoadedAmountInner.Transparency = 0
+LoaderLoadedAmountInner.Visible = false
+LoaderLoadedAmountInner.Active = true
+LoaderLoadedAmountInner.Selectable = true
+LoaderLoadedAmountInner.Parent = LoaderLoadedAmount
+LoaderPhrameLoadedInnerUICorner.Parent = LoaderLoadedAmountInner
+
+LoaderPhrameImage = Instance.new("ImageLabel")
+LoaderPhrameImage.Size = UDim2.new(0.9, 0, 0.9, 0)
+LoaderPhrameImage.Position = UDim2.new(0.05, 0, 0.05, 0)
+LoaderPhrameImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+LoaderPhrameImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+LoaderPhrameImage.BackgroundTransparency = 1
+LoaderPhrameImage.BorderSizePixel = 0
+LoaderPhrameImage.Visible = false
+LoaderPhrameImage.Image = "rbxassetid://13046417598"
+LoaderPhrameImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+LoaderPhrameImage.Parent = LoaderZeroPhrame
+
+LoaderText = Instance.new("TextLabel")
+LoaderText.Size = UDim2.new(0, 1, 0, 1)
+LoaderText.Position = UDim2.new(0.5, 0, 0.1, 0)
+LoaderText.BorderSizePixel = 0
+LoaderText.Text = ""
+LoaderText.TextColor3 = Color3.fromRGB(255,255,255)
+LoaderText.TextSize = 12
+LoaderText.BackgroundTransparency = 1
+LoaderText.TextXAlignment = "Center"
+LoaderText.Parent = LoaderZeroPhrameInner
+
+LoaderInfoText = Instance.new("TextLabel")
+LoaderInfoText.Size = UDim2.new(0.9, 0, 0.3, 0)
+LoaderInfoText.Position = UDim2.new(0.05, 0, 0.3, 0)
+LoaderInfoText.BorderSizePixel = 0
+LoaderInfoText.Text = "Hello and welcome to Agony this loader is here to prevent any lagging!"
+LoaderInfoText.TextColor3 = Color3.fromRGB(255,255,255)
+LoaderInfoText.TextSize = 8
+LoaderInfoText.TextWrapped = true
+LoaderInfoText.BackgroundTransparency = 1
+LoaderInfoText.TextXAlignment = "Center"
+LoaderInfoText.Parent = LoaderZeroPhrameInner
+
+LoaderInfoStatusText = Instance.new("TextLabel")
+LoaderInfoStatusText.Size = UDim2.new(0.9, 0, 0.3, 0)
+LoaderInfoStatusText.Position = UDim2.new(0.1, 0, 0.65, 0)
+LoaderInfoStatusText.BorderSizePixel = 0
+LoaderInfoStatusText.Text = ""
+LoaderInfoStatusText.TextColor3 = Color3.fromRGB(255,255,255)
+LoaderInfoStatusText.TextSize = 8
+LoaderInfoStatusText.TextWrapped = true
+LoaderInfoStatusText.BackgroundTransparency = 1
+LoaderInfoStatusText.TextXAlignment = "Left"
+LoaderInfoStatusText.Parent = LoaderZeroPhrameInner
+
+for i = 0, 100 do
+local ZeroPhrameTrans = (1-(i/100*0.8))
+local ZeroPhrameTransInner = (1-(i/100*0.7))
+    LoaderZeroPhrameInner.Transparency = ZeroPhrameTrans
+    LoaderZeroPhrame.Transparency = ZeroPhrameTransInner
+    LoaderText.Text = "Starting Loader!"
+wait()
+end
+
+function ProcessLoader1()
+    ProcessLoader2()
+end
+
+function ProcessLoader2()
+LoaderLoadedAmount.Visible = true
+LoaderLoadedAmountInner.Visible = true
+wait(0.4)
+local RandomValue1 = math.random(40, 90)
+LoaderInfoStatusText.Text = "Loading " .. tostring(math.round((RandomValue1/240)*100)) .. "/100% (Setting Variables)"
+LoaderText.Text = "Loading."
+LoaderLoadedAmountInner:TweenSize(UDim2.new(0, RandomValue1, 0.9, 0),Enum.EasingDirection.In,Enum.EasingStyle.Sine,0.4,true,callback)
+LoaderLoadedAmountInner.BackgroundColor3 = Color3.fromRGB(100, 170, 170)
+wait(0.4)
+local RandomValue2 = math.random(90, 160)
+LoaderInfoStatusText.Text = "Loading " .. tostring(math.round((RandomValue2/240)*100)) .. "/100% (Creating UI)"
+LoaderText.Text = "Loading..."
+LoaderLoadedAmountInner:TweenSize(UDim2.new(0, RandomValue2, 0.9, 0),Enum.EasingDirection.In,Enum.EasingStyle.Sine,0.4,true,callback)
+LoaderLoadedAmountInner.BackgroundColor3 = Color3.fromRGB(100, 170, 170)
+wait(0.4)
+local RandomValue3 = math.random(160, 200)
+LoaderInfoStatusText.Text = "Loading " .. tostring(math.round((RandomValue3/240)*100)) .. "/100% (Loading Agony)"
+LoaderText.Text = "Loading.."
+LoaderLoadedAmountInner:TweenSize(UDim2.new(0, RandomValue3, 0.9, 0),Enum.EasingDirection.In,Enum.EasingStyle.Sine,0.4,true,callback)
+LoaderLoadedAmountInner.BackgroundColor3 = Color3.fromRGB(100, 170, 170)
+wait(0.4)
+local RandomValue4 = math.random(200, 240)
+LoaderInfoStatusText.Text = "Loading " .. tostring(math.round((RandomValue4/240)*100)) .. "/100% (Successfully Loaded Agony)"
+LoaderText.Text = "Loading."
+LoaderLoadedAmountInner:TweenSize(UDim2.new(0, 240, 0.9, 0),Enum.EasingDirection.In,Enum.EasingStyle.Sine,0.4,true,callback)
+LoaderLoadedAmountInner.BackgroundColor3 = Color3.fromRGB(90, 170, 170)
+LoaderInfoStatusText.Text = "Loading 100/100%"
+wait(0.4)
+LoaderZeroPhrame:TweenSizeAndPosition(UDim2.new(0, 150, 0, 100), UDim2.new(0.5, -75, 0.5, -50), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, 3, true)
+	for i, poptarts in pairs(LoaderZeroPhrameInner:GetChildren()) do
+	    if poptarts ~= LoaderPhrameInnerUICorner then
+		    poptarts:remove()
+		end
+	end
+	LoaderText.Text = "Loading..."
+    repeat wait() until LoaderZeroPhrame.Size == UDim2.new(0, 150, 0, 100)
+        LoaderZeroPhrameInner.Visible = false
+        LoaderPhrameImage.Visible = true
+        for i = 0, 10 do
+        local LoaderPhrameImageTrans = (1-(i/10*1))
+        LoaderPhrameImage.ImageTransparency = LoaderPhrameImageTrans
+        wait()
+        LoaderText.Text = "Loading.."
+        end
+            wait(0.5)
+                LoaderText.Text = "Loading."
+                LoaderZeroPhrame:TweenSizeAndPosition(UDim2.new(0, 1, 0, 1), UDim2.new(0.5, -1, 0.5, -1), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, 1, true)
+				wait(1)
+				MainGuiForLoader:destroy()
+				ProcessScript()
+end
+
+ProcessLoader1()
+end
+--Loader
+
+
+
+--Finish
 if success then
-    --[[rconsoleprint("@@GREEN@@")
-    rconsoleprint("[Success] " .. "script works!.\n")
-    rconsoleprint("@@YELLOW@@")
-    rconsoleprint("[Check] " .. tostring(result) .. "\n")--]]
+	CreateLoader()
 else
-    --[[rconsoleprint("@@RED@@")
-    rconsoleprint("[Error] " .. tostring(result) .. "\n")--]]
 	AnnounceBox("Error detected " .. tostring(result) .. "", "SCRIPT", 20, 255, 255, 255, 255, 255, 255)
 end
