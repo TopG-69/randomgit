@@ -21,6 +21,7 @@ ShowLeaveAlerts = true
 ShowJoinAlerts = true
 ShowSpawnedItemAlerts = false
 ShowExploitAlerts = true
+AutoModVehicle = false
 TogglePunishExploiters = false
 ExecutorName = syn and "Synapse X" or getexecutorname and "ScriptWare" or KRNL_LOADED and "Krnl / Oxygen U / Comet" or is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or secure_load and "Sentinel" or "n/a"
 
@@ -420,6 +421,52 @@ function Skins(plr)
     end
 end
 
+function GetCar()
+	local Client = Players.LocalPlayer
+    local Seatfound = false
+    for _, v in pairs(Workspace.Vehicles:GetDescendants()) do
+        if v.Name ~= "VehicleWreck" and v:IsA("Weld") and v.Name == "SeatWeld" and v.Part1 ~= nil and v.Part1.Parent.Name == Client.Name then
+            Seatfound = true
+            if v.Parent.Parent.Parent.Name == "Seats" then
+                return vehicles, v.Parent.Parent.Parent.Parent
+            else
+                return v.Parent.Parent.Parent
+            end
+        end
+    end
+    if Seatfound == false then
+        return false
+    end
+end
+
+function VehicleMod(value, mode)
+	local CurrentVehicle = GetCar()
+	if mode == 1 then
+		fireserver("ChangeValue", CurrentVehicle.Stats.Armor.Max, value)
+		fireserver("ChangeValue", CurrentVehicle.Stats.Armor, value)
+    elseif mode == 2 then
+		fireserver("ChangeValue", CurrentVehicle.Stats.Engine.Max, value)
+		fireserver("ChangeValue", CurrentVehicle.Stats.Engine, value)
+	elseif mode == 3 then
+		fireserver("ChangeValue", CurrentVehicle.Stats.Fuel.Max, value)
+		fireserver("ChangeValue", CurrentVehicle.Stats.Fuel, value)
+	elseif mode == 4 then
+		fireserver("ChangeValue", CurrentVehicle.Stats.Tank.Max, value)
+		fireserver("ChangeValue", CurrentVehicle.Stats.Tank, value)
+	elseif mode == 5 then
+		fireserver("ChangeValue", CurrentVehicle.Stats.Hull.Max, value)
+		fireserver("ChangeValue", CurrentVehicle.Stats.Hull, value)
+	elseif mode == 6 then
+	  fireserver("ChangeValue", CurrentVehicle.Stats.MaxSpeed, value)
+	elseif mode == 7 then
+	  fireserver("ChangeValue", CurrentVehicle.Stats.MaxSpeed.Offroad, value)
+    elseif mode == nil or mode == nan then
+		if ShowFunctionAlerts then
+			AnnounceBox("Invalid mode usage!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+    end
+end
+
 function SpawnVehicle(SelectedVehicle, SelectedPlayer, Amount)
 	spawn(function()
 		for i = 1, Amount do
@@ -439,19 +486,19 @@ function SpawnVehicle(SelectedVehicle, SelectedPlayer, Amount)
 			until game.Workspace:FindFirstChild(tostring(SelectedVehicle))
 			newCar = game.Workspace[tostring(SelectedVehicle)]
 			fireserver("GrabItem", Vehicles, game.Players, newCar)
-			for i, v in pairs(newCar:WaitForChild("Stats"):GetChildren()) do
-				if v.Name == "Armor" or v.Name == "Tank" or v.Name == "Hull" or v.Name == "Engine" or v.Name == "Fuel" then
-					if v:FindFirstChild("Max") then
-						fireserver("ChangeValue", v.Max, 1999999999)
-						fireserver("ChangeValue", v, 1999999999)
-					end
-					if v.Name == "MaxSpeed" then
-						fireserver("ChangeValue", v, 200)
-					end
-					if v:FindFirstChild("Offroad") then
-						fireserver("ChangeValue", v.Offroad, 200)
-					end
-				end
+			if AutoModVehicle then
+				fireserver("ChangeValue", newCar.Stats.Armor.Max, 2000000000)
+				fireserver("ChangeValue", newCar.Stats.Armor, 2000000000)
+				fireserver("ChangeValue", newCar.Stats.Engine.Max, 2000000000)
+				fireserver("ChangeValue", newCar.Stats.Engine, 2000000000)
+				fireserver("ChangeValue", newCar.Stats.Fuel.Max, 2000000000)
+				fireserver("ChangeValue", newCar.Stats.Fuel, 2000000000)
+				fireserver("ChangeValue", newCar.Stats.Tank.Max, 2000000000)
+				fireserver("ChangeValue", newCar.Stats.Tank, 2000000000)
+				fireserver("ChangeValue", newCar.Stats.Hull.Max, 2000000000)
+				fireserver("ChangeValue", newCar.Stats.Hull, 2000000000)
+				fireserver("ChangeValue", newCar.Stats.MaxSpeed, 200)
+				fireserver("ChangeValue", newCar.Stats.MaxSpeed.Offroad, 200)
 			end
 			for i, v in pairs(newCar:WaitForChild("Wheels"):GetChildren()) do
 				fireserver("WheelVisibleSet", v, "Normal")
@@ -1405,52 +1452,6 @@ function StatMod(player, value, mode)
     end
 end
 
-function GetCar()
-	local Client = Players.LocalPlayer
-    local Seatfound = false
-    for _, v in pairs(Workspace.Vehicles:GetDescendants()) do
-        if v.Name ~= "VehicleWreck" and v:IsA("Weld") and v.Name == "SeatWeld" and v.Part1 ~= nil and v.Part1.Parent.Name == Client.Name then
-            Seatfound = true
-            if v.Parent.Parent.Parent.Name == "Seats" then
-                return vehicles, v.Parent.Parent.Parent.Parent
-            else
-                return v.Parent.Parent.Parent
-            end
-        end
-    end
-    if Seatfound == false then
-        return false
-    end
-end
-
-function VehicleMod(value, mode)
-	local CurrentVehicle = GetCar()
-	if mode == 1 then
-		fireserver("ChangeValue", CurrentVehicle.Stats.Armor.Max, value)
-		fireserver("ChangeValue", CurrentVehicle.Stats.Armor, value)
-    elseif mode == 2 then
-		fireserver("ChangeValue", CurrentVehicle.Stats.Engine.Max, value)
-		fireserver("ChangeValue", CurrentVehicle.Stats.Engine, value)
-	elseif mode == 3 then
-		fireserver("ChangeValue", CurrentVehicle.Stats.Fuel.Max, value)
-		fireserver("ChangeValue", CurrentVehicle.Stats.Fuel, value)
-	elseif mode == 4 then
-		fireserver("ChangeValue", CurrentVehicle.Stats.Tank.Max, value)
-		fireserver("ChangeValue", CurrentVehicle.Stats.Tank, value)
-	elseif mode == 5 then
-		fireserver("ChangeValue", CurrentVehicle.Stats.Hull.Max, value)
-		fireserver("ChangeValue", CurrentVehicle.Stats.Hull, value)
-	elseif mode == 6 then
-	  fireserver("ChangeValue", CurrentVehicle.Stats.MaxSpeed, value)
-	elseif mode == 7 then
-	  fireserver("ChangeValue", CurrentVehicle.Stats.MaxSpeed.Offroad, value)
-    elseif mode == nil or mode == nan then
-		if ShowFunctionAlerts then
-			AnnounceBox("Invalid mode usage!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
-		end
-    end
-end
-
 function Buildings(mode)
 	if mode == 1 then
 		fireserver("ChangeParent", Workspace["Anchored Objects"]["Towns/Cities"], Lighting)
@@ -2107,7 +2108,7 @@ SmallText = Instance.new("TextLabel")
 SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
 SmallText.Position = UDim2.new(0.08, 0, 0.4, 0)
 SmallText.BorderSizePixel = 0
-SmallText.Text = "(/) Script version: 129"
+SmallText.Text = "(/) Script version: 130"
 SmallText.TextColor3 = Color3.fromRGB(255,255,120)
 SmallText.TextSize = 8
 SmallText.BackgroundTransparency = 1
@@ -3827,7 +3828,7 @@ Tools1Page2FeaturesSpawningItemAmountRadiusH.TextWrapped = true
 Tools1Page2FeaturesSpawningItemAmountRadiusH.TextXAlignment = "Center"
 Tools1Page2FeaturesSpawningItemAmountRadiusH.Parent = Tools1PageSection2Phrame
 
-local ItemSpawningRadiusH = 2
+local ItemSpawningRadiusH = 0
 Tools1Page2FeaturesSpawningItemAmountRadiusH.FocusLost:Connect(function(enterPressed)
 	local GetValue = tonumber(Tools1Page2FeaturesSpawningItemAmountRadiusH.Text)
     if enterPressed then
@@ -4148,11 +4149,11 @@ Tools2Page2FeaturesVehicleGodImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Tools2Page2FeaturesVehicleGodImage.Parent = Tools2PageSection2Phrame
 
 Tools2Page2FeaturesVehicleGod.MouseButton1Down:connect(function()
-	VehicleMod(math.huge, 1)
-	VehicleMod(math.huge, 2)
-	VehicleMod(math.huge, 3)
-	VehicleMod(math.huge, 4)
-	VehicleMod(math.huge, 5)
+	VehicleMod(2000000000, 1)
+	VehicleMod(2000000000, 2)
+	VehicleMod(2000000000, 3)
+	VehicleMod(2000000000, 4)
+	VehicleMod(2000000000, 5)
 	AnnounceBox("Godded current vehicle!", "GOD", 5, 60, 160, 60, 255, 255, 255)
 end)
 
@@ -4187,6 +4188,44 @@ Tools2Page2FeaturesVehicleDestroy.MouseButton1Down:connect(function()
 	VehicleMod(0, 4)
 	VehicleMod(0, 5)
 	AnnounceBox("Destroyed current vehicle!", "DESTROY", 5, 60, 160, 60, 255, 255, 255)
+end)
+
+Tools2Page2FeaturesVehicleAutoMod = Instance.new("TextButton")
+Tools2Page2FeaturesVehicleAutoMod.Size = UDim2.new(0, 100, 0, 20)
+Tools2Page2FeaturesVehicleAutoMod.Position = UDim2.new(0.582, 0, 0.42, 0)
+Tools2Page2FeaturesVehicleAutoMod.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools2Page2FeaturesVehicleAutoMod.BackgroundTransparency = 0.4
+Tools2Page2FeaturesVehicleAutoMod.BorderSizePixel = 1
+Tools2Page2FeaturesVehicleAutoMod.Text = "Auto Mod"
+Tools2Page2FeaturesVehicleAutoMod.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesVehicleAutoMod.TextSize = 8
+Tools2Page2FeaturesVehicleAutoMod.TextXAlignment = "Center"
+Tools2Page2FeaturesVehicleAutoMod.Parent = Tools2PageSection2Phrame
+
+Tools2Page2FeaturesVehicleAutoModImage = Instance.new("ImageLabel")
+Tools2Page2FeaturesVehicleAutoModImage.Size = UDim2.new(0, 20, 0, 20)
+Tools2Page2FeaturesVehicleAutoModImage.Position = UDim2.new(0.5812, 0, 0.42, 0)
+Tools2Page2FeaturesVehicleAutoModImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Tools2Page2FeaturesVehicleAutoModImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesVehicleAutoModImage.BackgroundTransparency = 1
+Tools2Page2FeaturesVehicleAutoModImage.BorderSizePixel = 0
+Tools2Page2FeaturesVehicleAutoModImage.Visible = true
+Tools2Page2FeaturesVehicleAutoModImage.Image = "rbxassetid://12900618433"
+Tools2Page2FeaturesVehicleAutoModImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Tools2Page2FeaturesVehicleAutoModImage.Parent = Tools2PageSection2Phrame
+
+Tools2Page2FeaturesVehicleAutoMod.MouseButton1Down:connect(function()
+	if Tools2Page2FeaturesVehicleAutoMod.TextColor3 == Color3.fromRGB(255, 255, 255) then
+	    AnnounceBox("Auto modding vehicles is now on!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		Tools2Page2FeaturesVehicleAutoMod.TextColor3 = Color3.fromRGB(170, 170, 170)
+		Tools2Page2FeaturesVehicleAutoModImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+		AutoModVehicle = true
+	elseif Tools2Page2FeaturesVehicleAutoMod.TextColor3 == Color3.fromRGB(170, 170, 170) then
+		AnnounceBox("Auto modding vehicles is now off!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		Tools2Page2FeaturesVehicleAutoMod.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Tools2Page2FeaturesVehicleAutoModImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		AutoModVehicle = false
+	end
 end)
 
 Tools2Page2FeaturesVehicleSpawningItemAmount = Instance.new("TextBox")
