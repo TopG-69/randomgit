@@ -5610,6 +5610,34 @@ Scripts1Page2Features2ArGonImage.Parent = Scripts1PageSection2Phrame
 Scripts1Page2Features2ArGon.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet(('https://raw.githubusercontent.com/Sittapea/randomgit/main/ArGon.lua'),true))()
 end)
+
+Scripts1Page2Features2OldVentrix = Instance.new("TextButton")
+Scripts1Page2Features2OldVentrix.Size = UDim2.new(0, 160, 0, 20)
+Scripts1Page2Features2OldVentrix.Position = UDim2.new(0.35, 0, 0.42, 0)
+Scripts1Page2Features2OldVentrix.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Scripts1Page2Features2OldVentrix.BackgroundTransparency = 0.4
+Scripts1Page2Features2OldVentrix.BorderSizePixel = 1
+Scripts1Page2Features2OldVentrix.Text = "Old Ventrix"
+Scripts1Page2Features2OldVentrix.TextColor3 = Color3.fromRGB(255, 255, 255)
+Scripts1Page2Features2OldVentrix.TextSize = 8
+Scripts1Page2Features2OldVentrix.TextXAlignment = "Center"
+Scripts1Page2Features2OldVentrix.Parent = Scripts1PageSection2Phrame
+
+Scripts1Page2Features2OldVentrixImage = Instance.new("ImageLabel")
+Scripts1Page2Features2OldVentrixImage.Size = UDim2.new(0, 20, 0, 20)
+Scripts1Page2Features2OldVentrixImage.Position = UDim2.new(0.342, 0, 0.41, 0)
+Scripts1Page2Features2OldVentrixImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Scripts1Page2Features2OldVentrixImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Scripts1Page2Features2OldVentrixImage.BackgroundTransparency = 1
+Scripts1Page2Features2OldVentrixImage.BorderSizePixel = 0
+Scripts1Page2Features2OldVentrixImage.Visible = true
+Scripts1Page2Features2OldVentrixImage.Image = "rbxassetid://12900618433"
+Scripts1Page2Features2OldVentrixImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Scripts1Page2Features2OldVentrixImage.Parent = Scripts1PageSection2Phrame
+
+Scripts1Page2Features2OldVentrix.MouseButton1Click:Connect(function()
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/Sittapea/randomgit/main/Ventrixold.lua'),true))()
+end)
 --frames
 
 
