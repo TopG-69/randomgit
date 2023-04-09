@@ -672,7 +672,6 @@ function DeterminSpace(Plr, SelectedItem)
     return (12+ExtraSpace)-Total-ItemSpace, OpenSlot
 end
 
-ToWatchTab = {}
 function TransferItem(Plr, Ob)
 	local TransferTo = LocalPlayer
 	local TransferFrom = LocalPlayer
@@ -779,6 +778,7 @@ function UpdatePlayerInventory(Plr, Scroll)
     end
 end
 
+ToWatchTab = {}
 function SetupWatch(Plr, Val)
 	ToWatchTab[Val] = Plr
 	local SelectedFrameForWatching = LocalPlayerInventory
@@ -1609,7 +1609,7 @@ LoadBans()
 --setup
 ZeroPhrame = Instance.new("Frame")
 ZeroPhrame.Size = UDim2.new(0, 600, 0, 300)
-ZeroPhrame.Position = UDim2.new(0, -900, 0, -900)
+ZeroPhrame.Position = UDim2.new(0, -600, 0, -300)
 ZeroPhrame.BorderSizePixel = 5
 ZeroPhrame.Transparency = 1
 ZeroPhrame.Draggable = true
@@ -2161,7 +2161,7 @@ SmallText = Instance.new("TextLabel")
 SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
 SmallText.Position = UDim2.new(0.08, 0, 0.4, 0)
 SmallText.BorderSizePixel = 0
-SmallText.Text = "(/) Script version: 134"
+SmallText.Text = "(/) Script version: 135"
 SmallText.TextColor3 = Color3.fromRGB(255,255,120)
 SmallText.TextSize = 8
 SmallText.BackgroundTransparency = 1
@@ -2328,6 +2328,15 @@ Other2Page2FeaturesAmount.TextSize = 8
 Other2Page2FeaturesAmount.TextWrapped = true
 Other2Page2FeaturesAmount.TextXAlignment = "Center"
 Other2Page2FeaturesAmount.Parent = Other2PageSection2Phrame
+
+Other2Page2FeaturesAmount.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+		local Amount = tonumber(Other2Page2FeaturesAmount.Text)
+		if Amount then
+			AnnounceBox("Set amount to " .. Amount .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		end
+    end
+end)
 --frames
 
 
@@ -2436,6 +2445,15 @@ Other1Page2FeaturesAmount.TextWrapped = true
 Other1Page2FeaturesAmount.TextXAlignment = "Center"
 Other1Page2FeaturesAmount.Parent = Other1PageSection2Phrame
 
+Other1Page2FeaturesAmount.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+		local Amount = tonumber(Other1Page2FeaturesAmount.Text)
+		if Amount then
+			AnnounceBox("Set amount to " .. Amount .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		end
+    end
+end)
+
 Other1Page2FeaturesSpectate = Instance.new("TextButton")
 Other1Page2FeaturesSpectate.Size = UDim2.new(0, 120, 0, 20)
 Other1Page2FeaturesSpectate.Position = UDim2.new(0.02, 0, 0.02, 0)
@@ -2543,6 +2561,8 @@ Other1Page2FeaturesSpectate.MouseButton1Click:Connect(function()
 				SpectatingPhrameFeaturesName.Text = LocalTab1SelectedPlayer
 				workspace.CurrentCamera.CameraSubject = SPlayer.Character.Humanoid
 			elseif LocalTab1SelectedPlayer == "All" then
+				Other1Page2FeaturesSpectateImage.Image = "rbxassetid://12900770221"
+				AnnounceBox("Everyone is spectating your now!", "SPECTATE", 5, 60, 160, 60, 255, 255, 255)
 				for _, v in pairs(Players:GetPlayers()) do
 					if v.Character then
 						if v ~= LocalPlayer then
@@ -2551,6 +2571,8 @@ Other1Page2FeaturesSpectate.MouseButton1Click:Connect(function()
 					end
 				end
 			elseif LocalTab1SelectedPlayer == "Others" then
+				Other1Page2FeaturesSpectateImage.Image = "rbxassetid://12900770221"
+				AnnounceBox("Everyone is spectating your now!", "SPECTATE", 5, 60, 160, 60, 255, 255, 255)
 				for _, v in pairs(Players:GetPlayers()) do
 					if v.Character and v ~= LocalPlayer then
 						if v ~= LocalPlayer then
@@ -3990,7 +4012,7 @@ end
 function ItemsDisplay(Specific)
 ClearDisplay()
 wait()
-    for i, v in pairs(game:GetService("Lighting").LootDrops:GetChildren()) do
+    for i, v in pairs(game.Lighting.LootDrops:GetChildren()) do
         if Specific == nil or string.match(string.lower(v.Name), string.lower(Specific)) then
             CreatePlayerListsLabelP4(tostring(v))
             --rconsoleprint("[!] " .. tostring(v) .. "\n")
@@ -4186,7 +4208,7 @@ Tools1Page2FeaturesSpawningItemAmountRadiusH.FocusLost:Connect(function(enterPre
 end)
 
 Tools1Page2FeaturesSpawning.MouseButton1Down:connect(function()
-local LootS = game:GetService("Lighting").LootDrops
+local LootS = game.Lighting.LootDrops
 local LootSI = SpawningTabSelectedItem
 local SPlayer = game.Players:FindFirstChild(SpawningTabSelectedPlayer)
 local Amount = ItemSpawningAmount
@@ -4928,7 +4950,7 @@ end
 function KitsItemsDisplay(Specific)
 KitsClearDisplay()
 wait()
-    for i, v in pairs(game:GetService("Lighting").LootDrops:GetChildren()) do
+    for i, v in pairs(game.Lighting.LootDrops:GetChildren()) do
         if Specific == nil or string.match(string.lower(v.Name), string.lower(Specific)) then
             CreatePlayerListsLabelP8(tostring(v))
             --rconsoleprint("[!] " .. tostring(v) .. "\n")
@@ -5312,7 +5334,7 @@ local Amount = KitsItemSpawningAdd
 end)
 
 Tools3Page2FeaturesSpawningSpawn.MouseButton1Down:connect(function()
-local LootS = game:GetService("Lighting").LootDrops
+local LootS = game.Lighting.LootDrops
 local SPlayer = game.Players:FindFirstChild(KitsSpawningTabSelectedPlayer)
 local Amount = KitsItemSpawningAdd
 	if KitsSpawningTabSelectedPlayer ~= nil and KitsSpawningTabSelectedPlayer ~= "nan" and KitsSpawningTabSelectedPlayer ~= ""  then
