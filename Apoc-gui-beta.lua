@@ -1654,6 +1654,25 @@ function LoadBans()
 end
 
 LoadBans()
+
+IdkIdkIdkXd = {}
+function SaveKits()
+	local KitsStr = "return {"
+	for i, v in pairs(IdkIdkIdkXd) do
+		KitsStr = KitsStr..'"'..tostring(i)..'", '
+	end
+	WriteFile("Kits", KitsStr.."}")
+end
+
+function LoadKits()
+	local Bool, TempKitsList = ReadFile("Kits")
+	if Bool then
+		TempKitsList = loadstring(TempKitsList)()
+		for i = 1, #TempKitsList do
+			IdkIdkIdkXd[TempKitsList[i] ] = true
+		end
+	end
+end
 --functions
 
 
@@ -2184,7 +2203,7 @@ BigText = Instance.new("TextLabel")
 BigText.Size = UDim2.new(0.01, 0, 0.01, 0)
 BigText.Position = UDim2.new(0.05, 0, 0.05, 0)
 BigText.BorderSizePixel = 0
-BigText.Text = "Script Info [9/04/2023] [21/56/UTC+2] [DeaTh-X-AngEl] ━━━━━━━━━━━━━━━━━━━━━━"
+BigText.Text = "Script Info [9/04/2023] [23/05/UTC+2] [DeaTh-X-AngEl] ━━━━━━━━━━━━━━━━━━━━━━"
 BigText.TextColor3 = Color3.fromRGB(255,255,255)
 BigText.TextSize = 8
 BigText.BackgroundTransparency = 1
@@ -2244,7 +2263,7 @@ SmallText = Instance.new("TextLabel")
 SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
 SmallText.Position = UDim2.new(0.08, 0, 0.4, 0)
 SmallText.BorderSizePixel = 0
-SmallText.Text = "(/) Script version: 136"
+SmallText.Text = "(/) Script version: 137"
 SmallText.TextColor3 = Color3.fromRGB(255,255,120)
 SmallText.TextSize = 8
 SmallText.BackgroundTransparency = 1
@@ -5300,7 +5319,6 @@ Tools3Page2FeaturesSpawningCreateImage.Image = "rbxassetid://12900618433"
 Tools3Page2FeaturesSpawningCreateImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Tools3Page2FeaturesSpawningCreateImage.Parent = Tools3PageSection2Phrame
 
-IdkIdkIdkXd = {}
 Tools3Page2FeaturesSpawningCreate.MouseButton1Down:connect(function()
 	for i, v in pairs(PlayerListFrame9:GetChildren()) do
 		if v ~= PlayerListLabel9 then
@@ -5309,6 +5327,7 @@ Tools3Page2FeaturesSpawningCreate.MouseButton1Down:connect(function()
 	end
 	KitsClearItemDisplay()
 	wait()
+	SaveKits()
 	CreatePlayerListsLabelP9(KitsNameOfKit)
 end)
 
@@ -5336,12 +5355,14 @@ Tools3Page2FeaturesSpawningRefreshImage.Image = "rbxassetid://12900618433"
 Tools3Page2FeaturesSpawningRefreshImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Tools3Page2FeaturesSpawningRefreshImage.Parent = Tools3PageSection2Phrame
 
-IdkIdkIdkXd = {}
 Tools3Page2FeaturesSpawningRefresh.MouseButton1Down:connect(function()
 	KitsClearItemDisplay()
 	for i, v in pairs(IdkIdkIdkXd) do
 		IdkIdkIdkXd[tostring(v)] = nil
 	end
+	wait()
+	LoadKits()
+	CreatePlayerListsLabelP9("KitSavingTest")
 end)
 
 Tools3Page2FeaturesSpawningSpawn = Instance.new("TextButton")
