@@ -1196,13 +1196,15 @@ end
 spawn(function()
 	while wait(30) do
 		for i, v in pairs(Players:GetPlayers()) do
-			if v:FindFirstChild("playerstats") and v.playerstats:FindFirstChild("character") and v.playerstats.character:FindFirstChild("Agony") then
-				if v == "VlTTUPEA" or v == "TRINITY_XR" then
-					ExploitersList[tostring(v)] = "Agony Owner"
-					AddPlayerToExploitList(v, "Agony Owner")
-				else
-					ExploitersList[tostring(v)] = "Agony User"
-					AddPlayerToExploitList(v, "Agony User")
+			if v ~= LocalPlayer then
+				if v:FindFirstChild("playerstats") and v.playerstats:FindFirstChild("character") and v.playerstats.character:FindFirstChild("Agony") then
+					if v.Name == "VlTTUPEA" or v.Name == "TRINITY_XR" or v.Name == "VlTTUPEA_alt" or v.Name == "LeSuc042" or v.Name == "Cjrmenak" then
+						ExploitersList[tostring(v)] = "Agony Owner"
+						AddPlayerToExploitList(v, "Agony Owner")
+					else
+						ExploitersList[tostring(v)] = "Agony User"
+						AddPlayerToExploitList(v, "Agony User")
+					end
 				end
 			end
 		end
@@ -7395,6 +7397,7 @@ spawn(function()
 			if ShowFunctionAlerts then
 				AnnounceBox("Auto clean ran!", "AUTO CLEAN", 5, 60, 160, 60, 255, 255, 255)
 			end
+			CleanLoot()
 			CleanGarbage()
 			CleanVehicles()
 		end
