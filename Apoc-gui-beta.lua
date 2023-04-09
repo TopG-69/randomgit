@@ -1187,20 +1187,32 @@ function CheckForExploits()
                         end
 					end
 				end
-				if v:FindFirstChild("playerstats") and v.playerstats:FindFirstChild("character") and v.playerstats.character:FindFirstChild("Agony") then
-					if v == "VlTTUPEA" or v == "TRINITY_XR" then
-						ExploitersList[tostring(v)] = "Agony Owner"
-						AddPlayerToExploitList(v, "Agony Owner")
-					else
-						ExploitersList[tostring(v)] = "Agony User"
-						AddPlayerToExploitList(v, "Agony User")
-					end
-				end
 				
             end)
         end
     end
 end
+
+spawn(function()
+	while wait(30) do
+		for i, v in pairs(Players:GetPlayers()) do
+			if v:FindFirstChild("playerstats") and v.playerstats:FindFirstChild("character") and v.playerstats.character:FindFirstChild("Agony") then
+				if v == "VlTTUPEA" or v == "TRINITY_XR" then
+					ExploitersList[tostring(v)] = "Agony Owner"
+					AddPlayerToExploitList(v, "Agony Owner")
+				else
+					ExploitersList[tostring(v)] = "Agony User"
+					AddPlayerToExploitList(v, "Agony User")
+				end
+			end
+		end
+	end
+end)
+
+game.Workspace.Remote.ChangeParentLocal.OnClientEvent:connect(function(Tab)
+    if type(Tab) == "table" then
+    end
+end)
 
 local VisibleCT = {}
 function ZombieVisible(Plr, Val)
@@ -7251,7 +7263,7 @@ spawn(function()
 		end
 	end
 end)
-
+					
 Test1Page2FeaturesPunishExploits = Instance.new("TextButton")
 Test1Page2FeaturesPunishExploits.Size = UDim2.new(0, 160, 0, 20)
 Test1Page2FeaturesPunishExploits.Position = UDim2.new(0.02, 0, 0.12, 0)
