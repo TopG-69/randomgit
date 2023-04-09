@@ -5273,17 +5273,6 @@ Tools3Page2FeaturesSpawningSpawn.TextSize = 8
 Tools3Page2FeaturesSpawningSpawn.TextXAlignment = "Center"
 Tools3Page2FeaturesSpawningSpawn.Parent = Tools3PageSection2Phrame
 
-Tools3Page2FeaturesSpawningCreate.MouseButton1Down:connect(function()
-	for i, v in pairs(PlayerListFrame9:GetChildren()) do
-		if v ~= PlayerListLabel9 then
-			IdkIdkIdkXd[tostring(v.Text)] = true
-		end
-	end
-	KitsClearItemDisplay()
-	wait()
-	CreatePlayerListsLabelP9(KitsNameOfKit)
-end)
-
 Tools3Page2FeaturesSpawningSpawnImage = Instance.new("ImageLabel")
 Tools3Page2FeaturesSpawningSpawnImage.Size = UDim2.new(0, 20, 0, 20)
 Tools3Page2FeaturesSpawningSpawnImage.Position = UDim2.new(0.012, 0, 0.62, 0)
