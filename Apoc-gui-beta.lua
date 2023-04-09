@@ -8678,8 +8678,8 @@ CopyButton.MouseButton1Click:Connect(function()
 end)
 
 RestoreFromMinimizeButton = Instance.new("ImageButton")
-RestoreFromMinimizeButton.Size = UDim2.new(0, 25, 0, 25)
-RestoreFromMinimizeButton.Position = UDim2.new(0.75, 0, 0, 0)
+RestoreFromMinimizeButton.Size = UDim2.new(0, 35, 0, 35)
+RestoreFromMinimizeButton.Position = UDim2.new(0, 5, 0.70, 0)
 RestoreFromMinimizeButton.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
 RestoreFromMinimizeButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
 RestoreFromMinimizeButton.BackgroundTransparency = 1
@@ -8687,12 +8687,13 @@ RestoreFromMinimizeButton.BorderSizePixel = 1
 RestoreFromMinimizeButton.Visible = false
 RestoreFromMinimizeButton.Image = "rbxassetid://12902044900"
 RestoreFromMinimizeButton.ImageColor3 = Color3.fromRGB(255, 255, 255)
-RestoreFromMinimizeButton.Parent = ZeroPhrame
+RestoreFromMinimizeButton.Parent = MainGui
 --Linked with minimizeButton
 MinimizeButton.MouseButton1Click:Connect(function()
 	--Notify("[Fail]: Failed to minize gui!", 5, 95, 60, 60)
 	AnnounceBox("Minizeing gui!", "MINIMIZE", 5, 60, 160, 60, 255, 255, 255)
-	ZeroPhrame:TweenSize(UDim2.new(0, 0, 0, 0),Enum.EasingDirection.In,Enum.EasingStyle.Sine,1,true,callback)
+	ZeroPhrame:TweenPosition(UDim2.new(0,-900,0,-900),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,1.5,true)
+	--[[ZeroPhrame:TweenSize(UDim2.new(0, 0, 0, 0),Enum.EasingDirection.In,Enum.EasingStyle.Sine,1,true,callback)
 	wait(0.5)
     for i, v in pairs(GuiPhrame:GetChildren()) do
         v.Visible = false
@@ -8703,15 +8704,16 @@ MinimizeButton.MouseButton1Click:Connect(function()
     for i, v in pairs(GuiBarPhrame:GetChildren()) do
         v.Visible = false
     end
-	wait(0.5)
+	wait(0.5)--]]
 	RestoreFromMinimizeButton.Visible = true
 end)
 --Linked with minimizeButton
 RestoreFromMinimizeButton.MouseButton1Click:Connect(function()
+	RestoreFromMinimizeButton.Visible = false
     AnnounceBox("Restoring gui!", "MINIMIZE", 5, 60, 160, 60, 255, 255, 255)
+	ZeroPhrame:TweenPosition(UDim2.new(0, 600, 0, 300),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,1.5,true)
     --AnnounceBox("Waiting 5 seconds before destroying UI!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
-    ZeroPhrame:TweenSize(UDim2.new(0, 600, 0, 300),Enum.EasingDirection.In,Enum.EasingStyle.Sine,1,true,callback)
-    RestoreFromMinimizeButton.Visible = false
+    --[[ZeroPhrame:TweenSize(UDim2.new(0, 600, 0, 300),Enum.EasingDirection.In,Enum.EasingStyle.Sine,1,true,callback)
     --wait(5)
     --MainGui:destroy()
     wait(0.5)
@@ -8724,7 +8726,7 @@ RestoreFromMinimizeButton.MouseButton1Click:Connect(function()
     for i, v in pairs(GuiBarPhrame:GetChildren()) do
         v.Visible = true
     end
-    wait(0.5)
+    wait()
 	Welcome1PageSection1Phrame.Visible = true
 		
 	GuiLocalEBarPhrame.Visible = false	
@@ -8762,7 +8764,7 @@ RestoreFromMinimizeButton.MouseButton1Click:Connect(function()
 	ToolsButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	ScripButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	FavoriteButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
-	LocalButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
+	LocalButton.ImageColor3 = Color3.fromRGB(95, 60, 60)--]]
 end)
 
 ExitButton.MouseButton1Click:Connect(function()
