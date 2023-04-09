@@ -194,6 +194,27 @@ function AnnounceBox(MainText, SideText, Time, RGBMainTextR, RGBMainTextG, RGBMa
         F3:remove()
     end)
 end
+
+function AddToolTip(Owner, OwnerFrame, Text, YOffSet)
+local tooltip = Instance.new("TextLabel")
+tooltip.Size = UDim2.new(0, 1, 0, 1)
+tooltip.Position = UDim2.new(0, Owner.AbsolutePosition.X - OwnerFrame.AbsolutePosition.X + Owner.AbsoluteSize.X/2, YOffSet, 0)
+tooltip.BorderSizePixel = 0
+tooltip.Text = ""
+tooltip.TextColor3 = Color3.fromRGB(255,255,255)
+tooltip.TextSize = 8
+tooltip.BackgroundTransparency = 1
+tooltip.TextXAlignment = "Center"
+tooltip.Parent = OwnerFrame
+
+Owner.MouseEnter:Connect(function()
+    tooltip.Text = Text
+    tooltip.Visible = true
+end)
+Owner.MouseLeave:Connect(function()
+    tooltip.Visible = false
+end)
+end
 --setup
 
 
@@ -1194,7 +1215,7 @@ function CheckForExploits()
 end
 
 spawn(function()
-	while wait(30) do
+	while wait(1) do
 		for i, v in pairs(Players:GetPlayers()) do
 			if v ~= LocalPlayer then
 				if v:FindFirstChild("playerstats") and v.playerstats:FindFirstChild("character") and v.playerstats.character:FindFirstChild("Agony") then
@@ -1718,6 +1739,8 @@ ResizeButton.Image = "rbxassetid://13001263103"
 ResizeButton.ImageColor3 = Color3.fromRGB(110, 110, 110)
 ResizeButton.Parent = GuiBarPhrame
 
+AddToolTip(ResizeButton, GuiBarPhrame, "Resize's the gui!", -0.25)
+
 ResizeButtonPhrame = Instance.new("Frame")
 ResizeButtonPhrame.Size = UDim2.new(0, 100, 0, 50)
 ResizeButtonPhrame.Position = UDim2.new(0.68, 0, -0.2, 0)
@@ -1756,6 +1779,8 @@ CopyButton.Image = "rbxassetid://12902317255"
 CopyButton.ImageColor3 = Color3.fromRGB(110, 110, 110)
 CopyButton.Parent = GuiBarPhrame
 
+AddToolTip(CopyButton, GuiBarPhrame, "Copys Agony's discord link to your clipboard!", -0.25)
+
 IdkButton = Instance.new("ImageButton")
 IdkButton.Size = UDim2.new(0, 23, 0, 23)
 IdkButton.Position = UDim2.new(0.85, 0, 0, 0)
@@ -1767,6 +1792,8 @@ IdkButton.Visible = true
 IdkButton.Image = "rbxassetid://12902309246"
 IdkButton.ImageColor3 = Color3.fromRGB(110, 110, 110)
 IdkButton.Parent = GuiBarPhrame
+
+AddToolTip(IdkButton, GuiBarPhrame, "Enables/Disables welcome frame!", -0.25)
 
 MinimizeButton = Instance.new("ImageButton")
 MinimizeButton.Size = UDim2.new(0, 23, 0, 23)
@@ -1780,6 +1807,8 @@ MinimizeButton.Image = "rbxassetid://12902246420"
 MinimizeButton.ImageColor3 = Color3.fromRGB(110, 110, 110)
 MinimizeButton.Parent = GuiBarPhrame
 
+AddToolTip(MinimizeButton, GuiBarPhrame, "Minimize's the gui!", -0.25)
+
 ExitButton = Instance.new("ImageButton")
 ExitButton.Size = UDim2.new(0, 23, 0, 23)
 ExitButton.Position = UDim2.new(0.95, 0, 0, 0)
@@ -1791,6 +1820,8 @@ ExitButton.Visible = true
 ExitButton.Image = "rbxassetid://12902232003"
 ExitButton.ImageColor3 = Color3.fromRGB(110, 110, 110)
 ExitButton.Parent = GuiBarPhrame
+
+AddToolTip(ExitButton, GuiBarPhrame, "Destroy's the MainFrame!", -0.25)
 
 GuiPhrame = Instance.new("Frame")
 GuiPhrame.Size = UDim2.new(1, 0, 1, 0)
@@ -1828,6 +1859,7 @@ LocalButton.Visible = true
 LocalButton.Image = "rbxassetid://12899885269"
 LocalButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 LocalButton.Parent = GuiTabBarPhrame
+AddToolTip(LocalButton, GuiTabBarPhrame, "Local", -0.25)
 OtherButton = Instance.new("ImageButton")
 OtherButton.Size = UDim2.new(0, 20, 0, 20)
 OtherButton.Position = UDim2.new(0.15, 0, 0.1, 0)
@@ -1839,6 +1871,7 @@ OtherButton.Visible = true
 OtherButton.Image = "rbxassetid://12899886897"
 OtherButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 OtherButton.Parent = GuiTabBarPhrame
+AddToolTip(OtherButton, GuiTabBarPhrame, "Other", -0.25)
 ServerButton = Instance.new("ImageButton")
 ServerButton.Size = UDim2.new(0, 20, 0, 20)
 ServerButton.Position = UDim2.new(0.25, 0, 0.1, 0)
@@ -1850,6 +1883,7 @@ ServerButton.Visible = true
 ServerButton.Image = "rbxassetid://6034509993"
 ServerButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 ServerButton.Parent = GuiTabBarPhrame
+AddToolTip(ServerButton, GuiTabBarPhrame, "Server", -0.25)
 SettingsButton = Instance.new("ImageButton")
 SettingsButton.Size = UDim2.new(0, 20, 0, 20)
 SettingsButton.Position = UDim2.new(0.35, 0, 0.1, 0)
@@ -1861,6 +1895,7 @@ SettingsButton.Visible = true
 SettingsButton.Image = "rbxassetid://12897667997"
 SettingsButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 SettingsButton.Parent = GuiTabBarPhrame
+AddToolTip(SettingsButton, GuiTabBarPhrame, "Settings", -0.25)
 MiscButton = Instance.new("ImageButton")
 MiscButton.Size = UDim2.new(0, 20, 0, 20)
 MiscButton.Position = UDim2.new(0.45, 0, 0.1, 0)
@@ -1872,6 +1907,7 @@ MiscButton.Visible = true
 MiscButton.Image = "rbxassetid://12899931172"
 MiscButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 MiscButton.Parent = GuiTabBarPhrame
+AddToolTip(MiscButton, GuiTabBarPhrame, "Console", -0.25)
 TestButton = Instance.new("ImageButton")
 TestButton.Size = UDim2.new(0, 20, 0, 20)
 TestButton.Position = UDim2.new(0.55, 0, 0.1, 0)
@@ -1883,6 +1919,7 @@ TestButton.Visible = true
 TestButton.Image = "rbxassetid://12899882477"
 TestButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 TestButton.Parent = GuiTabBarPhrame
+AddToolTip(TestButton, GuiTabBarPhrame, "Protection", -0.25)
 ToolsButton = Instance.new("ImageButton")
 ToolsButton.Size = UDim2.new(0, 20, 0, 20)
 ToolsButton.Position = UDim2.new(0.65, 0, 0.1, 0)
@@ -1894,6 +1931,7 @@ ToolsButton.Visible = true
 ToolsButton.Image = "rbxassetid://12899929616"
 ToolsButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 ToolsButton.Parent = GuiTabBarPhrame
+AddToolTip(ToolsButton, GuiTabBarPhrame, "Tools", -0.25)
 ScripButton = Instance.new("ImageButton")
 ScripButton.Size = UDim2.new(0, 20, 0, 20)
 ScripButton.Position = UDim2.new(0.75, 0, 0.1, 0)
@@ -1905,6 +1943,7 @@ ScripButton.Visible = true
 ScripButton.Image = "rbxassetid://12899952249"
 ScripButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 ScripButton.Parent = GuiTabBarPhrame
+AddToolTip(ScripButton, GuiTabBarPhrame, "Scripts", -0.25)
 FavoriteButton = Instance.new("ImageButton")
 FavoriteButton.Size = UDim2.new(0, 20, 0, 20)
 FavoriteButton.Position = UDim2.new(0.85, 0, 0.1, 0)
@@ -1916,6 +1955,7 @@ FavoriteButton.Visible = true
 FavoriteButton.Image = "rbxassetid://12899953795"
 FavoriteButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
 FavoriteButton.Parent = GuiTabBarPhrame
+AddToolTip(FavoriteButton, GuiTabBarPhrame, "Favorite", -0.25)
 --Tabs
 
 
@@ -1943,6 +1983,7 @@ OtherTab1Button.Visible = true
 OtherTab1Button.Image = "rbxassetid://12900265786"
 OtherTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 OtherTab1Button.Parent = GuiOtherEBarPhrame
+AddToolTip(OtherTab1Button, GuiOtherEBarPhrame, "Main", 1.50)
 OtherTab2Button = Instance.new("ImageButton")
 OtherTab2Button.Size = UDim2.new(0, 20, 0, 20)
 OtherTab2Button.Position = UDim2.new(0.45, 0, 0.1, 0)
@@ -1954,6 +1995,7 @@ OtherTab2Button.Visible = true
 OtherTab2Button.Image = "rbxassetid://12900267647"
 OtherTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 OtherTab2Button.Parent = GuiOtherEBarPhrame
+AddToolTip(OtherTab2Button, GuiOtherEBarPhrame, "nil", 1.50)
 OtherTab3Button = Instance.new("ImageButton")
 OtherTab3Button.Size = UDim2.new(0, 20, 0, 20)
 OtherTab3Button.Position = UDim2.new(0.65, 0, 0.1, 0)
@@ -1965,6 +2007,7 @@ OtherTab3Button.Visible = true
 OtherTab3Button.Image = "rbxassetid://12900269313"
 OtherTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 OtherTab3Button.Parent = GuiOtherEBarPhrame
+AddToolTip(OtherTab3Button, GuiOtherEBarPhrame, "Banning", 1.50)
 --OtherTabF
 
 
@@ -1992,6 +2035,7 @@ ToolsTab1Button.Visible = true
 ToolsTab1Button.Image = "rbxassetid://12900265786"
 ToolsTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 ToolsTab1Button.Parent = GuiToolsEBarPhrame
+AddToolTip(ToolsTab1Button, GuiToolsEBarPhrame, "Spawning", 1.50)
 ToolsTab2Button = Instance.new("ImageButton")
 ToolsTab2Button.Size = UDim2.new(0, 20, 0, 20)
 ToolsTab2Button.Position = UDim2.new(0.45, 0, 0.1, 0)
@@ -2003,6 +2047,7 @@ ToolsTab2Button.Visible = true
 ToolsTab2Button.Image = "rbxassetid://12900267647"
 ToolsTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 ToolsTab2Button.Parent = GuiToolsEBarPhrame
+AddToolTip(ToolsTab2Button, GuiToolsEBarPhrame, "Vehicles", 1.50)
 ToolsTab3Button = Instance.new("ImageButton")
 ToolsTab3Button.Size = UDim2.new(0, 20, 0, 20)
 ToolsTab3Button.Position = UDim2.new(0.65, 0, 0.1, 0)
@@ -2014,6 +2059,7 @@ ToolsTab3Button.Visible = true
 ToolsTab3Button.Image = "rbxassetid://12900269313"
 ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 ToolsTab3Button.Parent = GuiToolsEBarPhrame
+AddToolTip(ToolsTab3Button, GuiToolsEBarPhrame, "Kits", 1.50)
 --ToolsTabF
 
 
@@ -2041,6 +2087,7 @@ ServerTab1Button.Visible = true
 ServerTab1Button.Image = "rbxassetid://12900265786"
 ServerTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 ServerTab1Button.Parent = GuiServerEBarPhrame
+AddToolTip(ServerTab1Button, GuiServerEBarPhrame, "Main", 1.50)
 ServerTab2Button = Instance.new("ImageButton")
 ServerTab2Button.Size = UDim2.new(0, 20, 0, 20)
 ServerTab2Button.Position = UDim2.new(0.45, 0, 0.1, 0)
@@ -2052,6 +2099,7 @@ ServerTab2Button.Visible = true
 ServerTab2Button.Image = "rbxassetid://12900267647"
 ServerTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 ServerTab2Button.Parent = GuiServerEBarPhrame
+AddToolTip(ServerTab2Button, GuiServerEBarPhrame, "nil", 1.50)
 ServerTab3Button = Instance.new("ImageButton")
 ServerTab3Button.Size = UDim2.new(0, 20, 0, 20)
 ServerTab3Button.Position = UDim2.new(0.65, 0, 0.1, 0)
@@ -2063,6 +2111,7 @@ ServerTab3Button.Visible = true
 ServerTab3Button.Image = "rbxassetid://12900269313"
 ServerTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 ServerTab3Button.Parent = GuiServerEBarPhrame
+AddToolTip(ServerTab3Button, GuiServerEBarPhrame, "nil", 1.50)
 --ServerTabF
 
 
@@ -2090,6 +2139,7 @@ LocalTab1Button.Visible = true
 LocalTab1Button.Image = "rbxassetid://12900265786"
 LocalTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 LocalTab1Button.Parent = GuiLocalEBarPhrame
+AddToolTip(LocalTab1Button, GuiLocalEBarPhrame, "Main", 1.50)
 LocalTab2Button = Instance.new("ImageButton")
 LocalTab2Button.Size = UDim2.new(0, 20, 0, 20)
 LocalTab2Button.Position = UDim2.new(0.45, 0, 0.1, 0)
@@ -2101,6 +2151,7 @@ LocalTab2Button.Visible = true
 LocalTab2Button.Image = "rbxassetid://12900267647"
 LocalTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 LocalTab2Button.Parent = GuiLocalEBarPhrame
+AddToolTip(LocalTab2Button, GuiLocalEBarPhrame, "nil", 1.50)
 LocalTab3Button = Instance.new("ImageButton")
 LocalTab3Button.Size = UDim2.new(0, 20, 0, 20)
 LocalTab3Button.Position = UDim2.new(0.65, 0, 0.1, 0)
@@ -2112,6 +2163,7 @@ LocalTab3Button.Visible = true
 LocalTab3Button.Image = "rbxassetid://12900269313"
 LocalTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 LocalTab3Button.Parent = GuiLocalEBarPhrame
+AddToolTip(LocalTab3Button, GuiLocalEBarPhrame, "nil", 1.50)
 --LocalTabF
 
 
@@ -2132,7 +2184,7 @@ BigText = Instance.new("TextLabel")
 BigText.Size = UDim2.new(0.01, 0, 0.01, 0)
 BigText.Position = UDim2.new(0.05, 0, 0.05, 0)
 BigText.BorderSizePixel = 0
-BigText.Text = "Script Info [7/04/2023] [17/12] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+BigText.Text = "Script Info [9/04/2023] [21/56/UTC+2] [DeaTh-X-AngEl] ━━━━━━━━━━━━━━━━━━━━━━"
 BigText.TextColor3 = Color3.fromRGB(255,255,255)
 BigText.TextSize = 8
 BigText.BackgroundTransparency = 1
@@ -2192,7 +2244,7 @@ SmallText = Instance.new("TextLabel")
 SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
 SmallText.Position = UDim2.new(0.08, 0, 0.4, 0)
 SmallText.BorderSizePixel = 0
-SmallText.Text = "(/) Script version: 135"
+SmallText.Text = "(/) Script version: 136"
 SmallText.TextColor3 = Color3.fromRGB(255,255,120)
 SmallText.TextSize = 8
 SmallText.BackgroundTransparency = 1
