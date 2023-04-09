@@ -278,6 +278,8 @@ pcall(function()
 	end
 end)
 
+R.AddClothing:FireServer("Agony", LocalPlayer.playerstats.character, "", "", "")
+
 local Oldmakefolder = makefolder
 makefolder = function(Name)
 	if not isfolder(Name) then
@@ -1105,6 +1107,7 @@ end
 function CheckNumber(Numb)
     return tonumber(string.sub(tostring(Numb), 1, 1))
 end
+
 function CheckForExploits()
     for i, v in pairs(game.Players:GetPlayers()) do
         if v ~= LocalPlayer then
@@ -1128,8 +1131,10 @@ function CheckForExploits()
                     if ShowExploitAlerts then
                         AnnounceBox("Warning player " .. tostring(v) .. " is using JJSploit!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
 					end
-					ExploitersList[tostring(v)] = "JJ Sploit"
-					AddPlayerToExploitList(v, "JJ Sploit")
+					if not ExploitersList[tostring(v)] == "Agony User" and ExploitersList[tostring(v)] == "Agony Owner" then
+						ExploitersList[tostring(v)] = "JJ Sploit"
+						AddPlayerToExploitList(v, "JJ Sploit")
+					end
 					if TogglePunishExploiters then
 					    Kick(v)
 					    if ShowFunctionAlerts then
@@ -1167,12 +1172,14 @@ function CheckForExploits()
                         end
 					end
                 end
-				if v:FindFirstChild("playerstats") and v.playerstats:FindFirstChild("character") and v.playerstats.character:FindFirstChild("AntiTP") then
+				if v:FindFirstChild("playerstats") and v.playerstats:FindFirstChild("character") and v.playerstats.character:FindFirstChild("AntiTP") or v.playerstats.character:FindFirstChild("AA") then
                     if ShowExploitAlerts then
                         AnnounceBox("Warning player " .. tostring(v) .. " is using XR Hub!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
 					end
-					ExploitersList[tostring(v)] = "XR Hub"
-					AddPlayerToExploitList(v, "XR Hub")
+					if not ExploitersList[tostring(v)] == "Agony User" and ExploitersList[tostring(v)] == "Agony Owner" then
+						ExploitersList[tostring(v)] = "XR Hub"
+						AddPlayerToExploitList(v, "XR Hub")
+					end
 					if TogglePunishExploiters then
 					    Kick(v)
 					    if ShowFunctionAlerts then
@@ -1180,6 +1187,16 @@ function CheckForExploits()
                         end
 					end
 				end
+				if v:FindFirstChild("playerstats") and v.playerstats:FindFirstChild("character") and v.playerstats.character:FindFirstChild("Agony") then
+					if v == "VlTTUPEA" or v == "TRINITY_XR" then
+						ExploitersList[tostring(v)] = "Agony Owner"
+						AddPlayerToExploitList(v, "Agony Owner")
+					else
+						ExploitersList[tostring(v)] = "Agony User"
+						AddPlayerToExploitList(v, "Agony User")
+					end
+				end
+				
             end)
         end
     end
