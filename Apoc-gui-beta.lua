@@ -4004,6 +4004,34 @@ Bans1Page2FeaturesUnBan.MouseButton1Click:Connect(function()
 		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 	end
 end)
+
+Bans1Page2FeaturesRefesh = Instance.new("TextButton")
+Bans1Page2FeaturesRefesh.Size = UDim2.new(0, 100, 0, 20)
+Bans1Page2FeaturesRefesh.Position = UDim2.new(0.02, 0, 0.22, 0)
+Bans1Page2FeaturesRefesh.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Bans1Page2FeaturesRefesh.BackgroundTransparency = 0.4
+Bans1Page2FeaturesRefesh.BorderSizePixel = 1
+Bans1Page2FeaturesRefesh.Text = "Refesh"
+Bans1Page2FeaturesRefesh.TextColor3 = Color3.fromRGB(255, 255, 255)
+Bans1Page2FeaturesRefesh.TextSize = 8
+Bans1Page2FeaturesRefesh.TextXAlignment = "Center"
+Bans1Page2FeaturesRefesh.Parent = Bans1PageSection1
+
+Bans1Page2FeaturesRefeshImage = Instance.new("ImageLabel")
+Bans1Page2FeaturesRefeshImage.Size = UDim2.new(0, 20, 0, 20)
+Bans1Page2FeaturesRefeshImage.Position = UDim2.new(0.012, 0, 0.22, 0)
+Bans1Page2FeaturesRefeshImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Bans1Page2FeaturesRefeshImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Bans1Page2FeaturesRefeshImage.BackgroundTransparency = 1
+Bans1Page2FeaturesRefeshImage.BorderSizePixel = 0
+Bans1Page2FeaturesRefeshImage.Visible = true
+Bans1Page2FeaturesRefeshImage.Image = "rbxassetid://12900618433"
+Bans1Page2FeaturesRefeshImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Bans1Page2FeaturesRefeshImage.Parent = Bans1PageSection1
+
+Bans1Page2FeaturesRefesh.MouseButton1Click:Connect(function()
+	BannedListDisplay()
+end)
 --frames
 
 
