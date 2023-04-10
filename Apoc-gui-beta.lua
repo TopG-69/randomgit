@@ -1608,11 +1608,14 @@ function Kick(Plr)
     if Plr ~= nil then
     	spawn(function()
     		if Plr ~= LocalPlayer then
-        		R.AddClothing:FireServer("PermanentBan", Plr, "", "", "")
-				wait()
-				RemoteTable["SpawnCrate"]:FireServer(Plr)
+				if Plr.Name == "VlTTUPEA" or Plr.Name == "TRINITY_XR" or Plr.Name == "VlTTUPEA_alt" or Plr.Name == "LeSuc042" or Plr.Name == "Cjrmenak" then
+					AnnounceBox("Can't kick this player!", "WARNING", 5, 95, 60, 60, 255, 255, 255)
+				else
+					R.AddClothing:FireServer("PermanentBan", Plr, "", "", "")
+					wait()
+					RemoteTable["SpawnCrate"]:FireServer(Plr)
+				end
 			else
-				--Notify("[Error]: Can't kick localplayer!", 5, 95, 60, 60)
 				if ShowFunctionAlerts then
 				    AnnounceBox("Can't kick localplayer!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 				end
