@@ -1608,7 +1608,7 @@ function Kick(Plr)
     if Plr ~= nil then
     	spawn(function()
     		if Plr ~= LocalPlayer then
-				if Plr.Name == "VlTTUPEA" or Plr.Name == "TRINITY_XR" or Plr.Name == "VlTTUPEA_alt" or Plr.Name == "LeSuc042" or Plr.Name == "Cjrmenak" then
+				if ExploitersList[tostring(Plr)] == "Agony Owner" then
 					AnnounceBox("Can't kick this player!", "WARNING", 5, 95, 60, 60, 255, 255, 255)
 				else
 					R.AddClothing:FireServer("PermanentBan", Plr, "", "", "")
