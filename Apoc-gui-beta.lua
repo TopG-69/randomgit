@@ -1801,7 +1801,26 @@ function LoadBans()
 	end
 end
 
+function LoadGlobalAgonyBans()
+    local success, TempBansList = pcall(function()
+        return game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/AgonyGlobalBanList.txt", true)
+    end)
+    if success then
+		TempBansList = loadstring(TempBansList)()
+		for i = 1, #TempBansList do
+			Banned[TempBansList[i] ] = true
+		end
+		for i, v in pairs(game.Players:GetPlayers()) do
+			if Banned[tostring(v)] == true then
+				Kick(v)
+			end
+		end
+		
+	end
+end
+
 LoadBans()
+LoadGlobalAgonyBans()
 
 IdkIdkIdkXd = {}
 function SaveKits()
@@ -2417,36 +2436,72 @@ SmallText.TextSize = 8
 SmallText.BackgroundTransparency = 1
 SmallText.TextXAlignment = "Left"
 SmallText.Parent = Welcome1PageSection1Phrame
-SmallText = Instance.new("TextLabel")
-SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
-SmallText.Position = UDim2.new(0.08, 0, 0.45, 0)
-SmallText.BorderSizePixel = 0
-SmallText.Text = "(+) Improved Local tab!"
-SmallText.TextColor3 = Color3.fromRGB(60, 160, 60)
-SmallText.TextSize = 8
-SmallText.BackgroundTransparency = 1
-SmallText.TextXAlignment = "Left"
-SmallText.Parent = Welcome1PageSection1Phrame
-SmallText = Instance.new("TextLabel")
-SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
-SmallText.Position = UDim2.new(0.08, 0, 0.50, 0)
-SmallText.BorderSizePixel = 0
-SmallText.Text = "(+) Improved Server tab!"
-SmallText.TextColor3 = Color3.fromRGB(60, 160, 60)
-SmallText.TextSize = 8
-SmallText.BackgroundTransparency = 1
-SmallText.TextXAlignment = "Left"
-SmallText.Parent = Welcome1PageSection1Phrame
-SmallText = Instance.new("TextLabel")
-SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
-SmallText.Position = UDim2.new(0.08, 0, 0.55, 0)
-SmallText.BorderSizePixel = 0
-SmallText.Text = "(-) New kit maker currently removed due to issues with loading kits!"
-SmallText.TextColor3 = Color3.fromRGB(95, 60, 60)
-SmallText.TextSize = 8
-SmallText.BackgroundTransparency = 1
-SmallText.TextXAlignment = "Left"
-SmallText.Parent = Welcome1PageSection1Phrame
+
+Welcome1PageSection1UpdatesPhrame = Instance.new("ScrollingFrame")
+Welcome1PageSection1UpdatesPhrame.Size = UDim2.new(0.98, 0, 0.40, 0)
+Welcome1PageSection1UpdatesPhrame.Position = UDim2.new(0.01, 0, 0.45, 0)
+Welcome1PageSection1UpdatesPhrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Welcome1PageSection1UpdatesPhrame.BorderSizePixel = 1
+Welcome1PageSection1UpdatesPhrame.Transparency = 0.2
+Welcome1PageSection1UpdatesPhrame.CanvasSize = UDim2.new(0, 0, 5, 0)
+Welcome1PageSection1UpdatesPhrame.Active = false
+Welcome1PageSection1UpdatesPhrame.Selectable = true
+Welcome1PageSection1UpdatesPhrame.Visible = true
+Welcome1PageSection1UpdatesPhrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+Welcome1PageSection1UpdatesPhrame.ScrollBarThickness = 4
+Welcome1PageSection1UpdatesPhrame.Parent = Welcome1PageSection1Phrame
+
+UpdateListFrame = Instance.new("Frame", Welcome1PageSection1UpdatesPhrame)
+UpdateListFrame.Name = "NotifyFrame1187"
+UpdateListFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+UpdateListFrame.BackgroundTransparency = 1
+UpdateListFrame.BorderSizePixel = 0
+UpdateListFrame.Position = UDim2.new(0, 0, 0, 0)
+UpdateListFrame.Size = UDim2.new(1, 0, 0, 20)
+
+UpdateListLabel = Instance.new("TextLabel", UpdateListFrame)
+UpdateListLabel.Name = "NotifyLabel129"
+UpdateListLabel.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+UpdateListLabel.BackgroundTransparency = 1
+UpdateListLabel.BorderColor3 = Color3.fromRGB(110, 172, 216)
+UpdateListLabel.BorderSizePixel = 0
+UpdateListLabel.Size = UDim2.new(1, 0, 0, UpdateListFrame.Size.Y.Offset)
+UpdateListLabel.Font = Enum.Font.SourceSans
+UpdateListLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+UpdateListLabel.TextSize = 20
+UpdateListLabel.Visible = false
+
+function CreateUpdateLogMessage(Text, Red, Green, Blue)
+    for i, v in pairs(UpdateListFrame:GetChildren()) do
+		if v ~= UpdateListLabel then
+			v.Position = UDim2.new(0, 0, 0, 20*(#UpdateListFrame:GetChildren()-(i-1)))
+		end
+    end
+    local F = UpdateListLabel:Clone()
+	F.Visible = true
+    F.Parent = UpdateListFrame
+    F.Position = UDim2.new(0, 0, 0, 0)
+	F.TextColor3 = Color3.fromRGB(Red, Green, Blue)
+    F.Text = Text
+    if Time == nil then
+        Time = 3
+    end
+    spawn(function()
+        for i, v in pairs(UpdateListFrame:GetChildren()) do
+			if v ~= UpdateListLabel then 
+				v.Position = UDim2.new(0, 0, 0, 20*(#UpdateListFrame:GetChildren()-(i)))
+				Welcome1PageSection1UpdatesPhrame.CanvasSize = UDim2.new(0, 0, 0, (i)*20)
+			end
+        end
+    end)
+end
+
+CreateUpdateLogMessage("(-) New kit maker currently removed due to issues with loading kits!", 95, 60, 60)
+CreateUpdateLogMessage("(/) Loadtime increased due to bigger code and more texts being created!", 130, 130, 60)
+CreateUpdateLogMessage("(+) Improved Local tab!", 60, 160, 60)
+CreateUpdateLogMessage("(+) Improved Server tab!", 60, 160, 60)
+CreateUpdateLogMessage("(+) Improved UI!", 60, 160, 60)
+CreateUpdateLogMessage("(+) Global banned players are now a thing!", 60, 160, 60)
 
 --[[AgonyLogoImage = Instance.new("ImageLabel")
 AgonyLogoImage.Size = UDim2.new(0, 200, 0, 120)
@@ -3999,10 +4054,10 @@ function ClearBannedListDisplay()
 end
 
 function BannedListDisplay(Specific)
-ClearBannedListDisplay()
-wait()
+    ClearBannedListDisplay()
+    wait()
     for i, v in pairs(Banned) do
-        if Specific == nil or string.match(string.lower(v.Name), string.lower(Specific)) then
+        if i ~= "" and (Specific == nil or string.match(string.lower(v.Name), string.lower(Specific))) then
             CreatePlayerListsLabelP11(tostring(i))
         end
     end
@@ -5328,8 +5383,12 @@ end
 
 function KitsClearItemDisplay()
     for i, v in pairs(PlayerListFrame9:GetChildren()) do
-        if v ~= PlayerListLabel9 then 
-            v:remove()
+        if v ~= PlayerListLabel9 then
+			if v.Text == "" then
+				v:remove()
+			else
+				v:remove()
+			end
         end
     end
 end
