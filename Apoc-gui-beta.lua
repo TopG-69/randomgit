@@ -195,6 +195,26 @@ function AnnounceBox(MainText, SideText, Time, RGBMainTextR, RGBMainTextG, RGBMa
     end)
 end
 
+FullBrightOn = false
+function FullBright()
+	FullBrightOn = not FullBrightOn
+	if FullBrightOn == true then
+		game.Lighting.Ambient = Color3.new(0.5, 0.5, 0.5)
+	end
+	return FullBrightOn
+end
+
+game.Lighting:GetPropertyChangedSignal("Ambient"):connect(function(Ch)
+    if CheckColor(game.Lighting.Ambient, Color3.new(0.5, 0.5, 0.5)) == false and FullBrightOn == true then
+        game.Lighting.Ambient = Color3.new(0.5, 0.5, 0.5)
+    end
+end)
+game.Lighting:GetPropertyChangedSignal("ClockTime"):connect(function(Ch)
+    if game.Lighting.ClockTime ~= 7.5 and FullBrightOn == true then
+        game.Lighting.ClockTime = 7.5
+    end
+end)
+
 function AddToolTip(Owner, OwnerFrame, Text, YOffSet)
 local tooltip = Instance.new("TextLabel")
 tooltip.Size = UDim2.new(0, 1, 0, 1)
@@ -226,6 +246,7 @@ if ExecutorName ~= "Synapse X" then
 else
 	if ExecutorName == "Synapse X" then
 		AnnounceBox("Synapse X detected script will load correctly!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		AnnounceBox("Load Process Takes 10-16 secs!", "SCRIPT", 2, 255, 255, 255, 255, 255, 255)
 	else
 		AnnounceBox("Synapse X was not detected!", "ERROR", 15, 95, 60, 60, 255, 255, 255)
 		AnnounceBox("Warning your executor (" .. ExecutorName .. ") has a high chance of not supporting the script!", "SCRIPT", 15, 255, 255, 255, 255, 255, 255)
@@ -2330,7 +2351,7 @@ BigText = Instance.new("TextLabel")
 BigText.Size = UDim2.new(0.01, 0, 0.01, 0)
 BigText.Position = UDim2.new(0.05, 0, 0.05, 0)
 BigText.BorderSizePixel = 0
-BigText.Text = "Script Info [9/04/2023] [23/05/UTC+2] [DeaTh-X-AngEl] ━━━━━━━━━━━━━━━━━━━━━━"
+BigText.Text = "Script Info [11/04/2023] [19/46/UTC+2] [DeaTh-X-AngEl] ━━━━━━━━━━━━━━━━━━━━━━"
 BigText.TextColor3 = Color3.fromRGB(255,255,255)
 BigText.TextSize = 8
 BigText.BackgroundTransparency = 1
@@ -2390,8 +2411,38 @@ SmallText = Instance.new("TextLabel")
 SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
 SmallText.Position = UDim2.new(0.08, 0, 0.4, 0)
 SmallText.BorderSizePixel = 0
-SmallText.Text = "(/) Script version: 137"
+SmallText.Text = "(/) Script version: 138"
 SmallText.TextColor3 = Color3.fromRGB(255,255,120)
+SmallText.TextSize = 8
+SmallText.BackgroundTransparency = 1
+SmallText.TextXAlignment = "Left"
+SmallText.Parent = Welcome1PageSection1Phrame
+SmallText = Instance.new("TextLabel")
+SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallText.Position = UDim2.new(0.08, 0, 0.45, 0)
+SmallText.BorderSizePixel = 0
+SmallText.Text = "(+) Improved Local tab!"
+SmallText.TextColor3 = Color3.fromRGB(60, 160, 60)
+SmallText.TextSize = 8
+SmallText.BackgroundTransparency = 1
+SmallText.TextXAlignment = "Left"
+SmallText.Parent = Welcome1PageSection1Phrame
+SmallText = Instance.new("TextLabel")
+SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallText.Position = UDim2.new(0.08, 0, 0.50, 0)
+SmallText.BorderSizePixel = 0
+SmallText.Text = "(+) Improved Server tab!"
+SmallText.TextColor3 = Color3.fromRGB(60, 160, 60)
+SmallText.TextSize = 8
+SmallText.BackgroundTransparency = 1
+SmallText.TextXAlignment = "Left"
+SmallText.Parent = Welcome1PageSection1Phrame
+SmallText = Instance.new("TextLabel")
+SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
+SmallText.Position = UDim2.new(0.08, 0, 0.55, 0)
+SmallText.BorderSizePixel = 0
+SmallText.Text = "(-) New kit maker currently removed due to issues with loading kits!"
+SmallText.TextColor3 = Color3.fromRGB(95, 60, 60)
 SmallText.TextSize = 8
 SmallText.BackgroundTransparency = 1
 SmallText.TextXAlignment = "Left"
@@ -6150,7 +6201,7 @@ Local1Page2Features.Parent = Local1PageSection2Phrame
 
 Local1Page2FeaturesImage = Instance.new("ImageLabel")
 Local1Page2FeaturesImage.Size = UDim2.new(0, 20, 0, 20)
-Local1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.21, 0)
+Local1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.22, 0)
 Local1Page2FeaturesImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Local1Page2FeaturesImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2FeaturesImage.BackgroundTransparency = 1
@@ -6174,7 +6225,7 @@ Local1Page2Features.Parent = Local1PageSection2Phrame
 
 Local1Page2FeaturesImage = Instance.new("ImageLabel")
 Local1Page2FeaturesImage.Size = UDim2.new(0, 20, 0, 20)
-Local1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.31, 0)
+Local1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.32, 0)
 Local1Page2FeaturesImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Local1Page2FeaturesImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2FeaturesImage.BackgroundTransparency = 1
@@ -6198,7 +6249,7 @@ Local1Page2Features.Parent = Local1PageSection2Phrame
 
 Local1Page2FeaturesImage = Instance.new("ImageLabel")
 Local1Page2FeaturesImage.Size = UDim2.new(0, 20, 0, 20)
-Local1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.41, 0)
+Local1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.42, 0)
 Local1Page2FeaturesImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Local1Page2FeaturesImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2FeaturesImage.BackgroundTransparency = 1
@@ -6222,7 +6273,7 @@ Local1Page2Features.Parent = Local1PageSection2Phrame
 
 Local1Page2FeaturesImage = Instance.new("ImageLabel")
 Local1Page2FeaturesImage.Size = UDim2.new(0, 20, 0, 20)
-Local1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.51, 0)
+Local1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.52, 0)
 Local1Page2FeaturesImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Local1Page2FeaturesImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2FeaturesImage.BackgroundTransparency = 1
@@ -6246,7 +6297,7 @@ Local1Page2Features.Parent = Local1PageSection2Phrame
 
 Local1Page2FeaturesImage = Instance.new("ImageLabel")
 Local1Page2FeaturesImage.Size = UDim2.new(0, 20, 0, 20)
-Local1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.61, 0)
+Local1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.62, 0)
 Local1Page2FeaturesImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Local1Page2FeaturesImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2FeaturesImage.BackgroundTransparency = 1
@@ -6270,7 +6321,7 @@ Local1Page2Features.Parent = Local1PageSection2Phrame
 
 Local1Page2FeaturesImage = Instance.new("ImageLabel")
 Local1Page2FeaturesImage.Size = UDim2.new(0, 20, 0, 20)
-Local1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.71, 0)
+Local1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.72, 0)
 Local1Page2FeaturesImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Local1Page2FeaturesImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2FeaturesImage.BackgroundTransparency = 1
@@ -6294,7 +6345,7 @@ Local1Page2Features2.Parent = Local1PageSection2Phrame
 
 Local1Page2Features2Image = Instance.new("ImageLabel")
 Local1Page2Features2Image.Size = UDim2.new(0, 20, 0, 20)
-Local1Page2Features2Image.Position = UDim2.new(0.342, 0, 0.012, 0)
+Local1Page2Features2Image.Position = UDim2.new(0.342, 0, 0.02, 0)
 Local1Page2Features2Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Local1Page2Features2Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2Features2Image.BackgroundTransparency = 1
@@ -6318,7 +6369,7 @@ Local1Page2Features2.Parent = Local1PageSection2Phrame
 
 Local1Page2Features2Image = Instance.new("ImageLabel")
 Local1Page2Features2Image.Size = UDim2.new(0, 20, 0, 20)
-Local1Page2Features2Image.Position = UDim2.new(0.342, 0, 0.11, 0)
+Local1Page2Features2Image.Position = UDim2.new(0.342, 0, 0.12, 0)
 Local1Page2Features2Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Local1Page2Features2Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2Features2Image.BackgroundTransparency = 1
@@ -6342,7 +6393,7 @@ Local1Page2Features2.Parent = Local1PageSection2Phrame
 
 Local1Page2Features2Image = Instance.new("ImageLabel")
 Local1Page2Features2Image.Size = UDim2.new(0, 20, 0, 20)
-Local1Page2Features2Image.Position = UDim2.new(0.342, 0, 0.21, 0)
+Local1Page2Features2Image.Position = UDim2.new(0.342, 0, 0.22, 0)
 Local1Page2Features2Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Local1Page2Features2Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2Features2Image.BackgroundTransparency = 1
@@ -6366,7 +6417,7 @@ Local1Page2Features2.Parent = Local1PageSection2Phrame
 
 Local1Page2Features2Image = Instance.new("ImageLabel")
 Local1Page2Features2Image.Size = UDim2.new(0, 20, 0, 20)
-Local1Page2Features2Image.Position = UDim2.new(0.342, 0, 0.31, 0)
+Local1Page2Features2Image.Position = UDim2.new(0.342, 0, 0.32, 0)
 Local1Page2Features2Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Local1Page2Features2Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2Features2Image.BackgroundTransparency = 1
@@ -6390,7 +6441,7 @@ Local1Page2Features2.Parent = Local1PageSection2Phrame
 
 Local1Page2Features2Image = Instance.new("ImageLabel")
 Local1Page2Features2Image.Size = UDim2.new(0, 20, 0, 20)
-Local1Page2Features2Image.Position = UDim2.new(0.342, 0, 0.41, 0)
+Local1Page2Features2Image.Position = UDim2.new(0.342, 0, 0.42, 0)
 Local1Page2Features2Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Local1Page2Features2Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2Features2Image.BackgroundTransparency = 1
@@ -6414,7 +6465,7 @@ Local1Page2Features2.Parent = Local1PageSection2Phrame
 
 Local1Page2Features2Image = Instance.new("ImageLabel")
 Local1Page2Features2Image.Size = UDim2.new(0, 20, 0, 20)
-Local1Page2Features2Image.Position = UDim2.new(0.342, 0, 0.51, 0)
+Local1Page2Features2Image.Position = UDim2.new(0.342, 0, 0.52, 0)
 Local1Page2Features2Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Local1Page2Features2Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2Features2Image.BackgroundTransparency = 1
@@ -6424,29 +6475,54 @@ Local1Page2Features2Image.Image = "rbxassetid://12900618433"
 Local1Page2Features2Image.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2Features2Image.Parent = Local1PageSection2Phrame
 
-Local1Page2Features3 = Instance.new("TextButton")
-Local1Page2Features3.Size = UDim2.new(0, 160, 0, 20)
-Local1Page2Features3.Position = UDim2.new(0.682, 0, 0.02, 0)
-Local1Page2Features3.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Local1Page2Features3.BackgroundTransparency = 0.4
-Local1Page2Features3.BorderSizePixel = 1
-Local1Page2Features3.Text = "No Fog"
-Local1Page2Features3.TextColor3 = Color3.fromRGB(255, 255, 255)
-Local1Page2Features3.TextSize = 8
-Local1Page2Features3.TextXAlignment = "Center"
-Local1Page2Features3.Parent = Local1PageSection2Phrame
+Local1Page2Features3FogToggle = Instance.new("TextButton")
+Local1Page2Features3FogToggle.Size = UDim2.new(0, 160, 0, 20)
+Local1Page2Features3FogToggle.Position = UDim2.new(0.682, 0, 0.02, 0)
+Local1Page2Features3FogToggle.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Local1Page2Features3FogToggle.BackgroundTransparency = 0.4
+Local1Page2Features3FogToggle.BorderSizePixel = 1
+Local1Page2Features3FogToggle.Text = "No Fog"
+Local1Page2Features3FogToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+Local1Page2Features3FogToggle.TextSize = 8
+Local1Page2Features3FogToggle.TextXAlignment = "Center"
+Local1Page2Features3FogToggle.Parent = Local1PageSection2Phrame
 
-Local1Page2Features3Image = Instance.new("ImageLabel")
-Local1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
-Local1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.012, 0)
-Local1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Local1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Local1Page2Features3Image.BackgroundTransparency = 1
-Local1Page2Features3Image.BorderSizePixel = 0
-Local1Page2Features3Image.Visible = true
-Local1Page2Features3Image.Image = "rbxassetid://12900618433"
-Local1Page2Features3Image.ImageColor3 = Color3.fromRGB(255, 255, 255)
-Local1Page2Features3Image.Parent = Local1PageSection2Phrame
+Local1Page2Features3FogToggleImage = Instance.new("ImageLabel")
+Local1Page2Features3FogToggleImage.Size = UDim2.new(0, 20, 0, 20)
+Local1Page2Features3FogToggleImage.Position = UDim2.new(0.674, 0, 0.012, 0)
+Local1Page2Features3FogToggleImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Local1Page2Features3FogToggleImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Local1Page2Features3FogToggleImage.BackgroundTransparency = 1
+Local1Page2Features3FogToggleImage.BorderSizePixel = 0
+Local1Page2Features3FogToggleImage.Visible = true
+Local1Page2Features3FogToggleImage.Image = "rbxassetid://12900618433"
+Local1Page2Features3FogToggleImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Local1Page2Features3FogToggleImage.Parent = Local1PageSection2Phrame
+
+local ToggleNoFog = false;
+Local1Page2Features3FogToggle.MouseButton1Click:Connect(function()
+	if Local1Page2Features3FogToggle.TextColor3 == Color3.fromRGB(255, 255, 255) then
+		AnnounceBox("Removed fog!", "FOG", 5, 60, 160, 60, 255, 255, 255)
+		Local1Page2Features3FogToggle.TextColor3 = Color3.fromRGB(170, 170, 170)
+		Local1Page2Features3FogToggleImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+		Local1Page2Features3FogToggle.Text = "Restore Fog"
+		game.Lighting.FogEnd = 9e9
+		ToggleNoFog = true
+	else
+		AnnounceBox("Restored fog!", "FOG", 5, 60, 160, 60, 255, 255, 255)
+		Local1Page2Features3FogToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Local1Page2Features3FogToggleImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		Local1Page2Features3FogToggle.Text = "No Fog"
+		game.Lighting.FogEnd = 1300
+		ToggleNoFog = false
+	end
+end)
+
+game.Lighting:GetPropertyChangedSignal("FogEnd"):connect(function(Ch)
+    if game.Lighting.FogEnd < 9e9 and ToggleNoFog == true then
+        game.Lighting.FogEnd = 9e9
+    end
+end)
 
 Local1Page2Features3 = Instance.new("TextButton")
 Local1Page2Features3.Size = UDim2.new(0, 160, 0, 20)
@@ -6462,7 +6538,7 @@ Local1Page2Features3.Parent = Local1PageSection2Phrame
 
 Local1Page2Features3Image = Instance.new("ImageLabel")
 Local1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
-Local1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.11, 0)
+Local1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.12, 0)
 Local1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Local1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2Features3Image.BackgroundTransparency = 1
@@ -6486,7 +6562,7 @@ Local1Page2Features3.Parent = Local1PageSection2Phrame
 
 Local1Page2Features3Image = Instance.new("ImageLabel")
 Local1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
-Local1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.21, 0)
+Local1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.22, 0)
 Local1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Local1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2Features3Image.BackgroundTransparency = 1
@@ -6510,7 +6586,7 @@ Local1Page2Features3.Parent = Local1PageSection2Phrame
 
 Local1Page2Features3Image = Instance.new("ImageLabel")
 Local1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
-Local1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.31, 0)
+Local1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.32, 0)
 Local1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Local1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2Features3Image.BackgroundTransparency = 1
@@ -6534,7 +6610,7 @@ Local1Page2Features3.Parent = Local1PageSection2Phrame
 
 Local1Page2Features3Image = Instance.new("ImageLabel")
 Local1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
-Local1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.41, 0)
+Local1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.42, 0)
 Local1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Local1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2Features3Image.BackgroundTransparency = 1
@@ -6558,7 +6634,7 @@ Local1Page2Features3.Parent = Local1PageSection2Phrame
 
 Local1Page2Features3Image = Instance.new("ImageLabel")
 Local1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
-Local1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.51, 0)
+Local1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.52, 0)
 Local1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Local1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2Features3Image.BackgroundTransparency = 1
@@ -6567,6 +6643,46 @@ Local1Page2Features3Image.Visible = true
 Local1Page2Features3Image.Image = "rbxassetid://12900618433"
 Local1Page2Features3Image.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Local1Page2Features3Image.Parent = Local1PageSection2Phrame
+
+Local1Page2Features3Fullbright = Instance.new("TextButton")
+Local1Page2Features3Fullbright.Size = UDim2.new(0, 160, 0, 20)
+Local1Page2Features3Fullbright.Position = UDim2.new(0.682, 0, 0.62, 0)
+Local1Page2Features3Fullbright.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Local1Page2Features3Fullbright.BackgroundTransparency = 0.4
+Local1Page2Features3Fullbright.BorderSizePixel = 1
+Local1Page2Features3Fullbright.Text = "FullBright"
+Local1Page2Features3Fullbright.TextColor3 = Color3.fromRGB(255, 255, 255)
+Local1Page2Features3Fullbright.TextSize = 8
+Local1Page2Features3Fullbright.TextXAlignment = "Center"
+Local1Page2Features3Fullbright.Parent = Local1PageSection2Phrame
+
+Local1Page2Features3FullbrightImage = Instance.new("ImageLabel")
+Local1Page2Features3FullbrightImage.Size = UDim2.new(0, 20, 0, 20)
+Local1Page2Features3FullbrightImage.Position = UDim2.new(0.674, 0, 0.62, 0)
+Local1Page2Features3FullbrightImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Local1Page2Features3FullbrightImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Local1Page2Features3FullbrightImage.BackgroundTransparency = 1
+Local1Page2Features3FullbrightImage.BorderSizePixel = 0
+Local1Page2Features3FullbrightImage.Visible = true
+Local1Page2Features3FullbrightImage.Image = "rbxassetid://12900618433"
+Local1Page2Features3FullbrightImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Local1Page2Features3FullbrightImage.Parent = Local1PageSection2Phrame
+
+Local1Page2Features3Fullbright.MouseButton1Click:Connect(function()
+	if Local1Page2Features3Fullbright.TextColor3 == Color3.fromRGB(255, 255, 255) then
+		AnnounceBox("fullbright is now on!", "FULLBRIGHT", 5, 60, 160, 60, 255, 255, 255)
+		Local1Page2Features3Fullbright.TextColor3 = Color3.fromRGB(170, 170, 170)
+		Local1Page2Features3FullbrightImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+		Local1Page2Features3Fullbright.Text = "No FullBright"
+		FullBright()
+	else
+		AnnounceBox("fullbright is now off!", "FULLBRIGHT", 5, 60, 160, 60, 255, 255, 255)
+		Local1Page2Features3Fullbright.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Local1Page2Features3FullbrightImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		Local1Page2Features3Fullbright.Text = "FullBright"
+		FullBright()
+	end
+end)
 --frames
 
 
