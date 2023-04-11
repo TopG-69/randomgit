@@ -320,6 +320,106 @@ function ReadFile(fn)
 	return pcall(function() return readfile("Agony/"..fn..".txt") end)
 end
 
+if pcall(function() readfile("Agony/Kits.txt") end) ~= true then
+WriteFile("Kits", "")
+wait()
+end
+
+NewTx = ReadFile("Kits")
+KitsList = {["Test"] = {"Test", {"M14Ammo50", 4}, "ACOG", "Grip", "Suppressor762", "MilitaryPackBlack"}}
+
+function Sep(Tx)
+	WriteFile("Kits", Tx)
+	local Tabs = {}
+	local Open = false
+	local Last = 0
+	for i = 1, string.len(Tx) do
+		if string.sub(Tx, i, i) == "{" then
+			Open = true
+			Last = i
+		elseif string.sub(Tx, i, i) == "}" then
+			if Open == true then
+				Open = false
+				table.insert(Tabs, string.sub(Tx, Last+1, i-1))
+			end
+		end
+	end
+return Tabs
+end
+
+function MakeIndividual(Tabs)
+	if #Tabs < 1 then
+		return
+	end
+	local ReturnList = {}
+	for i = 1, #Tabs do
+		local KitName = ""
+		local Items = {}
+		local Start = 0
+		for a = 1, string.len(Tabs[i]) do
+			if string.sub(Tabs[i], a, a) == ":" then
+				KitName = string.sub(Tabs[i], 1, a-1)
+				Start = a
+			elseif string.sub(Tabs[i], a, a) == ";" then
+				local TempItem = string.sub(Tabs[i], Start+1, a-1)
+				if string.match(TempItem, "#") then
+					local Val1 = string.split(TempItem, "#")
+					Val1[2] = tonumber(Val1[2])
+					TempItem = Val1
+				end
+				table.insert(Items, TempItem)
+				Start = a
+			end
+		end
+	KitsList[KitName] = Items
+	ReturnList[KitName] = Items
+	end
+return ReturnList
+end
+
+function SetupCustomKits()
+KitsList = {["Test"] = {"Test", {"M14Ammo50", 4}, "ACOG", "Grip", "Suppressor762", "MilitaryPackBlack"}}
+MakeIndividual(Sep(readfile("Agony/Kits.txt")))
+end
+SetupCustomKits()
+
+local TempKitCreation = {}
+local CreatingKit = false
+function AddToCreationKit(Item, Amount)
+	local TempItem = Item
+	if Amount > 1 then
+		TempItem = {Item, Amount}
+	end
+	table.insert(TempKitCreation, TempItem)
+end
+
+function RemoveFromCreationKit(Item)
+	for i = 1, #TempKitCreation do
+		if typeof(TempKitCreation[i]) == "table" and TempKitCreation[i][1] == Item or TempKitCreation[i] == Item then
+			table.remove(TempKitCreation, i)
+		end
+	end
+end
+
+function DeleteKitF(KN)
+	local TempKitListText = ReadFile("Kits")
+	for i = 1, string.len(TempKitListText) do
+		if string.sub(TempKitListText, i, i+string.len(KN)) == KN..":" then
+			local End = 0
+			repeat
+				End = End+1
+			until string.sub(TempKitListText, i+End, i+End) == "}"
+			if i == 2 then
+				TempKitListText = string.sub(TempKitListText, i+End+2)
+			else
+				TempKitListText = string.sub(TempKitListText, 1, i-2)..string.sub(TempKitListText, i+End+2)
+			end
+			WriteFile("Kits", TempKitListText)
+			break
+		end
+	end
+end
+
 local ItemValueList = {}
 for i, v in pairs(game:GetService("Lighting"):GetDescendants()) do
     if v:FindFirstChild("ObjectID") then
@@ -1422,6 +1522,30 @@ function GetPlayers(Str)
 		end
 	end
 	return Users
+end
+
+function Zombies(mode)
+	if mode == 1 then
+		fireserver('ChangeParent', game.Players["Zombies"], game.Workspace)
+	elseif mode == 2 then
+		fireserver('ChangeParent', game.Workspace["Zombies"], game.Players)
+    elseif mode == nil or mode == nan then
+	    if ShowFunctionAlerts then
+		    AnnounceBox("Invalid mode usage!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+	    end
+	end
+end
+
+function Helicopter(mode)
+	if mode == 1 then
+		fireserver('ChangeParent', game.Workspace["HeliCrash"], game.Players)
+	elseif mode == 2 then
+		fireserver('ChangeParent', game.Workspace, game.Players["HeliCrash"])
+    elseif mode == nil or mode == nan then
+	    if ShowFunctionAlerts then
+		    AnnounceBox("Invalid mode usage!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+	    end
+	end
 end
 
 function InventoryClear(Players)
@@ -5114,6 +5238,7 @@ PlayerListLabel9.TextSize = 20
 PlayerListLabel9.Visible = false
 
 local KitsSpawningTabSelectedItemInItems = ""
+--local SelectedKit = nil
 local KitsSpawningTabSelectedItemInItemsLabel;
 function CreatePlayerListsLabelP9(Text)
     for i, v in pairs(PlayerListFrame9:GetChildren()) do
@@ -5133,6 +5258,7 @@ function CreatePlayerListsLabelP9(Text)
 		F.TextColor3 = Color3.fromRGB(170, 170, 170)
 		KitsSpawningTabSelectedItemInItems = F.Text
 		KitsSpawningTabSelectedItemInItemsLabel = F
+		--SelectedKit = tostring("M14")
 		if ShowFunctionAlerts then
 			AnnounceBox("Item ".. F.Text .. " was selected!", "ITEM", 5, 255, 255, 255, 255, 255, 255)
 		end
@@ -5157,13 +5283,15 @@ function KitsClearItemDisplay()
     end
 end
 
-function KitsItemsItemDisplay(Item, clear)
-if clear then
+function LoadKitsItemsItemDisplay()
 	KitsClearItemDisplay()
+	wait()
+	for i, v in pairs(KitsList) do
+		CreatePlayerListsLabelP9(i)
+	end
 end
-wait()
-	CreatePlayerListsLabelP9(Item)
-end
+
+LoadKitsItemsItemDisplay()
 
 Tools3Page2FeaturesSearch = Instance.new("TextBox")
 Tools3Page2FeaturesSearch.Size = UDim2.new(0, 162, 0, 20)
@@ -5458,6 +5586,30 @@ local Amount = KitsItemSpawningAdd
 end)
 
 Tools3Page2FeaturesSpawningSpawn.MouseButton1Down:connect(function()
+--[[local SPlayer = game.Players:FindFirstChild(KitsSpawningTabSelectedPlayer)
+Tab = KitsList[SelectedKit]
+for i = 1, #Tab do
+local SItem;
+local SAmount = 1
+if typeof(Tab[i]) == "table" then
+SItem = Tab[i][1]
+SAmount = Tab[i][2]
+else
+SItem = Tab[i]
+end
+if Mats:FindFirstChild(SItem) then
+SItem = Mats:FindFirstChild(SItem)
+else
+SItem = Loot:WaitForChild(SItem)
+end
+spawn(function()
+for a = 1, SAmount do
+local ItemOffset = Vector3.new(math.random(1, 14)-7, 2, math.random(1, 14)-7)
+SpawnItem(SPlayer, SItem, Loot, ItemOffset, math.random(-5, 5))
+end
+end)
+end
+end)--]]
 local LootS = game.Lighting.LootDrops
 local SPlayer = game.Players:FindFirstChild(KitsSpawningTabSelectedPlayer)
 local Amount = KitsItemSpawningAdd
@@ -5950,7 +6102,7 @@ Local1Page2FeaturesHungerAmount.FocusLost:Connect(function(enterPressed)
 	local GetValue = tonumber(Local1Page2FeaturesHungerAmount.Text)
     if enterPressed then
 		if GetValue then
-			AnnounceBox("Set hunger to " .. GetValue .. "!", "HUNGER", 5, 255, 255, 255, 255, 255, 255)
+			AnnounceBox("Set hunger to " .. GetValue .. "!", "HUNGER", 5, 60, 160, 60, 255, 255, 255)
 			Vitals(LocalPlayer, 4, GetValue)
 		else
 			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
@@ -5976,7 +6128,7 @@ Local1Page2FeaturesThirstAmount.FocusLost:Connect(function(enterPressed)
 	local GetValue = tonumber(Local1Page2FeaturesThirstAmount.Text)
     if enterPressed then
 		if GetValue then
-			AnnounceBox("Set thirst to " .. GetValue .. "!", "THIRST", 5, 255, 255, 255, 255, 255, 255)
+			AnnounceBox("Set thirst to " .. GetValue .. "!", "THIRST", 5, 60, 160, 60, 255, 255, 255)
 			Vitals(LocalPlayer, 5, GetValue)
 		else
 			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
@@ -6431,13 +6583,133 @@ Server1PageSection2Phrame.Selectable = true
 Server1PageSection2Phrame.Visible = false
 Server1PageSection2Phrame.Parent = GuiPhrame
 
+Server1Page2FeaturesToggleZombies = Instance.new("TextButton")
+Server1Page2FeaturesToggleZombies.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2FeaturesToggleZombies.Position = UDim2.new(0.02, 0, 0.02, 0)
+Server1Page2FeaturesToggleZombies.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2FeaturesToggleZombies.BackgroundTransparency = 0.4
+Server1Page2FeaturesToggleZombies.BorderSizePixel = 1
+Server1Page2FeaturesToggleZombies.Text = "Kill Zombies"
+Server1Page2FeaturesToggleZombies.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2FeaturesToggleZombies.TextSize = 8
+Server1Page2FeaturesToggleZombies.TextXAlignment = "Center"
+Server1Page2FeaturesToggleZombies.Parent = Server1PageSection2Phrame
+
+Server1Page2FeaturesToggleZombiesImage = Instance.new("ImageLabel")
+Server1Page2FeaturesToggleZombiesImage.Size = UDim2.new(0, 20, 0, 20)
+Server1Page2FeaturesToggleZombiesImage.Position = UDim2.new(0.012, 0, 0.02, 0)
+Server1Page2FeaturesToggleZombiesImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2FeaturesToggleZombiesImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2FeaturesToggleZombiesImage.BackgroundTransparency = 1
+Server1Page2FeaturesToggleZombiesImage.BorderSizePixel = 0
+Server1Page2FeaturesToggleZombiesImage.Visible = true
+Server1Page2FeaturesToggleZombiesImage.Image = "rbxassetid://12900618433"
+Server1Page2FeaturesToggleZombiesImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2FeaturesToggleZombiesImage.Parent = Server1PageSection2Phrame
+
+Server1Page2FeaturesToggleZombies.MouseButton1Click:Connect(function()
+	if Server1Page2FeaturesToggleZombies.TextColor3 == Color3.fromRGB(255, 255, 255) then
+		AnnounceBox("Removed zombies!", "ZOMBIES", 5, 60, 160, 60, 255, 255, 255)
+		Server1Page2FeaturesToggleZombies.TextColor3 = Color3.fromRGB(170, 170, 170)
+		Server1Page2FeaturesToggleZombiesImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+		Server1Page2FeaturesToggleZombies.Text = "Bring Zombies"
+		Zombies(2)
+	else
+		AnnounceBox("Restored zombies!", "ZOMBIES", 5, 60, 160, 60, 255, 255, 255)
+		Server1Page2FeaturesToggleZombies.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Server1Page2FeaturesToggleZombiesImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		Server1Page2FeaturesToggleZombies.Text = "Kill Zombies"
+		Zombies(1)
+	end
+end)
+
+Server1Page2FeaturesHeliToggle = Instance.new("TextButton")
+Server1Page2FeaturesHeliToggle.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2FeaturesHeliToggle.Position = UDim2.new(0.02, 0, 0.12, 0)
+Server1Page2FeaturesHeliToggle.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2FeaturesHeliToggle.BackgroundTransparency = 0.4
+Server1Page2FeaturesHeliToggle.BorderSizePixel = 1
+Server1Page2FeaturesHeliToggle.Text = "Remove Heli"
+Server1Page2FeaturesHeliToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2FeaturesHeliToggle.TextSize = 8
+Server1Page2FeaturesHeliToggle.TextXAlignment = "Center"
+Server1Page2FeaturesHeliToggle.Parent = Server1PageSection2Phrame
+
+Server1Page2FeaturesHeliToggleImage = Instance.new("ImageLabel")
+Server1Page2FeaturesHeliToggleImage.Size = UDim2.new(0, 20, 0, 20)
+Server1Page2FeaturesHeliToggleImage.Position = UDim2.new(0.012, 0, 0.12, 0)
+Server1Page2FeaturesHeliToggleImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2FeaturesHeliToggleImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2FeaturesHeliToggleImage.BackgroundTransparency = 1
+Server1Page2FeaturesHeliToggleImage.BorderSizePixel = 0
+Server1Page2FeaturesHeliToggleImage.Visible = true
+Server1Page2FeaturesHeliToggleImage.Image = "rbxassetid://12900618433"
+Server1Page2FeaturesHeliToggleImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2FeaturesHeliToggleImage.Parent = Server1PageSection2Phrame
+
+Server1Page2FeaturesHeliToggle.MouseButton1Click:Connect(function()
+	if Server1Page2FeaturesHeliToggle.TextColor3 == Color3.fromRGB(255, 255, 255) then
+		AnnounceBox("Removed heli!", "HELI", 5, 60, 160, 60, 255, 255, 255)
+		Server1Page2FeaturesHeliToggle.TextColor3 = Color3.fromRGB(170, 170, 170)
+		Server1Page2FeaturesHeliToggleImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+		Server1Page2FeaturesHeliToggle.Text = "Restore Heli"
+		Helicopter(1)
+	else
+		AnnounceBox("Restored heli!", "HELI", 5, 60, 160, 60, 255, 255, 255)
+		Server1Page2FeaturesHeliToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Server1Page2FeaturesHeliToggleImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		Server1Page2FeaturesHeliToggle.Text = "Remove Heli"
+		Helicopter(2)
+	end
+end)
+
+Server1Page2FeaturesToggleLoot = Instance.new("TextButton")
+Server1Page2FeaturesToggleLoot.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2FeaturesToggleLoot.Position = UDim2.new(0.02, 0, 0.22, 0)
+Server1Page2FeaturesToggleLoot.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2FeaturesToggleLoot.BackgroundTransparency = 0.4
+Server1Page2FeaturesToggleLoot.BorderSizePixel = 1
+Server1Page2FeaturesToggleLoot.Text = "No Loot"
+Server1Page2FeaturesToggleLoot.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2FeaturesToggleLoot.TextSize = 8
+Server1Page2FeaturesToggleLoot.TextXAlignment = "Center"
+Server1Page2FeaturesToggleLoot.Parent = Server1PageSection2Phrame
+
+Server1Page2FeaturesToggleLootImage = Instance.new("ImageLabel")
+Server1Page2FeaturesToggleLootImage.Size = UDim2.new(0, 20, 0, 20)
+Server1Page2FeaturesToggleLootImage.Position = UDim2.new(0.012, 0, 0.22, 0)
+Server1Page2FeaturesToggleLootImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2FeaturesToggleLootImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2FeaturesToggleLootImage.BackgroundTransparency = 1
+Server1Page2FeaturesToggleLootImage.BorderSizePixel = 0
+Server1Page2FeaturesToggleLootImage.Visible = true
+Server1Page2FeaturesToggleLootImage.Image = "rbxassetid://12900618433"
+Server1Page2FeaturesToggleLootImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2FeaturesToggleLootImage.Parent = Server1PageSection2Phrame
+
+Server1Page2FeaturesToggleLoot.MouseButton1Click:Connect(function()
+	if Server1Page2FeaturesToggleLoot.TextColor3 == Color3.fromRGB(255, 255, 255) then
+		AnnounceBox("Removed loot!", "LOOT", 5, 60, 160, 60, 255, 255, 255)
+		Server1Page2FeaturesToggleLoot.TextColor3 = Color3.fromRGB(170, 170, 170)
+		Server1Page2FeaturesToggleLootImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+		Loot(1)
+		Server1Page2FeaturesToggleLoot.Text = "Loot"
+	else
+		AnnounceBox("Restored loot!", "LOOT", 5, 60, 160, 60, 255, 255, 255)
+		Server1Page2FeaturesToggleLoot.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Server1Page2FeaturesToggleLootImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		Loot(2)
+		Server1Page2FeaturesToggleLoot.Text = "No Loot"
+	end
+end)
+
 Server1Page2Features = Instance.new("TextButton")
 Server1Page2Features.Size = UDim2.new(0, 160, 0, 20)
-Server1Page2Features.Position = UDim2.new(0.02, 0, 0.02, 0)
+Server1Page2Features.Position = UDim2.new(0.02, 0, 0.32, 0)
 Server1Page2Features.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Server1Page2Features.BackgroundTransparency = 0.4
 Server1Page2Features.BorderSizePixel = 1
-Server1Page2Features.Text = "Bring Zombies"
+Server1Page2Features.Text = "Keep Inv"
 Server1Page2Features.TextColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2Features.TextSize = 8
 Server1Page2Features.TextXAlignment = "Center"
@@ -6445,7 +6717,7 @@ Server1Page2Features.Parent = Server1PageSection2Phrame
 
 Server1Page2FeaturesImage = Instance.new("ImageLabel")
 Server1Page2FeaturesImage.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.012, 0)
+Server1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.32, 0)
 Server1Page2FeaturesImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Server1Page2FeaturesImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2FeaturesImage.BackgroundTransparency = 1
@@ -6455,53 +6727,6 @@ Server1Page2FeaturesImage.Image = "rbxassetid://12900618433"
 Server1Page2FeaturesImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2FeaturesImage.Parent = Server1PageSection2Phrame
 
-Server1Page2Features = Instance.new("TextButton")
-Server1Page2Features.Size = UDim2.new(0, 160, 0, 20)
-Server1Page2Features.Position = UDim2.new(0.02, 0, 0.12, 0)
-Server1Page2Features.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features.BackgroundTransparency = 0.4
-Server1Page2Features.BorderSizePixel = 1
-Server1Page2Features.Text = "Kill Zombies"
-Server1Page2Features.TextColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features.TextSize = 8
-Server1Page2Features.TextXAlignment = "Center"
-Server1Page2Features.Parent = Server1PageSection2Phrame
-
-Server1Page2FeaturesImage = Instance.new("ImageLabel")
-Server1Page2FeaturesImage.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.11, 0)
-Server1Page2FeaturesImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2FeaturesImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2FeaturesImage.BackgroundTransparency = 1
-Server1Page2FeaturesImage.BorderSizePixel = 0
-Server1Page2FeaturesImage.Visible = true
-Server1Page2FeaturesImage.Image = "rbxassetid://12900618433"
-Server1Page2FeaturesImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2FeaturesImage.Parent = Server1PageSection2Phrame
-
-Server1Page2Features = Instance.new("TextButton")
-Server1Page2Features.Size = UDim2.new(0, 160, 0, 20)
-Server1Page2Features.Position = UDim2.new(0.02, 0, 0.22, 0)
-Server1Page2Features.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features.BackgroundTransparency = 0.4
-Server1Page2Features.BorderSizePixel = 1
-Server1Page2Features.Text = "No Loot"
-Server1Page2Features.TextColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features.TextSize = 8
-Server1Page2Features.TextXAlignment = "Center"
-Server1Page2Features.Parent = Server1PageSection2Phrame
-
-Server1Page2FeaturesImage = Instance.new("ImageLabel")
-Server1Page2FeaturesImage.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.21, 0)
-Server1Page2FeaturesImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2FeaturesImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2FeaturesImage.BackgroundTransparency = 1
-Server1Page2FeaturesImage.BorderSizePixel = 0
-Server1Page2FeaturesImage.Visible = true
-Server1Page2FeaturesImage.Image = "rbxassetid://12900618433"
-Server1Page2FeaturesImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2FeaturesImage.Parent = Server1PageSection2Phrame
 
 Server1Page2Features2CleanLoot = Instance.new("TextButton")
 Server1Page2Features2CleanLoot.Size = UDim2.new(0, 160, 0, 20)
@@ -6517,7 +6742,7 @@ Server1Page2Features2CleanLoot.Parent = Server1PageSection2Phrame
 
 Server1Page2Features2CleanLootImage = Instance.new("ImageLabel")
 Server1Page2Features2CleanLootImage.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2Features2CleanLootImage.Position = UDim2.new(0.342, 0, 0.012, 0)
+Server1Page2Features2CleanLootImage.Position = UDim2.new(0.342, 0, 0.02, 0)
 Server1Page2Features2CleanLootImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Server1Page2Features2CleanLootImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2Features2CleanLootImage.BackgroundTransparency = 1
@@ -6546,7 +6771,7 @@ Server1Page2Features2CleanGarbage.Parent = Server1PageSection2Phrame
 
 Server1Page2Features2CleanGarbageImage = Instance.new("ImageLabel")
 Server1Page2Features2CleanGarbageImage.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2Features2CleanGarbageImage.Position = UDim2.new(0.342, 0, 0.11, 0)
+Server1Page2Features2CleanGarbageImage.Position = UDim2.new(0.342, 0, 0.12, 0)
 Server1Page2Features2CleanGarbageImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Server1Page2Features2CleanGarbageImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2Features2CleanGarbageImage.BackgroundTransparency = 1
@@ -6575,7 +6800,7 @@ Server1Page2Features2CleanVehicles.Parent = Server1PageSection2Phrame
 
 Server1Page2Features2CleanVehiclesImage = Instance.new("ImageLabel")
 Server1Page2Features2CleanVehiclesImage.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2Features2CleanVehiclesImage.Position = UDim2.new(0.342, 0, 0.21, 0)
+Server1Page2Features2CleanVehiclesImage.Position = UDim2.new(0.342, 0, 0.22, 0)
 Server1Page2Features2CleanVehiclesImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Server1Page2Features2CleanVehiclesImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2Features2CleanVehiclesImage.BackgroundTransparency = 1
@@ -6604,7 +6829,7 @@ Server1Page2Features2CleanParts.Parent = Server1PageSection2Phrame
 
 Server1Page2Features2CleanPartsImage = Instance.new("ImageLabel")
 Server1Page2Features2CleanPartsImage.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2Features2CleanPartsImage.Position = UDim2.new(0.342, 0, 0.31, 0)
+Server1Page2Features2CleanPartsImage.Position = UDim2.new(0.342, 0, 0.32, 0)
 Server1Page2Features2CleanPartsImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Server1Page2Features2CleanPartsImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2Features2CleanPartsImage.BackgroundTransparency = 1
@@ -6633,7 +6858,7 @@ Server1Page2Features2CleanCows.Parent = Server1PageSection2Phrame
 
 Server1Page2Features2CleanCowsImage = Instance.new("ImageLabel")
 Server1Page2Features2CleanCowsImage.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2Features2CleanCowsImage.Position = UDim2.new(0.342, 0, 0.41, 0)
+Server1Page2Features2CleanCowsImage.Position = UDim2.new(0.342, 0, 0.42, 0)
 Server1Page2Features2CleanCowsImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Server1Page2Features2CleanCowsImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2Features2CleanCowsImage.BackgroundTransparency = 1
@@ -6662,7 +6887,7 @@ Server1Page2Features2CleanBuildings.Parent = Server1PageSection2Phrame
 
 Server1Page2Features2CleanBuildingsImage = Instance.new("ImageLabel")
 Server1Page2Features2CleanBuildingsImage.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2Features2CleanBuildingsImage.Position = UDim2.new(0.342, 0, 0.51, 0)
+Server1Page2Features2CleanBuildingsImage.Position = UDim2.new(0.342, 0, 0.52, 0)
 Server1Page2Features2CleanBuildingsImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Server1Page2Features2CleanBuildingsImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2Features2CleanBuildingsImage.BackgroundTransparency = 1
@@ -6691,7 +6916,7 @@ Server1Page2Features2DetoExplosives.Parent = Server1PageSection2Phrame
 
 Server1Page2Features2DetoExplosivesImage = Instance.new("ImageLabel")
 Server1Page2Features2DetoExplosivesImage.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2Features2DetoExplosivesImage.Position = UDim2.new(0.342, 0, 0.61, 0)
+Server1Page2Features2DetoExplosivesImage.Position = UDim2.new(0.342, 0, 0.62, 0)
 Server1Page2Features2DetoExplosivesImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Server1Page2Features2DetoExplosivesImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2Features2DetoExplosivesImage.BackgroundTransparency = 1
@@ -6776,7 +7001,7 @@ Server1Page2Features3.Parent = Server1PageSection2Phrame
 
 Server1Page2Features3Image = Instance.new("ImageLabel")
 Server1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.41, 0)
+Server1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.42, 0)
 Server1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Server1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2Features3Image.BackgroundTransparency = 1
@@ -6800,7 +7025,7 @@ Server1Page2Features3.Parent = Server1PageSection2Phrame
 
 Server1Page2Features3Image = Instance.new("ImageLabel")
 Server1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.51, 0)
+Server1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.52, 0)
 Server1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Server1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2Features3Image.BackgroundTransparency = 1
@@ -6810,53 +7035,85 @@ Server1Page2Features3Image.Image = "rbxassetid://12900618433"
 Server1Page2Features3Image.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2Features3Image.Parent = Server1PageSection2Phrame
 
-Server1Page2Features3 = Instance.new("TextButton")
-Server1Page2Features3.Size = UDim2.new(0, 160, 0, 20)
-Server1Page2Features3.Position = UDim2.new(0.682, 0, 0.62, 0)
-Server1Page2Features3.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features3.BackgroundTransparency = 0.4
-Server1Page2Features3.BorderSizePixel = 1
-Server1Page2Features3.Text = "No Map"
-Server1Page2Features3.TextColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3.TextSize = 8
-Server1Page2Features3.TextXAlignment = "Center"
-Server1Page2Features3.Parent = Server1PageSection2Phrame
+Server1Page2Features3MapToggle = Instance.new("TextButton")
+Server1Page2Features3MapToggle.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2Features3MapToggle.Position = UDim2.new(0.682, 0, 0.62, 0)
+Server1Page2Features3MapToggle.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3MapToggle.BackgroundTransparency = 0.4
+Server1Page2Features3MapToggle.BorderSizePixel = 1
+Server1Page2Features3MapToggle.Text = "No Map"
+Server1Page2Features3MapToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3MapToggle.TextSize = 8
+Server1Page2Features3MapToggle.TextXAlignment = "Center"
+Server1Page2Features3MapToggle.Parent = Server1PageSection2Phrame
 
-Server1Page2Features3Image = Instance.new("ImageLabel")
-Server1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.61, 0)
-Server1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3Image.BackgroundTransparency = 1
-Server1Page2Features3Image.BorderSizePixel = 0
-Server1Page2Features3Image.Visible = true
-Server1Page2Features3Image.Image = "rbxassetid://12900618433"
-Server1Page2Features3Image.ImageColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3Image.Parent = Server1PageSection2Phrame
+Server1Page2Features3MapToggleImage = Instance.new("ImageLabel")
+Server1Page2Features3MapToggleImage.Size = UDim2.new(0, 20, 0, 20)
+Server1Page2Features3MapToggleImage.Position = UDim2.new(0.674, 0, 0.62, 0)
+Server1Page2Features3MapToggleImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3MapToggleImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3MapToggleImage.BackgroundTransparency = 1
+Server1Page2Features3MapToggleImage.BorderSizePixel = 0
+Server1Page2Features3MapToggleImage.Visible = true
+Server1Page2Features3MapToggleImage.Image = "rbxassetid://12900618433"
+Server1Page2Features3MapToggleImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3MapToggleImage.Parent = Server1PageSection2Phrame
 
-Server1Page2Features3 = Instance.new("TextButton")
-Server1Page2Features3.Size = UDim2.new(0, 160, 0, 20)
-Server1Page2Features3.Position = UDim2.new(0.682, 0, 0.72, 0)
-Server1Page2Features3.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features3.BackgroundTransparency = 0.4
-Server1Page2Features3.BorderSizePixel = 1
-Server1Page2Features3.Text = "No Buildings"
-Server1Page2Features3.TextColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3.TextSize = 8
-Server1Page2Features3.TextXAlignment = "Center"
-Server1Page2Features3.Parent = Server1PageSection2Phrame
+Server1Page2Features3MapToggle.MouseButton1Click:Connect(function()
+	if Server1Page2Features3MapToggle.TextColor3 == Color3.fromRGB(255, 255, 255) then
+		AnnounceBox("Removed map!", "MAP", 5, 60, 160, 60, 255, 255, 255)
+		Server1Page2Features3MapToggle.TextColor3 = Color3.fromRGB(170, 170, 170)
+		Server1Page2Features3MapToggleImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+		Map(1)
+		Server1Page2Features3MapToggle.Text = "Map"
+	else
+		AnnounceBox("Restored map!", "MAP", 5, 60, 160, 60, 255, 255, 255)
+		Server1Page2Features3MapToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Server1Page2Features3MapToggleImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		Map(2)
+		Server1Page2Features3MapToggle.Text = "No Map"
+	end
+end)
 
-Server1Page2Features3Image = Instance.new("ImageLabel")
-Server1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.71, 0)
-Server1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3Image.BackgroundTransparency = 1
-Server1Page2Features3Image.BorderSizePixel = 0
-Server1Page2Features3Image.Visible = true
-Server1Page2Features3Image.Image = "rbxassetid://12900618433"
-Server1Page2Features3Image.ImageColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3Image.Parent = Server1PageSection2Phrame
+Server1Page2Features3BuildingToggle = Instance.new("TextButton")
+Server1Page2Features3BuildingToggle.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2Features3BuildingToggle.Position = UDim2.new(0.682, 0, 0.72, 0)
+Server1Page2Features3BuildingToggle.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3BuildingToggle.BackgroundTransparency = 0.4
+Server1Page2Features3BuildingToggle.BorderSizePixel = 1
+Server1Page2Features3BuildingToggle.Text = "No Buildings"
+Server1Page2Features3BuildingToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3BuildingToggle.TextSize = 8
+Server1Page2Features3BuildingToggle.TextXAlignment = "Center"
+Server1Page2Features3BuildingToggle.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3BuildingToggleImage = Instance.new("ImageLabel")
+Server1Page2Features3BuildingToggleImage.Size = UDim2.new(0, 20, 0, 20)
+Server1Page2Features3BuildingToggleImage.Position = UDim2.new(0.674, 0, 0.72, 0)
+Server1Page2Features3BuildingToggleImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3BuildingToggleImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3BuildingToggleImage.BackgroundTransparency = 1
+Server1Page2Features3BuildingToggleImage.BorderSizePixel = 0
+Server1Page2Features3BuildingToggleImage.Visible = true
+Server1Page2Features3BuildingToggleImage.Image = "rbxassetid://12900618433"
+Server1Page2Features3BuildingToggleImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3BuildingToggleImage.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3BuildingToggle.MouseButton1Click:Connect(function()
+	if Server1Page2Features3BuildingToggle.TextColor3 == Color3.fromRGB(255, 255, 255) then
+		AnnounceBox("Removed buildings!", "BUILDINGS", 5, 60, 160, 60, 255, 255, 255)
+		Server1Page2Features3BuildingToggle.TextColor3 = Color3.fromRGB(170, 170, 170)
+		Server1Page2Features3BuildingToggleImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+		Buildings(1)
+		Server1Page2Features3BuildingToggle.Text = "Buildings"
+	else
+		AnnounceBox("Restored buildings!", "BUILDINGS", 5, 60, 160, 60, 255, 255, 255)
+		Server1Page2Features3BuildingToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Server1Page2Features3BuildingToggleImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		Buildings(2)
+		Server1Page2Features3BuildingToggle.Text = "No Buildings"
+	end
+end)
 --frames
 
 
