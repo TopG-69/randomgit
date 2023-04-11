@@ -497,25 +497,44 @@ function Texture(model, texture, value)
     end
 end
 
-function PlayerTeleport(teleporter, reciver, mode)
+function PlayerTeleport(teleporter, reciver, mode, parameters)
 	if mode == 1 then
 		spawn(function()								
 			AddClothing = game.Workspace.Remote.AddClothing
 
+			repeat wait() until teleporter.Character ~= nil and teleporter.Character.HumanoidRootPart ~= nil 
 			AddClothing:FireServer("driven", teleporter.Character, "","","")
 			AddClothing:FireServer("IsBuildingMaterial", teleporter.Character.HumanoidRootPart, "poop","","")
 			AddClothing:FireServer("SeatPoint", teleporter.Character.Torso, "","","")
-			game:GetService("Workspace").Remote.HurtZombie:FireServer(teleporter.Character)
-			wait(0.2)
+			wait(1)
+			Workspace.Remote.HurtZombie:FireServer(teleporter.Character)
 			game:GetService("Workspace").Remote.ReplicatePart:FireServer(teleporter.Character.HumanoidRootPart, reciver.Character.Head.CFrame)
 			wait(1)
-			fireserver("ChangeParent", teleporter.Character.driven, nil)
 			fireserver("ChangeParent", teleporter.Character.HumanoidRootPart.IsBuildingMaterial, nil)
 			fireserver("ChangeParent", teleporter.Character.Torso.SeatPoint, nil)
+			fireserver("ChangeParent", teleporter.Character.driven, nil)
 			return
 		end)
 	elseif mode == 2 then
-		--for map locations!
+		if parameters == nil then
+			return
+		end
+		spawn(function()								
+			AddClothing = game.Workspace.Remote.AddClothing
+
+			repeat wait() until teleporter.Character ~= nil and teleporter.Character.HumanoidRootPart ~= nil 
+			AddClothing:FireServer("driven", teleporter.Character, "","","")
+			AddClothing:FireServer("IsBuildingMaterial", teleporter.Character.HumanoidRootPart, "poop","","")
+			AddClothing:FireServer("SeatPoint", teleporter.Character.Torso, "","","")
+			wait(1)
+			Workspace.Remote.HurtZombie:FireServer(teleporter.Character)
+			game:GetService("Workspace").Remote.ReplicatePart:FireServer(teleporter.Character.HumanoidRootPart, parameters)
+			wait(1)
+			fireserver("ChangeParent", teleporter.Character.HumanoidRootPart.IsBuildingMaterial, nil)
+			fireserver("ChangeParent", teleporter.Character.Torso.SeatPoint, nil)
+			fireserver("ChangeParent", teleporter.Character.driven, nil)
+			return
+		end)
 	elseif mode == nil or mode == nan then
 		if ShowFunctionAlerts then
 			AnnounceBox("Invalid mode usage!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
