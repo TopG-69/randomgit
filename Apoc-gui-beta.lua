@@ -1845,7 +1845,9 @@ local AntiSpam = 0
 game.Workspace.ChildAdded:connect(function(Ch)
 	if AllowSpawnLoot == false and (VehiclesTab[tostring(Ch)] ~= nil or game:GetService("Lighting").LootDrops:FindFirstChild(tostring(Ch)) or game:GetService("Lighting").Materials:FindFirstChild(tostring(Ch))) and not Ch:FindFirstChild("Handle") then
         local Pos = GetPartPosition(Ch)
-        fireserver("ChangeParent", Ch)
+		if ToggleRemoveItems then
+			fireserver("ChangeParent", Ch)
+		end
         if AntiSpam == 0 then
             spawn(function()
                 wait(5)
@@ -1863,55 +1865,11 @@ game.Workspace.ChildAdded:connect(function(Ch)
             end
             if Closest ~= nil then
 				if AnnounceSpawnedItem then
-					AnnounceBox("Someone attmpted to spawn (" .. tostring(Closest) .. ") near " .. tostring(Closest) .. "!", "SPAWNED ITEM DETECTION", 5, 130, 130, 60, 255, 255, 255)
-				end
-				if ToggleRemoveItems then
-					local LootCleaned = 0
-					for _, v in pairs(Workspace:GetChildren()) do
-						if Lighting.LootDrops:FindFirstChild(v.Name) then
-							LootCleaned = LootCleaned + 1
-							fireserver("ChangeParent", v, nil)
-						end
-					end
-					if ShowFunctionAlerts then
-						AnnounceBox("Successfully cleaned loot! (" .. tostring(LootCleaned) .. ")", "CLEAN LOOT", 5, 130, 130, 60, 255, 255, 255)
-					end
-					local VehiclesCleaned = 0
-						for _, v in pairs(Workspace:FindFirstChild("Vehicles"):GetDescendants()) do
-							if v.Name == "MaxSpeed" and v.Value > 100 or v.Name == "Hull" and v.Value > 5000 then
-								VehiclesCleaned = VehiclesCleaned + 1
-								fireserver("ChangeParent", v.Parent.Parent)
-							end
-						end
-					if ShowFunctionAlerts then
-						AnnounceBox("Successfully cleaned vehicles! (" .. tostring(VehiclesCleaned) .. ")", "CLEAN VEHICLES", 5, 130, 130, 60, 255, 255, 255)
-					end
+					AnnounceBox("Someone attmpted to spawn (" .. tostring(Ch) .. ") near " .. tostring(Closest) .. "!", "SPAWNED ITEM DETECTION", 5, 130, 130, 60, 255, 255, 255)
 				end
             elseif Pos.X == -100000 then
 				if AnnounceSpawnedItem then
 					AnnounceBox("Someone attmpted to spawn a (" .. tostring(Ch) .. ")!", "SPAWNED ITEM DETECTION", 5, 130, 130, 60, 255, 255, 255)
-				end
-				if ToggleRemoveItems then
-					local LootCleaned = 0
-					for _, v in pairs(Workspace:GetChildren()) do
-						if Lighting.LootDrops:FindFirstChild(v.Name) then
-							LootCleaned = LootCleaned + 1
-							fireserver("ChangeParent", v, nil)
-						end
-					end
-					if ShowFunctionAlerts then
-						AnnounceBox("Successfully cleaned loot! (" .. tostring(LootCleaned) .. ")", "CLEAN LOOT", 5, 130, 130, 60, 255, 255, 255)
-					end
-					local VehiclesCleaned = 0
-						for _, v in pairs(Workspace:FindFirstChild("Vehicles"):GetDescendants()) do
-							if v.Name == "MaxSpeed" and v.Value > 100 or v.Name == "Hull" and v.Value > 5000 then
-								VehiclesCleaned = VehiclesCleaned + 1
-								fireserver("ChangeParent", v.Parent.Parent)
-							end
-						end
-					if ShowFunctionAlerts then
-						AnnounceBox("Successfully cleaned vehicles! (" .. tostring(VehiclesCleaned) .. ")", "CLEAN VEHICLES", 5, 130, 130, 60, 255, 255, 255)
-					end
 				end
             end
         end
