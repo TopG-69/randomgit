@@ -1653,6 +1653,42 @@ function Helicopter(mode)
 	end
 end
 
+function Colormodel(Instance, Color, Texture)
+    spawn(function()
+        if not Instance:FindFirstChild("SecondaryColor") then
+            Workspace.Remote.AddClothing:FireServer("SecondaryColor", Instance, "", "", "")
+            repeat wait() until Instance:FindFirstChild("SecondaryColor")
+        end
+        Workspace.Remote.ColorGun:FireServer(Instance, Color, Texture, Color, Texture)
+        wait(.5)
+        for _, v in pairs(Instance:GetChildren()) do
+            if v.Name == "SecondaryColor" then 
+                FireServer("ChangeParent", v, nil)
+            end
+        end
+    end)
+end
+
+function ColorMap(Color, Texture)
+    if game.PlaceId == 1228674372 or game.PlaceId == 1228676522 or game.PlaceId == 237590761 then 
+        Colormodel(Workspace["TerrainChunks"], Color, Texture)
+        for _, v in pairs(Workspace["TerrainChunks"]:GetDescendants()) do
+            if v:IsA("Model") then
+                Colormodel(v, Color, Texture)
+                fireserver("VehichleLightsSet", v, "Plastic", 0)
+            end
+        end
+    elseif game.PlaceId == 290815963 or game.PlaceId == 1228676522 or game.PlaceId == 237590761 then 
+        Colormodel(Workspace["TerrainChunks"], Color, Texture)
+        for _, v in pairs(Workspace["TerrainChunks"]:GetDescendants()) do
+            if v:IsA("Model") then
+                Colormodel(v, Color, Texture)
+                fireserver("VehichleLightsSet", v, "Plastic", 0)
+            end
+        end
+    end
+end
+
 function InventoryClear(Players)
 	local Players = GetPlayers(Players)
 	for i = 1, #Players do
@@ -7786,29 +7822,33 @@ Server1Page2Features3.TextWrapped = true
 Server1Page2Features3.TextXAlignment = "Center"
 Server1Page2Features3.Parent = Server1PageSection2Phrame
 
-Server1Page2Features3 = Instance.new("TextButton")
-Server1Page2Features3.Size = UDim2.new(0, 160, 0, 20)
-Server1Page2Features3.Position = UDim2.new(0.682, 0, 0.42, 0)
-Server1Page2Features3.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features3.BackgroundTransparency = 0.4
-Server1Page2Features3.BorderSizePixel = 1
-Server1Page2Features3.Text = "Random Map"
-Server1Page2Features3.TextColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3.TextSize = 8
-Server1Page2Features3.TextXAlignment = "Center"
-Server1Page2Features3.Parent = Server1PageSection2Phrame
+Server1Page2Features3RandomMap = Instance.new("TextButton")
+Server1Page2Features3RandomMap.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2Features3RandomMap.Position = UDim2.new(0.682, 0, 0.42, 0)
+Server1Page2Features3RandomMap.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3RandomMap.BackgroundTransparency = 0.4
+Server1Page2Features3RandomMap.BorderSizePixel = 1
+Server1Page2Features3RandomMap.Text = "Random Map"
+Server1Page2Features3RandomMap.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3RandomMap.TextSize = 8
+Server1Page2Features3RandomMap.TextXAlignment = "Center"
+Server1Page2Features3RandomMap.Parent = Server1PageSection2Phrame
 
-Server1Page2Features3Image = Instance.new("ImageLabel")
-Server1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.42, 0)
-Server1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3Image.BackgroundTransparency = 1
-Server1Page2Features3Image.BorderSizePixel = 0
-Server1Page2Features3Image.Visible = true
-Server1Page2Features3Image.Image = "rbxassetid://12900618433"
-Server1Page2Features3Image.ImageColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3Image.Parent = Server1PageSection2Phrame
+Server1Page2Features3RandomMapImage = Instance.new("ImageLabel")
+Server1Page2Features3RandomMapImage.Size = UDim2.new(0, 20, 0, 20)
+Server1Page2Features3RandomMapImage.Position = UDim2.new(0.674, 0, 0.42, 0)
+Server1Page2Features3RandomMapImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3RandomMapImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3RandomMapImage.BackgroundTransparency = 1
+Server1Page2Features3RandomMapImage.BorderSizePixel = 0
+Server1Page2Features3RandomMapImage.Visible = true
+Server1Page2Features3RandomMapImage.Image = "rbxassetid://12900618433"
+Server1Page2Features3RandomMapImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3RandomMapImage.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3RandomMap.MouseButton1Click:Connect(function()
+	ColorMap(math.random(1,65), math.random(1,12))
+end)
 
 Server1Page2Features3 = Instance.new("TextButton")
 Server1Page2Features3.Size = UDim2.new(0, 160, 0, 20)
