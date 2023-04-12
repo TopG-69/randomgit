@@ -1592,7 +1592,72 @@ function CleanParts()
     end
 end
 
+function MakeWeld(Part0, Part1, C0, C1)
+	if C0 == nil then
+		C0 = CFrame.new()
+	end
+	if C1 == nil then
+		C1 = CFrame.new()
+	end
+    R.CreateWeld:FireServer(Part0, Part1, C0, C1)
+    local W = Instance.new("Weld", Part0)
+    W.Part0 = Part0
+    W.Part1 = Part1
+    W.C0 = C0
+    W.C1 = C1
+end
+
+function PlaceFlare(Plr)
+    if Plr == nil or Plr.Character == nil or not Plr.Character:FindFirstChild("Head") then
+        return
+    end
+    local Head = Plr.Character.Head
+    local P = Head.Position
+	local Flare = Mats.RoadFlareLit
+    R.PlaceMaterial:FireServer("RoadFlareLit", P-Flare.Head.Position)
+    while wait() do
+        for i, v in pairs(game.Workspace:GetChildren()) do
+            if v.Name == "RoadFlareLit" and (v.Head.Position-P).Magnitude < 2 then
+                MakeWeld(v.Head, Head, CFrame.new(0, 2, 0))
+                return v
+            end
+        end
+    end
+end
+
 function LaunchRocket(Plr, Dist)
+    spawn(function()
+        local Flare = PlaceFlare(Plr)
+        local StartPos = Flare.Head.Position
+        local Max = 90
+		if Dist ~= nil and Dist > 90 then
+			Max = Dist
+		end
+		local NSpeed = 1.2
+		if Max > 200 then
+			local S = Max/200-1
+			NSpeed = NSpeed + S
+		end
+        local Broken = false
+        local Ev;
+        Ev = game.Workspace.ChildAdded:connect(function(Ex)
+            if Ex.Name == "Explosion" and (Ex.Position-Flare.Head.Position).Magnitude < 10 then
+                Broken = true
+                Ev:Disconnect()
+            end
+        end)
+        for i = 1, 999999 do
+            if i == Max-50 then
+                R.Detonate:FireServer({["Head"] = Flare.Head})
+            end
+            if Broken == true or i > Max then
+                break
+            end
+            R.ReplicateModel:FireServer(Flare, CFrame.new(0, i*NSpeed, 0)+StartPos)
+            wait()
+        end
+        fireserver("ChangeParent", Flare)
+    end)
 end
 
 function GetPlayers(Str)
@@ -3736,13 +3801,30 @@ Other1Page2FeaturesRocketImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Other1Page2FeaturesRocketImage.Parent = Other1PageSection2Phrame
 
 Other1Page2FeaturesRocket.MouseButton1Click:Connect(function()
+	local Amount = tonumber(Other1Page2FeaturesAmount.Text)
 	local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
 	if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
-		--Notify("[Rocket]: Rocketed ".. LocalTab1SelectedPlayer .. "!", 5, 60, 160, 60)
-		AnnounceBox("Rocketed " .. LocalTab1SelectedPlayer .. "!", "ROCKET", 5, 60, 160, 60, 255, 255, 255)
-		LaunchRocket(SPlayer)
+		if Amount then
+			if LocalTab1SelectedPlayer ~= "All" and LocalTab1SelectedPlayer ~= "Others" then
+				AnnounceBox("Rocketed " .. LocalTab1SelectedPlayer .. "!", "ROCKET", 5, 60, 160, 60, 255, 255, 255)
+				LaunchRocket(SPlayer, Amount)
+			elseif LocalTab1SelectedPlayer == "All" then
+				for _, v in pairs(Players:GetPlayers()) do
+					AnnounceBox("Rocketed " .. tostring(v) .. "!", "ROCKET", 5, 60, 160, 60, 255, 255, 255)
+					LaunchRocket(v, Amount)
+				end
+			elseif LocalTab1SelectedPlayer == "Others" then
+				for _, v in pairs(Players:GetPlayers()) do
+					if v ~= LocalPlayer then
+						AnnounceBox("Rocketed " .. tostring(v) .. "!", "ROCKET", 5, 60, 160, 60, 255, 255, 255)
+						LaunchRocket(v, Amount)
+					end
+				end
+			end
+		else
+			AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
 	else
-		--Notify("[Error]: No player selected!", 5, 95, 60, 60)
 		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 	end
 end)
@@ -7833,7 +7915,7 @@ Server1Page2Features3MapTexture.FocusLost:Connect(function(enterPressed)
 		if AmountTexture then
 			AnnounceBox("Set map texture to " .. AmountTexture .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 			ServerTabMapTexture = AmountTexture
-			if ServerTabMapTexture ~= nil and ServerTabMapColor ~= nil then
+			if AmountColorl and AmountTexture then
 				ColorMap(ServerTabMapColor, ServerTabMapTexture)
 			end
 		else
@@ -7854,7 +7936,7 @@ Server1Page2Features3MapColor.FocusLost:Connect(function(enterPressed)
 		if AmountColor then
 			AnnounceBox("Set map color to " .. AmountColor .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 			ServerTabMapColor = AmountColor
-			if ServerTabMapTexture ~= nil and ServerTabMapColor ~= nil then
+			if AmountColor and AmountTexture then
 				ColorMap(ServerTabMapColor, ServerTabMapTexture)
 			end
 		else
