@@ -455,6 +455,138 @@ function DeleteKitF(KN)
 	end
 end
 
+StatsToChange = {["Reload"] = {false, 20, 9999999}, ["Accuracy"] = {true, 1, 9999999}, ["Zoomed"] = {true, 100, 9999999}, ["Damage"] = {true, 100, 1}, ["Recoil"] = {true, 1, 9999999}}
+
+function ChangeAllStats(Par, Val)
+for i, v in pairs(Par:GetDescendants()) do
+if StatsToChange[tostring(v)] ~= nil and (v:IsA("StringValue") or v:IsA("IntValue")) then
+if StatsToChange[tostring(v)][1] == false then
+fireserver("ChangeValue", v, StatsToChange[tostring(v)][Val])
+else
+fireserver("ChangeValue", v, Ob(StatsToChange[tostring(v)][Val]))
+end
+end
+end
+end
+
+function SetAmmo(Plr, Amount)
+    if Plr == nil or not Plr:FindFirstChild("playerstats") then
+        return
+    end
+    for i, v in pairs(Plr.playerstats:GetDescendants()) do
+        if v.Name == "Clip" and v:FindFirstChild("MaxClip") then
+            fireserver("ChangeValue", v.MaxClip, Amount)
+            fireserver("ChangeValue", v, Ob(Amount))
+        end
+    end
+end
+
+function UpdateGun(Gun)
+    if Gun:FindFirstChild("Shooter") then
+        local Scr = Gun.Shooter
+        fireserver("ChangeParent", Scr, game.ReplicatedStorage)
+        wait()
+        fireserver("ChangeParent", Scr, Gun)
+    end
+end
+
+function SetStats(Tab, Name, Val, E)
+    if typeof(Tab) == "Instance" then
+        Tab = {Tab}
+    end
+    for i = 1, #Tab do
+		spawn(function()
+			local Stats =  Tab[i]:FindFirstChild("Stats")
+			local Extra = Stats[Name]:FindFirstChildOfClass(Stats[Name].ClassName)
+			if not Stats or not Stats:FindFirstChild(Name) then
+				return false
+			end
+			if E then
+				if Stats[Name]:FindFirstChild("Rate") then
+					fireserver("ChangeValue", Stats[Name].Rate, Ob(E))
+				else
+					R.AddClothing:FireServer("Rate", Stats[Name], Ob(E), "", "")
+				end
+				repeat
+					wait()
+				until Stats[Name]:FindFirstChild("Rate")
+				UpdateGun(Tab[i])
+			end
+			if Stats[Name]:IsA("StringValue") then
+				Val = Ob(Val)
+			end
+			fireserver("ChangeValue", Stats[Name], Val)
+			if Extra then
+				fireserver("ChangeValue", Extra, Val)
+			end
+		end)
+    end
+    return true
+end
+
+function SetMin(Gun, Name, Val)
+    Val = math.floor(tonumber(Val))
+    if Val <= 0 then
+        Val = 1
+    end
+    if typeof(Gun) == "table" then
+        for i = 1, #Gun do
+            if SetStats(Gun[i], Name, Val) then
+				UpdateGun(Gun[i])
+			end
+        end
+        return
+    end
+    if SetStats(Gun, Name, Val) then
+        UpdateGun(Gun)
+    end
+end
+
+function SetAction(Plr, Val, Rate)
+    SetStats(GetGunsFromPlayer(Plr), "Action", Val, Rate)
+end
+
+function SetReload(Plr, Val)
+    SetStats(GetGunsFromPlayer(Plr), "Reload", Val)
+end
+
+function SetReload(Plr, Val)
+   SetMin(GetGunsFromPlayer(Plr), "Reload", Val)
+end
+
+function SetAccuracy(Plr, Val)
+    SetMin(GetGunsFromPlayer(Plr), "Accuracy", Val)
+end
+
+function SetRecoil(Plr, Val)
+    SetMin(GetGunsFromPlayer(Plr), "Recoil", Val)
+end
+
+function GetGunsFromPlayer(Plr)
+    local Guns = {}
+    for i, v in pairs(Plr.Backpack:GetChildren()) do
+        if v:FindFirstChild("Shooter") then
+            table.insert(Guns, v)
+        end
+    end
+    for i, v in pairs(Plr.Character:GetChildren()) do
+        if v:FindFirstChild("Shooter") then
+            table.insert(Guns, v)
+        end
+    end
+    return Guns
+end
+
+function SetStat(Stats, Name, Val)
+    if Stats:FindFirstChild(Name) then
+        if Stats[Name]:IsA("StringValue") then
+            Val = Ob(Val)
+        end
+        fireserver("ChangeValue", Stats[Name], Val)
+        return true
+    end
+end
+
 local ItemValueList = {}
 for i, v in pairs(game:GetService("Lighting"):GetDescendants()) do
     if v:FindFirstChild("ObjectID") then
@@ -2331,7 +2463,7 @@ OtherTab1Button.Visible = true
 OtherTab1Button.Image = "rbxassetid://12900265786"
 OtherTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 OtherTab1Button.Parent = GuiOtherEBarPhrame
-AddToolTip(OtherTab1Button, GuiOtherEBarPhrame, "Main", 1.50)
+AddToolTip(OtherTab1Button, GuiOtherEBarPhrame, "Main 1", 1.50)
 OtherTab2Button = Instance.new("ImageButton")
 OtherTab2Button.Size = UDim2.new(0, 20, 0, 20)
 OtherTab2Button.Position = UDim2.new(0.45, 0, 0.1, 0)
@@ -2343,7 +2475,7 @@ OtherTab2Button.Visible = true
 OtherTab2Button.Image = "rbxassetid://12900267647"
 OtherTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 OtherTab2Button.Parent = GuiOtherEBarPhrame
-AddToolTip(OtherTab2Button, GuiOtherEBarPhrame, "nil", 1.50)
+AddToolTip(OtherTab2Button, GuiOtherEBarPhrame, "Main 2", 1.50)
 OtherTab3Button = Instance.new("ImageButton")
 OtherTab3Button.Size = UDim2.new(0, 20, 0, 20)
 OtherTab3Button.Position = UDim2.new(0.65, 0, 0.1, 0)
@@ -2669,6 +2801,8 @@ CreateUpdateLogMessage("(+) Improved exploiter detection!", 60, 160, 60)
 CreateUpdateLogMessage("(+) Improved Protection tab!", 60, 160, 60)
 CreateUpdateLogMessage("(+) Improved Settings tab!", 60, 160, 60)
 CreateUpdateLogMessage("(/) Loadtime increased due to bigger code and more functions!", 130, 130, 60)
+CreateUpdateLogMessage("(+) Improved Others tab!", 60, 160, 60)
+CreateUpdateLogMessage("(+) Added Others 2 tab!", 60, 160, 60)
 
 --[[AgonyLogoImage = Instance.new("ImageLabel")
 AgonyLogoImage.Size = UDim2.new(0, 200, 0, 120)
@@ -2776,6 +2910,7 @@ PlayerListLabel2.TextColor3 = Color3.fromRGB(255, 255, 255)
 PlayerListLabel2.TextSize = 20
 PlayerListLabel2.Visible = false
 
+local LocalTab2SelectedPlayer = ""
 function CreatePlayerListsLabelP2(Text)
     for i, v in pairs(PlayerListFrame2:GetChildren()) do
 		if v ~= PlayerListLabel2 then
@@ -2792,7 +2927,7 @@ function CreatePlayerListsLabelP2(Text)
     end
     F.MouseButton1Click:Connect(function()
 		F.TextColor3 = Color3.fromRGB(170, 170, 170)
-		--Notify("[Selected]: ".. F.Text, 5, 255, 255, 255)
+		LocalTab2SelectedPlayer = F.Text
 		if ShowFunctionAlerts then
 			AnnounceBox("Player ".. F.Text .. " was selected!", "PLAYER", 5, 255, 255, 255, 255, 255, 255)
 		end
@@ -2838,6 +2973,271 @@ Other2Page2FeaturesAmount.FocusLost:Connect(function(enterPressed)
 			AnnounceBox("Set amount to " .. Amount .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 		end
     end
+end)
+
+Other2Page2FeaturesAmmo = Instance.new("TextButton")
+Other2Page2FeaturesAmmo.Size = UDim2.new(0, 120, 0, 20)
+Other2Page2FeaturesAmmo.Position = UDim2.new(0.02, 0, 0.02, 0)
+Other2Page2FeaturesAmmo.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other2Page2FeaturesAmmo.BackgroundTransparency = 0.4
+Other2Page2FeaturesAmmo.BorderSizePixel = 1
+Other2Page2FeaturesAmmo.Text = "Ammo"
+Other2Page2FeaturesAmmo.TextColor3 = Color3.fromRGB(255, 255, 255)
+Other2Page2FeaturesAmmo.TextSize = 8
+Other2Page2FeaturesAmmo.TextXAlignment = "Center"
+Other2Page2FeaturesAmmo.Parent = Other2PageSection2Phrame
+
+Other2Page2FeaturesAmmoImage = Instance.new("ImageLabel")
+Other2Page2FeaturesAmmoImage.Size = UDim2.new(0, 20, 0, 20)
+Other2Page2FeaturesAmmoImage.Position = UDim2.new(0.012, 0, 0.02, 0)
+Other2Page2FeaturesAmmoImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other2Page2FeaturesAmmoImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Other2Page2FeaturesAmmoImage.BackgroundTransparency = 1
+Other2Page2FeaturesAmmoImage.BorderSizePixel = 0
+Other2Page2FeaturesAmmoImage.Visible = true
+Other2Page2FeaturesAmmoImage.Image = "rbxassetid://12900618433"
+Other2Page2FeaturesAmmoImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Other2Page2FeaturesAmmoImage.Parent = Other2PageSection2Phrame
+
+Other2Page2FeaturesAmmo.MouseButton1Click:Connect(function()
+    local Amount = tonumber(Other2Page2FeaturesAmount.Text)
+	local SPlayer = game.Players:FindFirstChild(LocalTab2SelectedPlayer)
+	if LocalTab2SelectedPlayer ~= nil and LocalTab2SelectedPlayer ~= nan and LocalTab2SelectedPlayer ~= "" then
+		if Amount then
+			if LocalTab2SelectedPlayer ~= "All" and LocalTab2SelectedPlayer ~= "Others" then
+				AnnounceBox("Set " .. LocalTab2SelectedPlayer .. " ammo to " .. Amount .. "!", "WEAPON", 5, 60, 160, 60, 255, 255, 255)
+				SetAmmo(SPlayer, Amount)
+			elseif LocalTab2SelectedPlayer == "All" then
+				for _, v in pairs(Players:GetPlayers()) do
+					AnnounceBox("Set " .. tostring(v) .. " ammo to " .. Amount .. "!", "WEAPON", 5, 60, 160, 60, 255, 255, 255)
+					SetAmmo(v, Amount)
+				end
+			elseif LocalTab2SelectedPlayer == "Others" then
+				for _, v in pairs(Players:GetPlayers()) do
+					if v ~= LocalPlayer then
+						AnnounceBox("Set " .. tostring(v) .. " ammo to" .. Amount .. "!", "WEAPON", 5, 60, 160, 60, 255, 255, 255)
+						SetAmmo(v, Amount)
+					end
+				end
+			end
+		else
+		    AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	else
+		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+	end
+end)
+
+Other2Page2FeaturesRecoil = Instance.new("TextButton")
+Other2Page2FeaturesRecoil.Size = UDim2.new(0, 120, 0, 20)
+Other2Page2FeaturesRecoil.Position = UDim2.new(0.02, 0, 0.12, 0)
+Other2Page2FeaturesRecoil.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other2Page2FeaturesRecoil.BackgroundTransparency = 0.4
+Other2Page2FeaturesRecoil.BorderSizePixel = 1
+Other2Page2FeaturesRecoil.Text = "Recoil"
+Other2Page2FeaturesRecoil.TextColor3 = Color3.fromRGB(255, 255, 255)
+Other2Page2FeaturesRecoil.TextSize = 8
+Other2Page2FeaturesRecoil.TextXAlignment = "Center"
+Other2Page2FeaturesRecoil.Parent = Other2PageSection2Phrame
+
+Other2Page2FeaturesRecoilImage = Instance.new("ImageLabel")
+Other2Page2FeaturesRecoilImage.Size = UDim2.new(0, 20, 0, 20)
+Other2Page2FeaturesRecoilImage.Position = UDim2.new(0.012, 0, 0.12, 0)
+Other2Page2FeaturesRecoilImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other2Page2FeaturesRecoilImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Other2Page2FeaturesRecoilImage.BackgroundTransparency = 1
+Other2Page2FeaturesRecoilImage.BorderSizePixel = 0
+Other2Page2FeaturesRecoilImage.Visible = true
+Other2Page2FeaturesRecoilImage.Image = "rbxassetid://12900618433"
+Other2Page2FeaturesRecoilImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Other2Page2FeaturesRecoilImage.Parent = Other2PageSection2Phrame
+
+Other2Page2FeaturesRecoil.MouseButton1Click:Connect(function()
+    local Amount = tonumber(Other2Page2FeaturesAmount.Text)
+	local SPlayer = game.Players:FindFirstChild(LocalTab2SelectedPlayer)
+	if LocalTab2SelectedPlayer ~= nil and LocalTab2SelectedPlayer ~= nan and LocalTab2SelectedPlayer ~= "" then
+		if Amount then
+			if LocalTab2SelectedPlayer ~= "All" and LocalTab2SelectedPlayer ~= "Others" then
+				AnnounceBox("Set " .. LocalTab2SelectedPlayer .. " recoil to " .. Amount .. "!", "WEAPON", 5, 60, 160, 60, 255, 255, 255)
+				SetRecoil(SPlayer, Amount)
+			elseif LocalTab2SelectedPlayer == "All" then
+				for _, v in pairs(Players:GetPlayers()) do
+					AnnounceBox("Set " .. tostring(v) .. " recoil to " .. Amount .. "!", "WEAPON", 5, 60, 160, 60, 255, 255, 255)
+					SetRecoil(v, Amount)
+				end
+			elseif LocalTab2SelectedPlayer == "Others" then
+				for _, v in pairs(Players:GetPlayers()) do
+					if v ~= LocalPlayer then
+						AnnounceBox("Set " .. tostring(v) .. " recoil to" .. Amount .. "!", "WEAPON", 5, 60, 160, 60, 255, 255, 255)
+						SetRecoil(v, Amount)
+					end
+				end
+			end
+		else
+		    AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	else
+		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+	end
+end)
+
+Other2Page2FeaturesAccuracy = Instance.new("TextButton")
+Other2Page2FeaturesAccuracy.Size = UDim2.new(0, 120, 0, 20)
+Other2Page2FeaturesAccuracy.Position = UDim2.new(0.02, 0, 0.22, 0)
+Other2Page2FeaturesAccuracy.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other2Page2FeaturesAccuracy.BackgroundTransparency = 0.4
+Other2Page2FeaturesAccuracy.BorderSizePixel = 1
+Other2Page2FeaturesAccuracy.Text = "Accuracy"
+Other2Page2FeaturesAccuracy.TextColor3 = Color3.fromRGB(255, 255, 255)
+Other2Page2FeaturesAccuracy.TextSize = 8
+Other2Page2FeaturesAccuracy.TextXAlignment = "Center"
+Other2Page2FeaturesAccuracy.Parent = Other2PageSection2Phrame
+
+Other2Page2FeaturesAccuracyImage = Instance.new("ImageLabel")
+Other2Page2FeaturesAccuracyImage.Size = UDim2.new(0, 20, 0, 20)
+Other2Page2FeaturesAccuracyImage.Position = UDim2.new(0.012, 0, 0.22, 0)
+Other2Page2FeaturesAccuracyImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other2Page2FeaturesAccuracyImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Other2Page2FeaturesAccuracyImage.BackgroundTransparency = 1
+Other2Page2FeaturesAccuracyImage.BorderSizePixel = 0
+Other2Page2FeaturesAccuracyImage.Visible = true
+Other2Page2FeaturesAccuracyImage.Image = "rbxassetid://12900618433"
+Other2Page2FeaturesAccuracyImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Other2Page2FeaturesAccuracyImage.Parent = Other2PageSection2Phrame
+
+Other2Page2FeaturesAccuracy.MouseButton1Click:Connect(function()
+    local Amount = tonumber(Other2Page2FeaturesAmount.Text)
+	local SPlayer = game.Players:FindFirstChild(LocalTab2SelectedPlayer)
+	if LocalTab2SelectedPlayer ~= nil and LocalTab2SelectedPlayer ~= nan and LocalTab2SelectedPlayer ~= "" then
+		if Amount then
+			if LocalTab2SelectedPlayer ~= "All" and LocalTab2SelectedPlayer ~= "Others" then
+				AnnounceBox("Set " .. LocalTab2SelectedPlayer .. " accuracy to " .. Amount .. "!", "WEAPON", 5, 60, 160, 60, 255, 255, 255)
+				SetAccuracy(SPlayer, Amount)
+			elseif LocalTab2SelectedPlayer == "All" then
+				for _, v in pairs(Players:GetPlayers()) do
+					AnnounceBox("Set " .. tostring(v) .. " accuracy to " .. Amount .. "!", "WEAPON", 5, 60, 160, 60, 255, 255, 255)
+					SetAccuracy(v, Amount)
+				end
+			elseif LocalTab2SelectedPlayer == "Others" then
+				for _, v in pairs(Players:GetPlayers()) do
+					if v ~= LocalPlayer then
+						AnnounceBox("Set " .. tostring(v) .. " accuracy to" .. Amount .. "!", "WEAPON", 5, 60, 160, 60, 255, 255, 255)
+						SetAccuracy(v, Amount)
+					end
+				end
+			end
+		else
+		    AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	else
+		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+	end
+end)
+
+Other2Page2FeaturesReload = Instance.new("TextButton")
+Other2Page2FeaturesReload.Size = UDim2.new(0, 120, 0, 20)
+Other2Page2FeaturesReload.Position = UDim2.new(0.02, 0, 0.32, 0)
+Other2Page2FeaturesReload.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other2Page2FeaturesReload.BackgroundTransparency = 0.4
+Other2Page2FeaturesReload.BorderSizePixel = 1
+Other2Page2FeaturesReload.Text = "Reload"
+Other2Page2FeaturesReload.TextColor3 = Color3.fromRGB(255, 255, 255)
+Other2Page2FeaturesReload.TextSize = 8
+Other2Page2FeaturesReload.TextXAlignment = "Center"
+Other2Page2FeaturesReload.Parent = Other2PageSection2Phrame
+
+Other2Page2FeaturesReloadImage = Instance.new("ImageLabel")
+Other2Page2FeaturesReloadImage.Size = UDim2.new(0, 20, 0, 20)
+Other2Page2FeaturesReloadImage.Position = UDim2.new(0.012, 0, 0.32, 0)
+Other2Page2FeaturesReloadImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other2Page2FeaturesReloadImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Other2Page2FeaturesReloadImage.BackgroundTransparency = 1
+Other2Page2FeaturesReloadImage.BorderSizePixel = 0
+Other2Page2FeaturesReloadImage.Visible = true
+Other2Page2FeaturesReloadImage.Image = "rbxassetid://12900618433"
+Other2Page2FeaturesReloadImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Other2Page2FeaturesReloadImage.Parent = Other2PageSection2Phrame
+
+Other2Page2FeaturesReload.MouseButton1Click:Connect(function()
+    local Amount = tonumber(Other2Page2FeaturesAmount.Text)
+	local SPlayer = game.Players:FindFirstChild(LocalTab2SelectedPlayer)
+	if LocalTab2SelectedPlayer ~= nil and LocalTab2SelectedPlayer ~= nan and LocalTab2SelectedPlayer ~= "" then
+		if Amount then
+			if LocalTab2SelectedPlayer ~= "All" and LocalTab2SelectedPlayer ~= "Others" then
+				AnnounceBox("Set " .. LocalTab2SelectedPlayer .. " reload to " .. Amount .. "!", "WEAPON", 5, 60, 160, 60, 255, 255, 255)
+				SetReload(SPlayer, Amount)
+			elseif LocalTab2SelectedPlayer == "All" then
+				for _, v in pairs(Players:GetPlayers()) do
+					AnnounceBox("Set " .. tostring(v) .. " reload to " .. Amount .. "!", "WEAPON", 5, 60, 160, 60, 255, 255, 255)
+					SetReload(v, Amount)
+				end
+			elseif LocalTab2SelectedPlayer == "Others" then
+				for _, v in pairs(Players:GetPlayers()) do
+					if v ~= LocalPlayer then
+						AnnounceBox("Set " .. tostring(v) .. " reload to" .. Amount .. "!", "WEAPON", 5, 60, 160, 60, 255, 255, 255)
+						SetReload(v, Amount)
+					end
+				end
+			end
+		else
+		    AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	else
+		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+	end
+end)
+
+Other2Page2FeaturesShootSpeed = Instance.new("TextButton")
+Other2Page2FeaturesShootSpeed.Size = UDim2.new(0, 120, 0, 20)
+Other2Page2FeaturesShootSpeed.Position = UDim2.new(0.02, 0, 0.42, 0)
+Other2Page2FeaturesShootSpeed.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other2Page2FeaturesShootSpeed.BackgroundTransparency = 0.4
+Other2Page2FeaturesShootSpeed.BorderSizePixel = 1
+Other2Page2FeaturesShootSpeed.Text = "Shoot Speed"
+Other2Page2FeaturesShootSpeed.TextColor3 = Color3.fromRGB(255, 255, 255)
+Other2Page2FeaturesShootSpeed.TextSize = 8
+Other2Page2FeaturesShootSpeed.TextXAlignment = "Center"
+Other2Page2FeaturesShootSpeed.Parent = Other2PageSection2Phrame
+
+Other2Page2FeaturesShootSpeedImage = Instance.new("ImageLabel")
+Other2Page2FeaturesShootSpeedImage.Size = UDim2.new(0, 20, 0, 20)
+Other2Page2FeaturesShootSpeedImage.Position = UDim2.new(0.012, 0, 0.42, 0)
+Other2Page2FeaturesShootSpeedImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other2Page2FeaturesShootSpeedImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Other2Page2FeaturesShootSpeedImage.BackgroundTransparency = 1
+Other2Page2FeaturesShootSpeedImage.BorderSizePixel = 0
+Other2Page2FeaturesShootSpeedImage.Visible = true
+Other2Page2FeaturesShootSpeedImage.Image = "rbxassetid://12900618433"
+Other2Page2FeaturesShootSpeedImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Other2Page2FeaturesShootSpeedImage.Parent = Other2PageSection2Phrame
+
+Other2Page2FeaturesShootSpeed.MouseButton1Click:Connect(function()
+    local Amount = tonumber(Other2Page2FeaturesAmount.Text)
+	local SPlayer = game.Players:FindFirstChild(LocalTab2SelectedPlayer)
+	if LocalTab2SelectedPlayer ~= nil and LocalTab2SelectedPlayer ~= nan and LocalTab2SelectedPlayer ~= "" then
+		if Amount then
+			if LocalTab2SelectedPlayer ~= "All" and LocalTab2SelectedPlayer ~= "Others" then
+				AnnounceBox("Set " .. LocalTab2SelectedPlayer .. " reload to " .. Amount .. "!", "WEAPON", 5, 60, 160, 60, 255, 255, 255)
+				SetAction(SPlayer, 1, Amount)
+			elseif LocalTab2SelectedPlayer == "All" then
+				for _, v in pairs(Players:GetPlayers()) do
+					AnnounceBox("Set " .. tostring(v) .. " reload to " .. Amount .. "!", "WEAPON", 5, 60, 160, 60, 255, 255, 255)
+					SetAction(v, 1, Amount)
+				end
+			elseif LocalTab2SelectedPlayer == "Others" then
+				for _, v in pairs(Players:GetPlayers()) do
+					if v ~= LocalPlayer then
+						AnnounceBox("Set " .. tostring(v) .. " reload to" .. Amount .. "!", "WEAPON", 5, 60, 160, 60, 255, 255, 255)
+						SetAction(v, 1, Amount)
+					end
+				end
+			end
+		else
+		    AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	else
+		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+	end
 end)
 --frames
 
@@ -3995,29 +4395,58 @@ Other1Page2Features3ZIvis.MouseButton1Click:Connect(function()
 	end
 end)
 
-Other1Page2Features3 = Instance.new("TextButton")
-Other1Page2Features3.Size = UDim2.new(0, 120, 0, 20)
-Other1Page2Features3.Position = UDim2.new(0.698, 0, 0.52, 0)
-Other1Page2Features3.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Other1Page2Features3.BackgroundTransparency = 0.4
-Other1Page2Features3.BorderSizePixel = 1
-Other1Page2Features3.Text = "Horde"
-Other1Page2Features3.TextColor3 = Color3.fromRGB(255, 255, 255)
-Other1Page2Features3.TextSize = 8
-Other1Page2Features3.TextXAlignment = "Center"
-Other1Page2Features3.Parent = Other1PageSection2Phrame
+Other1Page2Features3Horde = Instance.new("TextButton")
+Other1Page2Features3Horde.Size = UDim2.new(0, 120, 0, 20)
+Other1Page2Features3Horde.Position = UDim2.new(0.698, 0, 0.52, 0)
+Other1Page2Features3Horde.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other1Page2Features3Horde.BackgroundTransparency = 0.4
+Other1Page2Features3Horde.BorderSizePixel = 1
+Other1Page2Features3Horde.Text = "Horde"
+Other1Page2Features3Horde.TextColor3 = Color3.fromRGB(255, 255, 255)
+Other1Page2Features3Horde.TextSize = 8
+Other1Page2Features3Horde.TextXAlignment = "Center"
+Other1Page2Features3Horde.Parent = Other1PageSection2Phrame
 
-Other1Page2Features3Image = Instance.new("ImageLabel")
-Other1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
-Other1Page2Features3Image.Position = UDim2.new(0.698, 0, 0.52, 0)
-Other1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Other1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Other1Page2Features3Image.BackgroundTransparency = 1
-Other1Page2Features3Image.BorderSizePixel = 0
-Other1Page2Features3Image.Visible = true
-Other1Page2Features3Image.Image = "rbxassetid://12900618433"
-Other1Page2Features3Image.ImageColor3 = Color3.fromRGB(255, 255, 255)
-Other1Page2Features3Image.Parent = Other1PageSection2Phrame
+Other1Page2Features3HordeImage = Instance.new("ImageLabel")
+Other1Page2Features3HordeImage.Size = UDim2.new(0, 20, 0, 20)
+Other1Page2Features3HordeImage.Position = UDim2.new(0.698, 0, 0.52, 0)
+Other1Page2Features3HordeImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other1Page2Features3HordeImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Other1Page2Features3HordeImage.BackgroundTransparency = 1
+Other1Page2Features3HordeImage.BorderSizePixel = 0
+Other1Page2Features3HordeImage.Visible = true
+Other1Page2Features3HordeImage.Image = "rbxassetid://12900618433"
+Other1Page2Features3HordeImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Other1Page2Features3HordeImage.Parent = Other1PageSection2Phrame
+
+Other1Page2Features3Horde.MouseButton1Click:Connect(function()
+    local Amount = tonumber(Other1Page2FeaturesAmount.Text)
+	local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
+	if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
+		if Amount then
+			if LocalTab1SelectedPlayer ~= "All" and LocalTab1SelectedPlayer ~= "Others" then
+				AnnounceBox("Spawned a horde of " .. Amount .. " on " .. LocalTab1SelectedPlayer .. "!", "HORDE", 5, 60, 160, 60, 255, 255, 255)
+				CloneZombie(SPlayer, Amount)
+			elseif LocalTab1SelectedPlayer == "All" then
+				for _, v in pairs(Players:GetPlayers()) do
+					AnnounceBox("Spawned a horde of " .. Amount .. " on " .. tostring(v) .. "!", "HORDE", 5, 60, 160, 60, 255, 255, 255)
+					CloneZombie(v, Amount)
+				end
+			elseif LocalTab1SelectedPlayer == "Others" then
+				for _, v in pairs(Players:GetPlayers()) do
+					if v ~= LocalPlayer then
+						AnnounceBox("Spawned a horde of " .. Amount .. " on " .. tostring(v) .. "!", "HORDE", 5, 60, 160, 60, 255, 255, 255)
+						CloneZombie(v, Amount)
+					end
+				end
+			end
+		else
+		    AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	else
+		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+	end
+end)
 
 Other1Page2Features3 = Instance.new("TextButton")
 Other1Page2Features3.Size = UDim2.new(0, 120, 0, 20)
@@ -9914,7 +10343,6 @@ end
 
 function ProcessLoader1()
     ProcessLoader2()
-	AnnounceBox("First Load Process Takes 1-3 secs!", "SCRIPT", 2, 255, 255, 255, 255, 255, 255)
 end
 
 function ProcessLoader2()
@@ -9978,6 +10406,7 @@ end
 
 --Finish
 if success then
+	AnnounceBox("First Load Process Takes 1-3 secs!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 	CreateLoader()
 else
 	AnnounceBox("Error detected " .. tostring(result) .. "", "SCRIPT", 20, 255, 255, 255, 255, 255, 255)
