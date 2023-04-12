@@ -235,6 +235,61 @@ Owner.MouseLeave:Connect(function()
     tooltip.Visible = false
 end)
 end
+
+function AddDropdownMenu(Owner, OwnerFrame, Options, YOffSet)
+    local dropdownMenu = Instance.new("TextButton")
+    dropdownMenu.Size = UDim2.new(0, Owner.AbsoluteSize.X, 0, 20)
+    dropdownMenu.Position = UDim2.new(0, Owner.AbsolutePosition.X - OwnerFrame.AbsolutePosition.X, YOffSet, 0)
+    dropdownMenu.BorderSizePixel = 1
+    dropdownMenu.Text = Options[1]
+    dropdownMenu.TextColor3 = Color3.fromRGB(255,255,255)
+    dropdownMenu.BackgroundColor3 = Color3.fromRGB(50,50,50)
+    dropdownMenu.BorderColor3 = Color3.fromRGB(255,255,255)
+    dropdownMenu.TextSize = 12
+    dropdownMenu.Font = Enum.Font.SourceSans
+    dropdownMenu.TextXAlignment = "Left"
+    dropdownMenu.ZIndex = OwnerFrame.ZIndex + 1
+    dropdownMenu.Parent = OwnerFrame
+
+    local dropdownList = Instance.new("Frame")
+    dropdownList.Size = UDim2.new(0, Owner.AbsoluteSize.X, 0, 20 * #Options)
+    dropdownList.Position = UDim2.new(0, Owner.AbsolutePosition.X - OwnerFrame.AbsolutePosition.X, YOffSet + 20, 0)
+    dropdownList.BorderSizePixel = 1
+    dropdownList.BackgroundColor3 = Color3.fromRGB(50,50,50)
+    dropdownList.BorderColor3 = Color3.fromRGB(255,255,255)
+    dropdownList.Visible = false
+    dropdownList.ZIndex = OwnerFrame.ZIndex + 1
+    dropdownList.Parent = OwnerFrame
+
+    for i, option in ipairs(Options) do
+        local dropdownOption = Instance.new("TextButton")
+        dropdownOption.Size = UDim2.new(0, Owner.AbsoluteSize.X, 0, 20)
+        dropdownOption.Position = UDim2.new(0, 0, 0, 20 * (i - 1))
+        dropdownOption.BorderSizePixel = 0
+        dropdownOption.Text = option
+        dropdownOption.TextColor3 = Color3.fromRGB(255,255,255)
+        dropdownOption.BackgroundColor3 = Color3.fromRGB(50,50,50)
+        dropdownOption.TextSize = 12
+        dropdownOption.Font = Enum.Font.SourceSans
+        dropdownOption.TextXAlignment = "Left"
+        dropdownOption.ZIndex = dropdownList.ZIndex + 1
+        dropdownOption.Parent = dropdownList
+
+        dropdownOption.MouseButton1Click:Connect(function()
+            dropdownMenu.Text = option
+            dropdownList.Visible = false
+        end)
+    end
+
+    dropdownMenu.MouseButton1Click:Connect(function()
+        dropdownList.Visible = not dropdownList.Visible
+    end)
+
+    dropdownList.MouseLeave:Connect(function()
+        dropdownList.Visible = false
+    end)
+end
+
 --setup
 
 
@@ -2521,6 +2576,7 @@ CreateUpdateLogMessage("(+) Improved Local tab!", 60, 160, 60)
 CreateUpdateLogMessage("(+) Improved Server tab!", 60, 160, 60)
 CreateUpdateLogMessage("(+) Improved UI!", 60, 160, 60)
 CreateUpdateLogMessage("(+) Global banned players are now a thing!", 60, 160, 60)
+CreateUpdateLogMessage("(+) Improved Scripts tab!", 60, 160, 60)
 
 --[[AgonyLogoImage = Instance.new("ImageLabel")
 AgonyLogoImage.Size = UDim2.new(0, 200, 0, 120)
@@ -5820,7 +5876,7 @@ Scripts1Page2FeaturesVentrix.Parent = Scripts1PageSection2Phrame
 
 Scripts1Page2FeaturesVentrixImage = Instance.new("ImageLabel")
 Scripts1Page2FeaturesVentrixImage.Size = UDim2.new(0, 20, 0, 20)
-Scripts1Page2FeaturesVentrixImage.Position = UDim2.new(0.012, 0, 0.012, 0)
+Scripts1Page2FeaturesVentrixImage.Position = UDim2.new(0.012, 0, 0.02, 0)
 Scripts1Page2FeaturesVentrixImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Scripts1Page2FeaturesVentrixImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Scripts1Page2FeaturesVentrixImage.BackgroundTransparency = 1
@@ -5833,6 +5889,8 @@ Scripts1Page2FeaturesVentrixImage.Parent = Scripts1PageSection2Phrame
 Scripts1Page2FeaturesVentrix.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/undesiredwrld/Ventrix-Development/main/custom_loader.lua"))()
 end)
+
+AddToolTip(Scripts1Page2FeaturesVentrix, Scripts1PageSection2Phrame, "Made by 9 9 9!", 0)
 
 Scripts1Page2FeaturesSethMilkMan = Instance.new("TextButton")
 Scripts1Page2FeaturesSethMilkMan.Size = UDim2.new(0, 160, 0, 20)
@@ -5848,7 +5906,7 @@ Scripts1Page2FeaturesSethMilkMan.Parent = Scripts1PageSection2Phrame
 
 Scripts1Page2FeaturesSethMilkManImage = Instance.new("ImageLabel")
 Scripts1Page2FeaturesSethMilkManImage.Size = UDim2.new(0, 20, 0, 20)
-Scripts1Page2FeaturesSethMilkManImage.Position = UDim2.new(0.012, 0, 0.11, 0)
+Scripts1Page2FeaturesSethMilkManImage.Position = UDim2.new(0.012, 0, 0.12, 0)
 Scripts1Page2FeaturesSethMilkManImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Scripts1Page2FeaturesSethMilkManImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Scripts1Page2FeaturesSethMilkManImage.BackgroundTransparency = 1
@@ -5861,6 +5919,8 @@ Scripts1Page2FeaturesSethMilkManImage.Parent = Scripts1PageSection2Phrame
 Scripts1Page2FeaturesSethMilkMan.MouseButton1Click:Connect(function()
     loadstring(game:GetObjects('rbxassetid://291556436')[1].Source)()
 end)
+
+AddToolTip(Scripts1Page2FeaturesSethMilkMan, Scripts1PageSection2Phrame, "Made by nil!", 0.1)
 
 Scripts1Page2FeaturesNeptunium = Instance.new("TextButton")
 Scripts1Page2FeaturesNeptunium.Size = UDim2.new(0, 160, 0, 20)
@@ -5876,7 +5936,7 @@ Scripts1Page2FeaturesNeptunium.Parent = Scripts1PageSection2Phrame
 
 Scripts1Page2FeaturesNeptuniumImage = Instance.new("ImageLabel")
 Scripts1Page2FeaturesNeptuniumImage.Size = UDim2.new(0, 20, 0, 20)
-Scripts1Page2FeaturesNeptuniumImage.Position = UDim2.new(0.012, 0, 0.21, 0)
+Scripts1Page2FeaturesNeptuniumImage.Position = UDim2.new(0.012, 0, 0.22, 0)
 Scripts1Page2FeaturesNeptuniumImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Scripts1Page2FeaturesNeptuniumImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Scripts1Page2FeaturesNeptuniumImage.BackgroundTransparency = 1
@@ -5889,6 +5949,8 @@ Scripts1Page2FeaturesNeptuniumImage.Parent = Scripts1PageSection2Phrame
 Scripts1Page2FeaturesNeptunium.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://pastebin.com/raw/yrGGY6sf", true))()
 end)
+
+AddToolTip(Scripts1Page2FeaturesNeptunium, Scripts1PageSection2Phrame, "Made by nil!", 0.2)
 
 Scripts1Page2FeaturesOldXR = Instance.new("TextButton")
 Scripts1Page2FeaturesOldXR.Size = UDim2.new(0, 160, 0, 20)
@@ -5904,7 +5966,7 @@ Scripts1Page2FeaturesOldXR.Parent = Scripts1PageSection2Phrame
 
 Scripts1Page2FeaturesOldXRImage = Instance.new("ImageLabel")
 Scripts1Page2FeaturesOldXRImage.Size = UDim2.new(0, 20, 0, 20)
-Scripts1Page2FeaturesOldXRImage.Position = UDim2.new(0.012, 0, 0.31, 0)
+Scripts1Page2FeaturesOldXRImage.Position = UDim2.new(0.012, 0, 0.32, 0)
 Scripts1Page2FeaturesOldXRImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Scripts1Page2FeaturesOldXRImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Scripts1Page2FeaturesOldXRImage.BackgroundTransparency = 1
@@ -5917,6 +5979,8 @@ Scripts1Page2FeaturesOldXRImage.Parent = Scripts1PageSection2Phrame
 Scripts1Page2FeaturesOldXR.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/Apoc.lua", true))()
 end)
+
+AddToolTip(Scripts1Page2FeaturesOldXR, Scripts1PageSection2Phrame, "Made by psychedelic and death!", 0.3)
 
 Scripts1Page2FeaturesOlderXR = Instance.new("TextButton")
 Scripts1Page2FeaturesOlderXR.Size = UDim2.new(0, 160, 0, 20)
@@ -5932,7 +5996,7 @@ Scripts1Page2FeaturesOlderXR.Parent = Scripts1PageSection2Phrame
 
 Scripts1Page2FeaturesOlderXRImage = Instance.new("ImageLabel")
 Scripts1Page2FeaturesOlderXRImage.Size = UDim2.new(0, 20, 0, 20)
-Scripts1Page2FeaturesOlderXRImage.Position = UDim2.new(0.012, 0, 0.41, 0)
+Scripts1Page2FeaturesOlderXRImage.Position = UDim2.new(0.012, 0, 0.42, 0)
 Scripts1Page2FeaturesOlderXRImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Scripts1Page2FeaturesOlderXRImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Scripts1Page2FeaturesOlderXRImage.BackgroundTransparency = 1
@@ -5945,6 +6009,8 @@ Scripts1Page2FeaturesOlderXRImage.Parent = Scripts1PageSection2Phrame
 Scripts1Page2FeaturesOlderXR.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://pastebin.com/raw/WBcXn2je", true))()
 end)
+
+AddToolTip(Scripts1Page2FeaturesOlderXR, Scripts1PageSection2Phrame, "Made by psychedelic!", 0.4)
 
 Scripts1Page2FeaturesLightningGui = Instance.new("TextButton")
 Scripts1Page2FeaturesLightningGui.Size = UDim2.new(0, 160, 0, 20)
@@ -5960,7 +6026,7 @@ Scripts1Page2FeaturesLightningGui.Parent = Scripts1PageSection2Phrame
 
 Scripts1Page2FeaturesLightningGuiImage = Instance.new("ImageLabel")
 Scripts1Page2FeaturesLightningGuiImage.Size = UDim2.new(0, 20, 0, 20)
-Scripts1Page2FeaturesLightningGuiImage.Position = UDim2.new(0.012, 0, 0.51, 0)
+Scripts1Page2FeaturesLightningGuiImage.Position = UDim2.new(0.012, 0, 0.52, 0)
 Scripts1Page2FeaturesLightningGuiImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Scripts1Page2FeaturesLightningGuiImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Scripts1Page2FeaturesLightningGuiImage.BackgroundTransparency = 1
@@ -5973,6 +6039,8 @@ Scripts1Page2FeaturesLightningGuiImage.Parent = Scripts1PageSection2Phrame
 Scripts1Page2FeaturesLightningGui.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet(('https://pastebin.com/raw/stPBzPJ0'),true))()
 end)
+
+AddToolTip(Scripts1Page2FeaturesLightningGui, Scripts1PageSection2Phrame, "Made by nil!", 0.5)
 
 Scripts1Page2FeaturesInfYield = Instance.new("TextButton")
 Scripts1Page2FeaturesInfYield.Size = UDim2.new(0, 160, 0, 20)
@@ -5988,7 +6056,7 @@ Scripts1Page2FeaturesInfYield.Parent = Scripts1PageSection2Phrame
 
 Scripts1Page2FeaturesInfYieldImage = Instance.new("ImageLabel")
 Scripts1Page2FeaturesInfYieldImage.Size = UDim2.new(0, 20, 0, 20)
-Scripts1Page2FeaturesInfYieldImage.Position = UDim2.new(0.012, 0, 0.61, 0)
+Scripts1Page2FeaturesInfYieldImage.Position = UDim2.new(0.012, 0, 0.62, 0)
 Scripts1Page2FeaturesInfYieldImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Scripts1Page2FeaturesInfYieldImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Scripts1Page2FeaturesInfYieldImage.BackgroundTransparency = 1
@@ -6001,6 +6069,8 @@ Scripts1Page2FeaturesInfYieldImage.Parent = Scripts1PageSection2Phrame
 Scripts1Page2FeaturesInfYield.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
 end)
+
+AddToolTip(Scripts1Page2FeaturesInfYield, Scripts1PageSection2Phrame, "Made by Toon-arch!", 0.6)
 
 Scripts1Page2FeaturesVictiniV2 = Instance.new("TextButton")
 Scripts1Page2FeaturesVictiniV2.Size = UDim2.new(0, 160, 0, 20)
@@ -6016,7 +6086,7 @@ Scripts1Page2FeaturesVictiniV2.Parent = Scripts1PageSection2Phrame
 
 Scripts1Page2FeaturesVictiniV2Image = Instance.new("ImageLabel")
 Scripts1Page2FeaturesVictiniV2Image.Size = UDim2.new(0, 20, 0, 20)
-Scripts1Page2FeaturesVictiniV2Image.Position = UDim2.new(0.012, 0, 0.71, 0)
+Scripts1Page2FeaturesVictiniV2Image.Position = UDim2.new(0.012, 0, 0.72, 0)
 Scripts1Page2FeaturesVictiniV2Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Scripts1Page2FeaturesVictiniV2Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Scripts1Page2FeaturesVictiniV2Image.BackgroundTransparency = 1
@@ -6029,6 +6099,8 @@ Scripts1Page2FeaturesVictiniV2Image.Parent = Scripts1PageSection2Phrame
 Scripts1Page2FeaturesVictiniV2.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/victiniv2.lua", true))()
 end)
+
+AddToolTip(Scripts1Page2FeaturesVictiniV2, Scripts1PageSection2Phrame, "Made by Victini!", 0.7)
 
 Scripts1Page2FeaturesVictiniV1 = Instance.new("TextButton")
 Scripts1Page2FeaturesVictiniV1.Size = UDim2.new(0, 160, 0, 20)
@@ -6044,7 +6116,7 @@ Scripts1Page2FeaturesVictiniV1.Parent = Scripts1PageSection2Phrame
 
 Scripts1Page2FeaturesVictiniV1Image = Instance.new("ImageLabel")
 Scripts1Page2FeaturesVictiniV1Image.Size = UDim2.new(0, 20, 0, 20)
-Scripts1Page2FeaturesVictiniV1Image.Position = UDim2.new(0.012, 0, 0.81, 0)
+Scripts1Page2FeaturesVictiniV1Image.Position = UDim2.new(0.012, 0, 0.82, 0)
 Scripts1Page2FeaturesVictiniV1Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Scripts1Page2FeaturesVictiniV1Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Scripts1Page2FeaturesVictiniV1Image.BackgroundTransparency = 1
@@ -6057,6 +6129,8 @@ Scripts1Page2FeaturesVictiniV1Image.Parent = Scripts1PageSection2Phrame
 Scripts1Page2FeaturesVictiniV1.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://pastebin.com/raw/TzqAK8sP", true))()
 end)
+
+AddToolTip(Scripts1Page2FeaturesVictiniV1, Scripts1PageSection2Phrame, "Made by Victini!", 0.8)
 
 Scripts1Page2Features2ImpulseHub = Instance.new("TextButton")
 Scripts1Page2Features2ImpulseHub.Size = UDim2.new(0, 160, 0, 20)
@@ -6072,7 +6146,7 @@ Scripts1Page2Features2ImpulseHub.Parent = Scripts1PageSection2Phrame
 
 Scripts1Page2Features2ImpulseHubImage = Instance.new("ImageLabel")
 Scripts1Page2Features2ImpulseHubImage.Size = UDim2.new(0, 20, 0, 20)
-Scripts1Page2Features2ImpulseHubImage.Position = UDim2.new(0.342, 0, 0.012, 0)
+Scripts1Page2Features2ImpulseHubImage.Position = UDim2.new(0.342, 0, 0.02, 0)
 Scripts1Page2Features2ImpulseHubImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Scripts1Page2Features2ImpulseHubImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Scripts1Page2Features2ImpulseHubImage.BackgroundTransparency = 1
@@ -6085,6 +6159,8 @@ Scripts1Page2Features2ImpulseHubImage.Parent = Scripts1PageSection2Phrame
 Scripts1Page2Features2ImpulseHub.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet('http://impulse-hub.xyz/ImpulseHub',true))()
 end)
+
+AddToolTip(Scripts1Page2Features2ImpulseHub, Scripts1PageSection2Phrame, "Made by nil!", 0)
 
 Scripts1Page2Features2ApocHub = Instance.new("TextButton")
 Scripts1Page2Features2ApocHub.Size = UDim2.new(0, 160, 0, 20)
@@ -6100,7 +6176,7 @@ Scripts1Page2Features2ApocHub.Parent = Scripts1PageSection2Phrame
 
 Scripts1Page2Features2ApocHubImage = Instance.new("ImageLabel")
 Scripts1Page2Features2ApocHubImage.Size = UDim2.new(0, 20, 0, 20)
-Scripts1Page2Features2ApocHubImage.Position = UDim2.new(0.342, 0, 0.11, 0)
+Scripts1Page2Features2ApocHubImage.Position = UDim2.new(0.342, 0, 0.12, 0)
 Scripts1Page2Features2ApocHubImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Scripts1Page2Features2ApocHubImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Scripts1Page2Features2ApocHubImage.BackgroundTransparency = 1
@@ -6113,6 +6189,8 @@ Scripts1Page2Features2ApocHubImage.Parent = Scripts1PageSection2Phrame
 Scripts1Page2Features2ApocHub.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://pastebin.com/raw/Ks6hHaDm", true))()
 end)
+
+AddToolTip(Scripts1Page2Features2ApocHub, Scripts1PageSection2Phrame, "Made by nil!", 0.1)
 
 Scripts1Page2Features2RandomEsp = Instance.new("TextButton")
 Scripts1Page2Features2RandomEsp.Size = UDim2.new(0, 160, 0, 20)
@@ -6128,7 +6206,7 @@ Scripts1Page2Features2RandomEsp.Parent = Scripts1PageSection2Phrame
 
 Scripts1Page2Features2RandomEspImage = Instance.new("ImageLabel")
 Scripts1Page2Features2RandomEspImage.Size = UDim2.new(0, 20, 0, 20)
-Scripts1Page2Features2RandomEspImage.Position = UDim2.new(0.342, 0, 0.21, 0)
+Scripts1Page2Features2RandomEspImage.Position = UDim2.new(0.342, 0, 0.22, 0)
 Scripts1Page2Features2RandomEspImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Scripts1Page2Features2RandomEspImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Scripts1Page2Features2RandomEspImage.BackgroundTransparency = 1
@@ -6141,6 +6219,8 @@ Scripts1Page2Features2RandomEspImage.Parent = Scripts1PageSection2Phrame
 Scripts1Page2Features2RandomEsp.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet(('https://pastebin.com/raw/uc6LV1cm'),true))()
 end)
+
+AddToolTip(Scripts1Page2Features2RandomEsp, Scripts1PageSection2Phrame, "Made by nil!", 0.2)
 
 Scripts1Page2Features2ArGon = Instance.new("TextButton")
 Scripts1Page2Features2ArGon.Size = UDim2.new(0, 160, 0, 20)
@@ -6156,7 +6236,7 @@ Scripts1Page2Features2ArGon.Parent = Scripts1PageSection2Phrame
 
 Scripts1Page2Features2ArGonImage = Instance.new("ImageLabel")
 Scripts1Page2Features2ArGonImage.Size = UDim2.new(0, 20, 0, 20)
-Scripts1Page2Features2ArGonImage.Position = UDim2.new(0.342, 0, 0.31, 0)
+Scripts1Page2Features2ArGonImage.Position = UDim2.new(0.342, 0, 0.32, 0)
 Scripts1Page2Features2ArGonImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Scripts1Page2Features2ArGonImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Scripts1Page2Features2ArGonImage.BackgroundTransparency = 1
@@ -6169,6 +6249,8 @@ Scripts1Page2Features2ArGonImage.Parent = Scripts1PageSection2Phrame
 Scripts1Page2Features2ArGon.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet(('https://raw.githubusercontent.com/Sittapea/randomgit/main/ArGon.lua'),true))()
 end)
+
+AddToolTip(Scripts1Page2Features2ArGon, Scripts1PageSection2Phrame, "Made by SKID GENERAL OF AR!", 0.3)
 
 Scripts1Page2Features2OldVentrix = Instance.new("TextButton")
 Scripts1Page2Features2OldVentrix.Size = UDim2.new(0, 160, 0, 20)
@@ -6184,7 +6266,7 @@ Scripts1Page2Features2OldVentrix.Parent = Scripts1PageSection2Phrame
 
 Scripts1Page2Features2OldVentrixImage = Instance.new("ImageLabel")
 Scripts1Page2Features2OldVentrixImage.Size = UDim2.new(0, 20, 0, 20)
-Scripts1Page2Features2OldVentrixImage.Position = UDim2.new(0.342, 0, 0.41, 0)
+Scripts1Page2Features2OldVentrixImage.Position = UDim2.new(0.342, 0, 0.42, 0)
 Scripts1Page2Features2OldVentrixImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Scripts1Page2Features2OldVentrixImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Scripts1Page2Features2OldVentrixImage.BackgroundTransparency = 1
@@ -6197,6 +6279,8 @@ Scripts1Page2Features2OldVentrixImage.Parent = Scripts1PageSection2Phrame
 Scripts1Page2Features2OldVentrix.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet(('https://raw.githubusercontent.com/Sittapea/randomgit/main/Ventrixold.lua'),true))()
 end)
+
+AddToolTip(Scripts1Page2Features2OldVentrix, Scripts1PageSection2Phrame, "Made by 9 9 9!", 0.4)
 --frames
 
 
