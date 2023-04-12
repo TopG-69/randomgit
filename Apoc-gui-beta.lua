@@ -321,6 +321,7 @@ Workspace = game:GetService("Workspace")
 Players = game:GetService("Players")
 ReplicatedStorage = game:GetService("ReplicatedStorage")
 RunService = game:GetService("RunService")
+ToWatchTab = {}
 Loot = Lighting.LootDrops
 Mats = Lighting.Materials
 Bags = Lighting.Backpacks
@@ -996,7 +997,6 @@ function UpdatePlayerInventory(Plr, Scroll)
     end
 end
 
-ToWatchTab = {}
 function SetupWatch(Plr, Val)
 	ToWatchTab[Val] = Plr
 	local SelectedFrameForWatching = LocalPlayerInventory
@@ -1320,94 +1320,43 @@ function Stamina(player, mode, amount)
 	end
 end
 
+function Vitals(player, mode, amount)
+	if mode == 1 then
+    	fireserver("ChangeValue", player.playerstats.Hunger, nil)
+		fireserver("ChangeValue", player.playerstats.Thirst, nil)
+	elseif mode == 2 then
+    	fireserver("ChangeValue", player.playerstats.Hunger, math.huge)
+		fireserver("ChangeValue", player.playerstats.Thirst, math.huge)
+	elseif mode == 3 then
+    	fireserver("ChangeValue", player.playerstats.Hunger, 100)
+		fireserver("ChangeValue", player.playerstats.Thirst, 100)
+	elseif mode == 4 then
+		if amount == nil then
+			if ShowFunctionAlerts then
+				AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+			end
+		else
+			fireserver("ChangeValue", player.playerstats.Hunger, amount)
+		end
+	elseif mode == 5 then
+		if amount == nil then
+			if ShowFunctionAlerts then
+				AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+			end
+		else
+			fireserver("ChangeValue", player.playerstats.Thirst, amount)
+		end
+	elseif mode == nil or mode == nan then
+		if ShowFunctionAlerts then
+		    AnnounceBox("Invalid mode usage!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	end
+end
+
 function CheckNumber(Numb)
     return tonumber(string.sub(tostring(Numb), 1, 1))
 end
 
-function CheckForExploits()
-    for i, v in pairs(game.Players:GetPlayers()) do
-        if v ~= LocalPlayer then
-            pcall(function()
-                if CheckNumber(v.playerstats.Hunger.Value) == nil or CheckNumber(v.playerstats.Thirst.Value) == nil then
-                    if ShowExploitAlerts then
-                        AnnounceBox("Warning player " .. tostring(v) .. " has infinite vitals!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
-					end
-					if not ExploitersList[tostring(v)] then
-						ExploitersList[tostring(v)] = "Inf Vitals"
-						AddPlayerToExploitList(v, "Inf Vitals")
-					end
-					if TogglePunishExploiters then
-					    Vitals(v, 1)
-					    if ShowFunctionAlerts then
-					        AnnounceBox("Warning removed vitals from " .. tostring(v) .. "!", "PUNISH EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
-                        end
-					end
-                end
-				if not v.Character:FindFirstChild("Humanoid") then
-                    if ShowExploitAlerts then
-                        AnnounceBox("Warning player " .. tostring(v) .. " is using JJSploit!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
-					end
-					if not ExploitersList[tostring(v)] == "Agony User" and ExploitersList[tostring(v)] == "Agony Owner" then
-						ExploitersList[tostring(v)] = "JJ Sploit"
-						AddPlayerToExploitList(v, "JJ Sploit")
-					end
-					if TogglePunishExploiters then
-					    Kick(v)
-					    if ShowFunctionAlerts then
-					        AnnounceBox("Warning kicked " .. tostring(v) .. "!", "PUNISH EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
-                        end
-					end
-				end
-                if tonumber(string.sub(tostring(v.Character.Humanoid.Health), 1, 1)) == nil then
-                    if ShowExploitAlerts then
-                        AnnounceBox("Warning player " .. tostring(v) .. " has infinite health!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
-					end
-					if not ExploitersList[tostring(v)] or ExploitersList[tostring(v)] == "Inf Vitals" then
-						ExploitersList[tostring(v)] = "Inf Health"
-						AddPlayerToExploitList(v, "Inf Health")
-					end
-					if TogglePunishExploiters then
-					    Kill(v)
-					    if ShowFunctionAlerts then
-					        AnnounceBox("Warning killed " .. tostring(v) .. "!", "PUNISH EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
-                        end
-					end
-                end
-                if v.Character:FindFirstChild("Humanoid") and v.Character.Humanoid:FindFirstChild("DefenseMultiplier") and tonumber(v.Character.Humanoid.DefenseMultiplier.Value) <= 0 then
-                    if ShowExploitAlerts then
-                        AnnounceBox("Warning player " .. tostring(v) .. " has PKGod!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
-					end
-					if not ExploitersList[tostring(v)] or ExploitersList[tostring(v)] == "Inf Vitals" then
-						ExploitersList[tostring(v)] = "PK God"
-						AddPlayerToExploitList(v, "PK God")
-					end
-					if TogglePunishExploiters then
-					    PKGod(v, 2)
-					    if ShowFunctionAlerts then
-					        AnnounceBox("Warning removed PKGod from " .. tostring(v) .. "!", "PUNISH EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
-                        end
-					end
-                end
-				if v:FindFirstChild("playerstats") and v.playerstats:FindFirstChild("character") and v.playerstats.character:FindFirstChild("AntiTP") or v.playerstats.character:FindFirstChild("AA") then
-                    if ShowExploitAlerts then
-                        AnnounceBox("Warning player " .. tostring(v) .. " is using XR Hub!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
-					end
-					if not ExploitersList[tostring(v)] == "Agony User" and ExploitersList[tostring(v)] == "Agony Owner" then
-						ExploitersList[tostring(v)] = "XR Hub"
-						AddPlayerToExploitList(v, "XR Hub")
-					end
-					if TogglePunishExploiters then
-					    Kick(v)
-					    if ShowFunctionAlerts then
-					        AnnounceBox("Warning kicked " .. tostring(v) .. "!", "PUNISH EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
-                        end
-					end
-				end
-				
-            end)
-        end
-    end
-end
 
 spawn(function()
 	while wait(1) do
@@ -1564,40 +1513,6 @@ function CleanParts()
     if ShowFunctionAlerts then
         AnnounceBox("Successfully cleaned parts! (" .. tostring(PartsCleaned) .. ")", "CLEAN PARTS", 5, 130, 130, 60, 255, 255, 255)
     end
-end
-
-function Vitals(player, mode, amount)
-	if mode == 1 then
-    	fireserver("ChangeValue", player.playerstats.Hunger, nil)
-		fireserver("ChangeValue", player.playerstats.Thirst, nil)
-	elseif mode == 2 then
-    	fireserver("ChangeValue", player.playerstats.Hunger, math.huge)
-		fireserver("ChangeValue", player.playerstats.Thirst, math.huge)
-	elseif mode == 3 then
-    	fireserver("ChangeValue", player.playerstats.Hunger, 100)
-		fireserver("ChangeValue", player.playerstats.Thirst, 100)
-	elseif mode == 4 then
-		if amount == nil then
-			if ShowFunctionAlerts then
-				AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
-			end
-		else
-			fireserver("ChangeValue", player.playerstats.Hunger, amount)
-		end
-	elseif mode == 5 then
-		if amount == nil then
-			if ShowFunctionAlerts then
-				AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
-			end
-		else
-			fireserver("ChangeValue", player.playerstats.Thirst, amount)
-		end
-	elseif mode == nil or mode == nan then
-		--Notify("[Error]: Invalid mode usage!", 5, 95, 60, 60)
-		if ShowFunctionAlerts then
-		    AnnounceBox("Invalid mode usage!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
-		end
-	end
 end
 
 function LaunchRocket(Plr, Dist)
@@ -1841,6 +1756,91 @@ function Kick(Plr)
 			end
     	end)
 	end
+end
+
+function CheckForExploits()
+    for i, v in pairs(game.Players:GetPlayers()) do
+        if v ~= LocalPlayer then
+            pcall(function()
+                if CheckNumber(v.playerstats.Hunger.Value) == nil or CheckNumber(v.playerstats.Thirst.Value) == nil then
+                    if ShowExploitAlerts then
+                        AnnounceBox("Warning player " .. tostring(v) .. " has infinite vitals!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
+					end
+					if not ExploitersList[tostring(v)] then
+						ExploitersList[tostring(v)] = "Inf Vitals"
+						AddPlayerToExploitList(v, "Inf Vitals")
+					end
+					if TogglePunishExploiters then
+					    Vitals(v, 3)
+					    if ShowFunctionAlerts then
+					        AnnounceBox("Warning removed vitals from " .. tostring(v) .. "!", "PUNISH EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
+                        end
+					end
+                end
+				if not v.Character:FindFirstChild("Humanoid") then
+                    if ShowExploitAlerts then
+                        AnnounceBox("Warning player " .. tostring(v) .. " is using JJSploit!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
+					end
+					if not ExploitersList[tostring(v)] == "Agony User" and ExploitersList[tostring(v)] == "Agony Owner" then
+						ExploitersList[tostring(v)] = "JJ Sploit"
+						AddPlayerToExploitList(v, "JJ Sploit")
+					end
+					if TogglePunishExploiters then
+					    Kick(v)
+					    if ShowFunctionAlerts then
+					        AnnounceBox("Warning kicked " .. tostring(v) .. "!", "PUNISH EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
+                        end
+					end
+				end
+                if tonumber(string.sub(tostring(v.Character.Humanoid.Health), 1, 1)) == nil then
+                    if ShowExploitAlerts then
+                        AnnounceBox("Warning player " .. tostring(v) .. " has infinite health!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
+					end
+					if not ExploitersList[tostring(v)] or ExploitersList[tostring(v)] == "Inf Vitals" then
+						ExploitersList[tostring(v)] = "Inf Health"
+						AddPlayerToExploitList(v, "Inf Health")
+					end
+					if TogglePunishExploiters then
+					    Kill(v)
+					    if ShowFunctionAlerts then
+					        AnnounceBox("Warning killed " .. tostring(v) .. "!", "PUNISH EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
+                        end
+					end
+                end
+                if v.Character:FindFirstChild("Humanoid") and v.Character.Humanoid:FindFirstChild("DefenseMultiplier") and tonumber(v.Character.Humanoid.DefenseMultiplier.Value) <= 0 then
+                    if ShowExploitAlerts then
+                        AnnounceBox("Warning player " .. tostring(v) .. " has PKGod!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
+					end
+					if not ExploitersList[tostring(v)] or ExploitersList[tostring(v)] == "Inf Vitals" then
+						ExploitersList[tostring(v)] = "PK God"
+						AddPlayerToExploitList(v, "PK God")
+					end
+					if TogglePunishExploiters then
+					    PKGod(v, 2)
+					    if ShowFunctionAlerts then
+					        AnnounceBox("Warning removed PKGod from " .. tostring(v) .. "!", "PUNISH EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
+                        end
+					end
+                end
+				if v:FindFirstChild("playerstats") and v.playerstats:FindFirstChild("character") and v.playerstats.character:FindFirstChild("AntiTP") or v.playerstats.character:FindFirstChild("AA") then
+                    if ShowExploitAlerts then
+                        AnnounceBox("Warning player " .. tostring(v) .. " is using XR Hub!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
+					end
+					if not ExploitersList[tostring(v)] == "Agony User" and ExploitersList[tostring(v)] == "Agony Owner" then
+						ExploitersList[tostring(v)] = "XR Hub"
+						AddPlayerToExploitList(v, "XR Hub")
+					end
+					if TogglePunishExploiters then
+					    Kick(v)
+					    if ShowFunctionAlerts then
+					        AnnounceBox("Warning kicked " .. tostring(v) .. "!", "PUNISH EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
+                        end
+					end
+				end
+				
+            end)
+        end
+    end
 end
 
 Banned = {}
