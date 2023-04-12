@@ -17,6 +17,9 @@
 
 OSstart = os.time()
 ShowFunctionAlerts = true
+AllowSpawnLoot = true
+ToggleRemoveItems = false
+AnnounceSpawnedItem = true
 ShowLeaveAlerts = true
 ShowJoinAlerts = true
 ShowSpawnedItemAlerts = false
@@ -1357,11 +1360,18 @@ function CheckNumber(Numb)
     return tonumber(string.sub(tostring(Numb), 1, 1))
 end
 
-
 spawn(function()
 	while wait(1) do
 		for i, v in pairs(Players:GetPlayers()) do
 			if v ~= LocalPlayer then
+				if ExploitersList[tostring(v)] == "Victini"  then
+					if TogglePunishExploiters then
+						Kick(v)
+						if ShowFunctionAlerts then
+							AnnounceBox("Warning kicked " .. tostring(v) .. "!", "PUNISH EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
+						end
+					end
+				end
 				if v:FindFirstChild("playerstats") and v.playerstats:FindFirstChild("character") and v.playerstats.character:FindFirstChild("Agony") then
 					if v.Name == "VlTTUPEA" or v.Name == "TRINITY_XR" or v.Name == "VlTTUPEA_alt" or v.Name == "LeSuc042" or v.Name == "Cjrmenak" then
 						ExploitersList[tostring(v)] = "Agony Owner"
@@ -1377,11 +1387,6 @@ spawn(function()
 			end
 		end
 	end
-end)
-
-game.Workspace.Remote.ChangeParentLocal.OnClientEvent:connect(function(Tab)
-    if type(Tab) == "table" then
-    end
 end)
 
 local VisibleCT = {}
@@ -1733,7 +1738,6 @@ function Kill(Plr)
     	if Plr ~= LocalPlayer then
         	fireserver("ChangeParent", Plr.Character.Head)
         else
-        	--Notify("[Error]: Can't kill localplayer!", 5, 95, 60, 60)
             if ShowFunctionAlerts then
 		        AnnounceBox("Can't kill localplayer!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
             end
@@ -1760,6 +1764,200 @@ function Kick(Plr)
     	end)
 	end
 end
+
+function GetZombie()
+    for i, v in pairs(game.Workspace.Zombies:GetDescendants()) do
+        if v:IsA("Humanoid") and v.Parent:FindFirstChild("Head") then
+            return v.Parent
+        end
+    end
+end
+
+local AcceptedZombies = {}
+function CloneZombie(Plr, A)
+    if Plr == nil or Plr.Character == nil or not Plr.Character:FindFirstChild("Head") then
+        return
+    end
+	Z = GetZombie()
+	if Z == nil then
+		return
+	end
+	if A == nil or A < 1 then
+		A = 1
+    elseif A > 100 then
+        A = 100
+    end
+    for i, v in pairs(Mats:GetChildren()) do
+        if v.Name == "Zombie" and v ~= Z then
+            fireserver("ChangeParent", v, game.Workspace.Zombies)
+        end
+    end
+    fireserver("ChangeParent", Z.Humanoid, Z.Head)
+    fireserver("ChangeParent", Z, Mats)
+    if not Z:FindFirstChild("IsBuildingMaterial") then
+        R.AddClothing:FireServer("IsBuildingMaterial", Z, "", "", "")
+    end
+    repeat
+        wait()
+    until Mats:FindFirstChild("Zombie") and Z:FindFirstChild("IsBuildingMaterial")
+    local Con;
+    local Amount = 0
+    Con = game.Workspace.ChildAdded:connect(function(Ch)
+        if tostring(Ch) == "Zombie" and AcceptedZombies[Ch] == nil then
+            AcceptedZombies[Ch] = true
+            Amount = Amount + 1
+            if Amount >= A then
+                Con:Disconnect()
+            end
+            repeat
+                wait()
+            until Ch:FindFirstChild("Control")
+            fireserver("ChangeParent", Ch, game.Workspace.Zombies)
+            local C = Ch.Control
+            fireserver("ChangeParent", C, game.ReplicatedStorage)
+            fireserver("ChangeParent", Ch.Head:FindFirstChild("Humanoid"), Ch)
+            spawn(function()
+                wait(1)
+                fireserver("ChangeParent", C, Ch)
+                if Plr.Character ~= nil and Plr.Character:FindFirstChild("Head") then
+                    R.ReplicateModel:FireServer(Ch, CFrame.new(0, 0, 0)+Plr.Character.Head.Position)
+                end
+            end)
+        end
+    end)
+    for i = 1, A do
+        R.PlaceMaterial:FireServer("Zombie", Z.Head.Position)
+    end
+end
+
+function GetPartPosition(Mod)
+	if Mod then
+		for i, v in pairs(Mod:GetDescendants()) do
+			if v:IsA("BasePart") then
+				return v.Position
+			end
+		end
+	end
+    return Vector3.new(-1000000, -1000000, -1000000)
+end
+
+local AntiSpam = 0
+game.Workspace.ChildAdded:connect(function(Ch)
+	if AllowSpawnLoot == false and (VehiclesTab[tostring(Ch)] ~= nil or game:GetService("Lighting").LootDrops:FindFirstChild(tostring(Ch)) or game:GetService("Lighting").Materials:FindFirstChild(tostring(Ch))) and not Ch:FindFirstChild("Handle") then
+        local Pos = GetPartPosition(Ch)
+        fireserver("ChangeParent", Ch)
+        if AntiSpam == 0 then
+            spawn(function()
+                wait(5)
+                AntiSpam = 0
+            end)
+        end
+        if AntiSpam >= 5 then
+            return
+        else
+            local Closest = nil
+            for i, v in pairs(game.Players:GetPlayers()) do
+                if v.Character ~= nil and v.Character:FindFirstChild("Head") and (v.Character.Head.Position-Pos).Magnitude < 250 and (Closest == nil or (v.Character.Head.Position-Pos).Magnitude < (Closest.Character.Head.Position-Pos).Magnitude) then
+                    Closest = v
+                end
+            end
+            if Closest ~= nil then
+				if AnnounceSpawnedItem then
+					AnnounceBox("Someone attmpted to spawn (" .. tostring(Closest) .. ") near " .. tostring(Closest) .. "!", "SPAWNED ITEM DETECTION", 5, 130, 130, 60, 255, 255, 255)
+				end
+				if ToggleRemoveItems then
+					local LootCleaned = 0
+					for _, v in pairs(Workspace:GetChildren()) do
+						if Lighting.LootDrops:FindFirstChild(v.Name) then
+							LootCleaned = LootCleaned + 1
+							fireserver("ChangeParent", v, nil)
+						end
+					end
+					if ShowFunctionAlerts then
+						AnnounceBox("Successfully cleaned loot! (" .. tostring(LootCleaned) .. ")", "CLEAN LOOT", 5, 130, 130, 60, 255, 255, 255)
+					end
+					local VehiclesCleaned = 0
+						for _, v in pairs(Workspace:FindFirstChild("Vehicles"):GetDescendants()) do
+							if v.Name == "MaxSpeed" and v.Value > 100 or v.Name == "Hull" and v.Value > 5000 then
+								VehiclesCleaned = VehiclesCleaned + 1
+								fireserver("ChangeParent", v.Parent.Parent)
+							end
+						end
+					if ShowFunctionAlerts then
+						AnnounceBox("Successfully cleaned vehicles! (" .. tostring(VehiclesCleaned) .. ")", "CLEAN VEHICLES", 5, 130, 130, 60, 255, 255, 255)
+					end
+				end
+            elseif Pos.X == -100000 then
+				if AnnounceSpawnedItem then
+					AnnounceBox("Someone attmpted to spawn a (" .. tostring(Ch) .. ")!", "SPAWNED ITEM DETECTION", 5, 130, 130, 60, 255, 255, 255)
+				end
+				if ToggleRemoveItems then
+					local LootCleaned = 0
+					for _, v in pairs(Workspace:GetChildren()) do
+						if Lighting.LootDrops:FindFirstChild(v.Name) then
+							LootCleaned = LootCleaned + 1
+							fireserver("ChangeParent", v, nil)
+						end
+					end
+					if ShowFunctionAlerts then
+						AnnounceBox("Successfully cleaned loot! (" .. tostring(LootCleaned) .. ")", "CLEAN LOOT", 5, 130, 130, 60, 255, 255, 255)
+					end
+					local VehiclesCleaned = 0
+						for _, v in pairs(Workspace:FindFirstChild("Vehicles"):GetDescendants()) do
+							if v.Name == "MaxSpeed" and v.Value > 100 or v.Name == "Hull" and v.Value > 5000 then
+								VehiclesCleaned = VehiclesCleaned + 1
+								fireserver("ChangeParent", v.Parent.Parent)
+							end
+						end
+					if ShowFunctionAlerts then
+						AnnounceBox("Successfully cleaned vehicles! (" .. tostring(VehiclesCleaned) .. ")", "CLEAN VEHICLES", 5, 130, 130, 60, 255, 255, 255)
+					end
+				end
+            end
+        end
+        AntiSpam = AntiSpam + 1
+	end
+end)
+
+function AddChat(Player, Message)
+	--MakeChatListLabel(tostring(Player)..": "..tostring(Message))
+end
+
+fireserver("ChangeParentLocal", {["RequestType"] = "Script", ["Message"] = "Agony", ["Player"] = game.Players.LocalPlayer})
+function HandleRequest(Tab)
+    if Tab["RequestType"] == "Script" then
+        fireserver("ChangeParentLocal", {["RequestType"] = "SetScript", 
+            ["Message"] = "Victini", 
+            ["Player"] = game.Players.LocalPlayer})
+        local PScript = Tab["Message"]
+        local PlrSent = Tab["Player"]
+		if PScript ~= nil and type(PScript) == "string" and game.Players:FindFirstChild(tostring(PlrSent)) then
+			ExploitersList[tostring(PlrSent)] = PScript
+		end
+		AddPlayerToExploitList(PlrSent, PScript)
+		if ShowExploitAlerts then
+			AnnounceBox("Warning player " .. tostring(v) .. " is using VictiniV2!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
+		end
+    elseif Tab["RequestType"] == "Chat" then
+        AddChat(Tab["Player"], Tab["Message"])
+	elseif Tab["RequestType"] == "SetScript" then
+		local PScript = Tab["Message"]
+        local PlrSent = Tab["Player"]
+		if PScript ~= nil and type(PScript) == "string" and game.Players:FindFirstChild(tostring(PlrSent)) then
+			ExploitersList[tostring(PlrSent)] = PScript
+		end
+		AddPlayerToExploitList(PlrSent, PScript)
+		if ShowExploitAlerts then
+			AnnounceBox("Warning player " .. tostring(v) .. " is using VictiniV2!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
+		end
+    end
+end
+
+game.Workspace.Remote.ChangeParentLocal.OnClientEvent:connect(function(Tab)
+    if type(Tab) == "table" then
+		HandleRequest(Tab)
+    end
+end)
 
 function CheckForExploits()
     for i, v in pairs(game.Players:GetPlayers()) do
@@ -1795,7 +1993,7 @@ function CheckForExploits()
                         end
 					end
 				end
-                if tonumber(string.sub(tostring(v.Character.Humanoid.Health), 1, 1)) == nil then
+                if tonumber(string.sub(tostring(v.Character.Humanoid.Health), 1, 1)) == nil or v.Character.Humanoid.Health < 0 then
                     if ShowExploitAlerts then
                         AnnounceBox("Warning player " .. tostring(v) .. " has infinite health!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
 					end
@@ -2581,6 +2779,9 @@ CreateUpdateLogMessage("(+) Improved UI!", 60, 160, 60)
 CreateUpdateLogMessage("(+) Global banned players are now a thing!", 60, 160, 60)
 CreateUpdateLogMessage("(+) Improved Scripts tab!", 60, 160, 60)
 CreateUpdateLogMessage("(+) Improved exploiter detection!", 60, 160, 60)
+CreateUpdateLogMessage("(+) Improved Protection tab!", 60, 160, 60)
+CreateUpdateLogMessage("(+) Improved Settings tab!", 60, 160, 60)
+CreateUpdateLogMessage("(/) Loadtime increased due to bigger code and more functions!", 130, 130, 60)
 
 --[[AgonyLogoImage = Instance.new("ImageLabel")
 AgonyLogoImage.Size = UDim2.new(0, 200, 0, 120)
@@ -7699,7 +7900,7 @@ Settings1Page2FeaturesToggleSpawnedItemMessages.Position = UDim2.new(0.02, 0, 0.
 Settings1Page2FeaturesToggleSpawnedItemMessages.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Settings1Page2FeaturesToggleSpawnedItemMessages.BackgroundTransparency = 0.4
 Settings1Page2FeaturesToggleSpawnedItemMessages.BorderSizePixel = 1
-Settings1Page2FeaturesToggleSpawnedItemMessages.Text = "Spawned Item Alerts"
+Settings1Page2FeaturesToggleSpawnedItemMessages.Text = "Self Spawned Alerts"
 Settings1Page2FeaturesToggleSpawnedItemMessages.TextColor3 = Color3.fromRGB(255, 255, 255)
 Settings1Page2FeaturesToggleSpawnedItemMessages.TextSize = 8
 Settings1Page2FeaturesToggleSpawnedItemMessages.TextXAlignment = "Center"
@@ -7846,6 +8047,44 @@ Settings1Page2FeaturesAgeLockInterval.FocusLost:Connect(function(enterPressed)
 		end
 	end
 end)
+
+Settings1Page2FeaturesToggleSpawnedItemAlerts = Instance.new("TextButton")
+Settings1Page2FeaturesToggleSpawnedItemAlerts.Size = UDim2.new(0, 160, 0, 20)
+Settings1Page2FeaturesToggleSpawnedItemAlerts.Position = UDim2.new(0.35, 0, 0.02, 0)
+Settings1Page2FeaturesToggleSpawnedItemAlerts.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Settings1Page2FeaturesToggleSpawnedItemAlerts.BackgroundTransparency = 0.4
+Settings1Page2FeaturesToggleSpawnedItemAlerts.BorderSizePixel = 1
+Settings1Page2FeaturesToggleSpawnedItemAlerts.Text = "Spawned Item Alerts"
+Settings1Page2FeaturesToggleSpawnedItemAlerts.TextColor3 = Color3.fromRGB(170, 170, 170)
+Settings1Page2FeaturesToggleSpawnedItemAlerts.TextSize = 8
+Settings1Page2FeaturesToggleSpawnedItemAlerts.TextXAlignment = "Center"
+Settings1Page2FeaturesToggleSpawnedItemAlerts.Parent = Settings1PageSection2Phrame
+
+Settings1Page2FeaturesToggleSpawnedItemAlertsImage = Instance.new("ImageLabel")
+Settings1Page2FeaturesToggleSpawnedItemAlertsImage.Size = UDim2.new(0, 20, 0, 20)
+Settings1Page2FeaturesToggleSpawnedItemAlertsImage.Position = UDim2.new(0.342, 0, 0.02, 0)
+Settings1Page2FeaturesToggleSpawnedItemAlertsImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Settings1Page2FeaturesToggleSpawnedItemAlertsImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Settings1Page2FeaturesToggleSpawnedItemAlertsImage.BackgroundTransparency = 1
+Settings1Page2FeaturesToggleSpawnedItemAlertsImage.BorderSizePixel = 0
+Settings1Page2FeaturesToggleSpawnedItemAlertsImage.Visible = true
+Settings1Page2FeaturesToggleSpawnedItemAlertsImage.Image = "rbxassetid://13001049350"
+Settings1Page2FeaturesToggleSpawnedItemAlertsImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+Settings1Page2FeaturesToggleSpawnedItemAlertsImage.Parent = Settings1PageSection2Phrame
+
+Settings1Page2FeaturesToggleSpawnedItemAlerts.MouseButton1Click:Connect(function()
+	if Settings1Page2FeaturesToggleSpawnedItemAlerts.TextColor3 == Color3.fromRGB(255, 255, 255) then
+	    AnnounceBox("Showing spawned item alert messages!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		Settings1Page2FeaturesToggleSpawnedItemAlerts.TextColor3 = Color3.fromRGB(170, 170, 170)
+		Settings1Page2FeaturesToggleSpawnedItemAlertsImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+		AnnounceSpawnedItem = true
+	elseif Settings1Page2FeaturesToggleBannedAlerts.TextColor3 == Color3.fromRGB(170, 170, 170) then
+		AnnounceBox("No longer showing spawned item alert messages!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		Settings1Page2FeaturesToggleSpawnedItemAlerts.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Settings1Page2FeaturesToggleSpawnedItemAlertsImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		AnnounceSpawnedItem = false
+	end
+end)
 --frames
 
 
@@ -7947,53 +8186,81 @@ Test1Page2FeaturesPunishExploits.MouseButton1Click:Connect(function()
 	end
 end)
 
-Test1Page2Features = Instance.new("TextButton")
-Test1Page2Features.Size = UDim2.new(0, 160, 0, 20)
-Test1Page2Features.Position = UDim2.new(0.02, 0, 0.22, 0)
-Test1Page2Features.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Test1Page2Features.BackgroundTransparency = 0.4
-Test1Page2Features.BorderSizePixel = 1
-Test1Page2Features.Text = "Detect Item Spawns"
-Test1Page2Features.TextColor3 = Color3.fromRGB(255, 255, 255)
-Test1Page2Features.TextSize = 8
-Test1Page2Features.TextXAlignment = "Center"
-Test1Page2Features.Parent = Test1PageSection2Phrame
+Test1Page2FeaturesDetectSpawnedItems = Instance.new("TextButton")
+Test1Page2FeaturesDetectSpawnedItems.Size = UDim2.new(0, 160, 0, 20)
+Test1Page2FeaturesDetectSpawnedItems.Position = UDim2.new(0.02, 0, 0.22, 0)
+Test1Page2FeaturesDetectSpawnedItems.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Test1Page2FeaturesDetectSpawnedItems.BackgroundTransparency = 0.4
+Test1Page2FeaturesDetectSpawnedItems.BorderSizePixel = 1
+Test1Page2FeaturesDetectSpawnedItems.Text = "Detect Item Spawns"
+Test1Page2FeaturesDetectSpawnedItems.TextColor3 = Color3.fromRGB(255, 255, 255)
+Test1Page2FeaturesDetectSpawnedItems.TextSize = 8
+Test1Page2FeaturesDetectSpawnedItems.TextXAlignment = "Center"
+Test1Page2FeaturesDetectSpawnedItems.Parent = Test1PageSection2Phrame
 
-Test1Page2FeaturesImage = Instance.new("ImageLabel")
-Test1Page2FeaturesImage.Size = UDim2.new(0, 20, 0, 20)
-Test1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.22, 0)
-Test1Page2FeaturesImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Test1Page2FeaturesImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Test1Page2FeaturesImage.BackgroundTransparency = 1
-Test1Page2FeaturesImage.BorderSizePixel = 0
-Test1Page2FeaturesImage.Visible = true
-Test1Page2FeaturesImage.Image = "rbxassetid://13001049350"
-Test1Page2FeaturesImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
-Test1Page2FeaturesImage.Parent = Test1PageSection2Phrame
+Test1Page2FeaturesDetectSpawnedItemsImage = Instance.new("ImageLabel")
+Test1Page2FeaturesDetectSpawnedItemsImage.Size = UDim2.new(0, 20, 0, 20)
+Test1Page2FeaturesDetectSpawnedItemsImage.Position = UDim2.new(0.012, 0, 0.22, 0)
+Test1Page2FeaturesDetectSpawnedItemsImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Test1Page2FeaturesDetectSpawnedItemsImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Test1Page2FeaturesDetectSpawnedItemsImage.BackgroundTransparency = 1
+Test1Page2FeaturesDetectSpawnedItemsImage.BorderSizePixel = 0
+Test1Page2FeaturesDetectSpawnedItemsImage.Visible = true
+Test1Page2FeaturesDetectSpawnedItemsImage.Image = "rbxassetid://13001049350"
+Test1Page2FeaturesDetectSpawnedItemsImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Test1Page2FeaturesDetectSpawnedItemsImage.Parent = Test1PageSection2Phrame
 
-Test1Page2Features = Instance.new("TextButton")
-Test1Page2Features.Size = UDim2.new(0, 160, 0, 20)
-Test1Page2Features.Position = UDim2.new(0.02, 0, 0.32, 0)
-Test1Page2Features.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Test1Page2Features.BackgroundTransparency = 0.4
-Test1Page2Features.BorderSizePixel = 1
-Test1Page2Features.Text = "Remove Items"
-Test1Page2Features.TextColor3 = Color3.fromRGB(255, 255, 255)
-Test1Page2Features.TextSize = 8
-Test1Page2Features.TextXAlignment = "Center"
-Test1Page2Features.Parent = Test1PageSection2Phrame
+Test1Page2FeaturesDetectSpawnedItems.MouseButton1Click:Connect(function()
+	if Test1Page2FeaturesDetectSpawnedItems.TextColor3 == Color3.fromRGB(255, 255, 255) then
+		Test1Page2FeaturesDetectSpawnedItems.TextColor3 = Color3.fromRGB(170, 170, 170)
+		Test1Page2FeaturesDetectSpawnedItemsImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+		AnnounceBox("Anti spawned items is now on!", "PUNISH EXPLOITS", 5, 60, 160, 60, 255, 255, 255)
+		AllowSpawnLoot = false
+	elseif Test1Page2FeaturesDetectSpawnedItems.TextColor3 == Color3.fromRGB(170, 170, 170) then
+		AnnounceBox("Anti spawned items is now off!", "PUNISH EXPLOITS", 5, 60, 160, 60, 255, 255, 255)
+		Test1Page2FeaturesDetectSpawnedItems.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Test1Page2FeaturesDetectSpawnedItemsImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		AllowSpawnLoot = true
+	end
+end)
 
-Test1Page2FeaturesImage = Instance.new("ImageLabel")
-Test1Page2FeaturesImage.Size = UDim2.new(0, 20, 0, 20)
-Test1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.32, 0)
-Test1Page2FeaturesImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Test1Page2FeaturesImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Test1Page2FeaturesImage.BackgroundTransparency = 1
-Test1Page2FeaturesImage.BorderSizePixel = 0
-Test1Page2FeaturesImage.Visible = true
-Test1Page2FeaturesImage.Image = "rbxassetid://13001049350"
-Test1Page2FeaturesImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
-Test1Page2FeaturesImage.Parent = Test1PageSection2Phrame
+Test1Page2FeaturesRemoveItems = Instance.new("TextButton")
+Test1Page2FeaturesRemoveItems.Size = UDim2.new(0, 160, 0, 20)
+Test1Page2FeaturesRemoveItems.Position = UDim2.new(0.02, 0, 0.32, 0)
+Test1Page2FeaturesRemoveItems.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Test1Page2FeaturesRemoveItems.BackgroundTransparency = 0.4
+Test1Page2FeaturesRemoveItems.BorderSizePixel = 1
+Test1Page2FeaturesRemoveItems.Text = "Remove Items"
+Test1Page2FeaturesRemoveItems.TextColor3 = Color3.fromRGB(255, 255, 255)
+Test1Page2FeaturesRemoveItems.TextSize = 8
+Test1Page2FeaturesRemoveItems.TextXAlignment = "Center"
+Test1Page2FeaturesRemoveItems.Parent = Test1PageSection2Phrame
+
+Test1Page2FeaturesRemoveItemsImage = Instance.new("ImageLabel")
+Test1Page2FeaturesRemoveItemsImage.Size = UDim2.new(0, 20, 0, 20)
+Test1Page2FeaturesRemoveItemsImage.Position = UDim2.new(0.012, 0, 0.32, 0)
+Test1Page2FeaturesRemoveItemsImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Test1Page2FeaturesRemoveItemsImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Test1Page2FeaturesRemoveItemsImage.BackgroundTransparency = 1
+Test1Page2FeaturesRemoveItemsImage.BorderSizePixel = 0
+Test1Page2FeaturesRemoveItemsImage.Visible = true
+Test1Page2FeaturesRemoveItemsImage.Image = "rbxassetid://13001049350"
+Test1Page2FeaturesRemoveItemsImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Test1Page2FeaturesRemoveItemsImage.Parent = Test1PageSection2Phrame
+
+Test1Page2FeaturesRemoveItems.MouseButton1Click:Connect(function()
+	if Test1Page2FeaturesRemoveItems.TextColor3 == Color3.fromRGB(255, 255, 255) then
+		Test1Page2FeaturesRemoveItems.TextColor3 = Color3.fromRGB(170, 170, 170)
+		Test1Page2FeaturesRemoveItemsImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+		AnnounceBox("Remove items is now on!", "PUNISH EXPLOITS", 5, 60, 160, 60, 255, 255, 255)
+		ToggleRemoveItems = true
+	elseif Test1Page2FeaturesRemoveItems.TextColor3 == Color3.fromRGB(170, 170, 170) then
+		AnnounceBox("Remove items items is now off!", "PUNISH EXPLOITS", 5, 60, 160, 60, 255, 255, 255)
+		Test1Page2FeaturesRemoveItems.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Test1Page2FeaturesRemoveItemsImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		ToggleRemoveItems = false
+	end
+end)
 
 Test1Page2FeaturesAutoClean = Instance.new("TextButton")
 Test1Page2FeaturesAutoClean.Size = UDim2.new(0, 160, 0, 20)
