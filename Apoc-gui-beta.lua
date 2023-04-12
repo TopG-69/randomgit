@@ -1883,32 +1883,6 @@ end
 
 fireserver("ChangeParentLocal", {["RequestType"] = "Script", ["Message"] = "Agony", ["Player"] = game.Players.LocalPlayer})
 function HandleRequest(Tab)
-    if Tab["RequestType"] == "Script" then
-        fireserver("ChangeParentLocal", {["RequestType"] = "SetScript", 
-            ["Message"] = "Victini", 
-            ["Player"] = game.Players.LocalPlayer})
-        local PScript = Tab["Message"]
-        local PlrSent = Tab["Player"]
-		if PScript ~= nil and type(PScript) == "string" and game.Players:FindFirstChild(tostring(PlrSent)) then
-			ExploitersList[tostring(PlrSent)] = PScript
-		end
-		AddPlayerToExploitList(PlrSent, PScript)
-		if ShowExploitAlerts then
-			AnnounceBox("Warning player " .. tostring(v) .. " is using VictiniV2!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
-		end
-    elseif Tab["RequestType"] == "Chat" then
-        AddChat(Tab["Player"], Tab["Message"])
-	elseif Tab["RequestType"] == "SetScript" then
-		local PScript = Tab["Message"]
-        local PlrSent = Tab["Player"]
-		if PScript ~= nil and type(PScript) == "string" and game.Players:FindFirstChild(tostring(PlrSent)) then
-			ExploitersList[tostring(PlrSent)] = PScript
-		end
-		AddPlayerToExploitList(PlrSent, PScript)
-		if ShowExploitAlerts then
-			AnnounceBox("Warning player " .. tostring(v) .. " is using VictiniV2!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
-		end
-    end
 end
 
 game.Workspace.Remote.ChangeParentLocal.OnClientEvent:connect(function(Tab)
