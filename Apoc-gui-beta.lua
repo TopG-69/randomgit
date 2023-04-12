@@ -1392,17 +1392,11 @@ end)
 
 function Stamina(player, mode, amount)
 	if mode == 1 then
-    	fireserver("ChangeValue", player.playerstats.Stamina, nil)
+		fireserver("ChangeValue", player.Backpack.GlobalFunctions.Stamina, nil)
 	elseif mode == 2 then
-    	fireserver("ChangeValue", player.playerstats.Stamina, math.huge)
+		fireserver("ChangeValue", player.Backpack.GlobalFunctions.Stamina, math.huge)
 	elseif mode == 3 then
-		if amount == nil then
-			if ShowFunctionAlerts then
-				AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
-			end
-		else
-			fireserver("ChangeValue", player.playerstats.Stamina, amount)
-		end
+		fireserver("ChangeValue", player.Backpack.GlobalFunctions.Stamina, amount)
 	elseif mode == nil or mode == nan then
 		if ShowFunctionAlerts then
 		    AnnounceBox("Invalid mode usage!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
@@ -1421,21 +1415,9 @@ function Vitals(player, mode, amount)
     	fireserver("ChangeValue", player.playerstats.Hunger, 100)
 		fireserver("ChangeValue", player.playerstats.Thirst, 100)
 	elseif mode == 4 then
-		if amount == nil then
-			if ShowFunctionAlerts then
-				AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
-			end
-		else
-			fireserver("ChangeValue", player.playerstats.Hunger, amount)
-		end
+		fireserver("ChangeValue", player.playerstats.Hunger, amount)
 	elseif mode == 5 then
-		if amount == nil then
-			if ShowFunctionAlerts then
-				AnnounceBox("Amount is invalid!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
-			end
-		else
-			fireserver("ChangeValue", player.playerstats.Thirst, amount)
-		end
+		fireserver("ChangeValue", player.playerstats.Thirst, amount)
 	elseif mode == nil or mode == nan then
 		if ShowFunctionAlerts then
 		    AnnounceBox("Invalid mode usage!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
@@ -4556,29 +4538,79 @@ Other1Page2Features3Skins.MouseButton1Click:Connect(function()
 	end
 end)
 
-Other1Page2Features3 = Instance.new("TextButton")
-Other1Page2Features3.Size = UDim2.new(0, 120, 0, 20)
-Other1Page2Features3.Position = UDim2.new(0.698, 0, 0.82, 0)
-Other1Page2Features3.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Other1Page2Features3.BackgroundTransparency = 0.4
-Other1Page2Features3.BorderSizePixel = 1
-Other1Page2Features3.Text = "Inf Stamina"
-Other1Page2Features3.TextColor3 = Color3.fromRGB(255, 255, 255)
-Other1Page2Features3.TextSize = 8
-Other1Page2Features3.TextXAlignment = "Center"
-Other1Page2Features3.Parent = Other1PageSection2Phrame
+Other1Page2Features3Stamina = Instance.new("TextButton")
+Other1Page2Features3Stamina.Size = UDim2.new(0, 120, 0, 20)
+Other1Page2Features3Stamina.Position = UDim2.new(0.698, 0, 0.82, 0)
+Other1Page2Features3Stamina.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other1Page2Features3Stamina.BackgroundTransparency = 0.4
+Other1Page2Features3Stamina.BorderSizePixel = 1
+Other1Page2Features3Stamina.Text = "Inf Stamina"
+Other1Page2Features3Stamina.TextColor3 = Color3.fromRGB(255, 255, 255)
+Other1Page2Features3Stamina.TextSize = 8
+Other1Page2Features3Stamina.TextXAlignment = "Center"
+Other1Page2Features3Stamina.Parent = Other1PageSection2Phrame
 
-Other1Page2Features3Image = Instance.new("ImageLabel")
-Other1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
-Other1Page2Features3Image.Position = UDim2.new(0.698, 0, 0.82, 0)
-Other1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Other1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Other1Page2Features3Image.BackgroundTransparency = 1
-Other1Page2Features3Image.BorderSizePixel = 0
-Other1Page2Features3Image.Visible = true
-Other1Page2Features3Image.Image = "rbxassetid://12900618433"
-Other1Page2Features3Image.ImageColor3 = Color3.fromRGB(255, 255, 255)
-Other1Page2Features3Image.Parent = Other1PageSection2Phrame
+Other1Page2Features3StaminaImage = Instance.new("ImageLabel")
+Other1Page2Features3StaminaImage.Size = UDim2.new(0, 20, 0, 20)
+Other1Page2Features3StaminaImage.Position = UDim2.new(0.698, 0, 0.82, 0)
+Other1Page2Features3StaminaImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other1Page2Features3StaminaImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Other1Page2Features3StaminaImage.BackgroundTransparency = 1
+Other1Page2Features3StaminaImage.BorderSizePixel = 0
+Other1Page2Features3StaminaImage.Visible = true
+Other1Page2Features3StaminaImage.Image = "rbxassetid://12900618433"
+Other1Page2Features3StaminaImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Other1Page2Features3StaminaImage.Parent = Other1PageSection2Phrame
+
+InfStaminaPlayers = {}
+Other1Page2Features3Stamina.MouseButton1Click:Connect(function()
+	local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
+	if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
+		if LocalTab1SelectedPlayer ~= "All" and LocalTab1SelectedPlayer ~= "Others" then
+			if InfStaminaPlayers[tostring(SPlayer)] ~= true then
+				InfStaminaPlayers[tostring(SPlayer)] = true
+				AnnounceBox("Added " .. tostring(SPlayer) .. " to inf stamina list!", "INF STAMINA", 5, 60, 160, 60, 255, 255, 255)
+			else
+				InfStaminaPlayers[tostring(SPlayer)] = nil
+				AnnounceBox("Removed " .. tostring(SPlayer) .. " from inf stamina list!", "INF STAMINA", 5, 60, 160, 60, 255, 255, 255)
+			end
+		elseif LocalTab1SelectedPlayer == "All" then
+			for _, v in pairs(Players:GetPlayers()) do
+				if InfStaminaPlayers[tostring(v)] ~= true then
+					InfStaminaPlayers[tostring(v)] = true
+					AnnounceBox("Added " .. tostring(v) .. " to inf stamina list!", "INF STAMINA", 5, 60, 160, 60, 255, 255, 255)
+				else
+					InfStaminaPlayers[tostring(v)] = nil
+					AnnounceBox("Removed " .. tostring(v) .. " from inf stamina list!", "INF STAMINA", 5, 60, 160, 60, 255, 255, 255)
+				end
+			end
+		elseif LocalTab1SelectedPlayer == "Others" then
+			for _, v in pairs(Players:GetPlayers()) do
+				if v ~= LocalPlayer then
+					if InfStaminaPlayers[tostring(v)] ~= true then
+						InfStaminaPlayers[tostring(v)] = true
+						AnnounceBox("Added " .. tostring(v) .. " to inf stamina list!", "INF STAMINA", 5, 60, 160, 60, 255, 255, 255)
+					else
+						InfStaminaPlayers[tostring(v)] = nil
+						AnnounceBox("Removed " .. tostring(v) .. " from inf stamina list!", "INF STAMINA", 5, 60, 160, 60, 255, 255, 255)
+					end
+				end
+			end
+		else
+			AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+		end
+	end
+end)
+
+spawn(function()
+	while wait(1) do
+		for _, v in pairs(Players:GetPlayers()) do
+			if InfStaminaPlayers[tostring(v)] == true then
+				Stamina(v, 3, 100)
+			end
+		end
+	end
+end)
 --frames
 
 
@@ -7766,33 +7798,75 @@ Server1Page2Features2DetoExplosives.MouseButton1Click:Connect(function()
 	CleanExplosives()
 end)
 
-Server1Page2Features3 = Instance.new("TextBox")
-Server1Page2Features3.Size = UDim2.new(0, 160, 0, 20)
-Server1Page2Features3.Position = UDim2.new(0.682, 0, 0.02, 0)
-Server1Page2Features3.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features3.BackgroundTransparency = 0.4
-Server1Page2Features3.BorderSizePixel = 1
-Server1Page2Features3.Text = "Map Color"
-Server1Page2Features3.TextColor3 = Color3.fromRGB(255, 255, 255)
---Server1Page2Features3.TextScaled = true
-Server1Page2Features3.TextSize = 8
-Server1Page2Features3.TextWrapped = true
-Server1Page2Features3.TextXAlignment = "Center"
-Server1Page2Features3.Parent = Server1PageSection2Phrame
+Server1Page2Features3MapColor = Instance.new("TextBox")
+Server1Page2Features3MapColor.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2Features3MapColor.Position = UDim2.new(0.682, 0, 0.02, 0)
+Server1Page2Features3MapColor.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3MapColor.BackgroundTransparency = 0.4
+Server1Page2Features3MapColor.BorderSizePixel = 1
+Server1Page2Features3MapColor.Text = "Map Color"
+Server1Page2Features3MapColor.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3MapColor.TextSize = 8
+Server1Page2Features3MapColor.TextWrapped = true
+Server1Page2Features3MapColor.TextXAlignment = "Center"
+Server1Page2Features3MapColor.Parent = Server1PageSection2Phrame
 
-Server1Page2Features3 = Instance.new("TextBox")
-Server1Page2Features3.Size = UDim2.new(0, 160, 0, 20)
-Server1Page2Features3.Position = UDim2.new(0.682, 0, 0.12, 0)
-Server1Page2Features3.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features3.BackgroundTransparency = 0.4
-Server1Page2Features3.BorderSizePixel = 1
-Server1Page2Features3.Text = "Map Texture"
-Server1Page2Features3.TextColor3 = Color3.fromRGB(255, 255, 255)
---Server1Page2Features3.TextScaled = true
-Server1Page2Features3.TextSize = 8
-Server1Page2Features3.TextWrapped = true
-Server1Page2Features3.TextXAlignment = "Center"
-Server1Page2Features3.Parent = Server1PageSection2Phrame
+Server1Page2Features3MapTexture = Instance.new("TextBox")
+Server1Page2Features3MapTexture.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2Features3MapTexture.Position = UDim2.new(0.682, 0, 0.12, 0)
+Server1Page2Features3MapTexture.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3MapTexture.BackgroundTransparency = 0.4
+Server1Page2Features3MapTexture.BorderSizePixel = 1
+Server1Page2Features3MapTexture.Text = "Map Texture"
+Server1Page2Features3MapTexture.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3MapTexture.TextSize = 8
+Server1Page2Features3MapTexture.TextWrapped = true
+Server1Page2Features3MapTexture.TextXAlignment = "Center"
+Server1Page2Features3MapTexture.Parent = Server1PageSection2Phrame
+
+local ServerTabMapTexture = nil
+local ServerTabMapColor = nil
+Server1Page2Features3MapTexture.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+		local AmountColor = tonumber(Server1Page2Features3MapColor.Text)
+		local AmountTexture = tonumber(Server1Page2Features3MapTexture.Text)
+		if AmountTexture then
+			AnnounceBox("Set map texture to " .. AmountTexture .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+			ServerTabMapTexture = AmountTexture
+			if ServerTabMapTexture ~= nil and ServerTabMapColor ~= nil then
+				ColorMap(ServerTabMapColor, ServerTabMapTexture)
+			end
+		else
+			if AmountTexture == nil then
+				AnnounceBox("Map texture is invalid!", "ERROR", 15, 95, 60, 60, 255, 255, 255)
+			end
+			if AmountColor == nil then
+				AnnounceBox("Map color is invalid!", "ERROR", 15, 95, 60, 60, 255, 255, 255)
+			end
+		end
+    end
+end)
+
+Server1Page2Features3MapColor.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+		local AmountColor = tonumber(Server1Page2Features3MapColor.Text)
+		local AmountTexture = tonumber(Server1Page2Features3MapTexture.Text)
+		if AmountColor then
+			AnnounceBox("Set map color to " .. AmountColor .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+			ServerTabMapColor = AmountColor
+			if ServerTabMapTexture ~= nil and ServerTabMapColor ~= nil then
+				ColorMap(ServerTabMapColor, ServerTabMapTexture)
+			end
+		else
+			if AmountTexture == nil then
+				AnnounceBox("Map texture is invalid!", "ERROR", 15, 95, 60, 60, 255, 255, 255)
+			end
+			if AmountColor == nil then
+				AnnounceBox("Map color is invalid!", "ERROR", 15, 95, 60, 60, 255, 255, 255)
+			end
+		end
+    end
+end)
 
 Server1Page2Features3 = Instance.new("TextBox")
 Server1Page2Features3.Size = UDim2.new(0, 160, 0, 20)
