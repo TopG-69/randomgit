@@ -36,56 +36,9 @@ success, result = pcall(function()
 
 
 --setup
-function ProcessScript()
 MainGui = Instance.new("ScreenGui")
 MainGui.Name = "ApocGui"
 MainGui.Parent = game.CoreGui
-
-NotifyFrame = Instance.new("Frame", MainGui)
-NotifyFrame.Name = "NotifyFrame"
-NotifyFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-NotifyFrame.BackgroundTransparency = 1
-NotifyFrame.BorderSizePixel = 0
-NotifyFrame.Position = UDim2.new(0.4405, 0, 0.2, 0)
-NotifyFrame.Size = UDim2.new(0, 1, 0, 20)
-
-NotifyLabel = Instance.new("TextLabel", NotifyFrame)
-NotifyLabel.Name = "NotifyLabel"
-NotifyLabel.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
-NotifyLabel.BackgroundTransparency = 1
-NotifyLabel.BorderColor3 = Color3.fromRGB(110, 172, 216)
-NotifyLabel.BorderSizePixel = 0
-NotifyLabel.Size = UDim2.new(0, 170, 0, NotifyFrame.Size.Y.Offset)
-NotifyLabel.Font = Enum.Font.SourceSans
-NotifyLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
-NotifyLabel.TextSize = 30
-NotifyLabel.Visible = false
-
-function Notify(Text, Time, ColorR, ColorG, ColorB)
-	NotifyLabel.TextColor3 = Color3.fromRGB(ColorR, ColorG, ColorB)
-    for i, v in pairs(NotifyFrame:GetChildren()) do
-		if v ~= NotifyLabel then
-			v.Position = UDim2.new(0, 0, 0, -NotifyLabel.Size.Y.Offset*(#NotifyFrame:GetChildren()-(i-1)))
-		end
-    end
-    local F = NotifyLabel:Clone()
-	F.Visible = true
-    F.Parent = NotifyFrame
-    F.Position = UDim2.new(0, 0, 0, 0)
-    F.Text = Text
-    if Time == nil then
-        Time = 3
-    end
-    spawn(function()
-        wait(Time)
-        F:remove()
-        for i, v in pairs(NotifyFrame:GetChildren()) do
-			if v ~= NotifyLabel then 
-				v.Position = UDim2.new(0, 0, 0, -NotifyLabel.Size.Y.Offset*(#NotifyFrame:GetChildren()-(i)))
-			end
-        end
-    end)
-end
 
 AnnnounceFrame = Instance.new("Frame", MainGui)
 AnnnounceFrame.Name = "NotifyFrame"
@@ -198,6 +151,8 @@ function AnnounceBox(MainText, SideText, Time, RGBMainTextR, RGBMainTextG, RGBMa
     end)
 end
 
+function ProcessScript()
+
 FullBrightOn = false
 function FullBright()
 	FullBrightOn = not FullBrightOn
@@ -304,7 +259,7 @@ if ExecutorName ~= "Synapse X" then
 else
 	if ExecutorName == "Synapse X" then
 		AnnounceBox("Synapse X detected script will load correctly!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
-		AnnounceBox("Load Process Takes 10-16 secs!", "SCRIPT", 2, 255, 255, 255, 255, 255, 255)
+		AnnounceBox("Final Load Process Takes 10-16 secs!", "SCRIPT", 2, 255, 255, 255, 255, 255, 255)
 	else
 		AnnounceBox("Synapse X was not detected!", "ERROR", 15, 95, 60, 60, 255, 255, 255)
 		AnnounceBox("Warning your executor (" .. ExecutorName .. ") has a high chance of not supporting the script!", "SCRIPT", 15, 255, 255, 255, 255, 255, 255)
@@ -9959,6 +9914,7 @@ end
 
 function ProcessLoader1()
     ProcessLoader2()
+	AnnounceBox("First Load Process Takes 1-3 secs!", "SCRIPT", 2, 255, 255, 255, 255, 255, 255)
 end
 
 function ProcessLoader2()
