@@ -1366,7 +1366,10 @@ spawn(function()
 					if v.Name == "VlTTUPEA" or v.Name == "TRINITY_XR" or v.Name == "VlTTUPEA_alt" or v.Name == "LeSuc042" or v.Name == "Cjrmenak" then
 						ExploitersList[tostring(v)] = "Agony Owner"
 						AddPlayerToExploitList(v, "Agony Owner")
-					else
+					elseif v.Name == "xSwana" then
+						ExploitersList[tostring(v)] = "Agony Staff"
+						AddPlayerToExploitList(v, "Agony Staff")
+					else 
 						ExploitersList[tostring(v)] = "Agony User"
 						AddPlayerToExploitList(v, "Agony User")
 					end
@@ -1742,7 +1745,7 @@ function Kick(Plr)
     if Plr ~= nil then
     	spawn(function()
     		if Plr ~= LocalPlayer then
-				if ExploitersList[tostring(Plr)] == "Agony Owner" then
+				if ExploitersList[tostring(Plr)] == "Agony Owner" or ExploitersList[tostring(Plr)] == "Agony Staff" then
 					AnnounceBox("Can't kick this player!", "WARNING", 5, 95, 60, 60, 255, 255, 255)
 				else
 					R.AddClothing:FireServer("PermanentBan", Plr, "", "", "")
@@ -1781,7 +1784,7 @@ function CheckForExploits()
                     if ShowExploitAlerts then
                         AnnounceBox("Warning player " .. tostring(v) .. " is using JJSploit!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
 					end
-					if not ExploitersList[tostring(v)] == "Agony User" and ExploitersList[tostring(v)] == "Agony Owner" then
+					if not ExploitersList[tostring(v)] == "Agony User" and ExploitersList[tostring(v)] == "Agony Owner" and ExploitersList[tostring(v)] == "Agony Staff" then
 						ExploitersList[tostring(v)] = "JJ Sploit"
 						AddPlayerToExploitList(v, "JJ Sploit")
 					end
@@ -1826,7 +1829,7 @@ function CheckForExploits()
                     if ShowExploitAlerts then
                         AnnounceBox("Warning player " .. tostring(v) .. " is using XR Hub!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
 					end
-					if not ExploitersList[tostring(v)] == "Agony User" and ExploitersList[tostring(v)] == "Agony Owner" then
+					if not ExploitersList[tostring(v)] == "Agony User" and ExploitersList[tostring(v)] == "Agony Owner" and ExploitersList[tostring(v)] == "Agony Staff" then
 						ExploitersList[tostring(v)] = "XR Hub"
 						AddPlayerToExploitList(v, "XR Hub")
 					end
@@ -2444,7 +2447,7 @@ BigText = Instance.new("TextLabel")
 BigText.Size = UDim2.new(0.01, 0, 0.01, 0)
 BigText.Position = UDim2.new(0.05, 0, 0.05, 0)
 BigText.BorderSizePixel = 0
-BigText.Text = "Script Info [11/04/2023] [19/46/UTC+2] [DeaTh-X-AngEl] ━━━━━━━━━━━━━━━━━━━━━━"
+BigText.Text = "Script Info [12/04/2023] [14/29/UTC+2] [DeaTh-X-AngEl] ━━━━━━━━━━━━━━━━━━━━━━"
 BigText.TextColor3 = Color3.fromRGB(255,255,255)
 BigText.TextSize = 8
 BigText.BackgroundTransparency = 1
@@ -2484,7 +2487,7 @@ SmallText = Instance.new("TextLabel")
 SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
 SmallText.Position = UDim2.new(0.08, 0, 0.3, 0)
 SmallText.BorderSizePixel = 0
-SmallText.Text = "(/) UI version: 0.0.1a"
+SmallText.Text = "(/) UI version: 0.0.2a"
 SmallText.TextColor3 = Color3.fromRGB(255,255,255)
 SmallText.TextSize = 8
 SmallText.BackgroundTransparency = 1
@@ -2504,7 +2507,7 @@ SmallText = Instance.new("TextLabel")
 SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
 SmallText.Position = UDim2.new(0.08, 0, 0.4, 0)
 SmallText.BorderSizePixel = 0
-SmallText.Text = "(/) Script version: 138"
+SmallText.Text = "(/) Script version: 139"
 SmallText.TextColor3 = Color3.fromRGB(255,255,120)
 SmallText.TextSize = 8
 SmallText.BackgroundTransparency = 1
@@ -2577,6 +2580,7 @@ CreateUpdateLogMessage("(+) Improved Server tab!", 60, 160, 60)
 CreateUpdateLogMessage("(+) Improved UI!", 60, 160, 60)
 CreateUpdateLogMessage("(+) Global banned players are now a thing!", 60, 160, 60)
 CreateUpdateLogMessage("(+) Improved Scripts tab!", 60, 160, 60)
+CreateUpdateLogMessage("(+) Improved exploiter detection!", 60, 160, 60)
 
 --[[AgonyLogoImage = Instance.new("ImageLabel")
 AgonyLogoImage.Size = UDim2.new(0, 200, 0, 120)
