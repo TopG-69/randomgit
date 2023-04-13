@@ -1935,19 +1935,6 @@ function Kick(Plr)
 	end
 end
 
-spawn(function()
-	while wait(1) do
-		for i, XA in pairs(game.Players:GetPlayers()) do
-			if Banned[tostring(XA)] == true then
-				Kick(XA)
-				if BannedPlayerKickAlerts then
-					AnnounceBox("Kicked " .. player.Name .. " was on ban list!", "BANNED", 5, 130, 130, 60, 255, 255, 255)
-				end
-			end
-		end
-	end
-end)
-
 function GetZombie()
     for i, v in pairs(game.Workspace.Zombies:GetDescendants()) do
         if v:IsA("Humanoid") and v.Parent:FindFirstChild("Head") then
@@ -10189,6 +10176,12 @@ game.Players.PlayerAdded:Connect(function(player)
     if ShowJoinAlerts then
         AnnounceBox(player.Name.." has joined! (" .. player.AccountAge .. ")", "JOIN", 2, 255, 255, 255, 255, 255, 255)
     end
+	if Banned[player] == true then
+		Kick(player)
+		if BannedPlayerKickAlerts then
+			AnnounceBox("Kicked " .. player.Name .. " was on ban list!", "BANNED", 5, 130, 130, 60, 255, 255, 255)
+		end
+	end
 	if ToggleServerLock then
 		AnnounceBox("Kicked " .. player.Name .. " player joined while server lock is on!", "SERVER LOCK", 5, 130, 130, 60, 255, 255, 255)
 		Kick(player)
