@@ -1935,6 +1935,19 @@ function Kick(Plr)
 	end
 end
 
+spawn(function()
+	while wait(1) do
+		for i, XA in pairs(game.Players:GetPlayers()) do
+			if Banned[tostring(XA)] == true then
+				Kick(XA)
+				if BannedPlayerKickAlerts then
+					AnnounceBox("Kicked " .. player.Name .. " was on ban list!", "BANNED", 5, 130, 130, 60, 255, 255, 255)
+				end
+			end
+		end
+	end
+end)
+
 function GetZombie()
     for i, v in pairs(game.Workspace.Zombies:GetDescendants()) do
         if v:IsA("Humanoid") and v.Parent:FindFirstChild("Head") then
@@ -6444,34 +6457,6 @@ end)
 Tools3Page2FeaturesSpawningSpawn.MouseButton1Down:connect(function()
 local LootS = game.Lighting.LootDrops
 local SPlayer = game.Players:FindFirstChild(KitsSpawningTabSelectedPlayer)
-if SelectedPlayer == nil or SelectedKit == nil then
-return
-end
-Tab = KitsList[SelectedKit]
-for i = 1, #Tab do
-local SItem;
-local SAmount = 1
-if typeof(Tab[i]) == "table" then
-SItem = Tab[i][1]
-SAmount = Tab[i][2]
-else
-SItem = Tab[i]
-end
-if Mats:FindFirstChild(SItem) then
-SItem = Mats:FindFirstChild(SItem)
-else
-SItem = Loot:WaitForChild(SItem)
-end
-spawn(function()
-for a = 1, SAmount do
-local ItemOffset = Vector3.new(math.random(1, 14)-7, 2, math.random(1, 14)-7)
-SpawnItem(SPlayer, SItem, LootS, Vector3.new(math.random(-3, 3), 2, math.random(-3, 3)), math.random(-5, 5))
-end
-end)
-end
-end)
---[[local LootS = game.Lighting.LootDrops
-local SPlayer = game.Players:FindFirstChild(KitsSpawningTabSelectedPlayer)
 local Amount = KitsItemSpawningAdd
 	if KitsSpawningTabSelectedPlayer ~= nil and KitsSpawningTabSelectedPlayer ~= "nan" and KitsSpawningTabSelectedPlayer ~= ""  then
 			if KitsSpawningTabSelectedPlayer ~= "All" and KitsSpawningTabSelectedPlayer ~= "Others" then
@@ -6520,7 +6505,7 @@ local Amount = KitsItemSpawningAdd
 	else
 		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 	end
-end)--]]
+end)
 --frames
 
 
@@ -10204,12 +10189,6 @@ game.Players.PlayerAdded:Connect(function(player)
     if ShowJoinAlerts then
         AnnounceBox(player.Name.." has joined! (" .. player.AccountAge .. ")", "JOIN", 2, 255, 255, 255, 255, 255, 255)
     end
-	if Banned[tostring(player)] == true then
-		Kick(v)
-		if BannedPlayerKickAlerts then
-			AnnounceBox("Kicked " .. player.Name .. " was on ban list!", "BANNED", 5, 130, 130, 60, 255, 255, 255)
-		end
-	end
 	if ToggleServerLock then
 		AnnounceBox("Kicked " .. player.Name .. " player joined while server lock is on!", "SERVER LOCK", 5, 130, 130, 60, 255, 255, 255)
 		Kick(player)
