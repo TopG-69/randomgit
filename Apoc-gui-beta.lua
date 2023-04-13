@@ -2733,7 +2733,7 @@ AddToolTip(LocalTab3Button, GuiLocalEBarPhrame, "nil", 1.50)
 
 --frames
 Welcome1PageSection1Phrame = Instance.new("Frame")
-Welcome1PageSection1Phrame.Size = UDim2.new(0.9, 0, 0.9, 0)
+Welcome1PageSection1Phrame.Size = UDim2.new(0.9, 0, 0.9, 0) --0.9
 Welcome1PageSection1Phrame.Position = UDim2.new(0.05, 0, 0.05, 0)
 Welcome1PageSection1Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
 Welcome1PageSection1Phrame.BorderSizePixel = 1
@@ -2815,10 +2815,10 @@ SmallText.TextXAlignment = "Left"
 SmallText.Parent = Welcome1PageSection1Phrame
 
 Welcome1PageSection1UpdatesPhrame = Instance.new("ScrollingFrame")
-Welcome1PageSection1UpdatesPhrame.Size = UDim2.new(0.98, 0, 0.40, 0)
-Welcome1PageSection1UpdatesPhrame.Position = UDim2.new(0.01, 0, 0.45, 0)
+Welcome1PageSection1UpdatesPhrame.Size = UDim2.new(1, 0, 0.40, 0) --0.98
+Welcome1PageSection1UpdatesPhrame.Position = UDim2.new(0, 0, 0.45, 0)
 Welcome1PageSection1UpdatesPhrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
-Welcome1PageSection1UpdatesPhrame.BorderSizePixel = 1
+Welcome1PageSection1UpdatesPhrame.BorderSizePixel = 0
 Welcome1PageSection1UpdatesPhrame.Transparency = 0.2
 Welcome1PageSection1UpdatesPhrame.CanvasSize = UDim2.new(0, 0, 5, 0)
 Welcome1PageSection1UpdatesPhrame.Active = false
@@ -6090,7 +6090,7 @@ PlayerListLabel9.TextSize = 20
 PlayerListLabel9.Visible = false
 
 local KitsSpawningTabSelectedItemInItems = ""
---local SelectedKit = nil
+local SelectedKit = nil
 local KitsSpawningTabSelectedItemInItemsLabel;
 function CreatePlayerListsLabelP9(Text)
     for i, v in pairs(PlayerListFrame9:GetChildren()) do
@@ -6110,7 +6110,7 @@ function CreatePlayerListsLabelP9(Text)
 		F.TextColor3 = Color3.fromRGB(170, 170, 170)
 		KitsSpawningTabSelectedItemInItems = F.Text
 		KitsSpawningTabSelectedItemInItemsLabel = F
-		--SelectedKit = tostring("M14")
+		SelectedKit = F.Text
 		if ShowFunctionAlerts then
 			AnnounceBox("Item ".. F.Text .. " was selected!", "ITEM", 5, 255, 255, 255, 255, 255, 255)
 		end
@@ -6442,7 +6442,11 @@ local Amount = KitsItemSpawningAdd
 end)
 
 Tools3Page2FeaturesSpawningSpawn.MouseButton1Down:connect(function()
---[[local SPlayer = game.Players:FindFirstChild(KitsSpawningTabSelectedPlayer)
+local LootS = game.Lighting.LootDrops
+local SPlayer = game.Players:FindFirstChild(KitsSpawningTabSelectedPlayer)
+if SelectedPlayer == nil or SelectedKit == nil then
+return
+end
 Tab = KitsList[SelectedKit]
 for i = 1, #Tab do
 local SItem;
@@ -6461,12 +6465,12 @@ end
 spawn(function()
 for a = 1, SAmount do
 local ItemOffset = Vector3.new(math.random(1, 14)-7, 2, math.random(1, 14)-7)
-SpawnItem(SPlayer, SItem, Loot, ItemOffset, math.random(-5, 5))
+SpawnItem(SPlayer, SItem, LootS, Vector3.new(math.random(-3, 3), 2, math.random(-3, 3)), math.random(-5, 5))
 end
 end)
 end
-end)--]]
-local LootS = game.Lighting.LootDrops
+end)
+--[[local LootS = game.Lighting.LootDrops
 local SPlayer = game.Players:FindFirstChild(KitsSpawningTabSelectedPlayer)
 local Amount = KitsItemSpawningAdd
 	if KitsSpawningTabSelectedPlayer ~= nil and KitsSpawningTabSelectedPlayer ~= "nan" and KitsSpawningTabSelectedPlayer ~= ""  then
@@ -6516,7 +6520,7 @@ local Amount = KitsItemSpawningAdd
 	else
 		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 	end
-end)
+end)--]]
 --frames
 
 
@@ -7915,7 +7919,7 @@ Server1Page2Features3MapTexture.FocusLost:Connect(function(enterPressed)
 		if AmountTexture then
 			AnnounceBox("Set map texture to " .. AmountTexture .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 			ServerTabMapTexture = AmountTexture
-			if AmountColorl and AmountTexture then
+			if ServerTabMapColor and ServerTabMapTexture then
 				ColorMap(ServerTabMapColor, ServerTabMapTexture)
 			end
 		else
@@ -7936,7 +7940,7 @@ Server1Page2Features3MapColor.FocusLost:Connect(function(enterPressed)
 		if AmountColor then
 			AnnounceBox("Set map color to " .. AmountColor .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 			ServerTabMapColor = AmountColor
-			if AmountColor and AmountTexture then
+			if ServerTabMapColor and ServerTabMapTexture then
 				ColorMap(ServerTabMapColor, ServerTabMapTexture)
 			end
 		else
