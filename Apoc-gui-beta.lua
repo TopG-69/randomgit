@@ -1451,7 +1451,7 @@ spawn(function()
 					if v.Name == "VlTTUPEA" or v.Name == "TRINITY_XR" or v.Name == "VlTTUPEA_alt" or v.Name == "LeSuc042" or v.Name == "Cjrmenak" then
 						ExploitersList[tostring(v)] = "Agony Owner"
 						AddPlayerToExploitList(v, "Agony Owner")
-					if v.Name == "BOTSBYVLT_001" or v.Name == "BOTSBYVLT_002" then
+					elseif v.Name == "BOTSBYVLT_001" or v.Name == "BOTSBYVLT_002" then
 						ExploitersList[tostring(v)] = "Agony Bot"
 						AddPlayerToExploitList(v, "Agony Bot")
 					elseif v.Name == "xSwana" then
