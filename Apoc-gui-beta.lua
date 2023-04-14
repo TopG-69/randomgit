@@ -2013,54 +2013,11 @@ function GetPartPosition(Mod)
     return Vector3.new(-1000000, -1000000, -1000000)
 end
 
-local TakenItems = {}
-local ItemsToSpawn = {}
-function AddItemsToSpawn(Item, Pos)
-	if ItemsToSpawn[tostring(Item)] == nil then
-		ItemsToSpawn[tostring(Item)] = {}
-	end
-	table.insert(ItemsToSpawn[tostring(Item)], Pos)
-end
-function FindItemsToSpawn(Item)
-	local Part = Item
-	if not Item:IsA("BasePart") then
-		Part = GetPart(Item)
-	end
-	if ItemsToSpawn[tostring(Item)] == nil then
-		return false
-	end
-	local Closest;
-	local Indx;
-	if Part ~= nil then
-		for i = 1, #ItemsToSpawn[tostring(Item)] do
-			if (Part.Position-ItemsToSpawn[tostring(Item)][i]).Magnitude < 25 and (Closest == nil or (Closest-Part.Position).Magnitude > (Part.Position-ItemsToSpawn[tostring(Item)][i]).Magnitude) then
-				Closest = ItemsToSpawn[tostring(Item)][i]
-				Indx = i
-			end
-		end
-	end
-	if Closest ~= nil and Indx ~= nil then
-		table.remove(ItemsToSpawn[tostring(Item)], Indx)
-		return true
-	end
-	return false
-end
-function GetCreatedItem(Par, Item, Val)
-    while wait() do
-        for i, v in pairs(Par:GetChildren()) do
-            if v.Name == tostring(Item) and TakenItems[v] == nil and (Val == nil or Val ~= nil and v.Value == Val) then
-                TakenItems[v] = true
-                return v
-            end
-        end
-    end
-end
-
 local AntiSpam = 0
 local PlayersDetectedTable = {}
 game.Workspace.ChildAdded:connect(function(Ch)
     wait()
-    if VehiclesTab[tostring(Ch)] ~= nil and (AllowSpawnLoot == true or FindItemsToSpawn(Ch) == true) then
+    if VehiclesTab[tostring(Ch)] ~= nil and (AllowSpawnLoot == true) then
         fireserver("ChangeParent", Ch, Vehicles)
 		wait(1)
 		for i, v in pairs(Ch:GetDescendants()) do
@@ -2070,7 +2027,7 @@ game.Workspace.ChildAdded:connect(function(Ch)
 		end
 	elseif tostring(Ch) == "RoadFlareLit" and not AllowRocket then
 		fireserver("ChangeParent", v:WaitForChild("IsBuildingMaterial"))
-	elseif AllowSpawnLoot == false and (VehiclesTab[tostring(Ch)] ~= nil or game:GetService("Lighting").LootDrops:FindFirstChild(tostring(Ch)) or game:GetService("Lighting").Materials:FindFirstChild(tostring(Ch))) and not Ch:FindFirstChild("Handle") and FindItemsToSpawn(Ch) == false then
+	elseif AllowSpawnLoot == false and (VehiclesTab[tostring(Ch)] ~= nil or game:GetService("Lighting").LootDrops:FindFirstChild(tostring(Ch)) or game:GetService("Lighting").Materials:FindFirstChild(tostring(Ch))) and not Ch:FindFirstChild("Handle") then
         local Pos = GetPartPosition(Ch)
 		if ToggleRemoveItems and tostring(Ch) ~= "Fireplace" and tostring(Ch) ~= "LargeCrateOpen" and tostring(Ch) ~= "SmallCrateOpen" and tostring(Ch) ~= "Floodlight" and tostring(Ch) ~= "VS50Placed" and tostring(Ch) ~= "C4Placed" and tostring(Ch) ~= "TM46Placed" then
 			fireserver("ChangeParent", Ch)
@@ -2100,7 +2057,7 @@ game.Workspace.ChildAdded:connect(function(Ch)
 				end
 			else
 				if AnnounceSpawnedItem then
-					AnnounceBox("Someone attmpted to spawn a (" .. tostring(Ch) .. ")!", "SPAWNED ITEM DETECTION", 5, 130, 130, 60, 255, 255, 255)
+					AnnounceBox("Item detection ran into a problem and only returned result (" .. tostring(Ch) .. ") everything else was lost!", "SPAWNED ITEM DETECTION", 5, 130, 130, 60, 255, 255, 255)
 				end
             end
         end
