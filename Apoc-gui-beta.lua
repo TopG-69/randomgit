@@ -20,6 +20,7 @@ ShowFunctionAlerts = true
 AllowSpawnLoot = true
 ToggleRemoveItems = false
 AnnounceSpawnedItem = true
+AllowRocket = false
 ShowLeaveAlerts = true
 ShowJoinAlerts = true
 ShowSpawnedItemAlerts = false
@@ -2025,7 +2026,7 @@ game.Workspace.ChildAdded:connect(function(Ch)
 				fireserver("ChangeParent", v)
 			end
 		end
-	elseif tostring(Ch) == "RoadFlareLit" and not AllowRocket then
+	elseif tostring(Ch) == "RoadFlareLit" and AllowRocket == false then
 		fireserver("ChangeParent", v:WaitForChild("IsBuildingMaterial"))
 	elseif AllowSpawnLoot == false and (VehiclesTab[tostring(Ch)] ~= nil or game:GetService("Lighting").LootDrops:FindFirstChild(tostring(Ch)) or game:GetService("Lighting").Materials:FindFirstChild(tostring(Ch))) and not Ch:FindFirstChild("Handle") then
         local Pos = GetPartPosition(Ch)
@@ -8738,6 +8739,44 @@ Settings1Page2FeaturesToggleSpawnedItemAlerts.MouseButton1Click:Connect(function
 		Settings1Page2FeaturesToggleSpawnedItemAlerts.TextColor3 = Color3.fromRGB(255, 255, 255)
 		Settings1Page2FeaturesToggleSpawnedItemAlertsImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
 		AnnounceSpawnedItem = false
+	end
+end)
+
+Settings1Page2FeaturesToggleAntiRocket = Instance.new("TextButton")
+Settings1Page2FeaturesToggleAntiRocket.Size = UDim2.new(0, 160, 0, 20)
+Settings1Page2FeaturesToggleAntiRocket.Position = UDim2.new(0.35, 0, 0.12, 0)
+Settings1Page2FeaturesToggleAntiRocket.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Settings1Page2FeaturesToggleAntiRocket.BackgroundTransparency = 0.4
+Settings1Page2FeaturesToggleAntiRocket.BorderSizePixel = 1
+Settings1Page2FeaturesToggleAntiRocket.Text = "Allow Rocket"
+Settings1Page2FeaturesToggleAntiRocket.TextColor3 = Color3.fromRGB(170, 170, 170)
+Settings1Page2FeaturesToggleAntiRocket.TextSize = 8
+Settings1Page2FeaturesToggleAntiRocket.TextXAlignment = "Center"
+Settings1Page2FeaturesToggleAntiRocket.Parent = Settings1PageSection2Phrame
+
+Settings1Page2FeaturesToggleAntiRocketImage = Instance.new("ImageLabel")
+Settings1Page2FeaturesToggleAntiRocketImage.Size = UDim2.new(0, 20, 0, 20)
+Settings1Page2FeaturesToggleAntiRocketImage.Position = UDim2.new(0.342, 0, 0.12, 0)
+Settings1Page2FeaturesToggleAntiRocketImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Settings1Page2FeaturesToggleAntiRocketImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Settings1Page2FeaturesToggleAntiRocketImage.BackgroundTransparency = 1
+Settings1Page2FeaturesToggleAntiRocketImage.BorderSizePixel = 0
+Settings1Page2FeaturesToggleAntiRocketImage.Visible = true
+Settings1Page2FeaturesToggleAntiRocketImage.Image = "rbxassetid://12902309246"
+Settings1Page2FeaturesToggleAntiRocketImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+Settings1Page2FeaturesToggleAntiRocketImage.Parent = Settings1PageSection2Phrame
+
+Settings1Page2FeaturesToggleAntiRocket.MouseButton1Click:Connect(function()
+	if Settings1Page2FeaturesToggleAntiRocket.TextColor3 == Color3.fromRGB(255, 255, 255) then
+	    AnnounceBox("Enabled anti rocket!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		Settings1Page2FeaturesToggleAntiRocket.TextColor3 = Color3.fromRGB(170, 170, 170)
+		Settings1Page2FeaturesToggleAntiRocketImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+		AllowRocket = false
+	elseif Settings1Page2FeaturesToggleAntiRocket.TextColor3 == Color3.fromRGB(170, 170, 170) then
+		AnnounceBox("Disabled anti rocket!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
+		Settings1Page2FeaturesToggleAntiRocket.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Settings1Page2FeaturesToggleAntiRocketImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		AllowRocket = true
 	end
 end)
 --frames
