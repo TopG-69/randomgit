@@ -1,1 +1,1 @@
-return {"samsuper159", "Lserinplay", }
+return {"samsuper159", }
