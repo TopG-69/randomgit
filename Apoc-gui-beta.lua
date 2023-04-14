@@ -8763,7 +8763,7 @@ Settings1Page2FeaturesToggleAntiRocketImage.BackgroundTransparency = 1
 Settings1Page2FeaturesToggleAntiRocketImage.BorderSizePixel = 0
 Settings1Page2FeaturesToggleAntiRocketImage.Visible = true
 Settings1Page2FeaturesToggleAntiRocketImage.Image = "rbxassetid://12902309246"
-Settings1Page2FeaturesToggleAntiRocketImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+Settings1Page2FeaturesToggleAntiRocketImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Settings1Page2FeaturesToggleAntiRocketImage.Parent = Settings1PageSection2Phrame
 
 Settings1Page2FeaturesToggleAntiRocket.MouseButton1Click:Connect(function()
