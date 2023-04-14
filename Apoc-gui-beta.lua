@@ -5052,6 +5052,19 @@ Bans1Page2FeaturesRefeshImage.Parent = Bans1PageSection1
 Bans1Page2FeaturesRefesh.MouseButton1Click:Connect(function()
 	BannedListDisplay()
 end)
+
+function CheckForBannedPlayers()
+	for _, v in pairs(Players:GetPlayers()) do
+		if Banned[tostring(v)] == true then
+			Kick(v)
+			if BannedPlayerKickAlerts then
+				AnnounceBox("Kicked " .. v.Name .. " was on ban list!", "BANNED", 5, 130, 130, 60, 255, 255, 255)
+			end
+		end
+	end
+end
+
+CheckForBannedPlayers()
 --frames
 
 
