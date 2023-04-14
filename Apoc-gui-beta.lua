@@ -8107,9 +8107,6 @@ Server1Page2Features3MapTexture.FocusLost:Connect(function(enterPressed)
 		if AmountTexture then
 			AnnounceBox("Set map texture to " .. AmountTexture .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 			ServerTabMapTexture = AmountTexture
-			if ServerTabMapColor and ServerTabMapTexture then
-				ColorMap(ServerTabMapColor, ServerTabMapTexture)
-			end
 		else
 			if AmountTexture == nil then
 				AnnounceBox("Map texture is invalid!", "ERROR", 15, 95, 60, 60, 255, 255, 255)
@@ -8128,9 +8125,6 @@ Server1Page2Features3MapColor.FocusLost:Connect(function(enterPressed)
 		if AmountColor then
 			AnnounceBox("Set map color to " .. AmountColor .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 			ServerTabMapColor = AmountColor
-			if ServerTabMapColor and ServerTabMapTexture then
-				ColorMap(ServerTabMapColor, ServerTabMapTexture)
-			end
 		else
 			if AmountTexture == nil then
 				AnnounceBox("Map texture is invalid!", "ERROR", 15, 95, 60, 60, 255, 255, 255)
@@ -8142,29 +8136,42 @@ Server1Page2Features3MapColor.FocusLost:Connect(function(enterPressed)
     end
 end)
 
-Server1Page2Features3 = Instance.new("TextButton")
-Server1Page2Features3.Size = UDim2.new(0, 160, 0, 20)
-Server1Page2Features3.Position = UDim2.new(0.682, 0, 0.22, 0)
-Server1Page2Features3.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features3.BackgroundTransparency = 0.4
-Server1Page2Features3.BorderSizePixel = 1
-Server1Page2Features3.Text = "Color Map"
-Server1Page2Features3.TextColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3.TextSize = 8
-Server1Page2Features3.TextXAlignment = "Center"
-Server1Page2Features3.Parent = Server1PageSection2Phrame
+Server1Page2Features3ColorMap = Instance.new("TextButton")
+Server1Page2Features3ColorMap.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2Features3ColorMap.Position = UDim2.new(0.682, 0, 0.22, 0)
+Server1Page2Features3ColorMap.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3ColorMap.BackgroundTransparency = 0.4
+Server1Page2Features3ColorMap.BorderSizePixel = 1
+Server1Page2Features3ColorMap.Text = "Color Map"
+Server1Page2Features3ColorMap.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3ColorMap.TextSize = 8
+Server1Page2Features3ColorMap.TextXAlignment = "Center"
+Server1Page2Features3ColorMap.Parent = Server1PageSection2Phrame
 
-Server1Page2Features3Image = Instance.new("ImageLabel")
-Server1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.22, 0)
-Server1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3Image.BackgroundTransparency = 1
-Server1Page2Features3Image.BorderSizePixel = 0
-Server1Page2Features3Image.Visible = true
-Server1Page2Features3Image.Image = "rbxassetid://12900618433"
-Server1Page2Features3Image.ImageColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3Image.Parent = Server1PageSection2Phrame
+Server1Page2Features3ColorMapImage = Instance.new("ImageLabel")
+Server1Page2Features3ColorMapImage.Size = UDim2.new(0, 20, 0, 20)
+Server1Page2Features3ColorMapImage.Position = UDim2.new(0.674, 0, 0.22, 0)
+Server1Page2Features3ColorMapImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3ColorMapImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3ColorMapImage.BackgroundTransparency = 1
+Server1Page2Features3ColorMapImage.BorderSizePixel = 0
+Server1Page2Features3ColorMapImage.Visible = true
+Server1Page2Features3ColorMapImage.Image = "rbxassetid://12900618433"
+Server1Page2Features3ColorMapImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3ColorMapImage.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3ColorMap.MouseButton1Click:Connect(function()
+	if ServerTabMapColor and ServerTabMapTexture then
+	AnnounceBox("Coloring map please wait!", "MAP", 5, 60, 160, 60, 255, 255, 255)
+		ColorMap(ServerTabMapColor, ServerTabMapTexture)
+	end
+	if ServerTabMapTexture == nil then
+		AnnounceBox("Map texture is invalid!", "ERROR", 15, 95, 60, 60, 255, 255, 255)
+	end
+	if ServerTabMapColor == nil then
+		AnnounceBox("Map color is invalid!", "ERROR", 15, 95, 60, 60, 255, 255, 255)
+	end
+end)
 
 Server1Page2Features3 = Instance.new("TextBox")
 Server1Page2Features3.Size = UDim2.new(0, 160, 0, 20)
