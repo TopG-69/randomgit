@@ -4784,7 +4784,7 @@ end)
 
 --frames
 BansPageSection1Phrame = Instance.new("ScrollingFrame")
-BansPageSection1Phrame.Size = UDim2.new(0.27, 0, 0.80, 0)
+BansPageSection1Phrame.Size = UDim2.new(0.27, 0, 0.805, 0)
 BansPageSection1Phrame.Position = UDim2.new(0.01, 0, 0.05, 0)
 BansPageSection1Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
 BansPageSection1Phrame.CanvasSize = UDim2.new(0, 0, 30, 0)
@@ -4898,7 +4898,7 @@ BannedListDisplay()
 	
 Bans1Page2FeaturesSearch = Instance.new("TextBox")
 Bans1Page2FeaturesSearch.Size = UDim2.new(0, 162, 0, 20)
-Bans1Page2FeaturesSearch.Position = UDim2.new(-1.332, 0, 0.92, 0)
+Bans1Page2FeaturesSearch.Position = UDim2.new(-1.332, 0, 0.925, 0)
 Bans1Page2FeaturesSearch.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Bans1Page2FeaturesSearch.BackgroundTransparency = 0.4
 Bans1Page2FeaturesSearch.BorderSizePixel = 1
@@ -5102,7 +5102,7 @@ end)
 
 --frames
 Tools1PageSection1Phrame = Instance.new("ScrollingFrame")
-Tools1PageSection1Phrame.Size = UDim2.new(0.27, 0, 0.80, 0)
+Tools1PageSection1Phrame.Size = UDim2.new(0.27, 0, 0.805, 0)
 Tools1PageSection1Phrame.Position = UDim2.new(0.01, 0, 0.05, 0)
 Tools1PageSection1Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
 Tools1PageSection1Phrame.CanvasSize = UDim2.new(0, 0, 30, 0)
@@ -5218,7 +5218,7 @@ ItemsDisplay()
 
 Tools1Page2FeaturesSearch = Instance.new("TextBox")
 Tools1Page2FeaturesSearch.Size = UDim2.new(0, 162, 0, 20)
-Tools1Page2FeaturesSearch.Position = UDim2.new(-1.332, 0, 0.92, 0)
+Tools1Page2FeaturesSearch.Position = UDim2.new(-1.332, 0, 0.925, 0)
 Tools1Page2FeaturesSearch.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Tools1Page2FeaturesSearch.BackgroundTransparency = 0.4
 Tools1Page2FeaturesSearch.BorderSizePixel = 1
@@ -5441,7 +5441,7 @@ end)
 
 --frames
 Tools2PageSection1Phrame = Instance.new("ScrollingFrame")
-Tools2PageSection1Phrame.Size = UDim2.new(0.27, 0, 0.80, 0)
+Tools2PageSection1Phrame.Size = UDim2.new(0.27, 0, 0.805, 0)
 Tools2PageSection1Phrame.Position = UDim2.new(0.01, 0, 0.05, 0)
 Tools2PageSection1Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
 Tools2PageSection1Phrame.CanvasSize = UDim2.new(0, 0, 30, 0)
@@ -5556,7 +5556,7 @@ VehicleDisplay()
 
 Tools2Page2FeaturesSearch = Instance.new("TextBox")
 Tools2Page2FeaturesSearch.Size = UDim2.new(0, 162, 0, 20)
-Tools2Page2FeaturesSearch.Position = UDim2.new(-1.332, 0, 0.92, 0)
+Tools2Page2FeaturesSearch.Position = UDim2.new(-1.332, 0, 0.925, 0)
 Tools2Page2FeaturesSearch.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Tools2Page2FeaturesSearch.BackgroundTransparency = 0.4
 Tools2Page2FeaturesSearch.BorderSizePixel = 1
@@ -6027,7 +6027,7 @@ end)
 
 --frames
 Tools3PageSection1Phrame = Instance.new("ScrollingFrame")
-Tools3PageSection1Phrame.Size = UDim2.new(0.27, 0, 0.80, 0)
+Tools3PageSection1Phrame.Size = UDim2.new(0.27, 0, 0.805, 0)
 Tools3PageSection1Phrame.Position = UDim2.new(0.01, 0, 0.05, 0)
 Tools3PageSection1Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
 Tools3PageSection1Phrame.CanvasSize = UDim2.new(0, 0, 30, 0)
@@ -6236,7 +6236,7 @@ LoadKitsItemsItemDisplay()
 
 Tools3Page2FeaturesSearch = Instance.new("TextBox")
 Tools3Page2FeaturesSearch.Size = UDim2.new(0, 162, 0, 20)
-Tools3Page2FeaturesSearch.Position = UDim2.new(-1.332, 0, 0.92, 0)
+Tools3Page2FeaturesSearch.Position = UDim2.new(-1.332, 0, 0.925, 0)
 Tools3Page2FeaturesSearch.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Tools3Page2FeaturesSearch.BackgroundTransparency = 0.4
 Tools3Page2FeaturesSearch.BorderSizePixel = 1
@@ -7737,6 +7737,137 @@ Server1Page2FeaturesImage.Image = "rbxassetid://12900618433"
 Server1Page2FeaturesImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2FeaturesImage.Parent = Server1PageSection2Phrame
 
+Server1Page2Features3RandomMap = Instance.new("TextButton")
+Server1Page2Features3RandomMap.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2Features3RandomMap.Position = UDim2.new(0.02, 0, 0.42, 0)
+Server1Page2Features3RandomMap.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3RandomMap.BackgroundTransparency = 0.4
+Server1Page2Features3RandomMap.BorderSizePixel = 1
+Server1Page2Features3RandomMap.Text = "Random Map"
+Server1Page2Features3RandomMap.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3RandomMap.TextSize = 8
+Server1Page2Features3RandomMap.TextXAlignment = "Center"
+Server1Page2Features3RandomMap.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3RandomMapImage = Instance.new("ImageLabel")
+Server1Page2Features3RandomMapImage.Size = UDim2.new(0, 20, 0, 20)
+Server1Page2Features3RandomMapImage.Position = UDim2.new(0.012, 0, 0.42, 0)
+Server1Page2Features3RandomMapImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3RandomMapImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3RandomMapImage.BackgroundTransparency = 1
+Server1Page2Features3RandomMapImage.BorderSizePixel = 0
+Server1Page2Features3RandomMapImage.Visible = true
+Server1Page2Features3RandomMapImage.Image = "rbxassetid://12900618433"
+Server1Page2Features3RandomMapImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3RandomMapImage.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3RandomMap.MouseButton1Click:Connect(function()
+	ColorMap(math.random(1,65), math.random(1,12))
+end)
+
+Server1Page2Features3 = Instance.new("TextButton")
+Server1Page2Features3.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2Features3.Position = UDim2.new(0.02, 0, 0.52, 0)
+Server1Page2Features3.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3.BackgroundTransparency = 0.4
+Server1Page2Features3.BorderSizePixel = 1
+Server1Page2Features3.Text = "Reset Map"
+Server1Page2Features3.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3.TextSize = 8
+Server1Page2Features3.TextXAlignment = "Center"
+Server1Page2Features3.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3Image = Instance.new("ImageLabel")
+Server1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
+Server1Page2Features3Image.Position = UDim2.new(0.012, 0, 0.52, 0)
+Server1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3Image.BackgroundTransparency = 1
+Server1Page2Features3Image.BorderSizePixel = 0
+Server1Page2Features3Image.Visible = true
+Server1Page2Features3Image.Image = "rbxassetid://12900618433"
+Server1Page2Features3Image.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3Image.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3MapToggle = Instance.new("TextButton")
+Server1Page2Features3MapToggle.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2Features3MapToggle.Position = UDim2.new(0.02, 0, 0.62, 0)
+Server1Page2Features3MapToggle.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3MapToggle.BackgroundTransparency = 0.4
+Server1Page2Features3MapToggle.BorderSizePixel = 1
+Server1Page2Features3MapToggle.Text = "No Map"
+Server1Page2Features3MapToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3MapToggle.TextSize = 8
+Server1Page2Features3MapToggle.TextXAlignment = "Center"
+Server1Page2Features3MapToggle.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3MapToggleImage = Instance.new("ImageLabel")
+Server1Page2Features3MapToggleImage.Size = UDim2.new(0, 20, 0, 20)
+Server1Page2Features3MapToggleImage.Position = UDim2.new(0.012, 0, 0.62, 0)
+Server1Page2Features3MapToggleImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3MapToggleImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3MapToggleImage.BackgroundTransparency = 1
+Server1Page2Features3MapToggleImage.BorderSizePixel = 0
+Server1Page2Features3MapToggleImage.Visible = true
+Server1Page2Features3MapToggleImage.Image = "rbxassetid://12900618433"
+Server1Page2Features3MapToggleImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3MapToggleImage.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3MapToggle.MouseButton1Click:Connect(function()
+	if Server1Page2Features3MapToggle.TextColor3 == Color3.fromRGB(255, 255, 255) then
+		AnnounceBox("Removed map!", "MAP", 5, 60, 160, 60, 255, 255, 255)
+		Server1Page2Features3MapToggle.TextColor3 = Color3.fromRGB(170, 170, 170)
+		Server1Page2Features3MapToggleImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+		Map(1)
+		Server1Page2Features3MapToggle.Text = "Map"
+	else
+		AnnounceBox("Restored map!", "MAP", 5, 60, 160, 60, 255, 255, 255)
+		Server1Page2Features3MapToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Server1Page2Features3MapToggleImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		Map(2)
+		Server1Page2Features3MapToggle.Text = "No Map"
+	end
+end)
+
+Server1Page2Features3BuildingToggle = Instance.new("TextButton")
+Server1Page2Features3BuildingToggle.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2Features3BuildingToggle.Position = UDim2.new(0.02, 0, 0.72, 0)
+Server1Page2Features3BuildingToggle.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3BuildingToggle.BackgroundTransparency = 0.4
+Server1Page2Features3BuildingToggle.BorderSizePixel = 1
+Server1Page2Features3BuildingToggle.Text = "No Buildings"
+Server1Page2Features3BuildingToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3BuildingToggle.TextSize = 8
+Server1Page2Features3BuildingToggle.TextXAlignment = "Center"
+Server1Page2Features3BuildingToggle.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3BuildingToggleImage = Instance.new("ImageLabel")
+Server1Page2Features3BuildingToggleImage.Size = UDim2.new(0, 20, 0, 20)
+Server1Page2Features3BuildingToggleImage.Position = UDim2.new(0.012, 0, 0.72, 0)
+Server1Page2Features3BuildingToggleImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3BuildingToggleImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3BuildingToggleImage.BackgroundTransparency = 1
+Server1Page2Features3BuildingToggleImage.BorderSizePixel = 0
+Server1Page2Features3BuildingToggleImage.Visible = true
+Server1Page2Features3BuildingToggleImage.Image = "rbxassetid://12900618433"
+Server1Page2Features3BuildingToggleImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3BuildingToggleImage.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3BuildingToggle.MouseButton1Click:Connect(function()
+	if Server1Page2Features3BuildingToggle.TextColor3 == Color3.fromRGB(255, 255, 255) then
+		AnnounceBox("Removed buildings!", "BUILDINGS", 5, 60, 160, 60, 255, 255, 255)
+		Server1Page2Features3BuildingToggle.TextColor3 = Color3.fromRGB(170, 170, 170)
+		Server1Page2Features3BuildingToggleImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+		Buildings(1)
+		Server1Page2Features3BuildingToggle.Text = "Buildings"
+	else
+		AnnounceBox("Restored buildings!", "BUILDINGS", 5, 60, 160, 60, 255, 255, 255)
+		Server1Page2Features3BuildingToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Server1Page2Features3BuildingToggleImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		Buildings(2)
+		Server1Page2Features3BuildingToggle.Text = "No Buildings"
+	end
+end)
 
 Server1Page2Features2CleanLoot = Instance.new("TextButton")
 Server1Page2Features2CleanLoot.Size = UDim2.new(0, 160, 0, 20)
@@ -8011,9 +8142,33 @@ Server1Page2Features3MapColor.FocusLost:Connect(function(enterPressed)
     end
 end)
 
-Server1Page2Features3 = Instance.new("TextBox")
+Server1Page2Features3 = Instance.new("TextButton")
 Server1Page2Features3.Size = UDim2.new(0, 160, 0, 20)
 Server1Page2Features3.Position = UDim2.new(0.682, 0, 0.22, 0)
+Server1Page2Features3.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3.BackgroundTransparency = 0.4
+Server1Page2Features3.BorderSizePixel = 1
+Server1Page2Features3.Text = "Color Map"
+Server1Page2Features3.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3.TextSize = 8
+Server1Page2Features3.TextXAlignment = "Center"
+Server1Page2Features3.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3Image = Instance.new("ImageLabel")
+Server1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
+Server1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.22, 0)
+Server1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3Image.BackgroundTransparency = 1
+Server1Page2Features3Image.BorderSizePixel = 0
+Server1Page2Features3Image.Visible = true
+Server1Page2Features3Image.Image = "rbxassetid://12900618433"
+Server1Page2Features3Image.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3Image.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3 = Instance.new("TextBox")
+Server1Page2Features3.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2Features3.Position = UDim2.new(0.682, 0, 0.32, 0)
 Server1Page2Features3.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Server1Page2Features3.BackgroundTransparency = 0.4
 Server1Page2Features3.BorderSizePixel = 1
@@ -8025,9 +8180,33 @@ Server1Page2Features3.TextWrapped = true
 Server1Page2Features3.TextXAlignment = "Center"
 Server1Page2Features3.Parent = Server1PageSection2Phrame
 
+Server1Page2Features3 = Instance.new("TextButton")
+Server1Page2Features3.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2Features3.Position = UDim2.new(0.682, 0, 0.42, 0)
+Server1Page2Features3.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3.BackgroundTransparency = 0.4
+Server1Page2Features3.BorderSizePixel = 1
+Server1Page2Features3.Text = "Color Road"
+Server1Page2Features3.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3.TextSize = 8
+Server1Page2Features3.TextXAlignment = "Center"
+Server1Page2Features3.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3Image = Instance.new("ImageLabel")
+Server1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
+Server1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.42, 0)
+Server1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3Image.BackgroundTransparency = 1
+Server1Page2Features3Image.BorderSizePixel = 0
+Server1Page2Features3Image.Visible = true
+Server1Page2Features3Image.Image = "rbxassetid://12900618433"
+Server1Page2Features3Image.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3Image.Parent = Server1PageSection2Phrame
+
 Server1Page2Features3 = Instance.new("TextBox")
 Server1Page2Features3.Size = UDim2.new(0, 160, 0, 20)
-Server1Page2Features3.Position = UDim2.new(0.682, 0, 0.32, 0)
+Server1Page2Features3.Position = UDim2.new(0.682, 0, 0.52, 0)
 Server1Page2Features3.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Server1Page2Features3.BackgroundTransparency = 0.4
 Server1Page2Features3.BorderSizePixel = 1
@@ -8039,41 +8218,13 @@ Server1Page2Features3.TextWrapped = true
 Server1Page2Features3.TextXAlignment = "Center"
 Server1Page2Features3.Parent = Server1PageSection2Phrame
 
-Server1Page2Features3RandomMap = Instance.new("TextButton")
-Server1Page2Features3RandomMap.Size = UDim2.new(0, 160, 0, 20)
-Server1Page2Features3RandomMap.Position = UDim2.new(0.682, 0, 0.42, 0)
-Server1Page2Features3RandomMap.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features3RandomMap.BackgroundTransparency = 0.4
-Server1Page2Features3RandomMap.BorderSizePixel = 1
-Server1Page2Features3RandomMap.Text = "Random Map"
-Server1Page2Features3RandomMap.TextColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3RandomMap.TextSize = 8
-Server1Page2Features3RandomMap.TextXAlignment = "Center"
-Server1Page2Features3RandomMap.Parent = Server1PageSection2Phrame
-
-Server1Page2Features3RandomMapImage = Instance.new("ImageLabel")
-Server1Page2Features3RandomMapImage.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2Features3RandomMapImage.Position = UDim2.new(0.674, 0, 0.42, 0)
-Server1Page2Features3RandomMapImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features3RandomMapImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3RandomMapImage.BackgroundTransparency = 1
-Server1Page2Features3RandomMapImage.BorderSizePixel = 0
-Server1Page2Features3RandomMapImage.Visible = true
-Server1Page2Features3RandomMapImage.Image = "rbxassetid://12900618433"
-Server1Page2Features3RandomMapImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3RandomMapImage.Parent = Server1PageSection2Phrame
-
-Server1Page2Features3RandomMap.MouseButton1Click:Connect(function()
-	ColorMap(math.random(1,65), math.random(1,12))
-end)
-
 Server1Page2Features3 = Instance.new("TextButton")
 Server1Page2Features3.Size = UDim2.new(0, 160, 0, 20)
-Server1Page2Features3.Position = UDim2.new(0.682, 0, 0.52, 0)
+Server1Page2Features3.Position = UDim2.new(0.682, 0, 0.62, 0)
 Server1Page2Features3.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Server1Page2Features3.BackgroundTransparency = 0.4
 Server1Page2Features3.BorderSizePixel = 1
-Server1Page2Features3.Text = "Reset Map"
+Server1Page2Features3.Text = "Color Buildings"
 Server1Page2Features3.TextColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2Features3.TextSize = 8
 Server1Page2Features3.TextXAlignment = "Center"
@@ -8081,7 +8232,7 @@ Server1Page2Features3.Parent = Server1PageSection2Phrame
 
 Server1Page2Features3Image = Instance.new("ImageLabel")
 Server1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.52, 0)
+Server1Page2Features3Image.Position = UDim2.new(0.674, 0, 0.62, 0)
 Server1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Server1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2Features3Image.BackgroundTransparency = 1
@@ -8090,86 +8241,6 @@ Server1Page2Features3Image.Visible = true
 Server1Page2Features3Image.Image = "rbxassetid://12900618433"
 Server1Page2Features3Image.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2Features3Image.Parent = Server1PageSection2Phrame
-
-Server1Page2Features3MapToggle = Instance.new("TextButton")
-Server1Page2Features3MapToggle.Size = UDim2.new(0, 160, 0, 20)
-Server1Page2Features3MapToggle.Position = UDim2.new(0.682, 0, 0.62, 0)
-Server1Page2Features3MapToggle.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features3MapToggle.BackgroundTransparency = 0.4
-Server1Page2Features3MapToggle.BorderSizePixel = 1
-Server1Page2Features3MapToggle.Text = "No Map"
-Server1Page2Features3MapToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3MapToggle.TextSize = 8
-Server1Page2Features3MapToggle.TextXAlignment = "Center"
-Server1Page2Features3MapToggle.Parent = Server1PageSection2Phrame
-
-Server1Page2Features3MapToggleImage = Instance.new("ImageLabel")
-Server1Page2Features3MapToggleImage.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2Features3MapToggleImage.Position = UDim2.new(0.674, 0, 0.62, 0)
-Server1Page2Features3MapToggleImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features3MapToggleImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3MapToggleImage.BackgroundTransparency = 1
-Server1Page2Features3MapToggleImage.BorderSizePixel = 0
-Server1Page2Features3MapToggleImage.Visible = true
-Server1Page2Features3MapToggleImage.Image = "rbxassetid://12900618433"
-Server1Page2Features3MapToggleImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3MapToggleImage.Parent = Server1PageSection2Phrame
-
-Server1Page2Features3MapToggle.MouseButton1Click:Connect(function()
-	if Server1Page2Features3MapToggle.TextColor3 == Color3.fromRGB(255, 255, 255) then
-		AnnounceBox("Removed map!", "MAP", 5, 60, 160, 60, 255, 255, 255)
-		Server1Page2Features3MapToggle.TextColor3 = Color3.fromRGB(170, 170, 170)
-		Server1Page2Features3MapToggleImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
-		Map(1)
-		Server1Page2Features3MapToggle.Text = "Map"
-	else
-		AnnounceBox("Restored map!", "MAP", 5, 60, 160, 60, 255, 255, 255)
-		Server1Page2Features3MapToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Server1Page2Features3MapToggleImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
-		Map(2)
-		Server1Page2Features3MapToggle.Text = "No Map"
-	end
-end)
-
-Server1Page2Features3BuildingToggle = Instance.new("TextButton")
-Server1Page2Features3BuildingToggle.Size = UDim2.new(0, 160, 0, 20)
-Server1Page2Features3BuildingToggle.Position = UDim2.new(0.682, 0, 0.72, 0)
-Server1Page2Features3BuildingToggle.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features3BuildingToggle.BackgroundTransparency = 0.4
-Server1Page2Features3BuildingToggle.BorderSizePixel = 1
-Server1Page2Features3BuildingToggle.Text = "No Buildings"
-Server1Page2Features3BuildingToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3BuildingToggle.TextSize = 8
-Server1Page2Features3BuildingToggle.TextXAlignment = "Center"
-Server1Page2Features3BuildingToggle.Parent = Server1PageSection2Phrame
-
-Server1Page2Features3BuildingToggleImage = Instance.new("ImageLabel")
-Server1Page2Features3BuildingToggleImage.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2Features3BuildingToggleImage.Position = UDim2.new(0.674, 0, 0.72, 0)
-Server1Page2Features3BuildingToggleImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features3BuildingToggleImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3BuildingToggleImage.BackgroundTransparency = 1
-Server1Page2Features3BuildingToggleImage.BorderSizePixel = 0
-Server1Page2Features3BuildingToggleImage.Visible = true
-Server1Page2Features3BuildingToggleImage.Image = "rbxassetid://12900618433"
-Server1Page2Features3BuildingToggleImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3BuildingToggleImage.Parent = Server1PageSection2Phrame
-
-Server1Page2Features3BuildingToggle.MouseButton1Click:Connect(function()
-	if Server1Page2Features3BuildingToggle.TextColor3 == Color3.fromRGB(255, 255, 255) then
-		AnnounceBox("Removed buildings!", "BUILDINGS", 5, 60, 160, 60, 255, 255, 255)
-		Server1Page2Features3BuildingToggle.TextColor3 = Color3.fromRGB(170, 170, 170)
-		Server1Page2Features3BuildingToggleImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
-		Buildings(1)
-		Server1Page2Features3BuildingToggle.Text = "Buildings"
-	else
-		AnnounceBox("Restored buildings!", "BUILDINGS", 5, 60, 160, 60, 255, 255, 255)
-		Server1Page2Features3BuildingToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Server1Page2Features3BuildingToggleImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
-		Buildings(2)
-		Server1Page2Features3BuildingToggle.Text = "No Buildings"
-	end
-end)
 --frames
 
 
