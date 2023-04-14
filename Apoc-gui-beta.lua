@@ -7722,29 +7722,34 @@ Server1Page2Features3RandomMap.MouseButton1Click:Connect(function()
 	ColorMap(math.random(1,65), math.random(1,12))
 end)
 
-Server1Page2Features3 = Instance.new("TextButton")
-Server1Page2Features3.Size = UDim2.new(0, 160, 0, 20)
-Server1Page2Features3.Position = UDim2.new(0.02, 0, 0.52, 0)
-Server1Page2Features3.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features3.BackgroundTransparency = 0.4
-Server1Page2Features3.BorderSizePixel = 1
-Server1Page2Features3.Text = "Reset Map"
-Server1Page2Features3.TextColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3.TextSize = 8
-Server1Page2Features3.TextXAlignment = "Center"
-Server1Page2Features3.Parent = Server1PageSection2Phrame
+Server1Page2Features3ResetMap = Instance.new("TextButton")
+Server1Page2Features3ResetMap.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2Features3ResetMap.Position = UDim2.new(0.02, 0, 0.52, 0)
+Server1Page2Features3ResetMap.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3ResetMap.BackgroundTransparency = 0.4
+Server1Page2Features3ResetMap.BorderSizePixel = 1
+Server1Page2Features3ResetMap.Text = "Reset Map"
+Server1Page2Features3ResetMap.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3ResetMap.TextSize = 8
+Server1Page2Features3ResetMap.TextXAlignment = "Center"
+Server1Page2Features3ResetMap.Parent = Server1PageSection2Phrame
 
-Server1Page2Features3Image = Instance.new("ImageLabel")
-Server1Page2Features3Image.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2Features3Image.Position = UDim2.new(0.012, 0, 0.52, 0)
-Server1Page2Features3Image.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features3Image.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3Image.BackgroundTransparency = 1
-Server1Page2Features3Image.BorderSizePixel = 0
-Server1Page2Features3Image.Visible = true
-Server1Page2Features3Image.Image = "rbxassetid://12900618433"
-Server1Page2Features3Image.ImageColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features3Image.Parent = Server1PageSection2Phrame
+Server1Page2Features3ResetMapImage = Instance.new("ImageLabel")
+Server1Page2Features3ResetMapImage.Size = UDim2.new(0, 20, 0, 20)
+Server1Page2Features3ResetMapImage.Position = UDim2.new(0.012, 0, 0.52, 0)
+Server1Page2Features3ResetMapImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3ResetMapImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3ResetMapImage.BackgroundTransparency = 1
+Server1Page2Features3ResetMapImage.BorderSizePixel = 0
+Server1Page2Features3ResetMapImage.Visible = true
+Server1Page2Features3ResetMapImage.Image = "rbxassetid://12900618433"
+Server1Page2Features3ResetMapImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3ResetMapImage.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3ResetMap.MouseButton1Click:Connect(function()
+	AnnounceBox("Coloring map please wait!", "MAP", 5, 60, 160, 60, 255, 255, 255)
+	ColorMap(8, 10)
+end)
 
 Server1Page2Features3MapToggle = Instance.new("TextButton")
 Server1Page2Features3MapToggle.Size = UDim2.new(0, 160, 0, 20)
