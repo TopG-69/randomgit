@@ -337,7 +337,11 @@ pcall(function()
 	end
 end)
 
-R.AddClothing:FireServer("Agony", LocalPlayer.playerstats.character, "", "", "")
+function addAgonyClothing()
+	repeat wait() until LocalPlayer:FindFirstChild("playerstats") and LocalPlayer.playerstats:FindFirstChild("character")
+	R.AddClothing:FireServer("Agony", LocalPlayer.playerstats.character, "", "", "")
+end
+addAgonyClothing()
 
 local Oldmakefolder = makefolder
 makefolder = function(Name)
