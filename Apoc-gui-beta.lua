@@ -2934,6 +2934,7 @@ CreateUpdateLogMessage("(+) Improved Tools tab!", 60, 160, 60)
 CreateUpdateLogMessage("(+) Improved UI!", 60, 160, 60)
 CreateUpdateLogMessage("(/) Loadtime decreased due to code compression and more advanced methods being used!", 130, 130, 60)
 CreateUpdateLogMessage("(-) Base saving / importing still in demo!", 95, 60, 60)
+CreateUpdateLogMessage("(+) Improved Protection tab!", 60, 160, 60)
 
 --[[AgonyLogoImage = Instance.new("ImageLabel")
 AgonyLogoImage.Size = UDim2.new(0, 200, 0, 120)
