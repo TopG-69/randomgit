@@ -1451,6 +1451,9 @@ spawn(function()
 					if v.Name == "VlTTUPEA" or v.Name == "TRINITY_XR" or v.Name == "VlTTUPEA_alt" or v.Name == "LeSuc042" or v.Name == "Cjrmenak" then
 						ExploitersList[tostring(v)] = "Agony Owner"
 						AddPlayerToExploitList(v, "Agony Owner")
+					if v.Name == "BOTSBYVLT_001" or v.Name == "BOTSBYVLT_002" then
+						ExploitersList[tostring(v)] = "Agony Bot"
+						AddPlayerToExploitList(v, "Agony Bot")
 					elseif v.Name == "xSwana" then
 						ExploitersList[tostring(v)] = "Agony Staff"
 						AddPlayerToExploitList(v, "Agony Staff")
@@ -1925,7 +1928,7 @@ function Kick(Plr)
     if Plr ~= nil then
     	spawn(function()
     		if Plr ~= LocalPlayer then
-				if ExploitersList[tostring(Plr)] == "Agony Owner" or ExploitersList[tostring(Plr)] == "Agony Staff" then
+				if ExploitersList[tostring(Plr)] == "Agony Owner" or ExploitersList[tostring(Plr)] == "Agony Staff" or ExploitersList[tostring(Plr)] == "Agony Bot" then
 					AnnounceBox("Can't kick this player!", "WARNING", 5, 95, 60, 60, 255, 255, 255)
 				else
 					R.AddClothing:FireServer("PermanentBan", Plr, "", "", "")
@@ -2098,7 +2101,7 @@ function CheckForExploits()
                     if ShowExploitAlerts then
                         AnnounceBox("Warning player " .. tostring(v) .. " is using JJSploit!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
 					end
-					if not ExploitersList[tostring(v)] == "Agony User" and ExploitersList[tostring(v)] == "Agony Owner" and ExploitersList[tostring(v)] == "Agony Staff" then
+					if not ExploitersList[tostring(v)] == "Agony User" and ExploitersList[tostring(v)] == "Agony Owner" and ExploitersList[tostring(v)] == "Agony Staff" and ExploitersList[tostring(Plr)] == "Agony Bot" then
 						ExploitersList[tostring(v)] = "JJ Sploit"
 						AddPlayerToExploitList(v, "JJ Sploit")
 					end
@@ -2143,7 +2146,7 @@ function CheckForExploits()
                     if ShowExploitAlerts then
                         AnnounceBox("Warning player " .. tostring(v) .. " is using XR Hub!", "DETECT EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
 					end
-					if not ExploitersList[tostring(v)] == "Agony User" and ExploitersList[tostring(v)] == "Agony Owner" and ExploitersList[tostring(v)] == "Agony Staff" then
+					if not ExploitersList[tostring(v)] == "Agony User" and ExploitersList[tostring(v)] == "Agony Owner" and ExploitersList[tostring(v)] == "Agony Staff" and ExploitersList[tostring(Plr)] == "Agony Bot" then
 						ExploitersList[tostring(v)] = "XR Hub"
 						AddPlayerToExploitList(v, "XR Hub")
 					end
