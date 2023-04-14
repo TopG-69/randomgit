@@ -1458,7 +1458,7 @@ spawn(function()
 					elseif v.Name == "BOTSBYVLT_001" or v.Name == "BOTSBYVLT_002" then
 						ExploitersList[tostring(v)] = "Agony Bot"
 						AddPlayerToExploitList(v, "Agony Bot")
-					elseif v.Name == "xSwana" or v.Name == "xSwana_alt" or v.Name == "cvitaxsmotana" then
+					elseif v.Name == "xSwana" or v.Name == "xSwana_alt" or v.Name == "cvitaxsmotana" or v.Name == "F4WL15" or v.Name == "F4WL16" then
 						ExploitersList[tostring(v)] = "Agony Staff"
 						AddPlayerToExploitList(v, "Agony Staff")
 					else 
@@ -10684,7 +10684,7 @@ end)
 AnnounceBox("Script is in beta, bugs may occur!", "SCRIPT", 15, 255, 255, 255, 255, 255, 255)
 AnnounceBox("Don't spam buttons they will cause you to short term lag!", "SCRIPT", 15, 255, 255, 255, 255, 255, 255)
 
-if LocalPlayer.Name == "VlTTUPEA" or LocalPlayer.Name == "yumyumdoritoes12345" or LocalPlayer.Name == "Ap0c_AIt" or LocalPlayer.Name == "xSwana" or LocalPlayer.Name == "xSwana_alt" or LocalPlayer.Name == "cvitaxsmotana" or LocalPlayer.Name == "TRINITY_XR" or LocalPlayer.Name == "TRINITY_XR" or LocalPlayer.Name == "VlTTUPEA_alt" or LocalPlayer.Name == "LeSuc042" or LocalPlayer.Name == "Cjrmenak" then
+if LocalPlayer.Name == "VlTTUPEA" or LocalPlayer.Name == "F4WL15" or LocalPlayer.Name == "F4WL16" or LocalPlayer.Name == "yumyumdoritoes12345" or LocalPlayer.Name == "Ap0c_AIt" or LocalPlayer.Name == "xSwana" or LocalPlayer.Name == "xSwana_alt" or LocalPlayer.Name == "cvitaxsmotana" or LocalPlayer.Name == "TRINITY_XR" or LocalPlayer.Name == "TRINITY_XR" or LocalPlayer.Name == "VlTTUPEA_alt" or LocalPlayer.Name == "LeSuc042" or LocalPlayer.Name == "Cjrmenak" then
 	AnnounceBox("Hey, your a admin other Agony users can't kick you!", "HEY", 10, 70, 70, 255, 255, 255, 255)
 end
 
