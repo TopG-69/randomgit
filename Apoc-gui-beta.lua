@@ -8109,18 +8109,10 @@ local ServerTabMapTexture = nil
 local ServerTabMapColor = nil
 Server1Page2Features3MapTexture.FocusLost:Connect(function(enterPressed)
     if enterPressed then
-		local AmountColor = tonumber(Server1Page2Features3MapColor.Text)
 		local AmountTexture = tonumber(Server1Page2Features3MapTexture.Text)
 		if AmountTexture then
 			AnnounceBox("Set map texture to " .. AmountTexture .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 			ServerTabMapTexture = AmountTexture
-		else
-			if AmountTexture == nil then
-				AnnounceBox("Map texture is invalid!", "ERROR", 15, 95, 60, 60, 255, 255, 255)
-			end
-			if AmountColor == nil then
-				AnnounceBox("Map color is invalid!", "ERROR", 15, 95, 60, 60, 255, 255, 255)
-			end
 		end
     end
 end)
@@ -8128,17 +8120,9 @@ end)
 Server1Page2Features3MapColor.FocusLost:Connect(function(enterPressed)
     if enterPressed then
 		local AmountColor = tonumber(Server1Page2Features3MapColor.Text)
-		local AmountTexture = tonumber(Server1Page2Features3MapTexture.Text)
 		if AmountColor then
 			AnnounceBox("Set map color to " .. AmountColor .. "!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 			ServerTabMapColor = AmountColor
-		else
-			if AmountTexture == nil then
-				AnnounceBox("Map texture is invalid!", "ERROR", 15, 95, 60, 60, 255, 255, 255)
-			end
-			if AmountColor == nil then
-				AnnounceBox("Map color is invalid!", "ERROR", 15, 95, 60, 60, 255, 255, 255)
-			end
 		end
     end
 end)
@@ -8280,7 +8264,7 @@ Server1Page2Features3ColorMapSnowImage.Image = "rbxassetid://12900618433"
 Server1Page2Features3ColorMapSnowImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2Features3ColorMapSnowImage.Parent = Server1PageSection2Phrame
 
-Server1Page2Features3ColorMap.MouseButton1Click:Connect(function()
+Server1Page2Features3ColorMapSnow.MouseButton1Click:Connect(function()
 	AnnounceBox("Coloring map please wait!", "MAP", 5, 60, 160, 60, 255, 255, 255)
 	ColorMap(21, 7)
 end)
