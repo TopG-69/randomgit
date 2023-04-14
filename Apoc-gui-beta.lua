@@ -2971,6 +2971,11 @@ CreateUpdateLogMessage("(+) Improved Settings tab!", 60, 160, 60)
 CreateUpdateLogMessage("(/) Loadtime increased due to bigger code and more functions!", 130, 130, 60)
 CreateUpdateLogMessage("(+) Improved Others tab!", 60, 160, 60)
 CreateUpdateLogMessage("(+) Added Others 2 tab!", 60, 160, 60)
+CreateUpdateLogMessage("(+) Improved Server tab!", 60, 160, 60)
+CreateUpdateLogMessage("(+) Improved Tools tab!", 60, 160, 60)
+CreateUpdateLogMessage("(+) Improved UI!", 60, 160, 60)
+CreateUpdateLogMessage("(/) Loadtime decreased due to code compression and more advanced methods!", 130, 130, 60)
+CreateUpdateLogMessage("(-) Base saving / importing still in demo!", 95, 60, 60)
 
 --[[AgonyLogoImage = Instance.new("ImageLabel")
 AgonyLogoImage.Size = UDim2.new(0, 200, 0, 120)
@@ -7762,6 +7767,7 @@ Server1Page2Features3RandomMapImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2Features3RandomMapImage.Parent = Server1PageSection2Phrame
 
 Server1Page2Features3RandomMap.MouseButton1Click:Connect(function()
+	AnnounceBox("Coloring map please wait!", "MAP", 5, 60, 160, 60, 255, 255, 255)
 	ColorMap(math.random(1,65), math.random(1,12))
 end)
 
@@ -8248,6 +8254,62 @@ Server1Page2Features3Image.Visible = true
 Server1Page2Features3Image.Image = "rbxassetid://12900618433"
 Server1Page2Features3Image.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Server1Page2Features3Image.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3ColorMapSnow = Instance.new("TextButton")
+Server1Page2Features3ColorMapSnow.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2Features3ColorMapSnow.Position = UDim2.new(0.682, 0, 0.72, 0)
+Server1Page2Features3ColorMapSnow.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3ColorMapSnow.BackgroundTransparency = 0.4
+Server1Page2Features3ColorMapSnow.BorderSizePixel = 1
+Server1Page2Features3ColorMapSnow.Text = "Snow Map"
+Server1Page2Features3ColorMapSnow.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3ColorMapSnow.TextSize = 8
+Server1Page2Features3ColorMapSnow.TextXAlignment = "Center"
+Server1Page2Features3ColorMapSnow.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3ColorMapSnowImage = Instance.new("ImageLabel")
+Server1Page2Features3ColorMapSnowImage.Size = UDim2.new(0, 20, 0, 20)
+Server1Page2Features3ColorMapSnowImage.Position = UDim2.new(0.674, 0, 0.72, 0)
+Server1Page2Features3ColorMapSnowImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3ColorMapSnowImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3ColorMapSnowImage.BackgroundTransparency = 1
+Server1Page2Features3ColorMapSnowImage.BorderSizePixel = 0
+Server1Page2Features3ColorMapSnowImage.Visible = true
+Server1Page2Features3ColorMapSnowImage.Image = "rbxassetid://12900618433"
+Server1Page2Features3ColorMapSnowImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3ColorMapSnowImage.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3ColorMap.MouseButton1Click:Connect(function()
+	ColorMap(21, 7)
+end)
+
+Server1Page2Features3ColorMapDesert = Instance.new("TextButton")
+Server1Page2Features3ColorMapDesert.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2Features3ColorMapDesert.Position = UDim2.new(0.682, 0, 0.82, 0)
+Server1Page2Features3ColorMapDesert.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3ColorMapDesert.BackgroundTransparency = 0.4
+Server1Page2Features3ColorMapDesert.BorderSizePixel = 1
+Server1Page2Features3ColorMapDesert.Text = "Desert Map"
+Server1Page2Features3ColorMapDesert.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3ColorMapDesert.TextSize = 8
+Server1Page2Features3ColorMapDesert.TextXAlignment = "Center"
+Server1Page2Features3ColorMapDesert.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3ColorMapDesertImage = Instance.new("ImageLabel")
+Server1Page2Features3ColorMapDesertImage.Size = UDim2.new(0, 20, 0, 20)
+Server1Page2Features3ColorMapDesertImage.Position = UDim2.new(0.674, 0, 0.82, 0)
+Server1Page2Features3ColorMapDesertImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2Features3ColorMapDesertImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3ColorMapDesertImage.BackgroundTransparency = 1
+Server1Page2Features3ColorMapDesertImage.BorderSizePixel = 0
+Server1Page2Features3ColorMapDesertImage.Visible = true
+Server1Page2Features3ColorMapDesertImage.Image = "rbxassetid://12900618433"
+Server1Page2Features3ColorMapDesertImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2Features3ColorMapDesertImage.Parent = Server1PageSection2Phrame
+
+Server1Page2Features3ColorMapDesert.MouseButton1Click:Connect(function()
+	ColorMap(32, 6)
+end)
 --frames
 
 
