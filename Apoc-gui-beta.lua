@@ -2085,7 +2085,7 @@ function CheckForExploits()
 						AddPlayerToExploitList(v, "Inf Vitals")
 					end
 					if TogglePunishExploiters then
-					    Vitals(tostring(v), 3)
+					    Vitals(v, 3)
 					    if ShowFunctionAlerts then
 					        AnnounceBox("Warning removed vitals from " .. tostring(v) .. "!", "PUNISH EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
                         end
@@ -2100,7 +2100,7 @@ function CheckForExploits()
 						AddPlayerToExploitList(v, "JJ Sploit")
 					end
 					if TogglePunishExploiters then
-					    Kick(tostring(v))
+					    Kick(v)
 					    if ShowFunctionAlerts then
 					        AnnounceBox("Warning kicked " .. tostring(v) .. "!", "PUNISH EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
                         end
@@ -2115,7 +2115,7 @@ function CheckForExploits()
 						AddPlayerToExploitList(v, "Inf Health")
 					end
 					if TogglePunishExploiters then
-					    Kill(tostring(v))
+					    Kill(v)
 					    if ShowFunctionAlerts then
 					        AnnounceBox("Warning killed " .. tostring(v) .. "!", "PUNISH EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
                         end
@@ -2130,7 +2130,7 @@ function CheckForExploits()
 						AddPlayerToExploitList(v, "PK God")
 					end
 					if TogglePunishExploiters then
-					    PKGod(tostring(v), 2)
+					    PKGod(v, 2)
 					    if ShowFunctionAlerts then
 					        AnnounceBox("Warning removed PKGod from " .. tostring(v) .. "!", "PUNISH EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
                         end
@@ -2145,13 +2145,12 @@ function CheckForExploits()
 						AddPlayerToExploitList(v, "XR Hub")
 					end
 					if TogglePunishExploiters then
-					    Kick(tostring(v))
+					    Kick(v)
 					    if ShowFunctionAlerts then
 					        AnnounceBox("Warning kicked " .. tostring(v) .. "!", "PUNISH EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
                         end
 					end
 				end
-				
             end)
         end
     end
