@@ -2065,14 +2065,6 @@ game.Workspace.ChildAdded:connect(function(Ch)
 	end
 end)
 
-function AddChat(Player, Message)
-	--MakeChatListLabel(tostring(Player)..": "..tostring(Message))
-end
-
-fireserver("ChangeParentLocal", {["RequestType"] = "Script", ["Message"] = "Agony", ["Player"] = game.Players.LocalPlayer})
-function HandleRequest(Tab)
-end
-
 game.Workspace.Remote.ChangeParentLocal.OnClientEvent:connect(function(Tab)
     if type(Tab) == "table" then
 		HandleRequest(Tab)
@@ -10819,11 +10811,3 @@ if success then
 else
 	AnnounceBox("Error detected " .. tostring(result) .. "", "SCRIPT", 20, 255, 255, 255, 255, 255, 255)
 end
-
-
-
-
-
-
-
-
