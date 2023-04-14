@@ -256,6 +256,7 @@ end
 if ExecutorName ~= "Synapse X" then
 	AnnounceBox("Synapse X was not detected!", "ERROR", 15, 95, 60, 60, 255, 255, 255)
 	AnnounceBox("Warning your executor (" .. ExecutorName .. ") has a high chance of not supporting the script!", "SCRIPT", 15, 255, 255, 255, 255, 255, 255)
+	AnnounceBox("Final Load Process Takes 10-16 secs!", "SCRIPT", 2, 255, 255, 255, 255, 255, 255)
 else
 	if ExecutorName == "Synapse X" then
 		AnnounceBox("Synapse X detected script will load correctly!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
@@ -263,6 +264,7 @@ else
 	else
 		AnnounceBox("Synapse X was not detected!", "ERROR", 15, 95, 60, 60, 255, 255, 255)
 		AnnounceBox("Warning your executor (" .. ExecutorName .. ") has a high chance of not supporting the script!", "SCRIPT", 15, 255, 255, 255, 255, 255, 255)
+		AnnounceBox("Final Load Process Takes 10-16 secs!", "SCRIPT", 2, 255, 255, 255, 255, 255, 255)
 	end
 end
 --warning
@@ -2041,6 +2043,10 @@ game.Workspace.ChildAdded:connect(function(Ch)
 				if AnnounceSpawnedItem then
 					AnnounceBox("Someone attmpted to spawn a (" .. tostring(Ch) .. ")!", "SPAWNED ITEM DETECTION", 5, 130, 130, 60, 255, 255, 255)
 				end
+			else
+				if AnnounceSpawnedItem then
+					AnnounceBox("A unknown error occured while attmpeting to detect item spawner / item!", "SPAWNED ITEM DETECTION", 5, 130, 130, 60, 255, 255, 255)
+				end
             end
         end
         AntiSpam = AntiSpam + 1
@@ -2589,7 +2595,7 @@ GuiToolsEBarPhrame.Parent = ZeroPhrame
 
 ToolsTab1Button = Instance.new("ImageButton")
 ToolsTab1Button.Size = UDim2.new(0, 20, 0, 20)
-ToolsTab1Button.Position = UDim2.new(0.25, 0, 0.1, 0)
+ToolsTab1Button.Position = UDim2.new(0.05, 0, 0.1, 0)--25
 ToolsTab1Button.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 ToolsTab1Button.BorderColor3 = Color3.fromRGB(255, 255, 255)
 ToolsTab1Button.BackgroundTransparency = 1
@@ -2601,7 +2607,7 @@ ToolsTab1Button.Parent = GuiToolsEBarPhrame
 AddToolTip(ToolsTab1Button, GuiToolsEBarPhrame, "Spawning", 1.50)
 ToolsTab2Button = Instance.new("ImageButton")
 ToolsTab2Button.Size = UDim2.new(0, 20, 0, 20)
-ToolsTab2Button.Position = UDim2.new(0.45, 0, 0.1, 0)
+ToolsTab2Button.Position = UDim2.new(0.25, 0, 0.1, 0)--45
 ToolsTab2Button.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 ToolsTab2Button.BorderColor3 = Color3.fromRGB(255, 255, 255)
 ToolsTab2Button.BackgroundTransparency = 1
@@ -2613,7 +2619,7 @@ ToolsTab2Button.Parent = GuiToolsEBarPhrame
 AddToolTip(ToolsTab2Button, GuiToolsEBarPhrame, "Vehicles", 1.50)
 ToolsTab3Button = Instance.new("ImageButton")
 ToolsTab3Button.Size = UDim2.new(0, 20, 0, 20)
-ToolsTab3Button.Position = UDim2.new(0.65, 0, 0.1, 0)
+ToolsTab3Button.Position = UDim2.new(0.45, 0, 0.1, 0)--65
 ToolsTab3Button.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 ToolsTab3Button.BorderColor3 = Color3.fromRGB(255, 255, 255)
 ToolsTab3Button.BackgroundTransparency = 1
@@ -2623,6 +2629,30 @@ ToolsTab3Button.Image = "rbxassetid://12900269313"
 ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 ToolsTab3Button.Parent = GuiToolsEBarPhrame
 AddToolTip(ToolsTab3Button, GuiToolsEBarPhrame, "Kits", 1.50)
+ToolsTab4Button = Instance.new("ImageButton")
+ToolsTab4Button.Size = UDim2.new(0, 20, 0, 20)
+ToolsTab4Button.Position = UDim2.new(0.65, 0, 0.1, 0)--
+ToolsTab4Button.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+ToolsTab4Button.BorderColor3 = Color3.fromRGB(255, 255, 255)
+ToolsTab4Button.BackgroundTransparency = 1
+ToolsTab4Button.BorderSizePixel = 0
+ToolsTab4Button.Visible = true
+ToolsTab4Button.Image = "rbxassetid://13123170419"
+ToolsTab4Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+ToolsTab4Button.Parent = GuiToolsEBarPhrame
+AddToolTip(ToolsTab4Button, GuiToolsEBarPhrame, "Bases", 1.50)
+ToolsTab5Button = Instance.new("ImageButton")
+ToolsTab5Button.Size = UDim2.new(0, 20, 0, 20)
+ToolsTab5Button.Position = UDim2.new(0.85, 0, 0.1, 0)
+ToolsTab5Button.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+ToolsTab5Button.BorderColor3 = Color3.fromRGB(255, 255, 255)
+ToolsTab5Button.BackgroundTransparency = 1
+ToolsTab5Button.BorderSizePixel = 0
+ToolsTab5Button.Visible = true
+ToolsTab5Button.Image = "rbxassetid://13123171923"
+ToolsTab5Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+ToolsTab5Button.Parent = GuiToolsEBarPhrame
+AddToolTip(ToolsTab5Button, GuiToolsEBarPhrame, "Base Saving", 1.50)
 --ToolsTabF
 
 
@@ -2948,7 +2978,7 @@ AgonyStatusText2.Parent = Welcome1PageSection1Phrame1Statuses
 
 --frames
 Other2PageSection1Phrame = Instance.new("ScrollingFrame")
-Other2PageSection1Phrame.Size = UDim2.new(0.27, 0, 0.80, 0)
+Other2PageSection1Phrame.Size = UDim2.new(0.27, 0, 0.805, 0)
 Other2PageSection1Phrame.Position = UDim2.new(0.01, 0, 0.05, 0)
 Other2PageSection1Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
 Other2PageSection1Phrame.BorderSizePixel = 1
@@ -3037,7 +3067,7 @@ end
 
 Other2Page2FeaturesAmount = Instance.new("TextBox")
 Other2Page2FeaturesAmount.Size = UDim2.new(0, 162, 0, 20)
-Other2Page2FeaturesAmount.Position = UDim2.new(-0.4, 0, 0.92, 0)
+Other2Page2FeaturesAmount.Position = UDim2.new(-0.4, 0, 0.925, 0)
 Other2Page2FeaturesAmount.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Other2Page2FeaturesAmount.BackgroundTransparency = 0.4
 Other2Page2FeaturesAmount.BorderSizePixel = 1
@@ -3328,7 +3358,7 @@ end)
 
 --frames
 Other1PageSection1Phrame = Instance.new("ScrollingFrame")
-Other1PageSection1Phrame.Size = UDim2.new(0.27, 0, 0.80, 0)
+Other1PageSection1Phrame.Size = UDim2.new(0.27, 0, 0.805, 0)
 Other1PageSection1Phrame.Position = UDim2.new(0.01, 0, 0.05, 0)
 Other1PageSection1Phrame.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
 Other1PageSection1Phrame.CanvasSize = UDim2.new(0, 0, 3, 0)
@@ -3418,7 +3448,7 @@ end
 
 Other1Page2FeaturesAmount = Instance.new("TextBox")
 Other1Page2FeaturesAmount.Size = UDim2.new(0, 162, 0, 20)
-Other1Page2FeaturesAmount.Position = UDim2.new(-0.4, 0, 0.92, 0)
+Other1Page2FeaturesAmount.Position = UDim2.new(-0.4, 0, 0.925, 0)
 Other1Page2FeaturesAmount.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Other1Page2FeaturesAmount.BackgroundTransparency = 0.4
 Other1Page2FeaturesAmount.BorderSizePixel = 1
@@ -8566,7 +8596,7 @@ Settings1Page2FeaturesToggleSpawnedItemAlerts.MouseButton1Click:Connect(function
 		Settings1Page2FeaturesToggleSpawnedItemAlerts.TextColor3 = Color3.fromRGB(170, 170, 170)
 		Settings1Page2FeaturesToggleSpawnedItemAlertsImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
 		AnnounceSpawnedItem = true
-	elseif Settings1Page2FeaturesToggleBannedAlerts.TextColor3 == Color3.fromRGB(170, 170, 170) then
+	elseif Settings1Page2FeaturesToggleSpawnedItemAlerts.TextColor3 == Color3.fromRGB(170, 170, 170) then
 		AnnounceBox("No longer showing spawned item alert messages!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
 		Settings1Page2FeaturesToggleSpawnedItemAlerts.TextColor3 = Color3.fromRGB(255, 255, 255)
 		Settings1Page2FeaturesToggleSpawnedItemAlertsImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
@@ -9297,6 +9327,8 @@ LocalButton.MouseButton1Click:Connect(function()
 		ToolsTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab4Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab5Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -9350,6 +9382,8 @@ OtherButton.MouseButton1Click:Connect(function()
 		ToolsTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab4Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab5Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -9403,6 +9437,8 @@ ServerButton.MouseButton1Click:Connect(function()
 		ToolsTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab4Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab5Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -9457,6 +9493,8 @@ MiscButton.MouseButton1Click:Connect(function()
 		ToolsTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab4Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab5Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -9511,6 +9549,8 @@ SettingsButton.MouseButton1Click:Connect(function()
 		ToolsTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab4Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab5Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -9562,6 +9602,8 @@ TestButton.MouseButton1Click:Connect(function()
 		OtherTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		OtherTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		OtherTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab4Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab5Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -9614,6 +9656,8 @@ ToolsButton.MouseButton1Click:Connect(function()
 		LocalTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		OtherTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		OtherTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab4Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab5Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		OtherTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -9671,6 +9715,8 @@ ScripButton.MouseButton1Click:Connect(function()
 		OtherTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab4Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab5Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -9725,6 +9771,8 @@ FavoriteButton.MouseButton1Click:Connect(function()
 		OtherTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab4Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab5Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ServerTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
@@ -9831,6 +9879,8 @@ ToolsTab1Button.MouseButton1Click:Connect(function()
 		Tools3PageSection3Phrame.Visible = false
 		ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab4Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab5Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	end
 end)
 ToolsTab2Button.MouseButton1Click:Connect(function()
@@ -9850,6 +9900,8 @@ ToolsTab2Button.MouseButton1Click:Connect(function()
 		Welcome1PageSection1Phrame.Visible = false
 		ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab4Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab5Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	end
 end)
 ToolsTab3Button.MouseButton1Click:Connect(function()
@@ -9869,6 +9921,50 @@ ToolsTab3Button.MouseButton1Click:Connect(function()
 		Tools2PageSection3Phrame.Visible = false
 		ToolsTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		ToolsTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab4Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab5Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+	end
+end)
+ToolsTab4Button.MouseButton1Click:Connect(function()
+	if ToolsTab4Button.ImageColor3 == Color3.fromRGB(95, 60, 60) then
+		ToolsTab4Button.ImageColor3 = Color3.fromRGB(60, 95, 60)
+		
+		Tools3PageSection1Phrame.Visible = false
+		Tools3PageSection2Phrame.Visible = false
+		Tools3PageSection3Phrame.Visible = false
+		Tools3PageSection4Phrame.Visible = false
+		Tools1PageSection2Phrame.Visible = false
+		Tools1PageSection1Phrame.Visible = false
+		Tools1PageSection3Phrame.Visible = false
+		Welcome1PageSection1Phrame.Visible = false
+		Tools2PageSection1Phrame.Visible = false
+		Tools2PageSection2Phrame.Visible = false
+		Tools2PageSection3Phrame.Visible = false
+		ToolsTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab5Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+	end
+end)
+ToolsTab5Button.MouseButton1Click:Connect(function()
+	if ToolsTab5Button.ImageColor3 == Color3.fromRGB(95, 60, 60) then
+		ToolsTab5Button.ImageColor3 = Color3.fromRGB(60, 95, 60)
+		
+		Tools3PageSection1Phrame.Visible = false
+		Tools3PageSection2Phrame.Visible = false
+		Tools3PageSection3Phrame.Visible = false
+		Tools3PageSection4Phrame.Visible = false
+		Tools1PageSection2Phrame.Visible = false
+		Tools1PageSection1Phrame.Visible = false
+		Tools1PageSection3Phrame.Visible = false
+		Welcome1PageSection1Phrame.Visible = false
+		Tools2PageSection1Phrame.Visible = false
+		Tools2PageSection2Phrame.Visible = false
+		Tools2PageSection3Phrame.Visible = false
+		ToolsTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab4Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		ToolsTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	end
 end)
 --tools tab stuff
