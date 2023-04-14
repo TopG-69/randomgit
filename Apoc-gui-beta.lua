@@ -1436,13 +1436,16 @@ spawn(function()
 	while wait(1) do
 		for i, v in pairs(Players:GetPlayers()) do
 			if v ~= LocalPlayer then
-				if ExploitersList[tostring(v)] == "Victini"  then
+				if ExploitersList[tostring(v)] == "Victini" then
 					if TogglePunishExploiters then
 						Kick(v)
 						if ShowFunctionAlerts then
 							AnnounceBox("Warning kicked " .. tostring(v) .. "!", "PUNISH EXPLOITS", 5, 130, 130, 60, 255, 255, 255)
 						end
 					end
+				end
+				if Banned[tostring(v)] == true then
+					Kick(v)
 				end
 				if v:FindFirstChild("playerstats") and v.playerstats:FindFirstChild("character") and v.playerstats.character:FindFirstChild("Agony") then
 					if v.Name == "VlTTUPEA" or v.Name == "TRINITY_XR" or v.Name == "VlTTUPEA_alt" or v.Name == "LeSuc042" or v.Name == "Cjrmenak" then
