@@ -2931,6 +2931,7 @@ UpdateListLabel.Size = UDim2.new(1, 0, 0, UpdateListFrame.Size.Y.Offset)
 UpdateListLabel.Font = Enum.Font.SourceSans
 UpdateListLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 UpdateListLabel.TextSize = 20
+UpdateListLabel.TextScaled = true
 UpdateListLabel.Visible = false
 
 function CreateUpdateLogMessage(Text, Red, Green, Blue)
@@ -2974,7 +2975,7 @@ CreateUpdateLogMessage("(+) Added Others 2 tab!", 60, 160, 60)
 CreateUpdateLogMessage("(+) Improved Server tab!", 60, 160, 60)
 CreateUpdateLogMessage("(+) Improved Tools tab!", 60, 160, 60)
 CreateUpdateLogMessage("(+) Improved UI!", 60, 160, 60)
-CreateUpdateLogMessage("(/) Loadtime decreased due to code compression and more advanced methods!", 130, 130, 60)
+CreateUpdateLogMessage("(/) Loadtime decreased due to code compression and more advanced methods being used!", 130, 130, 60)
 CreateUpdateLogMessage("(-) Base saving / importing still in demo!", 95, 60, 60)
 
 --[[AgonyLogoImage = Instance.new("ImageLabel")
@@ -8280,6 +8281,7 @@ Server1Page2Features3ColorMapSnowImage.ImageColor3 = Color3.fromRGB(255, 255, 25
 Server1Page2Features3ColorMapSnowImage.Parent = Server1PageSection2Phrame
 
 Server1Page2Features3ColorMap.MouseButton1Click:Connect(function()
+	AnnounceBox("Coloring map please wait!", "MAP", 5, 60, 160, 60, 255, 255, 255)
 	ColorMap(21, 7)
 end)
 
@@ -8308,6 +8310,7 @@ Server1Page2Features3ColorMapDesertImage.ImageColor3 = Color3.fromRGB(255, 255, 
 Server1Page2Features3ColorMapDesertImage.Parent = Server1PageSection2Phrame
 
 Server1Page2Features3ColorMapDesert.MouseButton1Click:Connect(function()
+	AnnounceBox("Coloring map please wait!", "MAP", 5, 60, 160, 60, 255, 255, 255)
 	ColorMap(32, 6)
 end)
 --frames
