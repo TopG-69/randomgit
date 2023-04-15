@@ -1731,7 +1731,7 @@ end
 
 function ColorMap(Color, Texture)
     if game.PlaceId == 1228674372 or game.PlaceId == 1228676522 or game.PlaceId == 237590761 then 
-        Colormodel(Workspace["TerrainChunks"], Color, Texture)
+        Colormodel(Workspace["TerrainChunks"], 8, 10)
         for _, v in pairs(Workspace["TerrainChunks"]:GetDescendants()) do
             if v:IsA("Model") then
                 Colormodel(v, Color, Texture)
@@ -1739,7 +1739,7 @@ function ColorMap(Color, Texture)
             end
         end
     elseif game.PlaceId == 290815963 or game.PlaceId == 1228676522 or game.PlaceId == 237590761 then 
-        Colormodel(Workspace["TerrainChunks"], Color, Texture)
+        Colormodel(Workspace["TerrainChunks"], 8, 10)
         for _, v in pairs(Workspace["TerrainChunks"]:GetDescendants()) do
             if v:IsA("Model") then
                 Colormodel(v, Color, Texture)
@@ -3392,6 +3392,20 @@ Other1PageSection1Phrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
 Other1PageSection1Phrame.ScrollBarThickness = 4
 Other1PageSection1Phrame.Parent = GuiPhrame
 
+Other1PageSection1PhrameTeleportLocs = Instance.new("ScrollingFrame")
+Other1PageSection1PhrameTeleportLocs.Size = UDim2.new(0.27, 0, 0.805, 0)
+Other1PageSection1PhrameTeleportLocs.Position = UDim2.new(0.01, 0, 0.05, 0)
+Other1PageSection1PhrameTeleportLocs.BackgroundColor3 = Color3.fromRGB(60, 60, 90)
+Other1PageSection1PhrameTeleportLocs.CanvasSize = UDim2.new(0, 0, 3, 0)
+Other1PageSection1PhrameTeleportLocs.BorderSizePixel = 1
+Other1PageSection1PhrameTeleportLocs.Transparency = 0.2
+Other1PageSection1PhrameTeleportLocs.Active = false
+Other1PageSection1PhrameTeleportLocs.Selectable = true
+Other1PageSection1PhrameTeleportLocs.Visible = false
+Other1PageSection1PhrameTeleportLocs.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+Other1PageSection1PhrameTeleportLocs.ScrollBarThickness = 4
+Other1PageSection1PhrameTeleportLocs.Parent = GuiPhrame
+
 Other1PageSection2Phrame = Instance.new("Frame")
 Other1PageSection2Phrame.Size = UDim2.new(0.7, 0, 0.9, 0)
 Other1PageSection2Phrame.Position = UDim2.new(0.29, 0, 0.05, 0)
@@ -3467,8 +3481,100 @@ end
 
 --setup players
 
+--setup locations
+PlayerListFrame12 = Instance.new("Frame", Other1PageSection1PhrameTeleportLocs)
+PlayerListFrame12.Name = "NotifyFrame1212"
+PlayerListFrame12.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListFrame12.BackgroundTransparency = 1
+PlayerListFrame12.BorderSizePixel = 0
+PlayerListFrame12.Position = UDim2.new(0, 0, 0, 0)
+PlayerListFrame12.Size = UDim2.new(0, 1, 0, 20)
+
+PlayerListLabel12 = Instance.new("TextButton", PlayerListFrame12)
+PlayerListLabel12.Name = "NotifyLabel12125"
+PlayerListLabel12.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+PlayerListLabel12.BackgroundTransparency = 1
+PlayerListLabel12.BorderColor3 = Color3.fromRGB(110, 172, 216)
+PlayerListLabel12.BorderSizePixel = 0
+PlayerListLabel12.Size = UDim2.new(0, 160, 0, PlayerListFrame12.Size.Y.Offset)
+PlayerListLabel12.Font = Enum.Font.SourceSans
+PlayerListLabel12.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerListLabel12.TextSize = 20
+PlayerListLabel12.Visible = false
+
+local LocalTab1SelectedLocation = ""
+function CreatePlayerListsLabelP12(Text)
+    for i, v in pairs(PlayerListFrame12:GetChildren()) do
+		if v ~= PlayerListLabel12 then
+			v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame12:GetChildren()-(i-1)))
+		end
+    end
+    local F = PlayerListLabel12:Clone()
+	F.Visible = true
+    F.Parent = PlayerListFrame12
+    F.Position = UDim2.new(0, 0, 0, 0)
+    F.Text = Text
+    if Time == nil then
+        Time = 3
+    end
+    F.MouseButton1Click:Connect(function()
+    	LocalTab1SelectedLocation = F.Text
+		F.TextColor3 = Color3.fromRGB(170, 170, 170)
+		if ShowFunctionAlerts then
+			AnnounceBox("Location ".. F.Text .. " was selected!", "LOCATION", 5, 255, 255, 255, 255, 255, 255)
+		end
+		wait(1)
+		F.TextColor3 = Color3.fromRGB(255, 255, 255)
+	end)
+    spawn(function()
+        for i, v in pairs(PlayerListFrame12:GetChildren()) do
+			if v ~= PlayerListLabel12 then 
+				v.Position = UDim2.new(0, 0, 0, 20*(#PlayerListFrame12:GetChildren()-(i)))
+				Other1PageSection1PhrameTeleportLocs.CanvasSize = UDim2.new(0, 0, 0, (i)*20)
+			end
+        end
+    end)
+end
+--setup locations
+
+function setupLocations(Specific)
+	if game.Workspace:FindFirstChild("Locations") then
+		for i, v in pairs(game.Workspace.Locations:GetChildren()) do
+			if v:IsA("BasePart") and (Specific == nil or string.match(string.lower(tostring(v)), Specific)) then
+				CreatePlayerListsLabelP12(tostring(v))
+			end
+		end
+	end
+end
+setupLocations()
+
+--setup locations
+
+Other1Page2FeaturesSwapTabImage = Instance.new("ImageButton")
+Other1Page2FeaturesSwapTabImage.Size = UDim2.new(0, 20, 0, 20)
+Other1Page2FeaturesSwapTabImage.Position = UDim2.new(-0.4, 142, 0.925, 0)
+Other1Page2FeaturesSwapTabImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Other1Page2FeaturesSwapTabImage.BackgroundTransparency = 0.4
+Other1Page2FeaturesSwapTabImage.BorderSizePixel = 1
+Other1Page2FeaturesSwapTabImage.Visible = true
+Other1Page2FeaturesSwapTabImage.Image = "rbxassetid://12900265786"
+Other1Page2FeaturesSwapTabImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Other1Page2FeaturesSwapTabImage.Parent = Other1PageSection2Phrame
+
+Other1Page2FeaturesSwapTabImage.MouseButton1Click:Connect(function()
+	if Other1Page2FeaturesSwapTabImage.Image == "rbxassetid://12900265786" then
+		Other1PageSection1PhrameTeleportLocs.Visible = true
+		Other1PageSection1Phrame.Visible = false
+		Other1Page2FeaturesSwapTabImage.Image = "rbxassetid://12900267647"
+	else
+		Other1PageSection1PhrameTeleportLocs.Visible = false
+		Other1PageSection1Phrame.Visible = true
+		Other1Page2FeaturesSwapTabImage.Image = "rbxassetid://12900265786"
+	end
+end)
+
 Other1Page2FeaturesAmount = Instance.new("TextBox")
-Other1Page2FeaturesAmount.Size = UDim2.new(0, 162, 0, 20)
+Other1Page2FeaturesAmount.Size = UDim2.new(0, 137, 0, 20)--0, 162, 0, 20
 Other1Page2FeaturesAmount.Position = UDim2.new(-0.4, 0, 0.925, 0)
 Other1Page2FeaturesAmount.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
 Other1Page2FeaturesAmount.BackgroundTransparency = 0.4
@@ -3708,6 +3814,7 @@ Other1Page2FeaturesGoToImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
 Other1Page2FeaturesGoToImage.Parent = Other1PageSection2Phrame
 
 Other1Page2FeaturesGoTo.MouseButton1Click:Connect(function()
+if Other1PageSection1PhrameTeleportLocs.Visible == false then
 	local SPlayer = game.Players:FindFirstChild(LocalTab1SelectedPlayer)
 	if LocalTab1SelectedPlayer ~= nil and LocalTab1SelectedPlayer ~= nan and LocalTab1SelectedPlayer ~= "" then
 		if LocalTab1SelectedPlayer ~= "All" and LocalTab1SelectedPlayer ~= "Others" then
@@ -3729,6 +3836,13 @@ Other1Page2FeaturesGoTo.MouseButton1Click:Connect(function()
 	else
 		AnnounceBox("No player selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
 	end
+else
+	if LocalTab1SelectedLocation ~= nil and LocalTab1SelectedLocation ~= nan and LocalTab1SelectedLocation ~= "" then
+		
+	else
+		AnnounceBox("No location selected!", "ERROR", 5, 95, 60, 60, 255, 255, 255)
+	end
+end
 end)
 
 Other1Page2Features = Instance.new("TextButton")
@@ -9497,6 +9611,8 @@ LocalButton.MouseButton1Click:Connect(function()
 		Tools2PageSection1Phrame.Visible = false
 		Tools2PageSection2Phrame.Visible = false
 		Tools2PageSection3Phrame.Visible = false
+		Other1Page2FeaturesSwapTabImage.Image = "rbxassetid://12900265786"
+		Other1PageSection1PhrameTeleportLocs.Visible = false
 		BansPageSection1Phrame.Visible = false
 		Bans1PageSection1.Visible = false
 		Bans1PageSection3Phrame.Visible = false
@@ -9548,6 +9664,8 @@ OtherButton.MouseButton1Click:Connect(function()
 		Other1PageSection2Phrame.Visible = false
 		Other1PageSection1Phrame.Visible = false	
 		Other2PageSection2Phrame.Visible = false
+		Other1Page2FeaturesSwapTabImage.Image = "rbxassetid://12900265786"
+		Other1PageSection1PhrameTeleportLocs.Visible = false
 		Tools1PageSection1Phrame.Visible = false
 		Tools1PageSection2Phrame.Visible = false
 		Tools2PageSection1Phrame.Visible = false
@@ -9604,6 +9722,8 @@ ServerButton.MouseButton1Click:Connect(function()
 		Other1PageSection1Phrame.Visible = false	
 		Other2PageSection2Phrame.Visible = false
 		Tools2PageSection1Phrame.Visible = false
+		Other1Page2FeaturesSwapTabImage.Image = "rbxassetid://12900265786"
+		Other1PageSection1PhrameTeleportLocs.Visible = false
 		Tools2PageSection2Phrame.Visible = false
 		Tools2PageSection3Phrame.Visible = false
 		Misc1PageSection2Phrame.Visible = false
@@ -9660,6 +9780,8 @@ MiscButton.MouseButton1Click:Connect(function()
 		Other2PageSection2Phrame.Visible = false
 		Other2PageSection1Phrame.Visible = false
 		Tools3PageSection4Phrame.Visible = false
+		Other1Page2FeaturesSwapTabImage.Image = "rbxassetid://12900265786"
+		Other1PageSection1PhrameTeleportLocs.Visible = false
 		Tools1PageSection1Phrame.Visible = false
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
@@ -9721,6 +9843,8 @@ SettingsButton.MouseButton1Click:Connect(function()
 		Tools3PageSection1Phrame.Visible = false
 		Tools3PageSection4Phrame.Visible = false
 		Tools3PageSection2Phrame.Visible = false
+		Other1Page2FeaturesSwapTabImage.Image = "rbxassetid://12900265786"
+		Other1PageSection1PhrameTeleportLocs.Visible = false
 		Tools3PageSection3Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
 		Tools2PageSection1Phrame.Visible = false
@@ -9778,6 +9902,8 @@ TestButton.MouseButton1Click:Connect(function()
 		Tools1PageSection3Phrame.Visible = false
 		Tools2PageSection1Phrame.Visible = false
 		Tools3PageSection1Phrame.Visible = false
+		Other1Page2FeaturesSwapTabImage.Image = "rbxassetid://12900265786"
+		Other1PageSection1PhrameTeleportLocs.Visible = false
 		Tools3PageSection2Phrame.Visible = false
 		BansPageSection1Phrame.Visible = false
 		Bans1PageSection1.Visible = false
@@ -9831,6 +9957,8 @@ ToolsButton.MouseButton1Click:Connect(function()
 		Scripts1PageSection2Phrame.Visible = false
 		Tools1PageSection1Phrame.Visible = false
 		Tools1PageSection2Phrame.Visible = false
+		Other1Page2FeaturesSwapTabImage.Image = "rbxassetid://12900265786"
+		Other1PageSection1PhrameTeleportLocs.Visible = false
 		Tools1PageSection3Phrame.Visible = false
 		Tools2PageSection1Phrame.Visible = false
 		Tools3PageSection1Phrame.Visible = false
@@ -9889,6 +10017,8 @@ ScripButton.MouseButton1Click:Connect(function()
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
 		Tools2PageSection1Phrame.Visible = false
+		Other1Page2FeaturesSwapTabImage.Image = "rbxassetid://12900265786"
+		Other1PageSection1PhrameTeleportLocs.Visible = false
 		Tools2PageSection2Phrame.Visible = false
 		Tools3PageSection4Phrame.Visible = false
 		Tools2PageSection3Phrame.Visible = false
@@ -9941,6 +10071,8 @@ FavoriteButton.MouseButton1Click:Connect(function()
 		Tools1PageSection1Phrame.Visible = false
 		Tools1PageSection2Phrame.Visible = false
 		Tools1PageSection3Phrame.Visible = false
+		Other1Page2FeaturesSwapTabImage.Image = "rbxassetid://12900265786"
+		Other1PageSection1PhrameTeleportLocs.Visible = false
 		Tools2PageSection1Phrame.Visible = false
 		Tools2PageSection2Phrame.Visible = false
 		Tools2PageSection3Phrame.Visible = false
@@ -10184,6 +10316,8 @@ OtherTab1Button.MouseButton1Click:Connect(function()
 		Bans1PageSection3Phrame.Visible = false
 		Other2PageSection1Phrame.Visible = false
 		Local1PageSection2Phrame.Visible = false
+		Other1Page2FeaturesSwapTabImage.Image = "rbxassetid://12900265786"
+		Other1PageSection1PhrameTeleportLocs.Visible = false
 		OtherTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		OtherTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	end
@@ -10202,6 +10336,8 @@ OtherTab2Button.MouseButton1Click:Connect(function()
 		Bans1PageSection3Phrame.Visible = false
 		Local1PageSection2Phrame.Visible = false
 		Other1PageSection1Phrame.Visible = false	
+		Other1Page2FeaturesSwapTabImage.Image = "rbxassetid://12900265786"
+		Other1PageSection1PhrameTeleportLocs.Visible = false
 		OtherTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		OtherTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	end
@@ -10220,6 +10356,8 @@ OtherTab3Button.MouseButton1Click:Connect(function()
 		Other2PageSection2Phrame.Visible = false
 		Other2PageSection1Phrame.Visible = false
 		Local1PageSection2Phrame.Visible = false
+		Other1Page2FeaturesSwapTabImage.Image = "rbxassetid://12900265786"
+		Other1PageSection1PhrameTeleportLocs.Visible = false
 		OtherTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		OtherTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	end
