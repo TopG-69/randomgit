@@ -2829,7 +2829,7 @@ BigText = Instance.new("TextLabel")
 BigText.Size = UDim2.new(0.01, 0, 0.01, 0)
 BigText.Position = UDim2.new(0.05, 0, 0.05, 0)
 BigText.BorderSizePixel = 0
-BigText.Text = "Script Info [12/04/2023] [14/29/UTC+2] [DeaTh-X-AngEl] ━━━━━━━━━━━━━━━━━━━━━━"
+BigText.Text = "Script Info [15/04/2023] [15/25/UTC+2] [DeaTh-X-AngEl] ━━━━━━━━━━━━━━━━━━━━━━"
 BigText.TextColor3 = Color3.fromRGB(255,255,255)
 BigText.TextSize = 8
 BigText.BackgroundTransparency = 1
@@ -2889,7 +2889,7 @@ SmallText = Instance.new("TextLabel")
 SmallText.Size = UDim2.new(0.01, 0, 0.01, 0)
 SmallText.Position = UDim2.new(0.08, 0, 0.4, 0)
 SmallText.BorderSizePixel = 0
-SmallText.Text = "(/) Script version: 139"
+SmallText.Text = "(/) Script version: 140"
 SmallText.TextColor3 = Color3.fromRGB(255,255,120)
 SmallText.TextSize = 8
 SmallText.BackgroundTransparency = 1
@@ -2975,6 +2975,8 @@ CreateUpdateLogMessage("(+) Improved UI!", 60, 160, 60)
 CreateUpdateLogMessage("(/) Loadtime decreased due to code compression and more advanced methods being used!", 130, 130, 60)
 CreateUpdateLogMessage("(-) Base saving / importing still in demo!", 95, 60, 60)
 CreateUpdateLogMessage("(+) Improved Protection tab!", 60, 160, 60)
+CreateUpdateLogMessage("(+) Improved Others tab!", 60, 160, 60)
+CreateUpdateLogMessage("(+) Improved UI!", 60, 160, 60)
 
 --[[AgonyLogoImage = Instance.new("ImageLabel")
 AgonyLogoImage.Size = UDim2.new(0, 200, 0, 120)
@@ -10466,6 +10468,7 @@ OtherTab4Button.MouseButton1Click:Connect(function()
 		OtherTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		OtherTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		OtherTab5Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		OtherTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	end
 end)
 OtherTab5Button.MouseButton1Click:Connect(function()
@@ -10486,6 +10489,7 @@ OtherTab5Button.MouseButton1Click:Connect(function()
 		Other1PageSection1PhrameTeleportLocs.Visible = false
 		OtherTab1Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		OtherTab2Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
+		OtherTab3Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 		OtherTab4Button.ImageColor3 = Color3.fromRGB(95, 60, 60)
 	end
 end)
@@ -10595,21 +10599,8 @@ RestoreFromMinimizeButton.ImageColor3 = Color3.fromRGB(255, 255, 255)
 RestoreFromMinimizeButton.Parent = MainGui
 --Linked with minimizeButton
 MinimizeButton.MouseButton1Click:Connect(function()
-	--Notify("[Fail]: Failed to minize gui!", 5, 95, 60, 60)
 	AnnounceBox("Minizeing gui!", "MINIMIZE", 5, 60, 160, 60, 255, 255, 255)
 	ZeroPhrame:TweenPosition(UDim2.new(0,-900,0,-900),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,1.5,true)
-	--[[ZeroPhrame:TweenSize(UDim2.new(0, 0, 0, 0),Enum.EasingDirection.In,Enum.EasingStyle.Sine,1,true,callback)
-	wait(0.5)
-    for i, v in pairs(GuiPhrame:GetChildren()) do
-        v.Visible = false
-    end
-    for i, v in pairs(GuiTabBarPhrame:GetChildren()) do
-        v.Visible = false
-    end
-    for i, v in pairs(GuiBarPhrame:GetChildren()) do
-        v.Visible = false
-    end
-	wait(0.5)--]]
 	RestoreFromMinimizeButton.Visible = true
 end)
 --Linked with minimizeButton
@@ -10617,59 +10608,6 @@ RestoreFromMinimizeButton.MouseButton1Click:Connect(function()
 	RestoreFromMinimizeButton.Visible = false
     AnnounceBox("Restoring gui!", "MINIMIZE", 5, 60, 160, 60, 255, 255, 255)
 	ZeroPhrame:TweenPosition(UDim2.new(0, 600, 0, 300),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,1.5,true)
-    --AnnounceBox("Waiting 5 seconds before destroying UI!", "SCRIPT", 5, 255, 255, 255, 255, 255, 255)
-    --[[ZeroPhrame:TweenSize(UDim2.new(0, 600, 0, 300),Enum.EasingDirection.In,Enum.EasingStyle.Sine,1,true,callback)
-    --wait(5)
-    --MainGui:destroy()
-    wait(0.5)
-    for i, v in pairs(GuiPhrame:GetChildren()) do
-        v.Visible = true
-    end
-    for i, v in pairs(GuiTabBarPhrame:GetChildren()) do
-        v.Visible = true
-    end
-    for i, v in pairs(GuiBarPhrame:GetChildren()) do
-        v.Visible = true
-    end
-    wait()
-	Welcome1PageSection1Phrame.Visible = true
-		
-	GuiLocalEBarPhrame.Visible = false	
-	Other1PageSection2Phrame.Visible = false
-	Tools3PageSection1Phrame.Visible = false
-	Tools3PageSection2Phrame.Visible = false
-	Tools3PageSection3Phrame.Visible = false
-	Other1PageSection1Phrame.Visible = false
-	Settings1PageSection2Phrame.Visible = false	
-	Tools3PageSection4Phrame.Visible = false
-	Other2PageSection2Phrame.Visible = false
-	Other2PageSection1Phrame.Visible = false
-	Test1PageSection2Phrame.Visible = false
-	Scripts1PageSection2Phrame.Visible = false
-	Local1PageSection2Phrame.Visible = false
-	Misc1PageSection2Phrame.Visible = false
-	GuiOtherEBarPhrame.Visible = false
-	Server1PageSection2Phrame.Visible = false
-	GuiServerEBarPhrame.Visible = false
-	GuiToolsEBarPhrame.Visible = false
-	Tools1PageSection1Phrame.Visible = false
-	Tools1PageSection2Phrame.Visible = false
-	Tools1PageSection3Phrame.Visible = false
-	Tools2PageSection1Phrame.Visible = false
-	Tools2PageSection2Phrame.Visible = false
-	Tools2PageSection3Phrame.Visible = false
-	BansPageSection1Phrame.Visible = false
-	Bans1PageSection1.Visible = false
-	Bans1PageSection3Phrame.Visible = false
-	OtherButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
-	ServerButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
-	SettingsButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
-	MiscButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
-	TestButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
-	ToolsButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
-	ScripButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
-	FavoriteButton.ImageColor3 = Color3.fromRGB(95, 60, 60)
-	LocalButton.ImageColor3 = Color3.fromRGB(95, 60, 60)--]]
 end)
 
 ExitButton.MouseButton1Click:Connect(function()
