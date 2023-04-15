@@ -1445,9 +1445,11 @@ function CheckNumber(Numb)
 end
 
 function addAgonyClothing()
-	repeat wait() until LocalPlayer:FindFirstChild("playerstats") and LocalPlayer.playerstats:FindFirstChild("character")
-	R.AddClothing:FireServer("Agony", LocalPlayer.playerstats.character, "", "", "")
+	if not LocalPlayer.playerstats.character:FindFirstChild("Agony") then
+		R.AddClothing:FireServer("Agony", LocalPlayer.playerstats.character, "", "", "")
+	end
 end
+addAgonyClothing()
 
 spawn(function()
 	while wait(1) do
