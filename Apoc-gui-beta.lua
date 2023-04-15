@@ -282,7 +282,6 @@ Workspace = game:GetService("Workspace")
 Players = game:GetService("Players")
 ReplicatedStorage = game:GetService("ReplicatedStorage")
 RunService = game:GetService("RunService")
-ToWatchTab = {}
 Loot = Lighting.LootDrops
 Mats = Lighting.Materials
 Bags = Lighting.Backpacks
@@ -926,7 +925,7 @@ LocalPlayerInventory = Instance.new("ScrollingFrame", InventoryFrame)
 LocalPlayerInventory.Name = "LocalPlayerInventory"
 LocalPlayerInventory.Active = true
 LocalPlayerInventory.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-LocalPlayerInventory.CanvasSize = UDim2.new(0, 0, 1, 32)
+--LocalPlayerInventory.CanvasSize = UDim2.new(0, 0, 1, 32)
 LocalPlayerInventory.BackgroundTransparency = 1
 LocalPlayerInventory.BorderSizePixel = 0
 LocalPlayerInventory.Position = UDim2.new(0, 0, 0, 25)
@@ -938,7 +937,7 @@ OpPlayerInventory = Instance.new("ScrollingFrame", InventoryFrame)
 OpPlayerInventory.Name = "OpPlayerInventory"
 OpPlayerInventory.Active = true
 OpPlayerInventory.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-OpPlayerInventory.CanvasSize = UDim2.new(0, 0, 1, 32)
+--OpPlayerInventory.CanvasSize = UDim2.new(0, 0, 1, 32)
 OpPlayerInventory.BackgroundTransparency = 1
 OpPlayerInventory.BorderSizePixel = 0
 OpPlayerInventory.Position = UDim2.new(0.5, 0, 0, 25)
@@ -1001,6 +1000,91 @@ function TransferItem(Plr, Ob)
 	end
 end
 
+PlrInventoryTab = {}
+function UpdatePlayerInventory(Plr, Scroll)
+    for i, v in pairs(Scroll:GetChildren()) do
+        v:remove()
+    end
+    local ToChose = {}
+    if PlrInventoryTab[Scroll] == nil then
+        PlrInventoryTab[Scroll] = {}
+    end
+    PlrInventoryTab[Scroll]["Selected"] = Plr
+    for i, v in pairs(PlrInventoryTab[Scroll]) do
+        if i ~= "Selected" then
+            PlrInventoryTab[Scroll][i] = nil
+        end
+    end
+    for i, v in pairs(Plr.playerstats:GetDescendants()) do
+        if v:FindFirstChild("ObjectID") then
+            table.insert(ToChose, v)
+        end
+    end
+    local X, Y = 0, 0
+    for i = 1, #ToChose do
+        local Button = InventoryButton:Clone()
+        Button.Parent = Scroll
+        Button.Position = UDim2.new(0, 35*X, 0, 35*Y)
+        Button.Visible = true
+        PlrInventoryTab[Scroll][Button] = ToChose[i]
+        spawn(function()
+            repeat
+                wait()
+            until Button:FindFirstChild("guntext") and Button:FindFirstChild("ClipValue")
+			pcall(function()
+				onChanged(Button, ToChose[i])
+			end)
+        end)
+		Button.MouseButton1Down:connect(function()
+			TransferItem(Plr, ToChose[i]:FindFirstChild("ObjectID"))
+		end)
+        X = X + 1
+        if X >= 5 then
+            X = 0
+            Y = Y + 1
+        end
+    end
+end
+
+ToWatchTab = {}
+function SetupWatch(Plr, Val)
+	ToWatchTab[Val] = Plr
+	local SelectedFrameForWatching = LocalPlayerInventory
+	if Val == 2 then
+		SelectedFrameForWatching = OpPlayerInventory
+	end
+	UpdatePlayerInventory(Plr, SelectedFrameForWatching)
+	local AlreadySorting = false
+	local ConFunc = function(Ob)
+		wait(0.1)
+		if tostring(Ob) == "ObjectID" and AlreadySorting == false then
+			AlreadySorting = true
+			UpdatePlayerInventory(Plr, SelectedFrameForWatching)
+			AlreadySorting = false
+		end
+	end
+	local Con1 = Plr.playerstats.DescendantAdded:connect(ConFunc)
+	local Con2 = Plr.playerstats.DescendantRemoving:connect(ConFunc)
+	spawn(function()
+		repeat
+			wait()
+		until ToWatchTab[Val] == nil or Plr == nil or ToWatchTab[Val] ~= Plr
+		Con1:Disconnect()
+		Con2:Disconnect()
+	end)
+end
+SetupWatch(LocalPlayer, 1)
+
+function Inventory(Plr)
+	if Plr ~= LocalPlayer then
+	    InventoryFrame.Visible = true
+	    SetupWatch(Plr, 2)
+        InventoryZeroPhrame.Draggable = true
+        InventoryZeroPhrame.Active = true
+        InventoryZeroPhrame.Selectable = true
+	end
+end
+
 function GetItemFromString(Item, Parent)
 	if Parent:FindFirstChild(Item) then
 		return Parent[Item]
@@ -1040,90 +1124,6 @@ function SpawnItem(SelectedPlayer, Item, Parent, OF, SP)
 			fireserver("ChangeParent", Mats:WaitForChild(tostring(Item)), Parent)
 		end
 	end)
-end
-
-PlrInventoryTab = {}
-function UpdatePlayerInventory(Plr, Scroll)
-    for i, v in pairs(Scroll:GetChildren()) do
-        v:remove()
-    end
-    local ToChose = {}
-    if PlrInventoryTab[Scroll] == nil then
-        PlrInventoryTab[Scroll] = {}
-    end
-    PlrInventoryTab[Scroll]["Selected"] = Plr
-    for i, v in pairs(PlrInventoryTab[Scroll]) do
-        if i ~= "Selected" then
-            PlrInventoryTab[Scroll][i] = nil
-        end
-    end
-    for i, v in pairs(Plr.playerstats:GetDescendants()) do
-        if v:FindFirstChild("ObjectID") then
-            table.insert(ToChose, v)
-        end
-    end
-    local X, Y = 0, 0
-    for i = 1, #ToChose do
-        local Button = InventoryButton:Clone()
-        Button.Parent = Scroll
-        Button.Position = UDim2.new(0, 35*X, 0, 35*Y)
-        Button.Visible = true
-        PlrInventoryTab[Scroll][Button] = ToChose[i]
-        spawn(function()
-            repeat
-                wait()
-            until Button:FindFirstChild("guntext") and Button:FindFirstChild("ClipValue")
-			pcall(function()
-				onChanged(Button, ToChose[i])
-			end)
-        end)
-		Button.MouseButton1Click:connect(function()
-			TransferItem(Plr, ToChose[i]:FindFirstChild("ObjectID"))
-		end)
-        X = X + 1
-        if X >= 5 then
-            X = 0
-            Y = Y + 1
-        end
-    end
-end
-
-function SetupWatch(Plr, Val)
-	ToWatchTab[Val] = Plr
-	local SelectedFrameForWatching = LocalPlayerInventory
-	if Val == 2 then
-		SelectedFrameForWatching = OpPlayerInventory
-	end
-	UpdatePlayerInventory(Plr, SelectedFrameForWatching)
-	local AlreadySorting = false
-	local ConFunc = function(Ob)
-		wait(0.1)
-		if tostring(Ob) == "ObjectID" and AlreadySorting == false then
-			AlreadySorting = true
-			UpdatePlayerInventory(Plr, SelectedFrameForWatching)
-			AlreadySorting = false
-		end
-	end
-	local Con1 = Plr.playerstats.DescendantAdded:connect(ConFunc)
-	local Con2 = Plr.playerstats.DescendantRemoving:connect(ConFunc)
-	spawn(function()
-		repeat
-			wait()
-		until ToWatchTab[Val] == nil or Plr == nil or ToWatchTab[Val] ~= Plr
-		Con1:Disconnect()
-		Con2:Disconnect()
-	end)
-end
-SetupWatch(LocalPlayer, 1)
-
-function Inventory(Plr)
-	if Plr ~= LocalPlayer then
-	    InventoryFrame.Visible = true
-	    SetupWatch(Plr, 2)
-        InventoryZeroPhrame.Draggable = true
-        InventoryZeroPhrame.Active = true
-        InventoryZeroPhrame.Selectable = true
-	end
 end
 
 function GetContexts()
