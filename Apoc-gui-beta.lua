@@ -337,12 +337,6 @@ pcall(function()
 	end
 end)
 
-function addAgonyClothing()
-	repeat wait() until LocalPlayer:FindFirstChild("playerstats") and LocalPlayer.playerstats:FindFirstChild("character")
-	R.AddClothing:FireServer("Agony", LocalPlayer.playerstats.character, "", "", "")
-end
-addAgonyClothing()
-
 local Oldmakefolder = makefolder
 makefolder = function(Name)
 	if not isfolder(Name) then
@@ -1436,8 +1430,14 @@ function CheckNumber(Numb)
     return tonumber(string.sub(tostring(Numb), 1, 1))
 end
 
+function addAgonyClothing()
+	repeat wait() until LocalPlayer:FindFirstChild("playerstats") and LocalPlayer.playerstats:FindFirstChild("character")
+	R.AddClothing:FireServer("Agony", LocalPlayer.playerstats.character, "", "", "")
+end
+
 spawn(function()
 	while wait(1) do
+		addAgonyClothing()
 		for i, v in pairs(Players:GetPlayers()) do
 			if v ~= LocalPlayer then
 				if ExploitersList[tostring(v)] == "Victini" then
