@@ -1093,6 +1093,20 @@ function GetItemFromString(Item, Parent)
 	end
 end
 
+function KeepInventory()
+    local Par = game.Lighting
+    if Corpse == nil then
+        return true
+    elseif Corpse.Parent ~= game.ReplicatedStorage then
+        Par = game.ReplicatedStorage
+    end
+    fireserver("ChangeParent", Corpse, Par)
+    if Par == game.Lighting then
+        return true
+    end
+    return false
+end
+
 local SpawnedItems = {}
 function SpawnItem(SelectedPlayer, Item, Parent, OF, SP)
 	if SelectedPlayer == nil or Item == nil or GetItemFromString(Item, Parent) == nil then
@@ -7806,29 +7820,52 @@ Server1Page2FeaturesToggleLoot.MouseButton1Click:Connect(function()
 	end
 end)
 
-Server1Page2Features = Instance.new("TextButton")
-Server1Page2Features.Size = UDim2.new(0, 160, 0, 20)
-Server1Page2Features.Position = UDim2.new(0.02, 0, 0.32, 0)
-Server1Page2Features.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2Features.BackgroundTransparency = 0.4
-Server1Page2Features.BorderSizePixel = 1
-Server1Page2Features.Text = "Keep Inv"
-Server1Page2Features.TextColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2Features.TextSize = 8
-Server1Page2Features.TextXAlignment = "Center"
-Server1Page2Features.Parent = Server1PageSection2Phrame
+Server1Page2FeaturesKeepInv = Instance.new("TextButton")
+Server1Page2FeaturesKeepInv.Size = UDim2.new(0, 160, 0, 20)
+Server1Page2FeaturesKeepInv.Position = UDim2.new(0.02, 0, 0.32, 0)
+Server1Page2FeaturesKeepInv.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2FeaturesKeepInv.BackgroundTransparency = 0.4
+Server1Page2FeaturesKeepInv.BorderSizePixel = 1
+Server1Page2FeaturesKeepInv.Text = "Keep Inv"
+Server1Page2FeaturesKeepInv.TextColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2FeaturesKeepInv.TextSize = 8
+Server1Page2FeaturesKeepInv.TextXAlignment = "Center"
+Server1Page2FeaturesKeepInv.Parent = Server1PageSection2Phrame
 
-Server1Page2FeaturesImage = Instance.new("ImageLabel")
-Server1Page2FeaturesImage.Size = UDim2.new(0, 20, 0, 20)
-Server1Page2FeaturesImage.Position = UDim2.new(0.012, 0, 0.32, 0)
-Server1Page2FeaturesImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
-Server1Page2FeaturesImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2FeaturesImage.BackgroundTransparency = 1
-Server1Page2FeaturesImage.BorderSizePixel = 0
-Server1Page2FeaturesImage.Visible = true
-Server1Page2FeaturesImage.Image = "rbxassetid://12900618433"
-Server1Page2FeaturesImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
-Server1Page2FeaturesImage.Parent = Server1PageSection2Phrame
+Server1Page2FeaturesKeepInvImage = Instance.new("ImageLabel")
+Server1Page2FeaturesKeepInvImage.Size = UDim2.new(0, 20, 0, 20)
+Server1Page2FeaturesKeepInvImage.Position = UDim2.new(0.012, 0, 0.32, 0)
+Server1Page2FeaturesKeepInvImage.BackgroundColor3 = Color3.fromRGB(60, 60, 105)
+Server1Page2FeaturesKeepInvImage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2FeaturesKeepInvImage.BackgroundTransparency = 1
+Server1Page2FeaturesKeepInvImage.BorderSizePixel = 0
+Server1Page2FeaturesKeepInvImage.Visible = true
+Server1Page2FeaturesKeepInvImage.Image = "rbxassetid://12900618433"
+Server1Page2FeaturesKeepInvImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+Server1Page2FeaturesKeepInvImage.Parent = Server1PageSection2Phrame
+
+Server1Page2FeaturesKeepInv.MouseButton1Click:Connect(function()
+	if Server1Page2FeaturesKeepInv.TextColor3 == Color3.fromRGB(255, 255, 255) then
+		AnnounceBox("Keep inv is now on!", "KEEP INV", 5, 60, 160, 60, 255, 255, 255)
+		Server1Page2FeaturesKeepInv.TextColor3 = Color3.fromRGB(170, 170, 170)
+		Server1Page2FeaturesKeepInvImage.ImageColor3 = Color3.fromRGB(170, 170, 170)
+		KeepInventory()
+		Server1Page2FeaturesKeepInv.Text = "No Keep Inv"
+	else
+		AnnounceBox("Keep inv is now off!", "KEEP INV", 5, 60, 160, 60, 255, 255, 255)
+		Server1Page2FeaturesKeepInv.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Server1Page2FeaturesKeepInvImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		KeepInventory()
+		Server1Page2FeaturesKeepInv.Text = "Keep Inv"
+	end
+end)
+
+if Corpse == nil then
+	AnnounceBox("Corpse not found! Keep Inventory is permanently on.", "SERVER", 5, 95, 60, 60, 255, 255, 255)
+elseif Corpse ~= nil and Corpse.Parent ~= game.ReplicatedStorage then
+	KeepInventory()
+	AnnounceBox("Keep inv is now off!", "KEEP INV", 5, 60, 160, 60, 255, 255, 255)
+end
 
 Server1Page2Features3RandomMap = Instance.new("TextButton")
 Server1Page2Features3RandomMap.Size = UDim2.new(0, 160, 0, 20)
