@@ -1531,7 +1531,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/ma
 end
 end	
 --]--End Of Script
-		
+
 --]--On Error
 if Discord_Key~=nil and Theme~=nil and ScreenSizeX~=nil and ScreenSizeY~=nil then ProcessScript() else 
 UpdateLabelError.Text = "Error 9: invalid"
