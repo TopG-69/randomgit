@@ -1,1 +1,1 @@
-return {"samsuper159", "APOYSALANGIT1", "traktionist", }
+return {"samsuper159", "traktionist", }
