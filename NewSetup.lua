@@ -1480,7 +1480,7 @@ UpdateLabelInfo1.Text = "Your missing ScreenSize"
 UpdateLabelInfo2.Text = "!"
 LoadingBar.BackgroundColor3 = Color3.fromRGB(255, 60, 60)
 
-elseif game.PlaceId ~= 290815963 and game.PlaceId ~= 237590657 and game.PlaceId ~= 1228674372 and game.PlaceId ~= 237590761 and game.PlaceId ~= 1600503 and game.PlaceId ~= 237590761 and game.PlaceId ~= 2866967438 and game.PlaceId ~= 69184822 and game.PlaceId ~= 54865335 then
+elseif game.PlaceId ~= 1228674372 and game.PlaceId ~= 1228676522 and game.PlaceId ~= 290815963 and game.PlaceId ~= 237590657 and game.PlaceId ~= 1228674372 and game.PlaceId ~= 237590761 and game.PlaceId ~= 1600503 and game.PlaceId ~= 237590761 and game.PlaceId ~= 2866967438 and game.PlaceId ~= 69184822 and game.PlaceId ~= 54865335 then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Error 4: unsupported game"
 UpdateLabelScript.Text = "Your game isn't supported"
@@ -1521,7 +1521,7 @@ UpdateLabelInfo1.Text = "!"
 UpdateLabelInfo2.Text = "!"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/Doors.lua", true))()
 	
-elseif game.PlaceId == 290815963 or game.PlaceId == 237590761 or game.PlaceId == 237590657 or game.PlaceId == 1228674372 or game.PlaceId == 1600503 or game.PlaceId == 237590761 then
+elseif game.PlaceId == 1228674372 or game.PlaceId == 1228676522 or game.PlaceId == 290815963 or game.PlaceId == 237590761 or game.PlaceId == 237590657 or game.PlaceId == 1228674372 or game.PlaceId == 1600503 or game.PlaceId == 237590761 then
 UpdateLabelError.TextSize = 9
 UpdateLabelError.Text = "Script Is Loading"
 UpdateLabelScript.Text = "!"
