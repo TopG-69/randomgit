@@ -62,7 +62,7 @@ game.StarterGui:SetCore("SendNotification",  {
 
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/ModuleQ")) ()
 
-local window = library.initiate("- XR - Made By LiHort#1000/Cjremenak", {
+local window = library.initiate("- space bois hub", {
     default = UDim2.new(0, 600, 0, 700),
     resize = true,
     min = UDim2.new(0, 100, 0, 100),
