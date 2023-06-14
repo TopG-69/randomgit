@@ -154,7 +154,7 @@ end
 TextButton.MouseButton1Click:Connect(function()
     Close()
     wait(0.1)
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/Apoc-gui-beta.lua", true))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/TopG-69/randomgit/main/Apoc-gui-beta.lua", true))()
 end)
 
 
@@ -162,7 +162,7 @@ end)
 TextButton_2.MouseButton1Click:Connect(function()
     Close()
     wait(0.1)
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/victiniv2.lua", true))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/TopG-69/randomgit/main/victiniv2.lua", true))()
 end)
 
 
@@ -170,5 +170,5 @@ end)
 TextButton_4.MouseButton1Click:Connect(function()
     Close()
     wait(0.1)
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Sittapea/randomgit/main/Apoc.lua", true))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/TopG-69/randomgit/main/Apoc.lua", true))()
 end)
