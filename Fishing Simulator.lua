@@ -13,14 +13,14 @@
 	                          |____/         \|____|                                             
 ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃
 
-									              -- UI Lib: Agony Lib V2.2
-								          This is a Demo of using the Library.
+									-- UI Lib: Agony Lib V2.2
+								This is a Demo of using the Library.
 						
-									              --Obfuscation: Undefined
-								          Electron API / Flux API can run this.
+									--Obfuscation: Undefined
+								Electron API / Flux API can run this.
 						
-										                --Agony Discord
-								              https://discord.gg/NV3qgagmRt
+										--Agony Discord
+								  https://discord.gg/NV3qgagmRt
 						  
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 ]]--
