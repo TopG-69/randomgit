@@ -14,13 +14,13 @@
 ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃
 
 									-- UI Lib: Agony Lib V2.5
-								This is a Demo of using the Library.
+									    Added ColorPicket.
 						
-									--Obfuscation: Undefined
-								Electron API / Flux API can run this.
+									 --Obfuscation: Undefined
+								   Electron API / Flux API can run this.
 						
-										--Agony Discord
-								  https://discord.gg/NV3qgagmRt
+									      --Agony Discord
+								        https://discord.gg/NV3qgagmRt
 						  
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 ]]--
