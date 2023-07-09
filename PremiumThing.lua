@@ -345,7 +345,7 @@ IsSuccess, ResultComp = pcall(function()
 			end
 			
 			CreateThing(10, "Betas", "Apoc GUI V154", "Test the newest version of Agony AR gui.", 12899952249, 13046417598, function()
-				loadstring(game:HttpGet(""))()
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/TopG-69/randomgit/main/premium-ar.lua"))()
 			end)
 
 			CreateThing(10, "Unreleased", "Anomic V2", "Unreleased upgrade of the original anomic script.", 12899952249, 14010473987, function()
