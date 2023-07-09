@@ -599,6 +599,22 @@ ScriptPhrameB.Visible = false
 ScriptPhrameB.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
 ScriptPhrameB.ScrollBarThickness = 4
 ScriptPhrameB.Parent = InfoPhrame
+
+local TextButton_PT = Instance.new("TextButton")
+TextButton_PT.Size = UDim2.new(0, 200, 0, 200)
+TextButton_PT.Position = UDim2.new(0, 5, 0, 5)
+TextButton_PT.BorderSizePixel = 0
+TextButton_PT.Text = "Premium Thing"
+TextButton_PT.Transparency = 0.1
+TextButton_PT.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton_PT.TextSize = 22
+TextButton_PT.BackgroundTransparency = 0.9
+TextButton_PT.TextXAlignment = "Center"
+TextButton_PT.Parent = ScriptPhrameB
+
+TextButton_PT.MouseButton1Click:connect(function()
+	game:HttpGet("https://raw.githubusercontent.com/TopG-69/randomgit/main/PremiumThing.lua", true)
+end)
 --[[ Gui Features --]]
 
 
