@@ -613,7 +613,7 @@ TextButton_PT.TextXAlignment = "Center"
 TextButton_PT.Parent = ScriptPhrameB
 
 TextButton_PT.MouseButton1Click:connect(function()
-	game:HttpGet("https://raw.githubusercontent.com/TopG-69/randomgit/main/PremiumThing.lua", true)
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/TopG-69/randomgit/main/PremiumThing.lua", true))()
 end)
 --[[ Gui Features --]]
 
