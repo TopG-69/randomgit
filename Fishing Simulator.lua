@@ -13,8 +13,7 @@
 	                          |____/         \|____|                                             
 ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃
 
-									-- UI Lib: Agony Lib V2.4
-								This is a Demo of using the Library.
+									-- UI Lib: Agony Lib V2.6
 						
 									--Obfuscation: Undefined
 								Electron API / Flux API can run this.
